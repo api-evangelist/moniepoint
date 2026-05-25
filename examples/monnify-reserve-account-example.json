@@ -1,0 +1,62 @@
+{
+  "name": "Monnify Reserve A Customer Account (V2)",
+  "description": "POST /api/v2/bank-transfer/reserved-accounts — create a permanent NUBAN virtual account for a customer with income-split routing.",
+  "request": {
+    "method": "POST",
+    "url": "https://api.monnify.com/api/v2/bank-transfer/reserved-accounts",
+    "headers": {
+      "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.example",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "accountReference": "CUST-90001",
+      "accountName": "Example Retail (Adaeze Okafor)",
+      "currencyCode": "NGN",
+      "contractCode": "100693834652",
+      "customerEmail": "adaeze@example.ng",
+      "customerName": "Adaeze Okafor",
+      "bvn": "22288899900",
+      "getAllAvailableBanks": false,
+      "preferredBanks": ["50515", "50211"],
+      "incomeSplitConfig": [
+        {
+          "subAccountCode": "MFY_SUB_ALPHA",
+          "feePercentage": 30,
+          "splitPercentage": 70,
+          "feeBearer": true
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "requestSuccessful": true,
+      "responseMessage": "success",
+      "responseCode": "0",
+      "responseBody": {
+        "accountReference": "CUST-90001",
+        "accountName": "Example Retail (Adaeze Okafor)",
+        "currencyCode": "NGN",
+        "customerEmail": "adaeze@example.ng",
+        "customerName": "Adaeze Okafor",
+        "bvn": "22288899900",
+        "status": "ACTIVE",
+        "accounts": [
+          {
+            "bankCode": "50515",
+            "bankName": "Moniepoint MFB",
+            "accountNumber": "5841119988",
+            "accountName": "Example Retail (Adaeze)"
+          },
+          {
+            "bankCode": "50211",
+            "bankName": "Kuda MFB",
+            "accountNumber": "1100099887",
+            "accountName": "Example Retail (Adaeze)"
+          }
+        ]
+      }
+    }
+  }
+}

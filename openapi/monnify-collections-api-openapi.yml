@@ -1,0 +1,281 @@
+openapi: 3.1.0
+info:
+  title: Monnify Collections API
+  description: >
+    Accept money from customers in Nigeria via Monnify Checkout, server-to-
+    server card capture with 3-D Secure / OTP, charge stored card tokens,
+    complete bank-transfer payments, and look up transaction status.
+  version: '1.0'
+  contact:
+    name: Monnify Developer Support
+    url: https://developers.monnify.com
+servers:
+  - url: https://api.monnify.com
+    description: Production
+  - url: https://sandbox.monnify.com
+    description: Sandbox
+security:
+  - BearerAuth: []
+tags:
+  - name: Transactions
+    description: Initialize, charge, query, and list collection transactions.
+paths:
+  /api/v1/merchant/transactions/init-transaction:
+    post:
+      summary: Monnify Initialize Transaction
+      description: Create a pending transaction and return a checkoutUrl plus paymentReference.
+      operationId: initializeTransaction
+      tags: [Transactions]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InitializeTransactionRequest'
+      responses:
+        '200':
+          description: Transaction initialized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionEnvelope'
+  /api/v1/merchant/bank-transfer/init-payment:
+    post:
+      summary: Monnify Pay With Bank Transfer
+      description: Generate a one-time NUBAN to complete an initialized transaction by bank transfer.
+      operationId: payWithBankTransfer
+      tags: [Transactions]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayWithTransferRequest'
+      responses:
+        '200':
+          description: Bank-transfer instructions returned.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionEnvelope'
+  /api/v1/merchant/cards/charge:
+    post:
+      summary: Monnify Charge Card
+      description: Server-to-server card capture; returns secure-3D / OTP next step when required.
+      operationId: chargeCard
+      tags: [Transactions]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChargeCardRequest'
+      responses:
+        '200':
+          description: Card charge processed or pending authorization.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionEnvelope'
+  /api/v1/merchant/cards/otp/authorize:
+    post:
+      summary: Monnify Authorize OTP
+      description: Submit the OTP returned by the cardholder to complete a card charge.
+      operationId: authorizeOtp
+      tags: [Transactions]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizeOtpRequest'
+      responses:
+        '200':
+          description: Card charge authorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionEnvelope'
+  /api/v1/merchant/cards/charge-card-token:
+    post:
+      summary: Monnify Charge Tokenized Card
+      description: Charge a stored card token previously returned on a successful card collection.
+      operationId: chargeCardToken
+      tags: [Transactions]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChargeCardTokenRequest'
+      responses:
+        '200':
+          description: Tokenized card charged.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionEnvelope'
+  /api/v2/merchant/transactions/query:
+    get:
+      summary: Monnify Get Transaction Status
+      description: Query a transaction by paymentReference or transactionReference.
+      operationId: getTransactionStatus
+      tags: [Transactions]
+      parameters:
+        - name: paymentReference
+          in: query
+          schema: { type: string }
+        - name: transactionReference
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Transaction details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionEnvelope'
+  /api/v1/transactions/search:
+    get:
+      summary: Monnify Search Transactions
+      description: Paginated search across collection transactions by date range, status, and reference.
+      operationId: searchTransactions
+      tags: [Transactions]
+      parameters:
+        - name: page
+          in: query
+          schema: { type: integer, default: 0 }
+        - name: size
+          in: query
+          schema: { type: integer, default: 20 }
+        - name: from
+          in: query
+          schema: { type: string, format: date }
+        - name: to
+          in: query
+          schema: { type: string, format: date }
+        - name: paymentStatus
+          in: query
+          schema: { type: string, enum: [PAID, OVERPAID, PARTIALLY_PAID, PENDING, FAILED, EXPIRED] }
+      responses:
+        '200':
+          description: Paginated transaction page.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionPageEnvelope'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    InitializeTransactionRequest:
+      type: object
+      required: [amount, customerName, customerEmail, paymentReference, paymentDescription, contractCode, currencyCode]
+      properties:
+        amount: { type: number, example: 1500 }
+        customerName: { type: string, example: Jane Customer }
+        customerEmail: { type: string, format: email }
+        paymentReference: { type: string }
+        paymentDescription: { type: string }
+        contractCode: { type: string }
+        currencyCode: { type: string, example: NGN }
+        redirectUrl: { type: string, format: uri }
+        paymentMethods:
+          type: array
+          items: { type: string, enum: [CARD, ACCOUNT_TRANSFER, USSD, PHONE_NUMBER] }
+        incomeSplitConfig:
+          type: array
+          items: { $ref: '#/components/schemas/IncomeSplit' }
+        metaData:
+          type: object
+          additionalProperties: { type: string }
+    PayWithTransferRequest:
+      type: object
+      required: [transactionReference]
+      properties:
+        transactionReference: { type: string }
+        bankCode: { type: string }
+    ChargeCardRequest:
+      type: object
+      required: [transactionReference, collectionChannel, card]
+      properties:
+        transactionReference: { type: string }
+        collectionChannel: { type: string, example: API_NOTIFICATION }
+        card:
+          type: object
+          required: [number, expiryMonth, expiryYear, pin, cvv]
+          properties:
+            number: { type: string }
+            expiryMonth: { type: string }
+            expiryYear: { type: string }
+            pin: { type: string }
+            cvv: { type: string }
+    AuthorizeOtpRequest:
+      type: object
+      required: [transactionReference, collectionChannel, tokenId, token]
+      properties:
+        transactionReference: { type: string }
+        collectionChannel: { type: string }
+        tokenId: { type: string }
+        token: { type: string, description: OTP returned by the cardholder's bank. }
+    ChargeCardTokenRequest:
+      type: object
+      required: [cardToken, amount, customerName, customerEmail, paymentReference, contractCode]
+      properties:
+        cardToken: { type: string }
+        amount: { type: number }
+        customerName: { type: string }
+        customerEmail: { type: string, format: email }
+        paymentReference: { type: string }
+        contractCode: { type: string }
+        currencyCode: { type: string, default: NGN }
+    IncomeSplit:
+      type: object
+      properties:
+        subAccountCode: { type: string }
+        feePercentage: { type: number }
+        splitAmount: { type: number }
+        feeBearer: { type: boolean }
+    Transaction:
+      type: object
+      properties:
+        transactionReference: { type: string }
+        paymentReference: { type: string }
+        merchantName: { type: string }
+        apiKey: { type: string }
+        redirectUrl: { type: string }
+        enabledPaymentMethod: { type: array, items: { type: string } }
+        checkoutUrl: { type: string, format: uri }
+        amount: { type: number }
+        currencyCode: { type: string }
+        paymentStatus:
+          type: string
+          enum: [PAID, OVERPAID, PARTIALLY_PAID, PENDING, FAILED, EXPIRED]
+        paidOn: { type: string, format: date-time }
+        paymentMethod: { type: string }
+    TransactionEnvelope:
+      type: object
+      properties:
+        requestSuccessful: { type: boolean }
+        responseMessage: { type: string }
+        responseCode: { type: string }
+        responseBody: { $ref: '#/components/schemas/Transaction' }
+    TransactionPageEnvelope:
+      type: object
+      properties:
+        requestSuccessful: { type: boolean }
+        responseMessage: { type: string }
+        responseCode: { type: string }
+        responseBody:
+          type: object
+          properties:
+            content:
+              type: array
+              items: { $ref: '#/components/schemas/Transaction' }
+            number: { type: integer }
+            size: { type: integer }
+            totalElements: { type: integer }
+            totalPages: { type: integer }

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/moniepoint/monnify-transfer-schema.json",
+  "title": "Monnify Transfer",
+  "description": "Schema for a Monnify disbursement Transfer (single or bulk item) returned by /api/v2/disbursements/single and /api/v2/disbursements/bulk endpoints.",
+  "type": "object",
+  "properties": {
+    "reference": { "type": "string", "description": "Merchant-supplied unique transfer reference." },
+    "amount": { "type": "number", "minimum": 0 },
+    "currency": { "type": "string", "example": "NGN" },
+    "destinationAccountNumber": { "type": "string" },
+    "destinationAccountName": { "type": "string", "description": "Required as of March 2026; must match Name Inquiry." },
+    "destinationBankCode": { "type": "string" },
+    "destinationBankName": { "type": "string" },
+    "sourceAccountNumber": { "type": "string" },
+    "narration": { "type": "string", "maxLength": 100 },
+    "status": {
+      "type": "string",
+      "enum": ["SUCCESS", "FAILED", "REVERSED", "PENDING", "OTP_EMAIL_DISPATCH", "PENDING_AUTHORIZATION"]
+    },
+    "fee": { "type": "number" },
+    "dateCreated": { "type": "string", "format": "date-time" },
+    "completedOn": { "type": "string", "format": "date-time" },
+    "senderInformation": {
+      "type": "object",
+      "description": "Optional sender identity object (supported since October 2025).",
+      "properties": {
+        "fullName": { "type": "string" },
+        "phoneNumber": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "senderRef": { "type": "string" }
+      }
+    }
+  },
+  "required": ["reference", "amount", "currency", "destinationAccountNumber", "destinationBankCode", "status"]
+}

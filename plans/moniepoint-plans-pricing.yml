@@ -1,0 +1,165 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Moniepoint
+providerId: moniepoint
+created: '2026-05-24'
+modified: '2026-05-24'
+reconciled: false
+tags:
+  - Payments
+  - Nigeria
+  - Fintech
+  - Monnify
+description: >
+  Plans and per-transaction pricing for the Monnify developer platform and Moniepoint POS acquiring. Monnify
+  publishes its current commercial rates in the dashboard at app.monnify.com after sign-up; the figures here
+  reflect the typical published structure (card / transfer / USSD on collections, flat fee on disbursements
+  capped per transfer). Customers should confirm rates with their Monnify account manager.
+sources:
+  - https://moniepoint.com/payments
+  - https://app.monnify.com
+  - https://developers.monnify.com
+plans:
+  - id: monnify-standard
+    name: Monnify Standard
+    type: usage-based
+    description: Default merchant plan for businesses using Monnify Checkout, Reserved Accounts, and Disbursements.
+    entries:
+      - label: Card collection fee (local)
+        name: card_collection_local
+        type: metered
+        metric: percent
+        unit: 1
+        price: '1.50'
+        timeFrame: usage
+        geo: NG
+        description: Percentage fee on local Nigerian card collections, capped per transaction.
+      - label: Card collection cap (local)
+        name: card_collection_local_cap
+        type: metered
+        metric: NGN
+        unit: 1
+        price: '2000'
+        timeFrame: usage
+        geo: NG
+        description: Maximum per-transaction fee on local card collections.
+      - label: International card collection fee
+        name: card_collection_international
+        type: metered
+        metric: percent
+        unit: 1
+        price: '3.80'
+        timeFrame: usage
+        geo: global
+        description: Percentage fee on international card collections.
+      - label: Bank transfer collection fee
+        name: bank_transfer_collection
+        type: metered
+        metric: percent
+        unit: 1
+        price: '0.50'
+        timeFrame: usage
+        geo: NG
+        description: Percentage fee on bank-transfer collections via reserved accounts, capped per transaction.
+      - label: Bank transfer collection cap
+        name: bank_transfer_collection_cap
+        type: metered
+        metric: NGN
+        unit: 1
+        price: '500'
+        timeFrame: usage
+        geo: NG
+      - label: USSD collection fee
+        name: ussd_collection
+        type: metered
+        metric: percent
+        unit: 1
+        price: '1.50'
+        timeFrame: usage
+        geo: NG
+      - label: NIP transfer (below NGN 5,000)
+        name: nip_transfer_small
+        type: metered
+        metric: NGN
+        unit: 1
+        price: '10'
+        timeFrame: usage
+        geo: NG
+        description: Flat NGN fee per transfer below NGN 5,000.
+      - label: NIP transfer (NGN 5,000 - 50,000)
+        name: nip_transfer_mid
+        type: metered
+        metric: NGN
+        unit: 1
+        price: '25'
+        timeFrame: usage
+        geo: NG
+      - label: NIP transfer (above NGN 50,000)
+        name: nip_transfer_large
+        type: metered
+        metric: NGN
+        unit: 1
+        price: '50'
+        timeFrame: usage
+        geo: NG
+  - id: monnify-enterprise
+    name: Monnify Enterprise
+    type: usage-based
+    description: Negotiated enterprise plan with custom rates, custom contract codes, and dedicated account management.
+    entries:
+      - label: Custom card collection fee
+        name: card_collection_custom
+        type: metered
+        metric: percent
+        unit: 1
+        price: 'custom'
+        timeFrame: usage
+        geo: NG
+      - label: Custom transfer collection fee
+        name: bank_transfer_collection_custom
+        type: metered
+        metric: percent
+        unit: 1
+        price: 'custom'
+        timeFrame: usage
+        geo: NG
+      - label: Custom disbursement fee
+        name: disbursement_custom
+        type: metered
+        metric: NGN
+        unit: 1
+        price: 'custom'
+        timeFrame: usage
+        geo: NG
+  - id: moniepoint-pos-acquiring
+    name: Moniepoint POS Acquiring
+    type: usage-based
+    description: POS terminal acquiring plan for merchants accepting in-person card and bank-transfer payments.
+    entries:
+      - label: POS card transaction fee
+        name: pos_card_collection
+        type: metered
+        metric: percent
+        unit: 1
+        price: '0.50'
+        timeFrame: usage
+        geo: NG
+        description: Percentage fee on POS card transactions, capped per transaction.
+      - label: POS card transaction cap
+        name: pos_card_collection_cap
+        type: metered
+        metric: NGN
+        unit: 1
+        price: '300'
+        timeFrame: usage
+        geo: NG
+      - label: POS terminal rental
+        name: pos_terminal_rental
+        type: subscription
+        metric: terminal
+        unit: 1
+        price: 'custom'
+        timeFrame: month
+        geo: NG
+        description: Optional monthly fee depending on merchant plan and acquiring volume.

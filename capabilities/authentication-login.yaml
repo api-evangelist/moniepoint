@@ -1,0 +1,74 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Monnify Authentication — Login
+  description: Exchange Monnify API key and secret credentials for a short-lived Bearer access token via POST /api/v1/auth/login.
+    Self-contained Naftiko capability covering one Monnify business surface.
+  tags:
+  - Moniepoint
+  - Monnify
+  - Authentication
+  created: '2026-05-24'
+  modified: '2026-05-24'
+binds:
+- namespace: env
+  keys:
+    MONNIFY_API_KEY: MONNIFY_API_KEY
+    MONNIFY_SECRET_KEY: MONNIFY_SECRET_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: authentication-login
+    baseUri: https://api.monnify.com
+    description: Monnify Authentication business capability. Self-contained, no shared references.
+    resources:
+    - name: auth-login
+      path: /api/v1/auth/login
+      operations:
+      - name: monnifyLogin
+        method: POST
+        description: Monnify Log In And Issue Access Token
+        outputRawFormat: json
+        outputParameters:
+        - name: accessToken
+          type: string
+          value: $.responseBody.accessToken
+        - name: expiresIn
+          type: integer
+          value: $.responseBody.expiresIn
+    authentication:
+      type: basic
+      username: '{{env.MONNIFY_API_KEY}}'
+      password: '{{env.MONNIFY_SECRET_KEY}}'
+  exposes:
+  - type: rest
+    namespace: authentication-login-rest
+    port: 8080
+    description: REST adapter for Monnify Authentication. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/auth/login
+      name: auth-login
+      description: REST surface for auth-login.
+      operations:
+      - method: POST
+        name: monnifyLogin
+        description: Monnify Log In And Issue Access Token
+        call: authentication-login.monnifyLogin
+        outputParameters:
+        - type: string
+          mapping: $.accessToken
+  - type: mcp
+    namespace: authentication-login-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Monnify Authentication. One tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: monnify-login
+      description: Monnify Log In And Issue Access Token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: authentication-login.monnifyLogin
+      outputParameters:
+      - type: string
+        mapping: $.accessToken

@@ -1,0 +1,39 @@
+{
+  "name": "Moniepoint Push Payment Request",
+  "description": "POST /api/v1/push-payment/request — push a payment to a registered Moniepoint POS terminal serial number.",
+  "request": {
+    "method": "POST",
+    "url": "https://pos.moniepoint.com/api/v1/push-payment/request",
+    "headers": {
+      "Authorization": "Basic <base64(client_id:client_secret)>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "terminalSerialNumber": "P2P-PAX-A920-1234567",
+      "amount": 6500.00,
+      "reference": "ISV-PUSH-2026-05-24-0001",
+      "currency": "NGN",
+      "description": "Table 14 — bill split",
+      "callbackUrl": "https://isv.example.ng/webhooks/pos-push",
+      "expiresIn": 120
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "requestSuccessful": true,
+      "responseMessage": "success",
+      "responseCode": "0",
+      "responseBody": {
+        "terminalSerialNumber": "P2P-PAX-A920-1234567",
+        "reference": "ISV-PUSH-2026-05-24-0001",
+        "amount": 6500.00,
+        "currency": "NGN",
+        "status": "PENDING",
+        "responseCode": "00",
+        "responseMessage": "Push delivered to terminal",
+        "dateCreated": "2026-05-24T18:42:11.000Z"
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "Monnify Initialize Transaction",
+  "description": "POST /api/v1/merchant/transactions/init-transaction request and response example.",
+  "request": {
+    "method": "POST",
+    "url": "https://api.monnify.com/api/v1/merchant/transactions/init-transaction",
+    "headers": {
+      "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.example",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "amount": 4500.50,
+      "customerName": "Adaeze Okafor",
+      "customerEmail": "adaeze@example.ng",
+      "paymentReference": "ORD-2026-05-24-0001",
+      "paymentDescription": "Order 0001 — Lagos delivery",
+      "contractCode": "100693834652",
+      "currencyCode": "NGN",
+      "redirectUrl": "https://merchant.example.ng/payments/success",
+      "paymentMethods": ["CARD", "ACCOUNT_TRANSFER", "USSD"],
+      "metaData": {
+        "orderId": "ORD-2026-05-24-0001",
+        "channel": "web"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "requestSuccessful": true,
+      "responseMessage": "success",
+      "responseCode": "0",
+      "responseBody": {
+        "transactionReference": "MNFY|20260524|001|0000123",
+        "paymentReference": "ORD-2026-05-24-0001",
+        "merchantName": "Example Retail Limited",
+        "apiKey": "MK_PROD_XYZ",
+        "redirectUrl": "https://merchant.example.ng/payments/success",
+        "enabledPaymentMethod": ["CARD", "ACCOUNT_TRANSFER", "USSD"],
+        "checkoutUrl": "https://sandbox.sdk.monnify.com/checkout/MNFY%7C20260524%7C001%7C0000123",
+        "amount": 4500.50,
+        "currencyCode": "NGN",
+        "paymentStatus": "PENDING"
+      }
+    }
+  }
+}

@@ -1,0 +1,71 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Moniepoint
+providerId: moniepoint
+created: '2026-05-24'
+modified: '2026-05-24'
+reconciled: false
+tags:
+  - Payments
+  - Rate Limiting
+  - Monnify
+description: >
+  Rate limits and concurrency controls applied to the Monnify developer API and the Moniepoint POS Push
+  Payment API. Monnify does not publish a single global rate-limit table; limits are enforced per merchant
+  contract code and per resource group, with sustained throughput communicated by the merchant success team.
+  Exceeded limits return HTTP 429.
+sources:
+  - https://developers.monnify.com
+  - https://moniepoint.com
+algorithm: fixed-window
+responseCodes:
+  throttled: 429
+headers:
+  retryAfter: retry-after
+limits:
+  - resource: Authentication
+    endpoint: POST /api/v1/auth/login
+    limit: 30
+    window: minute
+    description: Re-authentication is rate-limited; cache the accessToken until expiry (typically 3600s).
+  - resource: Collections
+    endpoint: POST /api/v1/merchant/transactions/init-transaction
+    limit: 1000
+    window: minute
+    description: Default soft limit per merchant; raised on enterprise contracts.
+  - resource: Reserved Accounts
+    endpoint: POST /api/v2/bank-transfer/reserved-accounts
+    limit: 600
+    window: minute
+  - resource: Disbursements
+    endpoint: POST /api/v2/disbursements/single
+    limit: 300
+    window: minute
+    description: Subject to merchant disbursement-wallet velocity policy.
+  - resource: Bulk Disbursements
+    endpoint: POST /api/v2/disbursements/bulk
+    limit: 60
+    window: minute
+    description: Bulk batches up to 50,000 items.
+  - resource: Verification
+    endpoint: GET /api/v1/disbursements/account/validate
+    limit: 600
+    window: minute
+  - resource: BVN Verification
+    endpoint: POST /api/v1/vas/bvn-account-match
+    limit: 120
+    window: minute
+  - resource: Bills Payment
+    endpoint: POST /api/v1/bill-payment/process-bill
+    limit: 300
+    window: minute
+  - resource: POS Push Payment
+    endpoint: POST /api/v1/push-payment/request
+    limit: 120
+    window: minute
+    description: Per ISV / per terminal limits apply; speak to Moniepoint POS integration team to raise.
+notes:
+  - Concrete per-merchant limits are visible in the Monnify Business dashboard or via the account success team.
+  - Exceeding limits returns HTTP 429 with a responseMessage indicating throttling; back off and retry with jitter.
+  - Bulk disbursements share quota with single disbursements when both run against the same source wallet.

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/moniepoint/monnify-webhook-schema.json",
+  "title": "Monnify Webhook Notification",
+  "description": "Schema for the asynchronous notifications Monnify posts to a merchant's webhook URL. Each delivery includes a monnify-signature header computed as HMAC-SHA-512(clientSecret, stringifiedBody).",
+  "type": "object",
+  "properties": {
+    "eventType": {
+      "type": "string",
+      "enum": [
+        "SUCCESSFUL_TRANSACTION",
+        "SUCCESSFUL_DISBURSEMENT",
+        "FAILED_DISBURSEMENT",
+        "REVERSED_DISBURSEMENT",
+        "SUCCESSFUL_REFUND",
+        "FAILED_REFUND",
+        "SETTLEMENT",
+        "MANDATE_STATUS_UPDATE",
+        "WALLET_TRANSACTION",
+        "LOW_BALANCE_ALERT"
+      ],
+      "description": "Monnify event category. low_balance_alert was added September 12, 2025."
+    },
+    "eventData": {
+      "type": "object",
+      "description": "Event-specific payload. Shape varies by eventType; common discriminating fields include transactionReference, paymentReference, settlementReference, mandateCode, walletReference."
+    }
+  },
+  "required": ["eventType", "eventData"]
+}

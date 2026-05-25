@@ -1,0 +1,123 @@
+openapi: 3.1.0
+info:
+  title: Monnify Settlements API
+  description: >
+    Retrieve settlement information for collected funds — settlement
+    batches per merchant or sub-account and settlement transactions.
+    Powers reconciliation of daily settlement payouts into the merchant's
+    external bank account.
+  version: '1.0'
+  contact:
+    name: Monnify Developer Support
+    url: https://developers.monnify.com
+servers:
+  - url: https://api.monnify.com
+    description: Production
+  - url: https://sandbox.monnify.com
+    description: Sandbox
+security:
+  - BearerAuth: []
+tags:
+  - name: Settlements
+    description: Settlement batches and transactions reporting.
+paths:
+  /api/v1/transactions/find-by-settlement-reference:
+    get:
+      summary: Monnify Find Transactions By Settlement Reference
+      description: List the transactions included in a single settlement payout.
+      operationId: findTransactionsBySettlement
+      tags: [Settlements]
+      parameters:
+        - name: reference
+          in: query
+          required: true
+          schema: { type: string }
+        - name: page
+          in: query
+          schema: { type: integer, default: 0 }
+        - name: size
+          in: query
+          schema: { type: integer, default: 10 }
+      responses:
+        '200':
+          description: Settlement transactions page.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestSuccessful: { type: boolean }
+                  responseMessage: { type: string }
+                  responseCode: { type: string }
+                  responseBody:
+                    type: object
+                    properties:
+                      content:
+                        type: array
+                        items: { $ref: '#/components/schemas/SettlementTransaction' }
+                      totalElements: { type: integer }
+                      totalPages: { type: integer }
+  /api/v1/settlements:
+    get:
+      summary: Monnify List Settlements
+      operationId: listSettlements
+      tags: [Settlements]
+      parameters:
+        - name: page
+          in: query
+          schema: { type: integer, default: 0 }
+        - name: size
+          in: query
+          schema: { type: integer, default: 10 }
+        - name: from
+          in: query
+          schema: { type: string, format: date }
+        - name: to
+          in: query
+          schema: { type: string, format: date }
+      responses:
+        '200':
+          description: Settlements page.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestSuccessful: { type: boolean }
+                  responseMessage: { type: string }
+                  responseCode: { type: string }
+                  responseBody:
+                    type: object
+                    properties:
+                      content:
+                        type: array
+                        items: { $ref: '#/components/schemas/Settlement' }
+                      totalElements: { type: integer }
+                      totalPages: { type: integer }
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Settlement:
+      type: object
+      properties:
+        settlementReference: { type: string }
+        amount: { type: number }
+        fee: { type: number }
+        netAmount: { type: number }
+        bankCode: { type: string }
+        accountNumber: { type: string }
+        accountName: { type: string }
+        settlementStatus: { type: string, enum: [PENDING, COMPLETED, FAILED] }
+        settledOn: { type: string, format: date-time }
+    SettlementTransaction:
+      type: object
+      properties:
+        transactionReference: { type: string }
+        amount: { type: number }
+        fee: { type: number }
+        netAmount: { type: number }
+        paidOn: { type: string, format: date-time }

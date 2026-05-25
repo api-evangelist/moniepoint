@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/moniepoint/monnify-reserved-account-schema.json",
+  "title": "Monnify Reserved Account",
+  "description": "Schema for a Monnify Reserved Account — a permanent NUBAN virtual account allocated to a customer for inbound bank-transfer collections. Returned by /api/v2/bank-transfer/reserved-accounts.",
+  "type": "object",
+  "properties": {
+    "accountReference": { "type": "string", "description": "Merchant-supplied unique reference." },
+    "accountName": { "type": "string", "description": "Display name used on bank statements." },
+    "currencyCode": { "type": "string", "example": "NGN" },
+    "contractCode": { "type": "string" },
+    "customerEmail": { "type": "string", "format": "email" },
+    "customerName": { "type": "string" },
+    "bvn": { "type": "string", "minLength": 11, "maxLength": 11 },
+    "nin": { "type": "string", "minLength": 11, "maxLength": 11 },
+    "status": { "type": "string", "enum": ["ACTIVE", "INACTIVE", "DEALLOCATED"] },
+    "restrictPaymentSource": { "type": "boolean" },
+    "allowedPaymentSources": {
+      "type": "object",
+      "properties": {
+        "bvns": { "type": "array", "items": { "type": "string" } },
+        "accountNumbers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "accountNumber": { "type": "string" },
+              "bankCode": { "type": "string" }
+            }
+          }
+        },
+        "accountNames": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "accounts": {
+      "type": "array",
+      "description": "One NUBAN per preferred bank.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "bankCode": { "type": "string" },
+          "bankName": { "type": "string" },
+          "accountNumber": { "type": "string" },
+          "accountName": { "type": "string" }
+        }
+      }
+    },
+    "incomeSplitConfig": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "subAccountCode": { "type": "string" },
+          "feePercentage": { "type": "number" },
+          "splitPercentage": { "type": "number" },
+          "feeBearer": { "type": "boolean" }
+        }
+      }
+    },
+    "limitProfileCode": { "type": "string" },
+    "dateCreated": { "type": "string", "format": "date-time" }
+  },
+  "required": ["accountReference", "accountName", "currencyCode", "customerEmail", "status"]
+}

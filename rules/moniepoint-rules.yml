@@ -1,0 +1,78 @@
+extends:
+  - 'spectral:oas'
+formats:
+  - oas3_1
+  - oas3
+documentationUrl: https://developers.monnify.com
+rules:
+  monnify-info-contact:
+    description: Each Monnify OpenAPI document must declare a contact pointing to the developer portal.
+    given: $.info
+    severity: error
+    then:
+      field: contact
+      function: truthy
+  monnify-info-license:
+    description: Each Monnify OpenAPI document should reference Moniepoint's terms of service.
+    given: $.info
+    severity: warn
+    then:
+      field: license
+      function: truthy
+  monnify-servers-production:
+    description: Production server must be https://api.monnify.com.
+    given: $.servers[*].url
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: '^(https://(api|sandbox)\.monnify\.com|https://pos\.moniepoint\.com)$'
+  monnify-operation-id-camelcase:
+    description: operationId values use camelCase.
+    given: $.paths[*][*]
+    severity: error
+    then:
+      field: operationId
+      function: pattern
+      functionOptions:
+        match: '^[a-z][a-zA-Z0-9]+$'
+  monnify-summary-title-case:
+    description: Operation summaries are written in Title Case and start with the provider name.
+    given: $.paths[*][get,post,put,delete,patch]
+    severity: warn
+    then:
+      field: summary
+      function: pattern
+      functionOptions:
+        match: '^(Monnify|Moniepoint) [A-Z]'
+  monnify-paths-versioned:
+    description: All Monnify endpoints live under /api/v1/ or /api/v2/.
+    given: $.paths
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: '^/api/v[12]/'
+  monnify-bearer-or-basic:
+    description: Either Bearer auth (Monnify Bearer JWT) or Basic auth (auth/login + POS) must be declared.
+    given: $.components.securitySchemes[*]
+    severity: error
+    then:
+      field: type
+      function: enumeration
+      functionOptions:
+        values:
+          - http
+          - apiKey
+  monnify-tag-defined:
+    description: Every tag used on an operation must be defined at the document level.
+    given: $.paths[*][*].tags[*]
+    severity: warn
+    then:
+      function: defined
+  monnify-response-envelope:
+    description: Responses should reference the standard Monnify envelope properties.
+    given: $.components.schemas
+    severity: hint
+    then:
+      function: truthy

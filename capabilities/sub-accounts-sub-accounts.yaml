@@ -1,0 +1,92 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Monnify Sub-Accounts — Settlement Sub-Accounts
+  description: Create, update, list, and delete Monnify sub-accounts used for split settlement.
+    Self-contained Naftiko capability covering one Monnify business surface.
+  tags:
+  - Moniepoint
+  - Monnify
+  - Sub-Accounts
+  - Split Payments
+  created: '2026-05-24'
+  modified: '2026-05-24'
+binds:
+- namespace: env
+  keys:
+    MONNIFY_ACCESS_TOKEN: MONNIFY_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: sub-accounts-sub-accounts
+    baseUri: https://api.monnify.com
+    description: Monnify Sub-Accounts business capability.
+    resources:
+    - name: sub-accounts
+      path: /api/v1/sub-accounts
+      operations:
+      - name: createSubAccounts
+        method: POST
+        description: Monnify Create Sub-Accounts
+        outputRawFormat: json
+        inputParameters:
+        - name: body
+          in: body
+          type: array
+          required: true
+      - name: updateSubAccount
+        method: PUT
+        description: Monnify Update Sub-Account
+        outputRawFormat: json
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+      - name: listSubAccounts
+        method: GET
+        description: Monnify List Sub-Accounts
+        outputRawFormat: json
+    - name: sub-account
+      path: /api/v1/sub-accounts/{subAccountCode}
+      operations:
+      - name: deleteSubAccount
+        method: DELETE
+        description: Monnify Delete Sub-Account
+        outputRawFormat: json
+        inputParameters:
+        - name: subAccountCode
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: 'Bearer {{env.MONNIFY_ACCESS_TOKEN}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: sub-accounts-sub-accounts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Monnify Sub-Accounts.
+    tools:
+    - name: monnify-create-sub-accounts
+      description: Monnify Create Sub-Accounts
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: sub-accounts-sub-accounts.createSubAccounts
+      with:
+        body: tools.body
+    - name: monnify-list-sub-accounts
+      description: Monnify List Sub-Accounts
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: sub-accounts-sub-accounts.listSubAccounts
+    - name: monnify-update-sub-account
+      description: Monnify Update Sub-Account
+      hints: { readOnly: false, destructive: false, idempotent: true }
+      call: sub-accounts-sub-accounts.updateSubAccount
+      with:
+        body: tools.body
+    - name: monnify-delete-sub-account
+      description: Monnify Delete Sub-Account
+      hints: { readOnly: false, destructive: true, idempotent: true }
+      call: sub-accounts-sub-accounts.deleteSubAccount

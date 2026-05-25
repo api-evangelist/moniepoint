@@ -1,0 +1,100 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Monnify Direct Debit — Mandates
+  description: Create, activate, fetch, and cancel direct-debit mandates against a customer's bank account.
+    Self-contained Naftiko capability covering one Monnify business surface.
+  tags:
+  - Moniepoint
+  - Monnify
+  - Direct Debit
+  - Mandates
+  created: '2026-05-24'
+  modified: '2026-05-24'
+binds:
+- namespace: env
+  keys:
+    MONNIFY_ACCESS_TOKEN: MONNIFY_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: direct-debit-mandates
+    baseUri: https://api.monnify.com
+    description: Monnify Direct Debit — Mandates business capability.
+    resources:
+    - name: mandate
+      path: /api/v1/direct-debit/mandate
+      operations:
+      - name: createMandate
+        method: POST
+        description: Monnify Create Direct Debit Mandate
+        outputRawFormat: json
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    - name: mandate-detail
+      path: /api/v1/direct-debit/mandate/{mandateCode}
+      operations:
+      - name: getMandate
+        method: GET
+        description: Monnify Get Direct Debit Mandate
+        outputRawFormat: json
+        inputParameters:
+        - name: mandateCode
+          in: path
+          type: string
+          required: true
+      - name: cancelMandate
+        method: DELETE
+        description: Monnify Cancel Direct Debit Mandate
+        outputRawFormat: json
+        inputParameters:
+        - name: mandateCode
+          in: path
+          type: string
+          required: true
+    - name: mandate-activation
+      path: /api/v1/direct-debit/mandate/activation
+      operations:
+      - name: activateMandate
+        method: POST
+        description: Monnify Activate Direct Debit Mandate
+        outputRawFormat: json
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: 'Bearer {{env.MONNIFY_ACCESS_TOKEN}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: direct-debit-mandates-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Monnify Direct Debit — Mandates.
+    tools:
+    - name: monnify-create-mandate
+      description: Monnify Create Direct Debit Mandate
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: direct-debit-mandates.createMandate
+      with:
+        body: tools.body
+    - name: monnify-activate-mandate
+      description: Monnify Activate Direct Debit Mandate
+      hints: { readOnly: false, destructive: false, idempotent: true }
+      call: direct-debit-mandates.activateMandate
+      with:
+        body: tools.body
+    - name: monnify-get-mandate
+      description: Monnify Get Direct Debit Mandate
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: direct-debit-mandates.getMandate
+    - name: monnify-cancel-mandate
+      description: Monnify Cancel Direct Debit Mandate
+      hints: { readOnly: false, destructive: true, idempotent: true }
+      call: direct-debit-mandates.cancelMandate

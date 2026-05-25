@@ -1,0 +1,175 @@
+openapi: 3.1.0
+info:
+  title: Monnify Verification API
+  description: >
+    Validate a Nigerian bank account number (Name Inquiry), match a Bank
+    Verification Number (BVN) against an account, and verify National
+    Identification Numbers (NIN). These checks underpin KYC, beneficiary
+    verification on disbursement, and fraud prevention.
+  version: '1.0'
+  contact:
+    name: Monnify Developer Support
+    url: https://developers.monnify.com
+servers:
+  - url: https://api.monnify.com
+    description: Production
+  - url: https://sandbox.monnify.com
+    description: Sandbox
+security:
+  - BearerAuth: []
+tags:
+  - name: Verification
+    description: Identity, BVN, NIN, and account verification.
+paths:
+  /api/v1/disbursements/account/validate:
+    get:
+      summary: Monnify Validate Bank Account
+      description: Returns the registered account name for a bank account number and bank code.
+      operationId: validateAccount
+      tags: [Verification]
+      parameters:
+        - name: accountNumber
+          in: query
+          required: true
+          schema: { type: string }
+        - name: bankCode
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Account holder name.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountValidationEnvelope'
+  /api/v1/vas/bvn-account-match:
+    post:
+      summary: Monnify Match BVN To Bank Account
+      description: Verify that a BVN belongs to the owner of a given bank account.
+      operationId: matchBvnToAccount
+      tags: [Verification]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [bvn, bankCode, accountNumber]
+              properties:
+                bvn: { type: string }
+                bankCode: { type: string }
+                accountNumber: { type: string }
+      responses:
+        '200':
+          description: BVN match result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BvnMatchEnvelope'
+  /api/v1/vas/bvn-details/{bvn}:
+    get:
+      summary: Monnify Get BVN Details
+      description: Returns demographic details associated with a BVN.
+      operationId: getBvnDetails
+      tags: [Verification]
+      parameters:
+        - name: bvn
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: BVN details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BvnDetailsEnvelope'
+  /api/v1/vas/verify-nin:
+    post:
+      summary: Monnify Verify NIN
+      description: Validate a National Identification Number (NIN) against demographic details.
+      operationId: verifyNin
+      tags: [Verification]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [nin]
+              properties:
+                nin: { type: string }
+                dateOfBirth: { type: string, format: date }
+                phoneNumber: { type: string }
+      responses:
+        '200':
+          description: NIN verification result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NinEnvelope'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    AccountValidationEnvelope:
+      type: object
+      properties:
+        requestSuccessful: { type: boolean }
+        responseMessage: { type: string }
+        responseCode: { type: string }
+        responseBody:
+          type: object
+          properties:
+            accountNumber: { type: string }
+            accountName: { type: string }
+            bankCode: { type: string }
+    BvnMatchEnvelope:
+      type: object
+      properties:
+        requestSuccessful: { type: boolean }
+        responseMessage: { type: string }
+        responseCode: { type: string }
+        responseBody:
+          type: object
+          properties:
+            bvn: { type: string }
+            accountNumber: { type: string }
+            bankCode: { type: string }
+            matchStatus: { type: string, enum: [MATCHED, PARTIAL_MATCH, NO_MATCH] }
+    BvnDetailsEnvelope:
+      type: object
+      properties:
+        requestSuccessful: { type: boolean }
+        responseMessage: { type: string }
+        responseCode: { type: string }
+        responseBody:
+          type: object
+          properties:
+            bvn: { type: string }
+            firstName: { type: string }
+            middleName: { type: string }
+            lastName: { type: string }
+            dateOfBirth: { type: string, format: date }
+            phoneNumber: { type: string }
+            gender: { type: string }
+            registrationDate: { type: string, format: date }
+    NinEnvelope:
+      type: object
+      properties:
+        requestSuccessful: { type: boolean }
+        responseMessage: { type: string }
+        responseCode: { type: string }
+        responseBody:
+          type: object
+          properties:
+            nin: { type: string }
+            firstName: { type: string }
+            lastName: { type: string }
+            dateOfBirth: { type: string, format: date }
+            phoneNumber: { type: string }
+            matched: { type: boolean }

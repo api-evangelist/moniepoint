@@ -1,0 +1,47 @@
+{
+  "name": "Monnify Initiate Single Transfer",
+  "description": "POST /api/v2/disbursements/single — initiate a single NIP transfer after pre-flight Name Inquiry.",
+  "request": {
+    "method": "POST",
+    "url": "https://api.monnify.com/api/v2/disbursements/single",
+    "headers": {
+      "Authorization": "Bearer eyJhbGciOiJIUzUxMiJ9.example",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "amount": 25000.00,
+      "reference": "PAYOUT-2026-05-24-0001",
+      "narration": "May 2026 supplier payment",
+      "destinationBankCode": "058",
+      "destinationAccountNumber": "0123456789",
+      "destinationAccountName": "TUNDE BABATUNDE",
+      "currency": "NGN",
+      "sourceAccountNumber": "3000123456",
+      "async": false,
+      "senderInformation": {
+        "fullName": "Example Retail Limited",
+        "senderRef": "OPS-FINANCE-001"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "requestSuccessful": true,
+      "responseMessage": "success",
+      "responseCode": "0",
+      "responseBody": {
+        "reference": "PAYOUT-2026-05-24-0001",
+        "amount": 25000.00,
+        "destinationAccountName": "TUNDE BABATUNDE",
+        "destinationAccountNumber": "0123456789",
+        "destinationBankCode": "058",
+        "currency": "NGN",
+        "status": "PENDING_AUTHORIZATION",
+        "narration": "May 2026 supplier payment",
+        "fee": 25.00,
+        "dateCreated": "2026-05-24T10:15:23.000Z"
+      }
+    }
+  }
+}

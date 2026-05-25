@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/schemas/moniepoint/monnify-transaction-schema.json",
+  "title": "Monnify Transaction",
+  "description": "Schema for the core Monnify collection transaction object returned by Initialize Transaction, Get Transaction Status, and Search Transactions endpoints under /api/v1/merchant/transactions/ and /api/v2/merchant/transactions/.",
+  "type": "object",
+  "properties": {
+    "transactionReference": {
+      "type": "string",
+      "description": "Monnify-assigned reference for the transaction."
+    },
+    "paymentReference": {
+      "type": "string",
+      "description": "Merchant-supplied unique reference."
+    },
+    "merchantName": { "type": "string" },
+    "apiKey": { "type": "string", "description": "Merchant API key used to initialize the transaction." },
+    "contractCode": { "type": "string" },
+    "amount": { "type": "number", "minimum": 0 },
+    "amountPaid": { "type": "number", "minimum": 0 },
+    "currencyCode": { "type": "string", "example": "NGN" },
+    "customerName": { "type": "string" },
+    "customerEmail": { "type": "string", "format": "email" },
+    "checkoutUrl": { "type": "string", "format": "uri" },
+    "paymentStatus": {
+      "type": "string",
+      "enum": ["PAID", "OVERPAID", "PARTIALLY_PAID", "PENDING", "FAILED", "EXPIRED"]
+    },
+    "paymentMethod": {
+      "type": "string",
+      "enum": ["CARD", "ACCOUNT_TRANSFER", "USSD", "PHONE_NUMBER", "DIRECT_DEBIT"]
+    },
+    "paymentDescription": { "type": "string" },
+    "redirectUrl": { "type": "string", "format": "uri" },
+    "settlementAmount": { "type": "number" },
+    "completedOn": { "type": "string", "format": "date-time" },
+    "paidOn": { "type": "string", "format": "date-time" },
+    "metaData": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "incomeSplitConfig": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "subAccountCode": { "type": "string" },
+          "feePercentage": { "type": "number" },
+          "splitPercentage": { "type": "number" },
+          "splitAmount": { "type": "number" },
+          "feeBearer": { "type": "boolean" }
+        }
+      }
+    }
+  },
+  "required": ["paymentReference", "amount", "currencyCode", "paymentStatus"]
+}

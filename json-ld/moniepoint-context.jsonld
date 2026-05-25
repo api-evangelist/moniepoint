@@ -1,0 +1,97 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "@vocab": "https://schema.org/",
+    "monnify": "https://api.monnify.com/v1/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Transaction": {
+      "@id": "monnify:Transaction",
+      "@context": {
+        "transactionReference": { "@id": "monnify:Transaction/transactionReference", "@type": "xsd:string" },
+        "paymentReference": { "@id": "monnify:Transaction/paymentReference", "@type": "xsd:string" },
+        "amount": { "@id": "monnify:Transaction/amount", "@type": "xsd:decimal" },
+        "amountPaid": { "@id": "monnify:Transaction/amountPaid", "@type": "xsd:decimal" },
+        "currencyCode": { "@id": "monnify:Transaction/currencyCode", "@type": "xsd:string" },
+        "paymentStatus": { "@id": "monnify:Transaction/paymentStatus", "@type": "xsd:string" },
+        "paymentMethod": { "@id": "monnify:Transaction/paymentMethod", "@type": "xsd:string" },
+        "customerEmail": { "@id": "monnify:Transaction/customerEmail", "@type": "xsd:string" },
+        "paidOn": { "@id": "monnify:Transaction/paidOn", "@type": "xsd:dateTime" }
+      }
+    },
+
+    "ReservedAccount": {
+      "@id": "monnify:ReservedAccount",
+      "@context": {
+        "accountReference": { "@id": "monnify:ReservedAccount/accountReference", "@type": "xsd:string" },
+        "accountName": { "@id": "monnify:ReservedAccount/accountName", "@type": "xsd:string" },
+        "currencyCode": { "@id": "monnify:ReservedAccount/currencyCode", "@type": "xsd:string" },
+        "customerEmail": { "@id": "monnify:ReservedAccount/customerEmail", "@type": "xsd:string" },
+        "bvn": { "@id": "monnify:ReservedAccount/bvn", "@type": "xsd:string" },
+        "nin": { "@id": "monnify:ReservedAccount/nin", "@type": "xsd:string" },
+        "status": { "@id": "monnify:ReservedAccount/status", "@type": "xsd:string" },
+        "accounts": { "@id": "monnify:ReservedAccount/accounts", "@container": "@list" }
+      }
+    },
+
+    "Transfer": {
+      "@id": "monnify:Transfer",
+      "@context": {
+        "reference": { "@id": "monnify:Transfer/reference", "@type": "xsd:string" },
+        "amount": { "@id": "monnify:Transfer/amount", "@type": "xsd:decimal" },
+        "currency": { "@id": "monnify:Transfer/currency", "@type": "xsd:string" },
+        "destinationAccountNumber": { "@id": "monnify:Transfer/destinationAccountNumber", "@type": "xsd:string" },
+        "destinationAccountName": { "@id": "monnify:Transfer/destinationAccountName", "@type": "xsd:string" },
+        "destinationBankCode": { "@id": "monnify:Transfer/destinationBankCode", "@type": "xsd:string" },
+        "status": { "@id": "monnify:Transfer/status", "@type": "xsd:string" },
+        "narration": { "@id": "monnify:Transfer/narration", "@type": "xsd:string" },
+        "fee": { "@id": "monnify:Transfer/fee", "@type": "xsd:decimal" },
+        "dateCreated": { "@id": "monnify:Transfer/dateCreated", "@type": "xsd:dateTime" }
+      }
+    },
+
+    "Mandate": {
+      "@id": "monnify:Mandate",
+      "@context": {
+        "mandateCode": { "@id": "monnify:Mandate/mandateCode", "@type": "xsd:string" },
+        "mandateAmount": { "@id": "monnify:Mandate/mandateAmount", "@type": "xsd:decimal" },
+        "status": { "@id": "monnify:Mandate/status", "@type": "xsd:string" },
+        "frequency": { "@id": "monnify:Mandate/frequency", "@type": "xsd:string" },
+        "startDate": { "@id": "monnify:Mandate/startDate", "@type": "xsd:date" },
+        "endDate": { "@id": "monnify:Mandate/endDate", "@type": "xsd:date" }
+      }
+    },
+
+    "Invoice": {
+      "@id": "monnify:Invoice",
+      "@context": {
+        "invoiceReference": { "@id": "monnify:Invoice/invoiceReference", "@type": "xsd:string" },
+        "amount": { "@id": "monnify:Invoice/amount", "@type": "xsd:decimal" },
+        "currencyCode": { "@id": "monnify:Invoice/currencyCode", "@type": "xsd:string" },
+        "status": { "@id": "monnify:Invoice/status", "@type": "xsd:string" },
+        "expiryDate": { "@id": "monnify:Invoice/expiryDate", "@type": "xsd:dateTime" }
+      }
+    },
+
+    "SubAccount": {
+      "@id": "monnify:SubAccount",
+      "@context": {
+        "subAccountCode": { "@id": "monnify:SubAccount/subAccountCode", "@type": "xsd:string" },
+        "currencyCode": { "@id": "monnify:SubAccount/currencyCode", "@type": "xsd:string" },
+        "bankCode": { "@id": "monnify:SubAccount/bankCode", "@type": "xsd:string" },
+        "accountNumber": { "@id": "monnify:SubAccount/accountNumber", "@type": "xsd:string" },
+        "defaultSplitPercentage": { "@id": "monnify:SubAccount/defaultSplitPercentage", "@type": "xsd:decimal" }
+      }
+    },
+
+    "WebhookEvent": {
+      "@id": "monnify:WebhookEvent",
+      "@context": {
+        "eventType": { "@id": "monnify:WebhookEvent/eventType", "@type": "xsd:string" },
+        "eventData": { "@id": "monnify:WebhookEvent/eventData" }
+      }
+    }
+  }
+}

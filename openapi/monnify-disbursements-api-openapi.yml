@@ -1,0 +1,403 @@
+openapi: 3.1.0
+info:
+  title: Monnify Disbursements API
+  description: >
+    Initiate single and bulk NIP transfers to Nigerian bank accounts. As of
+    April 2026 the disbursement flow requires Name Inquiry first then a
+    Disbursement Request that carries the verified beneficiary account name.
+    A sender-information object has been supported on initiation since
+    October 2025. Two-factor authorization with OTP applies to single
+    transfers.
+  version: '2.0'
+  contact:
+    name: Monnify Developer Support
+    url: https://developers.monnify.com
+servers:
+  - url: https://api.monnify.com
+    description: Production
+  - url: https://sandbox.monnify.com
+    description: Sandbox
+security:
+  - BearerAuth: []
+tags:
+  - name: Single Transfers
+    description: Initiate, authorize, and query single transfers.
+  - name: Bulk Transfers
+    description: Initiate and query bulk transfer batches.
+  - name: Wallet
+    description: Disbursement wallet balance and metadata.
+  - name: Banks
+    description: NIP bank directory and account validation.
+paths:
+  /api/v2/disbursements/single:
+    post:
+      summary: Monnify Initiate Single Transfer
+      description: Initiate a single-bank-account payout. Requires beneficiary account name verified by Name Inquiry.
+      operationId: initiateSingleTransfer
+      tags: [Single Transfers]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SingleTransferRequest'
+      responses:
+        '200':
+          description: Transfer initiated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferEnvelope'
+  /api/v2/disbursements/single/validate-otp:
+    post:
+      summary: Monnify Authorize Single Transfer OTP
+      description: Submit the OTP returned to the merchant to authorize a pending transfer.
+      operationId: authorizeSingleTransferOtp
+      tags: [Single Transfers]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizeTransferRequest'
+      responses:
+        '200':
+          description: Transfer authorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferEnvelope'
+  /api/v2/disbursements/single/resend-otp:
+    post:
+      summary: Monnify Resend Transfer OTP
+      operationId: resendTransferOtp
+      tags: [Single Transfers]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [reference]
+              properties:
+                reference: { type: string }
+      responses:
+        '200':
+          description: OTP resent.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestSuccessful: { type: boolean }
+                  responseMessage: { type: string }
+                  responseCode: { type: string }
+                  responseBody: { type: object }
+  /api/v2/disbursements/single/summary:
+    get:
+      summary: Monnify Get Single Transfer Status
+      description: Look up the current status of a single transfer.
+      operationId: getSingleTransferStatus
+      tags: [Single Transfers]
+      parameters:
+        - name: reference
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Transfer status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferEnvelope'
+  /api/v2/disbursements/single/transactions:
+    get:
+      summary: Monnify List Single Transfers
+      operationId: listSingleTransfers
+      tags: [Single Transfers]
+      parameters:
+        - name: pageNo
+          in: query
+          schema: { type: integer, default: 0 }
+        - name: pageSize
+          in: query
+          schema: { type: integer, default: 10 }
+      responses:
+        '200':
+          description: Single transfers page.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferPageEnvelope'
+  /api/v2/disbursements/bulk:
+    post:
+      summary: Monnify Initiate Bulk Transfer
+      description: Initiate a batch of transfers in one call.
+      operationId: initiateBulkTransfer
+      tags: [Bulk Transfers]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkTransferRequest'
+      responses:
+        '200':
+          description: Bulk transfer accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkTransferEnvelope'
+  /api/v2/disbursements/bulk/summary:
+    get:
+      summary: Monnify Get Bulk Transfer Summary
+      operationId: getBulkTransferSummary
+      tags: [Bulk Transfers]
+      parameters:
+        - name: batchReference
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Bulk transfer summary.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkTransferEnvelope'
+  /api/v2/disbursements/bulk/{batchReference}/transactions:
+    get:
+      summary: Monnify List Bulk Transfer Items
+      operationId: listBulkTransferItems
+      tags: [Bulk Transfers]
+      parameters:
+        - name: batchReference
+          in: path
+          required: true
+          schema: { type: string }
+        - name: pageNo
+          in: query
+          schema: { type: integer, default: 0 }
+        - name: pageSize
+          in: query
+          schema: { type: integer, default: 10 }
+      responses:
+        '200':
+          description: Bulk transfer items page.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferPageEnvelope'
+  /api/v2/disbursements/wallet-balance:
+    get:
+      summary: Monnify Get Disbursement Wallet Balance
+      operationId: getWalletBalance
+      tags: [Wallet]
+      parameters:
+        - name: accountNumber
+          in: query
+          required: true
+          schema: { type: string, description: Merchant disbursement wallet account number. }
+      responses:
+        '200':
+          description: Wallet balance.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestSuccessful: { type: boolean }
+                  responseMessage: { type: string }
+                  responseCode: { type: string }
+                  responseBody:
+                    type: object
+                    properties:
+                      availableBalance: { type: number }
+                      ledgerBalance: { type: number }
+  /api/v1/sdk/transactions/banks:
+    get:
+      summary: Monnify List NIP Banks
+      description: Returns the list of supported Nigerian banks with bank codes.
+      operationId: listBanks
+      tags: [Banks]
+      responses:
+        '200':
+          description: Bank list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestSuccessful: { type: boolean }
+                  responseMessage: { type: string }
+                  responseCode: { type: string }
+                  responseBody:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code: { type: string }
+                        name: { type: string }
+                        ussdTemplate: { type: string }
+                        nibssBankCode: { type: string }
+  /api/v1/disbursements/account/validate:
+    get:
+      summary: Monnify Validate Bank Account (Name Inquiry)
+      description: Return the registered account name for a bank account number.
+      operationId: validateBankAccount
+      tags: [Banks]
+      parameters:
+        - name: accountNumber
+          in: query
+          required: true
+          schema: { type: string }
+        - name: bankCode
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Account holder name.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestSuccessful: { type: boolean }
+                  responseMessage: { type: string }
+                  responseCode: { type: string }
+                  responseBody:
+                    type: object
+                    properties:
+                      accountNumber: { type: string }
+                      accountName: { type: string }
+                      bankCode: { type: string }
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    SenderInformation:
+      type: object
+      description: Optional sender details (added October 2025).
+      properties:
+        fullName: { type: string }
+        phoneNumber: { type: string }
+        email: { type: string, format: email }
+        senderRef: { type: string }
+    IncomeSplit:
+      type: object
+      properties:
+        subAccountCode: { type: string }
+        feePercentage: { type: number }
+        splitAmount: { type: number }
+        feeBearer: { type: boolean }
+    SingleTransferRequest:
+      type: object
+      required: [amount, reference, narration, destinationBankCode, destinationAccountNumber, currency, sourceAccountNumber]
+      properties:
+        amount: { type: number }
+        reference: { type: string, description: Unique merchant reference. }
+        narration: { type: string, maxLength: 100 }
+        destinationBankCode: { type: string }
+        destinationAccountNumber: { type: string }
+        destinationAccountName:
+          type: string
+          description: Required as of March 2026 — must match the Name Inquiry result.
+        currency: { type: string, example: NGN }
+        sourceAccountNumber: { type: string, description: Merchant wallet account number. }
+        async: { type: boolean }
+        senderInformation: { $ref: '#/components/schemas/SenderInformation' }
+    AuthorizeTransferRequest:
+      type: object
+      required: [reference, authorizationCode]
+      properties:
+        reference: { type: string }
+        authorizationCode: { type: string }
+    BulkTransferRequest:
+      type: object
+      required: [title, batchReference, narration, sourceAccountNumber, transactionList]
+      properties:
+        title: { type: string }
+        batchReference: { type: string }
+        narration: { type: string }
+        sourceAccountNumber: { type: string }
+        onValidationFailure:
+          type: string
+          enum: [BREAK, CONTINUE]
+        notificationInterval:
+          type: integer
+          description: Webhook batch notification interval as a percentage (10, 20, 50, 100).
+        transactionList:
+          type: array
+          items:
+            type: object
+            properties:
+              amount: { type: number }
+              reference: { type: string }
+              narration: { type: string }
+              destinationBankCode: { type: string }
+              destinationAccountNumber: { type: string }
+              destinationAccountName: { type: string }
+              currency: { type: string, example: NGN }
+    Transfer:
+      type: object
+      properties:
+        reference: { type: string }
+        amount: { type: number }
+        destinationAccountName: { type: string }
+        destinationAccountNumber: { type: string }
+        destinationBankCode: { type: string }
+        currency: { type: string }
+        status:
+          type: string
+          enum: [SUCCESS, FAILED, REVERSED, PENDING, OTP_EMAIL_DISPATCH, PENDING_AUTHORIZATION]
+        narration: { type: string }
+        fee: { type: number }
+        dateCreated: { type: string, format: date-time }
+    BulkTransferSummary:
+      type: object
+      properties:
+        batchReference: { type: string }
+        batchStatus: { type: string }
+        totalAmount: { type: number }
+        totalFee: { type: number }
+        totalReceivedAmount: { type: number }
+        totalCount: { type: integer }
+        successfulCount: { type: integer }
+        failedCount: { type: integer }
+        pendingCount: { type: integer }
+        dateCreated: { type: string, format: date-time }
+    TransferEnvelope:
+      type: object
+      properties:
+        requestSuccessful: { type: boolean }
+        responseMessage: { type: string }
+        responseCode: { type: string }
+        responseBody: { $ref: '#/components/schemas/Transfer' }
+    BulkTransferEnvelope:
+      type: object
+      properties:
+        requestSuccessful: { type: boolean }
+        responseMessage: { type: string }
+        responseCode: { type: string }
+        responseBody: { $ref: '#/components/schemas/BulkTransferSummary' }
+    TransferPageEnvelope:
+      type: object
+      properties:
+        requestSuccessful: { type: boolean }
+        responseMessage: { type: string }
+        responseCode: { type: string }
+        responseBody:
+          type: object
+          properties:
+            content:
+              type: array
+              items: { $ref: '#/components/schemas/Transfer' }
+            number: { type: integer }
+            size: { type: integer }
+            totalElements: { type: integer }
+            totalPages: { type: integer }

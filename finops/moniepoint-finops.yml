@@ -1,0 +1,134 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Moniepoint
+providerId: moniepoint
+created: '2026-05-24'
+modified: '2026-05-24'
+reconciled: false
+tags:
+  - FinOps
+  - Payments
+  - Nigeria
+  - FOCUS
+description: >
+  FOCUS-aligned FinOps definition for the Monnify developer platform and the Moniepoint POS acquiring
+  service. Monnify charges per transaction on collections (card, transfer, USSD), per transfer on
+  disbursements (tiered NGN flat fee), and per bill on bills-payment; POS acquiring charges a percent
+  capped fee per card transaction. Billing currency is NGN, with USD-equivalent reporting available on
+  enterprise contracts.
+sources:
+  - https://moniepoint.com/payments
+  - https://app.monnify.com
+  - https://developers.monnify.com
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Moniepoint Inc.
+serviceCategory: Financial Services
+billingModel:
+  pricingCategory: Usage-Based
+  billingFrequency: Daily
+  billingCurrency: NGN
+  chargeCategories:
+    - Usage
+    - Tax
+    - Adjustment
+    - Refund
+  primaryUnit: transaction
+  secondaryUnits:
+    - NGN
+    - transfer
+    - bill
+    - terminal
+focusColumns:
+  ServiceName: Monnify
+  ServiceCategory: Financial Services
+  ProviderName: Moniepoint
+  PublisherName: Moniepoint Inc.
+  InvoiceIssuerName: Moniepoint Inc.
+  PricingCategory: Usage-Based
+  PricingUnit: transaction
+  BillingCurrency: NGN
+meters:
+  - name: card_collections
+    unit: transaction
+    aggregation: sum
+    dimensions:
+      - contractCode
+      - currency
+      - cardType
+      - issuerRegion
+  - name: bank_transfer_collections
+    unit: transaction
+    aggregation: sum
+    dimensions:
+      - contractCode
+      - currency
+      - sourceBank
+  - name: ussd_collections
+    unit: transaction
+    aggregation: sum
+    dimensions:
+      - contractCode
+      - currency
+  - name: disbursements_single
+    unit: transfer
+    aggregation: sum
+    dimensions:
+      - contractCode
+      - destinationBank
+      - amountTier
+  - name: disbursements_bulk
+    unit: transfer
+    aggregation: sum
+    dimensions:
+      - contractCode
+      - destinationBank
+      - amountTier
+  - name: bills_processed
+    unit: bill
+    aggregation: sum
+    dimensions:
+      - contractCode
+      - categoryCode
+      - billerCode
+  - name: pos_card_transactions
+    unit: transaction
+    aggregation: sum
+    dimensions:
+      - terminalSerialNumber
+      - merchantId
+      - cardType
+  - name: pos_transfer_transactions
+    unit: transaction
+    aggregation: sum
+    dimensions:
+      - terminalSerialNumber
+      - merchantId
+  - name: settlement_volume
+    unit: NGN
+    aggregation: sum
+    dimensions:
+      - contractCode
+      - settlementBank
+discounts:
+  - name: enterprise_volume_discount
+    description: Negotiated per-merchant pricing on high-volume contracts (Monnify Enterprise).
+    appliesTo:
+      - card_collections
+      - bank_transfer_collections
+      - disbursements_single
+      - disbursements_bulk
+reporting:
+  invoices: Daily settlement statements via Monnify dashboard and email.
+  api:
+    - GET /api/v1/transactions/find-by-settlement-reference
+    - GET /api/v1/settlements
+  webhooks:
+    - SETTLEMENT
+    - WALLET_TRANSACTION
+    - LOW_BALANCE_ALERT

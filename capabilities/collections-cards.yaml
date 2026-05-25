@@ -1,0 +1,127 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Monnify Collections — Cards
+  description: Server-to-server card capture, OTP authorization, and tokenized card charges across the Monnify Collections API.
+    Self-contained Naftiko capability covering one Monnify business surface.
+  tags:
+  - Moniepoint
+  - Monnify
+  - Cards
+  - 3-D Secure
+  created: '2026-05-24'
+  modified: '2026-05-24'
+binds:
+- namespace: env
+  keys:
+    MONNIFY_ACCESS_TOKEN: MONNIFY_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: collections-cards
+    baseUri: https://api.monnify.com
+    description: Monnify Collections — Cards business capability.
+    resources:
+    - name: charge-card
+      path: /api/v1/merchant/cards/charge
+      operations:
+      - name: chargeCard
+        method: POST
+        description: Monnify Charge Card
+        outputRawFormat: json
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    - name: authorize-otp
+      path: /api/v1/merchant/cards/otp/authorize
+      operations:
+      - name: authorizeOtp
+        method: POST
+        description: Monnify Authorize OTP
+        outputRawFormat: json
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    - name: charge-card-token
+      path: /api/v1/merchant/cards/charge-card-token
+      operations:
+      - name: chargeCardToken
+        method: POST
+        description: Monnify Charge Tokenized Card
+        outputRawFormat: json
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: 'Bearer {{env.MONNIFY_ACCESS_TOKEN}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: collections-cards-rest
+    port: 8080
+    description: REST adapter for Monnify Collections — Cards.
+    resources:
+    - path: /v1/charge-card
+      name: charge-card
+      operations:
+      - method: POST
+        name: chargeCard
+        call: collections-cards.chargeCard
+        with:
+          body: rest.body
+    - path: /v1/authorize-otp
+      name: authorize-otp
+      operations:
+      - method: POST
+        name: authorizeOtp
+        call: collections-cards.authorizeOtp
+        with:
+          body: rest.body
+    - path: /v1/charge-card-token
+      name: charge-card-token
+      operations:
+      - method: POST
+        name: chargeCardToken
+        call: collections-cards.chargeCardToken
+        with:
+          body: rest.body
+  - type: mcp
+    namespace: collections-cards-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Monnify Collections — Cards.
+    tools:
+    - name: monnify-charge-card
+      description: Monnify Charge Card
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: collections-cards.chargeCard
+      with:
+        body: tools.body
+    - name: monnify-authorize-otp
+      description: Monnify Authorize OTP
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: collections-cards.authorizeOtp
+      with:
+        body: tools.body
+    - name: monnify-charge-card-token
+      description: Monnify Charge Tokenized Card
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: collections-cards.chargeCardToken
+      with:
+        body: tools.body

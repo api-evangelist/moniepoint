@@ -1,0 +1,106 @@
+vocabulary: Moniepoint / Monnify
+provider: Moniepoint
+providerId: moniepoint
+created: '2026-05-24'
+modified: '2026-05-24'
+description: Operational and capability vocabulary for the Moniepoint and Monnify platforms — payments, banking, and POS acquiring for Nigerian SMBs.
+namespaces:
+  monnify: https://api.monnify.com/v1/
+  moniepoint: https://pos.moniepoint.com/v1/
+dimensions:
+  - name: Domain
+    values:
+      - Payments
+      - Banking
+      - Acquiring
+      - Disbursement
+      - Direct Debit
+      - Bills Payment
+      - KYC
+      - Wallet
+      - Settlement
+      - Verification
+  - name: Channel
+    values:
+      - Card
+      - Bank Transfer
+      - USSD
+      - Phone Number
+      - POS Terminal
+      - Direct Debit
+      - QR Code
+  - name: Object
+    values:
+      - Transaction
+      - Reserved Account
+      - Sub-Account
+      - Limit Profile
+      - Transfer
+      - Bulk Transfer
+      - Mandate
+      - Invoice
+      - Bill
+      - Wallet
+      - Refund
+      - Settlement
+      - Push Payment
+      - Webhook Event
+  - name: Status
+    values:
+      - PENDING
+      - PAID
+      - OVERPAID
+      - PARTIALLY_PAID
+      - FAILED
+      - EXPIRED
+      - SUCCESS
+      - REVERSED
+      - CANCELLED
+      - ACTIVATED
+      - DEALLOCATED
+      - COMPLETED
+      - PENDING_AUTHORIZATION
+  - name: Currency
+    values:
+      - NGN
+      - USD
+  - name: Country
+    values:
+      - NG
+      - KE
+  - name: Identifier
+    values:
+      - paymentReference
+      - transactionReference
+      - accountReference
+      - subAccountCode
+      - mandateCode
+      - refundReference
+      - invoiceReference
+      - settlementReference
+      - walletReference
+      - terminalSerialNumber
+      - batchReference
+      - bvn
+      - nin
+  - name: Webhook Event
+    values:
+      - SUCCESSFUL_TRANSACTION
+      - SUCCESSFUL_DISBURSEMENT
+      - FAILED_DISBURSEMENT
+      - REVERSED_DISBURSEMENT
+      - SUCCESSFUL_REFUND
+      - FAILED_REFUND
+      - SETTLEMENT
+      - MANDATE_STATUS_UPDATE
+      - WALLET_TRANSACTION
+      - LOW_BALANCE_ALERT
+  - name: Authentication
+    values:
+      - Basic (API key + secret) on /api/v1/auth/login
+      - Bearer accessToken (1-hour TTL)
+      - Basic client id / client secret on Moniepoint POS
+sources:
+  - https://developers.monnify.com
+  - https://docs.pos.moniepoint.com
+  - https://developers.monnify.com/docs/change-logs

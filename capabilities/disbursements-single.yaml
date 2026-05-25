@@ -1,0 +1,110 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Monnify Disbursements — Single Transfers
+  description: Initiate single NIP transfers with name-inquiry pre-flight, authorize via OTP, query status, and list transfers.
+    Self-contained Naftiko capability covering one Monnify business surface.
+  tags:
+  - Moniepoint
+  - Monnify
+  - Disbursements
+  - NIP
+  created: '2026-05-24'
+  modified: '2026-05-24'
+binds:
+- namespace: env
+  keys:
+    MONNIFY_ACCESS_TOKEN: MONNIFY_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: disbursements-single
+    baseUri: https://api.monnify.com
+    description: Monnify Disbursements — Single Transfers business capability.
+    resources:
+    - name: single
+      path: /api/v2/disbursements/single
+      operations:
+      - name: initiateSingleTransfer
+        method: POST
+        description: Monnify Initiate Single Transfer
+        outputRawFormat: json
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    - name: validate-otp
+      path: /api/v2/disbursements/single/validate-otp
+      operations:
+      - name: authorizeSingleTransferOtp
+        method: POST
+        description: Monnify Authorize Single Transfer OTP
+        outputRawFormat: json
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    - name: resend-otp
+      path: /api/v2/disbursements/single/resend-otp
+      operations:
+      - name: resendTransferOtp
+        method: POST
+        description: Monnify Resend Transfer OTP
+        outputRawFormat: json
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    - name: summary
+      path: /api/v2/disbursements/single/summary
+      operations:
+      - name: getSingleTransferStatus
+        method: GET
+        description: Monnify Get Single Transfer Status
+        outputRawFormat: json
+        inputParameters:
+        - name: reference
+          in: query
+          type: string
+          required: true
+    - name: transactions
+      path: /api/v2/disbursements/single/transactions
+      operations:
+      - name: listSingleTransfers
+        method: GET
+        description: Monnify List Single Transfers
+        outputRawFormat: json
+    authentication:
+      type: apikey
+      key: Authorization
+      value: 'Bearer {{env.MONNIFY_ACCESS_TOKEN}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: disbursements-single-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Monnify Disbursements — Single Transfers.
+    tools:
+    - name: monnify-initiate-single-transfer
+      description: Monnify Initiate Single Transfer
+      hints: { readOnly: false, destructive: true, idempotent: false }
+      call: disbursements-single.initiateSingleTransfer
+      with:
+        body: tools.body
+    - name: monnify-authorize-transfer-otp
+      description: Monnify Authorize Single Transfer OTP
+      hints: { readOnly: false, destructive: true, idempotent: true }
+      call: disbursements-single.authorizeSingleTransferOtp
+      with:
+        body: tools.body
+    - name: monnify-get-transfer-status
+      description: Monnify Get Single Transfer Status
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: disbursements-single.getSingleTransferStatus
+    - name: monnify-list-single-transfers
+      description: Monnify List Single Transfers
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: disbursements-single.listSingleTransfers

@@ -1,0 +1,129 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Monnify Bills Payment — Bills
+  description: Unified biller service for airtime, data, electricity, cable TV, betting, and education — list categories, billers, items; validate customer; process bill; check status.
+    Self-contained Naftiko capability covering one Monnify business surface.
+  tags:
+  - Moniepoint
+  - Monnify
+  - Bills
+  created: '2026-05-24'
+  modified: '2026-05-24'
+binds:
+- namespace: env
+  keys:
+    MONNIFY_ACCESS_TOKEN: MONNIFY_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: bills-payment-bills
+    baseUri: https://api.monnify.com
+    description: Monnify Bills Payment business capability.
+    resources:
+    - name: categories
+      path: /api/v1/bill-payment/categories
+      operations:
+      - name: listBillCategories
+        method: GET
+        description: Monnify List Bill Categories
+        outputRawFormat: json
+    - name: billers
+      path: /api/v1/bill-payment/billers
+      operations:
+      - name: listBillers
+        method: GET
+        description: Monnify List Billers
+        outputRawFormat: json
+        inputParameters:
+        - name: categoryCode
+          in: query
+          type: string
+          required: true
+    - name: biller-items
+      path: /api/v1/bill-payment/biller-items
+      operations:
+      - name: listBillerItems
+        method: GET
+        description: Monnify List Biller Items
+        outputRawFormat: json
+        inputParameters:
+        - name: billerCode
+          in: query
+          type: string
+          required: true
+    - name: customer-validate
+      path: /api/v1/bill-payment/customer-validate
+      operations:
+      - name: validateBillsCustomer
+        method: POST
+        description: Monnify Validate Bills Customer
+        outputRawFormat: json
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    - name: process-bill
+      path: /api/v1/bill-payment/process-bill
+      operations:
+      - name: processBill
+        method: POST
+        description: Monnify Process Bill
+        outputRawFormat: json
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    - name: status
+      path: /api/v1/bill-payment/status
+      operations:
+      - name: getBillStatus
+        method: GET
+        description: Monnify Get Bill Status
+        outputRawFormat: json
+        inputParameters:
+        - name: reference
+          in: query
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: 'Bearer {{env.MONNIFY_ACCESS_TOKEN}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: bills-payment-bills-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Monnify Bills Payment.
+    tools:
+    - name: monnify-list-bill-categories
+      description: Monnify List Bill Categories
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: bills-payment-bills.listBillCategories
+    - name: monnify-list-billers
+      description: Monnify List Billers
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: bills-payment-bills.listBillers
+    - name: monnify-list-biller-items
+      description: Monnify List Biller Items
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: bills-payment-bills.listBillerItems
+    - name: monnify-validate-bills-customer
+      description: Monnify Validate Bills Customer
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: bills-payment-bills.validateBillsCustomer
+      with:
+        body: tools.body
+    - name: monnify-process-bill
+      description: Monnify Process Bill
+      hints: { readOnly: false, destructive: true, idempotent: false }
+      call: bills-payment-bills.processBill
+      with:
+        body: tools.body
+    - name: monnify-get-bill-status
+      description: Monnify Get Bill Status
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: bills-payment-bills.getBillStatus

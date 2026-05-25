@@ -1,0 +1,48 @@
+{
+  "name": "Monnify Successful Collection Webhook",
+  "description": "Sample SUCCESSFUL_TRANSACTION webhook payload posted by Monnify to a merchant's notification URL. Verify the monnify-signature header against HMAC-SHA-512(clientSecret, stringifiedBody) before trusting the payload.",
+  "request": {
+    "method": "POST",
+    "url": "https://merchant.example.ng/webhooks/monnify",
+    "headers": {
+      "Content-Type": "application/json",
+      "monnify-signature": "5f8b3c2d1e... (HMAC-SHA-512 hex)"
+    },
+    "body": {
+      "eventType": "SUCCESSFUL_TRANSACTION",
+      "eventData": {
+        "product": { "type": "WEB_SDK", "reference": "ORD-2026-05-24-0001" },
+        "transactionReference": "MNFY|20260524|001|0000123",
+        "paymentReference": "ORD-2026-05-24-0001",
+        "paidOn": "2026-05-24T10:18:55.000Z",
+        "paymentDescription": "Order 0001 — Lagos delivery",
+        "paymentSourceInformation": {
+          "amountPaid": 4500.50,
+          "bankCode": "058",
+          "accountNumber": "******1234",
+          "accountName": "ADAEZE OKAFOR"
+        },
+        "amountPaid": 4500.50,
+        "totalPayable": 4500.50,
+        "settlementAmount": 4477.50,
+        "paymentStatus": "PAID",
+        "paymentMethod": "ACCOUNT_TRANSFER",
+        "currency": "NGN",
+        "customer": {
+          "name": "Adaeze Okafor",
+          "email": "adaeze@example.ng"
+        },
+        "metaData": {
+          "orderId": "ORD-2026-05-24-0001",
+          "channel": "web"
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "acknowledged": true
+    }
+  }
+}

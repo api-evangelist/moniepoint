@@ -1,0 +1,61 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Monnify Settlements — Settlements
+  description: Retrieve settlement batches and the transactions included in each daily settlement payout.
+    Self-contained Naftiko capability covering one Monnify business surface.
+  tags:
+  - Moniepoint
+  - Monnify
+  - Settlements
+  created: '2026-05-24'
+  modified: '2026-05-24'
+binds:
+- namespace: env
+  keys:
+    MONNIFY_ACCESS_TOKEN: MONNIFY_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: settlements-settlements
+    baseUri: https://api.monnify.com
+    description: Monnify Settlements business capability.
+    resources:
+    - name: settlements
+      path: /api/v1/settlements
+      operations:
+      - name: listSettlements
+        method: GET
+        description: Monnify List Settlements
+        outputRawFormat: json
+    - name: settlement-transactions
+      path: /api/v1/transactions/find-by-settlement-reference
+      operations:
+      - name: findTransactionsBySettlement
+        method: GET
+        description: Monnify Find Transactions By Settlement Reference
+        outputRawFormat: json
+        inputParameters:
+        - name: reference
+          in: query
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: 'Bearer {{env.MONNIFY_ACCESS_TOKEN}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: settlements-settlements-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Monnify Settlements.
+    tools:
+    - name: monnify-list-settlements
+      description: Monnify List Settlements
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: settlements-settlements.listSettlements
+    - name: monnify-find-transactions-by-settlement
+      description: Monnify Find Transactions By Settlement Reference
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: settlements-settlements.findTransactionsBySettlement

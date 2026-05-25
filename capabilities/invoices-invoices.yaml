@@ -1,0 +1,95 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Monnify Invoices — Invoices
+  description: Create static and dynamic invoices, fetch, list, and cancel invoices via the Monnify Invoice API.
+    Self-contained Naftiko capability covering one Monnify business surface.
+  tags:
+  - Moniepoint
+  - Monnify
+  - Invoices
+  created: '2026-05-24'
+  modified: '2026-05-24'
+binds:
+- namespace: env
+  keys:
+    MONNIFY_ACCESS_TOKEN: MONNIFY_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: invoices-invoices
+    baseUri: https://api.monnify.com
+    description: Monnify Invoices business capability.
+    resources:
+    - name: invoice-create
+      path: /api/v1/invoice/create
+      operations:
+      - name: createInvoice
+        method: POST
+        description: Monnify Create Invoice
+        outputRawFormat: json
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    - name: invoice-detail
+      path: /api/v1/invoice/{invoiceReference}/details
+      operations:
+      - name: getInvoice
+        method: GET
+        description: Monnify Get Invoice Details
+        outputRawFormat: json
+        inputParameters:
+        - name: invoiceReference
+          in: path
+          type: string
+          required: true
+    - name: invoice-all
+      path: /api/v1/invoice/all
+      operations:
+      - name: listInvoices
+        method: GET
+        description: Monnify List Invoices
+        outputRawFormat: json
+    - name: invoice-cancel
+      path: /api/v1/invoice/{invoiceReference}/cancel
+      operations:
+      - name: cancelInvoice
+        method: DELETE
+        description: Monnify Cancel Invoice
+        outputRawFormat: json
+        inputParameters:
+        - name: invoiceReference
+          in: path
+          type: string
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: 'Bearer {{env.MONNIFY_ACCESS_TOKEN}}'
+      placement: header
+  exposes:
+  - type: mcp
+    namespace: invoices-invoices-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Monnify Invoices.
+    tools:
+    - name: monnify-create-invoice
+      description: Monnify Create Invoice
+      hints: { readOnly: false, destructive: false, idempotent: false }
+      call: invoices-invoices.createInvoice
+      with:
+        body: tools.body
+    - name: monnify-get-invoice
+      description: Monnify Get Invoice Details
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: invoices-invoices.getInvoice
+    - name: monnify-list-invoices
+      description: Monnify List Invoices
+      hints: { readOnly: true, destructive: false, idempotent: true }
+      call: invoices-invoices.listInvoices
+    - name: monnify-cancel-invoice
+      description: Monnify Cancel Invoice
+      hints: { readOnly: false, destructive: true, idempotent: true }
+      call: invoices-invoices.cancelInvoice

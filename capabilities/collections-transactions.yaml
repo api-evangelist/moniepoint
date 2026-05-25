@@ -1,0 +1,145 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Monnify Collections — Transactions
+  description: Initialize transactions, complete bank-transfer collections, and look up transaction status across the Monnify Collections API.
+    Self-contained Naftiko capability covering one Monnify business surface.
+  tags:
+  - Moniepoint
+  - Monnify
+  - Collections
+  created: '2026-05-24'
+  modified: '2026-05-24'
+binds:
+- namespace: env
+  keys:
+    MONNIFY_ACCESS_TOKEN: MONNIFY_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: collections-transactions
+    baseUri: https://api.monnify.com
+    description: Monnify Collections — Transactions business capability.
+    resources:
+    - name: init-transaction
+      path: /api/v1/merchant/transactions/init-transaction
+      operations:
+      - name: initializeTransaction
+        method: POST
+        description: Monnify Initialize Transaction
+        outputRawFormat: json
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    - name: pay-with-transfer
+      path: /api/v1/merchant/bank-transfer/init-payment
+      operations:
+      - name: payWithBankTransfer
+        method: POST
+        description: Monnify Pay With Bank Transfer
+        outputRawFormat: json
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+    - name: transaction-status
+      path: /api/v2/merchant/transactions/query
+      operations:
+      - name: getTransactionStatus
+        method: GET
+        description: Monnify Get Transaction Status
+        outputRawFormat: json
+        inputParameters:
+        - name: paymentReference
+          in: query
+          type: string
+        - name: transactionReference
+          in: query
+          type: string
+    - name: search-transactions
+      path: /api/v1/transactions/search
+      operations:
+      - name: searchTransactions
+        method: GET
+        description: Monnify Search Transactions
+        outputRawFormat: json
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+        - name: size
+          in: query
+          type: integer
+    authentication:
+      type: apikey
+      key: Authorization
+      value: 'Bearer {{env.MONNIFY_ACCESS_TOKEN}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: collections-transactions-rest
+    port: 8080
+    description: REST adapter for Monnify Collections — Transactions.
+    resources:
+    - path: /v1/init-transaction
+      name: init-transaction
+      operations:
+      - method: POST
+        name: initializeTransaction
+        call: collections-transactions.initializeTransaction
+        with:
+          body: rest.body
+    - path: /v1/pay-with-transfer
+      name: pay-with-transfer
+      operations:
+      - method: POST
+        name: payWithBankTransfer
+        call: collections-transactions.payWithBankTransfer
+        with:
+          body: rest.body
+    - path: /v1/transaction-status
+      name: transaction-status
+      operations:
+      - method: GET
+        name: getTransactionStatus
+        call: collections-transactions.getTransactionStatus
+  - type: mcp
+    namespace: collections-transactions-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Monnify Collections — Transactions.
+    tools:
+    - name: monnify-initialize-transaction
+      description: Monnify Initialize Transaction
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: collections-transactions.initializeTransaction
+      with:
+        body: tools.body
+    - name: monnify-pay-with-transfer
+      description: Monnify Pay With Bank Transfer
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: collections-transactions.payWithBankTransfer
+      with:
+        body: tools.body
+    - name: monnify-get-transaction-status
+      description: Monnify Get Transaction Status
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: collections-transactions.getTransactionStatus
+    - name: monnify-search-transactions
+      description: Monnify Search Transactions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: collections-transactions.searchTransactions
