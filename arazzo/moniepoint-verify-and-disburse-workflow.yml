@@ -1,0 +1,127 @@
+arazzo: 1.0.1
+info:
+  title: Moniepoint Verify And Disburse
+  summary: Name-inquiry a beneficiary bank account, then disburse to it and poll the transfer to a final state.
+  description: >-
+    The April 2026 disbursement flow requires a Name Inquiry before paying out.
+    This workflow validates the beneficiary account number and bank code to
+    resolve the registered account name, initiates a single NIP transfer that
+    carries that verified account name, and then polls the transfer summary
+    until it reaches a terminal status. Every step spells out its request inline
+    so the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: verificationApi
+  url: ../openapi/monnify-verification-api-openapi.yml
+  type: openapi
+- name: disbursementsApi
+  url: ../openapi/monnify-disbursements-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: verify-and-disburse
+  summary: Verify a beneficiary account by Name Inquiry, then disburse to it and poll for completion.
+  description: >-
+    Resolve the beneficiary account name via Name Inquiry, initiate a single
+    transfer carrying that verified name, and poll the transfer status until it
+    settles to SUCCESS, FAILED, or REVERSED.
+  inputs:
+    type: object
+    required:
+    - destinationAccountNumber
+    - destinationBankCode
+    - amount
+    - reference
+    - narration
+    - currency
+    - sourceAccountNumber
+    properties:
+      destinationAccountNumber:
+        type: string
+        description: Beneficiary bank account number to pay out to.
+      destinationBankCode:
+        type: string
+        description: NIP bank code of the beneficiary bank.
+      amount:
+        type: number
+        description: Amount to transfer.
+      reference:
+        type: string
+        description: Unique merchant reference for the transfer.
+      narration:
+        type: string
+        description: Narration shown on the transfer (max 100 chars).
+      currency:
+        type: string
+        description: ISO currency code for the transfer (e.g. NGN).
+      sourceAccountNumber:
+        type: string
+        description: Merchant disbursement wallet account number to debit.
+  steps:
+  - stepId: nameInquiry
+    description: >-
+      Resolve the registered account name for the beneficiary account number
+      and bank code before paying out.
+    operationId: validateAccount
+    parameters:
+    - name: accountNumber
+      in: query
+      value: $inputs.destinationAccountNumber
+    - name: bankCode
+      in: query
+      value: $inputs.destinationBankCode
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      accountName: $response.body#/responseBody/accountName
+  - stepId: initiateTransfer
+    description: >-
+      Initiate a single NIP transfer carrying the beneficiary account name
+      resolved by Name Inquiry.
+    operationId: initiateSingleTransfer
+    requestBody:
+      contentType: application/json
+      payload:
+        amount: $inputs.amount
+        reference: $inputs.reference
+        narration: $inputs.narration
+        destinationBankCode: $inputs.destinationBankCode
+        destinationAccountNumber: $inputs.destinationAccountNumber
+        destinationAccountName: $steps.nameInquiry.outputs.accountName
+        currency: $inputs.currency
+        sourceAccountNumber: $inputs.sourceAccountNumber
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      reference: $response.body#/responseBody/reference
+      status: $response.body#/responseBody/status
+  - stepId: pollTransferStatus
+    description: >-
+      Poll the single transfer summary until it reaches a terminal status of
+      SUCCESS, FAILED, or REVERSED.
+    operationId: getSingleTransferStatus
+    parameters:
+    - name: reference
+      in: query
+      value: $steps.initiateTransfer.outputs.reference
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.responseBody.status == 'SUCCESS' || $.responseBody.status == 'FAILED' || $.responseBody.status == 'REVERSED'
+      context: $response.body
+      type: jsonpath
+    retryAfter: 5
+    retryLimit: 10
+    outputs:
+      status: $response.body#/responseBody/status
+      amount: $response.body#/responseBody/amount
+      fee: $response.body#/responseBody/fee
+  outputs:
+    reference: $steps.initiateTransfer.outputs.reference
+    beneficiaryName: $steps.nameInquiry.outputs.accountName
+    finalStatus: $steps.pollTransferStatus.outputs.status

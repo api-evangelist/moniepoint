@@ -1,0 +1,118 @@
+arazzo: 1.0.1
+info:
+  title: Moniepoint Collect Via Bank Transfer
+  summary: Initialize a collection, generate a one-time NUBAN to pay it, then poll the transaction until paid.
+  description: >-
+    Accept money from a customer by bank transfer. This workflow initializes a
+    pending transaction to obtain a transactionReference, generates a one-time
+    NUBAN for the customer to pay into, and then polls the transaction status
+    until it reaches a terminal payment state of PAID, FAILED, or EXPIRED. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: collectionsApi
+  url: ../openapi/monnify-collections-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: collect-bank-transfer
+  summary: Initialize a transaction, get a pay-with-transfer NUBAN, then poll to paid.
+  description: >-
+    Create a pending transaction, generate a one-time NUBAN for bank-transfer
+    payment, and poll the transaction status until it settles.
+  inputs:
+    type: object
+    required:
+    - amount
+    - customerName
+    - customerEmail
+    - paymentReference
+    - paymentDescription
+    - contractCode
+    - currencyCode
+    properties:
+      amount:
+        type: number
+        description: Amount the customer should pay.
+      customerName:
+        type: string
+        description: Name of the paying customer.
+      customerEmail:
+        type: string
+        description: Email of the paying customer.
+      paymentReference:
+        type: string
+        description: Unique merchant payment reference.
+      paymentDescription:
+        type: string
+        description: Description shown for the payment.
+      contractCode:
+        type: string
+        description: Monnify contract code the transaction is created under.
+      currencyCode:
+        type: string
+        description: ISO currency code for the transaction (e.g. NGN).
+  steps:
+  - stepId: initializeTransaction
+    description: >-
+      Create a pending transaction and obtain its transactionReference and
+      checkoutUrl.
+    operationId: initializeTransaction
+    requestBody:
+      contentType: application/json
+      payload:
+        amount: $inputs.amount
+        customerName: $inputs.customerName
+        customerEmail: $inputs.customerEmail
+        paymentReference: $inputs.paymentReference
+        paymentDescription: $inputs.paymentDescription
+        contractCode: $inputs.contractCode
+        currencyCode: $inputs.currencyCode
+        paymentMethods:
+        - ACCOUNT_TRANSFER
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      transactionReference: $response.body#/responseBody/transactionReference
+      checkoutUrl: $response.body#/responseBody/checkoutUrl
+  - stepId: payWithTransfer
+    description: >-
+      Generate a one-time NUBAN the customer can pay into to complete the
+      initialized transaction.
+    operationId: payWithBankTransfer
+    requestBody:
+      contentType: application/json
+      payload:
+        transactionReference: $steps.initializeTransaction.outputs.transactionReference
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      paymentReference: $response.body#/responseBody/paymentReference
+  - stepId: pollStatus
+    description: >-
+      Poll the transaction status until it reaches a terminal payment state of
+      PAID, FAILED, or EXPIRED.
+    operationId: getTransactionStatus
+    parameters:
+    - name: transactionReference
+      in: query
+      value: $steps.initializeTransaction.outputs.transactionReference
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.responseBody.paymentStatus == 'PAID' || $.responseBody.paymentStatus == 'FAILED' || $.responseBody.paymentStatus == 'EXPIRED'
+      context: $response.body
+      type: jsonpath
+    retryAfter: 5
+    retryLimit: 12
+    outputs:
+      paymentStatus: $response.body#/responseBody/paymentStatus
+      amount: $response.body#/responseBody/amount
+  outputs:
+    transactionReference: $steps.initializeTransaction.outputs.transactionReference
+    paymentStatus: $steps.pollStatus.outputs.paymentStatus

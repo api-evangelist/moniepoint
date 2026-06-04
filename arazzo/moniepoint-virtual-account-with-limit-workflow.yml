@@ -1,0 +1,123 @@
+arazzo: 1.0.1
+info:
+  title: Moniepoint Virtual Account With Limit Profile
+  summary: Define a transaction limit profile, then reserve a virtual account bound to that profile.
+  description: >-
+    Create a per-account limit profile that caps single-transaction value and
+    daily transaction volume, then reserve a permanent NUBAN virtual account
+    that is pre-assigned to that limit profile, and read the account back to
+    confirm it was created. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: reservedAccountsApi
+  url: ../openapi/monnify-reserved-accounts-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: virtual-account-with-limit
+  summary: Create a limit profile and reserve a virtual account bound to it.
+  description: >-
+    Define a reusable limit profile, then create a reserved account that
+    references the profile by limitProfileCode, and confirm the account by
+    reading it back.
+  inputs:
+    type: object
+    required:
+    - limitProfileName
+    - singleTransactionValue
+    - dailyTransactionVolume
+    - dailyTransactionValue
+    - accountReference
+    - accountName
+    - currencyCode
+    - contractCode
+    - customerEmail
+    properties:
+      limitProfileName:
+        type: string
+        description: Human-readable name for the limit profile.
+      singleTransactionValue:
+        type: number
+        description: Maximum value allowed for a single inbound transaction.
+      dailyTransactionVolume:
+        type: integer
+        description: Maximum number of transactions allowed per day.
+      dailyTransactionValue:
+        type: number
+        description: Maximum total transaction value allowed per day.
+      accountReference:
+        type: string
+        description: Unique merchant reference identifying the reserved account.
+      accountName:
+        type: string
+        description: Display name for the reserved account.
+      currencyCode:
+        type: string
+        description: ISO currency code for the account (e.g. NGN).
+      contractCode:
+        type: string
+        description: Monnify contract code the account is created under.
+      customerEmail:
+        type: string
+        description: Email address of the customer the account is reserved for.
+  steps:
+  - stepId: createLimitProfile
+    description: >-
+      Define a limit profile that caps single-transaction value and daily
+      transaction volume and value.
+    operationId: createLimitProfile
+    requestBody:
+      contentType: application/json
+      payload:
+        limitProfileName: $inputs.limitProfileName
+        singleTransactionValue: $inputs.singleTransactionValue
+        dailyTransactionVolume: $inputs.dailyTransactionVolume
+        dailyTransactionValue: $inputs.dailyTransactionValue
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      limitProfileCode: $response.body#/responseBody/limitProfileCode
+  - stepId: reserveAccountWithLimit
+    description: >-
+      Reserve a permanent NUBAN virtual account pre-assigned to the limit
+      profile created above.
+    operationId: reserveAccountWithLimit
+    requestBody:
+      contentType: application/json
+      payload:
+        accountReference: $inputs.accountReference
+        accountName: $inputs.accountName
+        currencyCode: $inputs.currencyCode
+        contractCode: $inputs.contractCode
+        customerEmail: $inputs.customerEmail
+        limitProfileCode: $steps.createLimitProfile.outputs.limitProfileCode
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      accountReference: $response.body#/responseBody/accountReference
+      status: $response.body#/responseBody/status
+  - stepId: confirmAccount
+    description: >-
+      Read the reserved account back by its accountReference to confirm
+      creation and surface the issued NUBAN details.
+    operationId: getReservedAccountV2
+    parameters:
+    - name: accountReference
+      in: path
+      value: $steps.reserveAccountWithLimit.outputs.accountReference
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/responseBody/status
+      accounts: $response.body#/responseBody/accounts
+  outputs:
+    limitProfileCode: $steps.createLimitProfile.outputs.limitProfileCode
+    accountReference: $steps.reserveAccountWithLimit.outputs.accountReference
+    status: $steps.confirmAccount.outputs.status
+    accounts: $steps.confirmAccount.outputs.accounts

@@ -1,0 +1,148 @@
+arazzo: 1.0.1
+info:
+  title: Moniepoint Single Transfer With OTP
+  summary: Initiate a single transfer, branch on whether OTP authorization is required, authorize it, and confirm.
+  description: >-
+    Single transfers can require two-factor authorization with an OTP dispatched
+    to the merchant. This workflow validates the beneficiary account, initiates
+    the transfer, and branches: when the transfer comes back awaiting OTP it
+    submits the authorization code and then confirms the final status, and when
+    the transfer is already settled it skips straight to confirmation. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: disbursementsApi
+  url: ../openapi/monnify-disbursements-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: single-transfer-otp
+  summary: Initiate a single transfer and authorize it with an OTP when required.
+  description: >-
+    Validate the beneficiary, initiate the transfer, and branch on the returned
+    status: authorize with an OTP when the transfer is pending authorization,
+    otherwise confirm the settled status directly.
+  inputs:
+    type: object
+    required:
+    - destinationAccountNumber
+    - destinationBankCode
+    - amount
+    - reference
+    - narration
+    - currency
+    - sourceAccountNumber
+    - authorizationCode
+    properties:
+      destinationAccountNumber:
+        type: string
+        description: Beneficiary bank account number to pay out to.
+      destinationBankCode:
+        type: string
+        description: NIP bank code of the beneficiary bank.
+      amount:
+        type: number
+        description: Amount to transfer.
+      reference:
+        type: string
+        description: Unique merchant reference for the transfer.
+      narration:
+        type: string
+        description: Narration shown on the transfer (max 100 chars).
+      currency:
+        type: string
+        description: ISO currency code for the transfer (e.g. NGN).
+      sourceAccountNumber:
+        type: string
+        description: Merchant disbursement wallet account number to debit.
+      authorizationCode:
+        type: string
+        description: OTP authorization code dispatched to the merchant.
+  steps:
+  - stepId: validateBeneficiary
+    description: >-
+      Resolve the beneficiary account name via Name Inquiry before initiating
+      the transfer.
+    operationId: validateBankAccount
+    parameters:
+    - name: accountNumber
+      in: query
+      value: $inputs.destinationAccountNumber
+    - name: bankCode
+      in: query
+      value: $inputs.destinationBankCode
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      accountName: $response.body#/responseBody/accountName
+  - stepId: initiateTransfer
+    description: >-
+      Initiate the single transfer carrying the verified beneficiary account
+      name.
+    operationId: initiateSingleTransfer
+    requestBody:
+      contentType: application/json
+      payload:
+        amount: $inputs.amount
+        reference: $inputs.reference
+        narration: $inputs.narration
+        destinationBankCode: $inputs.destinationBankCode
+        destinationAccountNumber: $inputs.destinationAccountNumber
+        destinationAccountName: $steps.validateBeneficiary.outputs.accountName
+        currency: $inputs.currency
+        sourceAccountNumber: $inputs.sourceAccountNumber
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      reference: $response.body#/responseBody/reference
+      status: $response.body#/responseBody/status
+    onSuccess:
+    - name: needsAuthorization
+      type: goto
+      stepId: authorizeOtp
+      criteria:
+      - context: $response.body
+        condition: $.responseBody.status == 'PENDING_AUTHORIZATION' || $.responseBody.status == 'OTP_EMAIL_DISPATCH'
+        type: jsonpath
+    - name: alreadySettled
+      type: goto
+      stepId: confirmStatus
+      criteria:
+      - context: $response.body
+        condition: $.responseBody.status == 'SUCCESS' || $.responseBody.status == 'PENDING'
+        type: jsonpath
+  - stepId: authorizeOtp
+    description: >-
+      Submit the OTP authorization code to authorize the pending transfer.
+    operationId: authorizeSingleTransferOtp
+    requestBody:
+      contentType: application/json
+      payload:
+        reference: $steps.initiateTransfer.outputs.reference
+        authorizationCode: $inputs.authorizationCode
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      status: $response.body#/responseBody/status
+  - stepId: confirmStatus
+    description: >-
+      Confirm the final status of the transfer by querying its summary.
+    operationId: getSingleTransferStatus
+    parameters:
+    - name: reference
+      in: query
+      value: $steps.initiateTransfer.outputs.reference
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/responseBody/status
+      amount: $response.body#/responseBody/amount
+  outputs:
+    reference: $steps.initiateTransfer.outputs.reference
+    finalStatus: $steps.confirmStatus.outputs.status

@@ -1,0 +1,120 @@
+arazzo: 1.0.1
+info:
+  title: Moniepoint Reserve Virtual Account
+  summary: Reserve a permanent NUBAN virtual account for a customer, confirm it, and read its inbound transactions.
+  description: >-
+    Provision a dedicated reserved NUBAN account for a customer, then read the
+    account back by its accountReference to confirm the issued NUBAN and status,
+    and finally pull the paginated list of inbound bank-transfer transactions
+    settled into that account. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: reservedAccountsApi
+  url: ../openapi/monnify-reserved-accounts-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: reserve-virtual-account
+  summary: Create a reserved NUBAN account, confirm it, then list its inbound transactions.
+  description: >-
+    Reserve a permanent virtual account for a customer using a merchant
+    accountReference, fetch the created account to surface the issued NUBAN and
+    ACTIVE status, and list the inbound transactions paid into the account.
+  inputs:
+    type: object
+    required:
+    - accountReference
+    - accountName
+    - currencyCode
+    - contractCode
+    - customerEmail
+    properties:
+      accountReference:
+        type: string
+        description: Unique merchant reference identifying the reserved account.
+      accountName:
+        type: string
+        description: Display name for the reserved account.
+      currencyCode:
+        type: string
+        description: ISO currency code for the account (e.g. NGN).
+      contractCode:
+        type: string
+        description: Monnify contract code the account is created under.
+      customerEmail:
+        type: string
+        description: Email address of the customer the account is reserved for.
+      customerName:
+        type: string
+        description: Full name of the customer the account is reserved for.
+      bvn:
+        type: string
+        description: Optional customer BVN (11 digits) used for KYC.
+  steps:
+  - stepId: reserveAccount
+    description: >-
+      Create a permanent NUBAN virtual account for the customer under the
+      supplied contract code.
+    operationId: reserveAccountV2
+    requestBody:
+      contentType: application/json
+      payload:
+        accountReference: $inputs.accountReference
+        accountName: $inputs.accountName
+        currencyCode: $inputs.currencyCode
+        contractCode: $inputs.contractCode
+        customerEmail: $inputs.customerEmail
+        customerName: $inputs.customerName
+        bvn: $inputs.bvn
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      accountReference: $response.body#/responseBody/accountReference
+      status: $response.body#/responseBody/status
+      accounts: $response.body#/responseBody/accounts
+  - stepId: getReservedAccount
+    description: >-
+      Fetch the reserved account back by its accountReference to confirm the
+      issued NUBAN details and account status.
+    operationId: getReservedAccountV2
+    parameters:
+    - name: accountReference
+      in: path
+      value: $steps.reserveAccount.outputs.accountReference
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.responseBody.status == 'ACTIVE'
+      context: $response.body
+      type: jsonpath
+    outputs:
+      status: $response.body#/responseBody/status
+      accounts: $response.body#/responseBody/accounts
+  - stepId: listTransactions
+    description: >-
+      List the paginated inbound transactions settled into the reserved
+      account.
+    operationId: listReservedAccountTransactions
+    parameters:
+    - name: accountReference
+      in: query
+      value: $steps.reserveAccount.outputs.accountReference
+    - name: page
+      in: query
+      value: 0
+    - name: size
+      in: query
+      value: 10
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      transactions: $response.body#/responseBody/content
+      totalElements: $response.body#/responseBody/totalElements
+  outputs:
+    accountReference: $steps.reserveAccount.outputs.accountReference
+    status: $steps.getReservedAccount.outputs.status
+    accounts: $steps.getReservedAccount.outputs.accounts
+    transactions: $steps.listTransactions.outputs.transactions

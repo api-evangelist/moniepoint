@@ -1,0 +1,116 @@
+arazzo: 1.0.1
+info:
+  title: Moniepoint Bulk Disbursement
+  summary: Initiate a batch of transfers, poll the batch summary to completion, then list per-item results.
+  description: >-
+    Pay many beneficiaries in one call. This workflow initiates a bulk transfer
+    batch, polls the batch summary until every item has settled (no pending
+    items remain), and then lists the individual transfer items in the batch so
+    successful and failed payouts can be reconciled. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: disbursementsApi
+  url: ../openapi/monnify-disbursements-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: bulk-disbursement
+  summary: Initiate a bulk transfer, poll the batch summary, then list its items.
+  description: >-
+    Submit a batch of transfers, poll the batch summary until no pending items
+    remain, and list the per-item results for reconciliation.
+  inputs:
+    type: object
+    required:
+    - title
+    - batchReference
+    - narration
+    - sourceAccountNumber
+    - transactionList
+    properties:
+      title:
+        type: string
+        description: Title describing the bulk transfer batch.
+      batchReference:
+        type: string
+        description: Unique merchant reference for the batch.
+      narration:
+        type: string
+        description: Narration applied to the batch.
+      sourceAccountNumber:
+        type: string
+        description: Merchant disbursement wallet account number to debit.
+      onValidationFailure:
+        type: string
+        description: Whether to BREAK or CONTINUE when an item fails validation.
+      transactionList:
+        type: array
+        description: The list of individual transfers in the batch.
+        items:
+          type: object
+  steps:
+  - stepId: initiateBatch
+    description: >-
+      Initiate the bulk transfer batch with the supplied transaction list.
+    operationId: initiateBulkTransfer
+    requestBody:
+      contentType: application/json
+      payload:
+        title: $inputs.title
+        batchReference: $inputs.batchReference
+        narration: $inputs.narration
+        sourceAccountNumber: $inputs.sourceAccountNumber
+        onValidationFailure: $inputs.onValidationFailure
+        transactionList: $inputs.transactionList
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      batchReference: $response.body#/responseBody/batchReference
+      batchStatus: $response.body#/responseBody/batchStatus
+  - stepId: pollBatchSummary
+    description: >-
+      Poll the batch summary until no transfers remain in a pending state.
+    operationId: getBulkTransferSummary
+    parameters:
+    - name: batchReference
+      in: query
+      value: $steps.initiateBatch.outputs.batchReference
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.responseBody.pendingCount == 0
+      context: $response.body
+      type: jsonpath
+    retryAfter: 5
+    retryLimit: 12
+    outputs:
+      totalCount: $response.body#/responseBody/totalCount
+      successfulCount: $response.body#/responseBody/successfulCount
+      failedCount: $response.body#/responseBody/failedCount
+  - stepId: listItems
+    description: >-
+      List the individual transfer items in the batch for reconciliation.
+    operationId: listBulkTransferItems
+    parameters:
+    - name: batchReference
+      in: path
+      value: $steps.initiateBatch.outputs.batchReference
+    - name: pageNo
+      in: query
+      value: 0
+    - name: pageSize
+      in: query
+      value: 10
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      items: $response.body#/responseBody/content
+      totalElements: $response.body#/responseBody/totalElements
+  outputs:
+    batchReference: $steps.initiateBatch.outputs.batchReference
+    successfulCount: $steps.pollBatchSummary.outputs.successfulCount
+    failedCount: $steps.pollBatchSummary.outputs.failedCount
+    items: $steps.listItems.outputs.items

@@ -1,0 +1,98 @@
+arazzo: 1.0.1
+info:
+  title: Moniepoint POS Push Payment
+  summary: Push a payment request to a Moniepoint POS terminal, then poll the terminal until the customer completes it.
+  description: >-
+    ISV partners push an authenticated payment request to a registered
+    Moniepoint POS terminal and wait for the customer to tap to pay. This
+    workflow pushes a payment request to a terminal serial number to obtain a
+    reference, then polls the push-payment status until the terminal reaches a
+    terminal state of COMPLETED, DECLINED, EXPIRED, or FAILED. Authentication is
+    HTTP Basic using the API client id and client secret issued from the
+    Moniepoint Business dashboard, applied by the runtime per the spec's
+    security requirement. Every step spells out its request inline so the flow
+    can be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: posApi
+  url: ../openapi/moniepoint-pos-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: pos-push-payment
+  summary: Push a payment to a POS terminal, then poll until the customer completes it.
+  description: >-
+    Push a payment request to a registered terminal serial number, then poll the
+    push-payment status until the terminal reaches a terminal state.
+  inputs:
+    type: object
+    required:
+    - terminalSerialNumber
+    - amount
+    - reference
+    - currency
+    properties:
+      terminalSerialNumber:
+        type: string
+        description: Serial number of the registered POS terminal to push to.
+      amount:
+        type: number
+        description: Amount to collect at the terminal.
+      reference:
+        type: string
+        description: Unique ISV reference for the push payment.
+      currency:
+        type: string
+        description: ISO currency code for the payment (e.g. NGN).
+      description:
+        type: string
+        description: Optional description shown for the payment.
+      expiresIn:
+        type: integer
+        description: Seconds before the terminal cancels the request.
+  steps:
+  - stepId: pushPayment
+    description: >-
+      Push a payment request to the terminal serial number; the terminal prompts
+      the cashier and customer to complete it.
+    operationId: pushPaymentRequest
+    requestBody:
+      contentType: application/json
+      payload:
+        terminalSerialNumber: $inputs.terminalSerialNumber
+        amount: $inputs.amount
+        reference: $inputs.reference
+        currency: $inputs.currency
+        description: $inputs.description
+        expiresIn: $inputs.expiresIn
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      reference: $response.body#/responseBody/reference
+      status: $response.body#/responseBody/status
+  - stepId: pollPushStatus
+    description: >-
+      Poll the push-payment status until the terminal reaches a terminal state
+      of COMPLETED, DECLINED, EXPIRED, or FAILED.
+    operationId: pushPaymentStatus
+    parameters:
+    - name: reference
+      in: path
+      value: $steps.pushPayment.outputs.reference
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.responseBody.status == 'COMPLETED' || $.responseBody.status == 'DECLINED' || $.responseBody.status == 'EXPIRED' || $.responseBody.status == 'FAILED'
+      context: $response.body
+      type: jsonpath
+    retryAfter: 5
+    retryLimit: 12
+    outputs:
+      status: $response.body#/responseBody/status
+      paymentMethod: $response.body#/responseBody/paymentMethod
+      completedAt: $response.body#/responseBody/completedAt
+  outputs:
+    reference: $steps.pushPayment.outputs.reference
+    finalStatus: $steps.pollPushStatus.outputs.status
+    paymentMethod: $steps.pollPushStatus.outputs.paymentMethod

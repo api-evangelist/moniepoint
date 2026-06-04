@@ -1,0 +1,134 @@
+arazzo: 1.0.1
+info:
+  title: Moniepoint Pay A Bill
+  summary: List billers for a category, validate the customer, process the bill, then poll the bill status.
+  description: >-
+    Pay a utility, airtime, or cable-TV bill through the Unified Biller Service.
+    This workflow lists the billers in a category to resolve a billerCode,
+    validates the customer identifier against the biller and item, processes the
+    bill payment, and then polls the bill status until it reaches a terminal
+    state of SUCCESS or FAILED. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: billsPaymentApi
+  url: ../openapi/monnify-bills-payment-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: pay-bill
+  summary: Resolve a biller, validate the customer, process the bill, then poll status.
+  description: >-
+    List billers for a category, validate the customer identifier, process the
+    bill, and poll until the payment settles.
+  inputs:
+    type: object
+    required:
+    - categoryCode
+    - billerCode
+    - billerItemCode
+    - customerId
+    - amount
+    - reference
+    properties:
+      categoryCode:
+        type: string
+        description: Bill category code to list billers for.
+      billerCode:
+        type: string
+        description: Biller code to validate and pay.
+      billerItemCode:
+        type: string
+        description: Biller item code (the specific product or service).
+      customerId:
+        type: string
+        description: Customer identifier (meter number, smart-card number, account, etc.).
+      amount:
+        type: number
+        description: Amount to pay.
+      reference:
+        type: string
+        description: Unique merchant reference for the bill payment.
+      customerEmail:
+        type: string
+        description: Optional customer email for receipts.
+      narration:
+        type: string
+        description: Optional narration for the payment.
+  steps:
+  - stepId: listBillers
+    description: >-
+      List the billers in the supplied category to confirm the target biller is
+      available.
+    operationId: listBillers
+    parameters:
+    - name: categoryCode
+      in: query
+      value: $inputs.categoryCode
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      billers: $response.body#/responseBody
+  - stepId: validateCustomer
+    description: >-
+      Validate the customer identifier against the biller and biller item to
+      resolve the registered customer name.
+    operationId: validateBillsCustomer
+    requestBody:
+      contentType: application/json
+      payload:
+        billerCode: $inputs.billerCode
+        billerItemCode: $inputs.billerItemCode
+        customerId: $inputs.customerId
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      customerName: $response.body#/responseBody/customerName
+  - stepId: processBill
+    description: >-
+      Process the bill payment for the validated customer.
+    operationId: processBill
+    requestBody:
+      contentType: application/json
+      payload:
+        billerCode: $inputs.billerCode
+        billerItemCode: $inputs.billerItemCode
+        customerId: $inputs.customerId
+        customerEmail: $inputs.customerEmail
+        amount: $inputs.amount
+        reference: $inputs.reference
+        narration: $inputs.narration
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      reference: $response.body#/responseBody/reference
+      status: $response.body#/responseBody/status
+  - stepId: pollBillStatus
+    description: >-
+      Poll the bill status until it reaches a terminal state of SUCCESS or
+      FAILED.
+    operationId: getBillStatus
+    parameters:
+    - name: reference
+      in: query
+      value: $steps.processBill.outputs.reference
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.responseBody.status == 'SUCCESS' || $.responseBody.status == 'FAILED'
+      context: $response.body
+      type: jsonpath
+    retryAfter: 5
+    retryLimit: 10
+    outputs:
+      status: $response.body#/responseBody/status
+      token: $response.body#/responseBody/token
+  outputs:
+    reference: $steps.processBill.outputs.reference
+    status: $steps.pollBillStatus.outputs.status
+    token: $steps.pollBillStatus.outputs.token

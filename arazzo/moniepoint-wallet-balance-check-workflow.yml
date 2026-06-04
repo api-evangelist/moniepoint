@@ -1,0 +1,104 @@
+arazzo: 1.0.1
+info:
+  title: Moniepoint Create Wallet And Check Balance
+  summary: Create a customer wallet, read its available and ledger balance, then list its transactions.
+  description: >-
+    Stand up an end-user wallet and inspect it. This workflow creates a wallet
+    with BVN details to obtain its NUBAN account number and walletReference,
+    reads the available and ledger balance for that account number, and lists
+    the wallet's credit and debit transaction history. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: walletsApi
+  url: ../openapi/monnify-wallets-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: wallet-balance-check
+  summary: Create a wallet, read its balance, then list its transactions.
+  description: >-
+    Create a customer wallet, read its available and ledger balance using the
+    issued account number, and list its transaction history.
+  inputs:
+    type: object
+    required:
+    - walletReference
+    - walletName
+    - customerEmail
+    - bvnDetails
+    properties:
+      walletReference:
+        type: string
+        description: Unique merchant reference for the wallet.
+      walletName:
+        type: string
+        description: Display name for the wallet.
+      customerName:
+        type: string
+        description: Name of the wallet owner.
+      customerEmail:
+        type: string
+        description: Email of the wallet owner.
+      bvnDetails:
+        type: object
+        description: BVN details object (bvn and bvnDateOfBirth) for the wallet owner.
+  steps:
+  - stepId: createWallet
+    description: >-
+      Create a wallet with BVN details and obtain the issued NUBAN account
+      number and walletReference.
+    operationId: createWallet
+    requestBody:
+      contentType: application/json
+      payload:
+        walletReference: $inputs.walletReference
+        walletName: $inputs.walletName
+        customerName: $inputs.customerName
+        customerEmail: $inputs.customerEmail
+        bvnDetails: $inputs.bvnDetails
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      walletReference: $response.body#/responseBody/walletReference
+      accountNumber: $response.body#/responseBody/accountNumber
+  - stepId: getBalance
+    description: >-
+      Read the available and ledger balance for the wallet's account number.
+    operationId: getWalletBalance
+    parameters:
+    - name: accountNumber
+      in: query
+      value: $steps.createWallet.outputs.accountNumber
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      availableBalance: $response.body#/responseBody/availableBalance
+      ledgerBalance: $response.body#/responseBody/ledgerBalance
+  - stepId: listTransactions
+    description: >-
+      List the wallet's credit and debit transaction history.
+    operationId: listWalletTransactions
+    parameters:
+    - name: walletReference
+      in: query
+      value: $steps.createWallet.outputs.walletReference
+    - name: pageNo
+      in: query
+      value: 0
+    - name: pageSize
+      in: query
+      value: 20
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      transactions: $response.body#/responseBody/content
+      totalElements: $response.body#/responseBody/totalElements
+  outputs:
+    walletReference: $steps.createWallet.outputs.walletReference
+    accountNumber: $steps.createWallet.outputs.accountNumber
+    availableBalance: $steps.getBalance.outputs.availableBalance
+    transactions: $steps.listTransactions.outputs.transactions

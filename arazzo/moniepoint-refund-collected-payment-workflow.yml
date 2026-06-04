@@ -1,0 +1,107 @@
+arazzo: 1.0.1
+info:
+  title: Moniepoint Refund A Collected Payment
+  summary: Confirm a collection is paid, initiate a refund against it, then poll the refund to completion.
+  description: >-
+    Refund a customer for a successful collection. This workflow first confirms
+    the original transaction is in a PAID state, initiates a full or partial
+    refund against its transactionReference, and then polls the refund status
+    until it reaches a terminal state of COMPLETED or FAILED. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: collectionsApi
+  url: ../openapi/monnify-collections-api-openapi.yml
+  type: openapi
+- name: refundsApi
+  url: ../openapi/monnify-refunds-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: refund-collected-payment
+  summary: Confirm a paid transaction, initiate a refund, then poll the refund status.
+  description: >-
+    Verify the original transaction is paid, initiate a refund against it, and
+    poll the refund until it completes or fails.
+  inputs:
+    type: object
+    required:
+    - transactionReference
+    - refundReference
+    - refundAmount
+    - refundReason
+    properties:
+      transactionReference:
+        type: string
+        description: Reference of the original collection transaction to refund.
+      refundReference:
+        type: string
+        description: Unique merchant reference for the refund.
+      refundAmount:
+        type: number
+        description: Amount to refund (may be partial).
+      refundReason:
+        type: string
+        description: Reason for the refund.
+      customerNote:
+        type: string
+        description: Optional note shared with the customer.
+  steps:
+  - stepId: confirmPaid
+    description: >-
+      Confirm the original transaction is in a PAID state before refunding.
+    operationId: getTransactionStatus
+    parameters:
+    - name: transactionReference
+      in: query
+      value: $inputs.transactionReference
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.responseBody.paymentStatus == 'PAID'
+      context: $response.body
+      type: jsonpath
+    outputs:
+      paymentStatus: $response.body#/responseBody/paymentStatus
+      amount: $response.body#/responseBody/amount
+  - stepId: initiateRefund
+    description: >-
+      Initiate a refund against the confirmed transaction reference.
+    operationId: initiateRefund
+    requestBody:
+      contentType: application/json
+      payload:
+        transactionReference: $inputs.transactionReference
+        refundReference: $inputs.refundReference
+        refundAmount: $inputs.refundAmount
+        refundReason: $inputs.refundReason
+        customerNote: $inputs.customerNote
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      refundReference: $response.body#/responseBody/refundReference
+      refundStatus: $response.body#/responseBody/refundStatus
+  - stepId: pollRefund
+    description: >-
+      Poll the refund status until it reaches a terminal state of COMPLETED or
+      FAILED.
+    operationId: getRefundStatus
+    parameters:
+    - name: refundReference
+      in: path
+      value: $steps.initiateRefund.outputs.refundReference
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.responseBody.refundStatus == 'COMPLETED' || $.responseBody.refundStatus == 'FAILED'
+      context: $response.body
+      type: jsonpath
+    retryAfter: 5
+    retryLimit: 12
+    outputs:
+      refundStatus: $response.body#/responseBody/refundStatus
+      completedOn: $response.body#/responseBody/completedOn
+  outputs:
+    refundReference: $steps.initiateRefund.outputs.refundReference
+    refundStatus: $steps.pollRefund.outputs.refundStatus

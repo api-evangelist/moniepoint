@@ -1,0 +1,147 @@
+arazzo: 1.0.1
+info:
+  title: Moniepoint Recurring Mandate Debit
+  summary: Create a direct-debit mandate, activate it, debit it, then read the mandate back.
+  description: >-
+    Set up and exercise a recurring NIBSS direct-debit mandate. This workflow
+    creates a mandate against a customer's bank account, activates it from
+    PENDING to ACTIVATED with an activation code, debits a configured amount
+    against the active mandate, and reads the mandate back to confirm its
+    ACTIVATED status. Every step spells out its request inline so the flow can
+    be read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: directDebitApi
+  url: ../openapi/monnify-direct-debit-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: recurring-mandate-debit
+  summary: Create, activate, and debit a direct-debit mandate, then confirm it.
+  description: >-
+    Create a direct-debit mandate, activate it with the activation code, debit a
+    configured amount against it, and read the mandate back to confirm its
+    status.
+  inputs:
+    type: object
+    required:
+    - mandateDescription
+    - mandateAmount
+    - customerName
+    - customerAccountNumber
+    - customerBankCode
+    - startDate
+    - endDate
+    - activationCode
+    - debitAmount
+    - debitReference
+    - narration
+    properties:
+      mandateDescription:
+        type: string
+        description: Description of the mandate.
+      mandateAmount:
+        type: number
+        description: Maximum mandate amount.
+      customerName:
+        type: string
+        description: Name of the customer the mandate is against.
+      customerAccountNumber:
+        type: string
+        description: Customer bank account number to debit.
+      customerBankCode:
+        type: string
+        description: Customer bank code.
+      startDate:
+        type: string
+        description: Mandate start date (YYYY-MM-DD).
+      endDate:
+        type: string
+        description: Mandate end date (YYYY-MM-DD).
+      activationCode:
+        type: string
+        description: Activation code used to activate the mandate.
+      debitAmount:
+        type: number
+        description: Amount to debit against the active mandate.
+      debitReference:
+        type: string
+        description: Unique merchant reference for the debit.
+      narration:
+        type: string
+        description: Narration for the debit.
+  steps:
+  - stepId: createMandate
+    description: >-
+      Create a direct-debit mandate against the customer's bank account; it is
+      returned pending activation.
+    operationId: createMandate
+    requestBody:
+      contentType: application/json
+      payload:
+        mandateDescription: $inputs.mandateDescription
+        mandateAmount: $inputs.mandateAmount
+        customerName: $inputs.customerName
+        customerAccountNumber: $inputs.customerAccountNumber
+        customerBankCode: $inputs.customerBankCode
+        startDate: $inputs.startDate
+        endDate: $inputs.endDate
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      mandateCode: $response.body#/responseBody/mandateCode
+      status: $response.body#/responseBody/status
+  - stepId: activateMandate
+    description: >-
+      Submit the activation code to move the mandate from PENDING to ACTIVATED.
+    operationId: activateMandate
+    requestBody:
+      contentType: application/json
+      payload:
+        mandateCode: $steps.createMandate.outputs.mandateCode
+        activationCode: $inputs.activationCode
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.responseBody.status == 'ACTIVATED'
+      context: $response.body
+      type: jsonpath
+    outputs:
+      status: $response.body#/responseBody/status
+  - stepId: debitMandate
+    description: >-
+      Debit the configured amount against the now-active mandate.
+    operationId: debitMandate
+    requestBody:
+      contentType: application/json
+      payload:
+        mandateCode: $steps.createMandate.outputs.mandateCode
+        amount: $inputs.debitAmount
+        debitReference: $inputs.debitReference
+        narration: $inputs.narration
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      transactionReference: $response.body#/responseBody/transactionReference
+      debitStatus: $response.body#/responseBody/status
+  - stepId: confirmMandate
+    description: >-
+      Read the mandate back to confirm its activated status after debiting.
+    operationId: getMandate
+    parameters:
+    - name: mandateCode
+      in: path
+      value: $steps.createMandate.outputs.mandateCode
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/responseBody/status
+  outputs:
+    mandateCode: $steps.createMandate.outputs.mandateCode
+    debitStatus: $steps.debitMandate.outputs.debitStatus
+    transactionReference: $steps.debitMandate.outputs.transactionReference
+    mandateStatus: $steps.confirmMandate.outputs.status

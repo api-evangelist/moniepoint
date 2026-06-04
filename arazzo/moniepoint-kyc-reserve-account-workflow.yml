@@ -1,0 +1,135 @@
+arazzo: 1.0.1
+info:
+  title: Moniepoint KYC Verified Virtual Account
+  summary: Match a customer BVN to their bank account, then reserve a KYC-bound virtual account and confirm it.
+  description: >-
+    Run a KYC check before provisioning a customer virtual account. This
+    workflow matches the customer's BVN against a bank account they own, and
+    only when the match succeeds reserves a permanent NUBAN virtual account
+    carrying the verified BVN, then reads the account back to confirm it is
+    ACTIVE. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: verificationApi
+  url: ../openapi/monnify-verification-api-openapi.yml
+  type: openapi
+- name: reservedAccountsApi
+  url: ../openapi/monnify-reserved-accounts-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: kyc-reserve-account
+  summary: Verify a customer BVN, then reserve a KYC-bound virtual account when the match passes.
+  description: >-
+    Match the customer BVN to their bank account and branch: when the BVN
+    matches, reserve a permanent NUBAN virtual account carrying the verified BVN
+    and confirm it; when it does not match, end the workflow.
+  inputs:
+    type: object
+    required:
+    - bvn
+    - bankCode
+    - bvnAccountNumber
+    - accountReference
+    - accountName
+    - currencyCode
+    - contractCode
+    - customerEmail
+    properties:
+      bvn:
+        type: string
+        description: Customer BVN to verify.
+      bankCode:
+        type: string
+        description: Bank code of the account the BVN should own.
+      bvnAccountNumber:
+        type: string
+        description: Bank account number to match the BVN against.
+      accountReference:
+        type: string
+        description: Unique merchant reference for the reserved account.
+      accountName:
+        type: string
+        description: Display name for the reserved account.
+      currencyCode:
+        type: string
+        description: ISO currency code for the account (e.g. NGN).
+      contractCode:
+        type: string
+        description: Monnify contract code the account is created under.
+      customerEmail:
+        type: string
+        description: Email of the customer the account is reserved for.
+      customerName:
+        type: string
+        description: Name of the customer the account is reserved for.
+  steps:
+  - stepId: matchBvn
+    description: >-
+      Verify the customer BVN belongs to the owner of the supplied bank account.
+    operationId: matchBvnToAccount
+    requestBody:
+      contentType: application/json
+      payload:
+        bvn: $inputs.bvn
+        bankCode: $inputs.bankCode
+        accountNumber: $inputs.bvnAccountNumber
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      matchStatus: $response.body#/responseBody/matchStatus
+    onSuccess:
+    - name: bvnMatched
+      type: goto
+      stepId: reserveAccount
+      criteria:
+      - context: $response.body
+        condition: $.responseBody.matchStatus == 'MATCHED'
+        type: jsonpath
+  - stepId: reserveAccount
+    description: >-
+      Reserve a permanent NUBAN virtual account carrying the verified BVN.
+    operationId: reserveAccountV2
+    requestBody:
+      contentType: application/json
+      payload:
+        accountReference: $inputs.accountReference
+        accountName: $inputs.accountName
+        currencyCode: $inputs.currencyCode
+        contractCode: $inputs.contractCode
+        customerEmail: $inputs.customerEmail
+        customerName: $inputs.customerName
+        bvn: $inputs.bvn
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      accountReference: $response.body#/responseBody/accountReference
+      status: $response.body#/responseBody/status
+  - stepId: confirmAccount
+    description: >-
+      Read the reserved account back to confirm it is ACTIVE and surface the
+      issued NUBAN details.
+    operationId: getReservedAccountV2
+    parameters:
+    - name: accountReference
+      in: path
+      value: $steps.reserveAccount.outputs.accountReference
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.responseBody.status == 'ACTIVE'
+      context: $response.body
+      type: jsonpath
+    outputs:
+      status: $response.body#/responseBody/status
+      accounts: $response.body#/responseBody/accounts
+  outputs:
+    matchStatus: $steps.matchBvn.outputs.matchStatus
+    accountReference: $steps.reserveAccount.outputs.accountReference
+    status: $steps.confirmAccount.outputs.status
+    accounts: $steps.confirmAccount.outputs.accounts

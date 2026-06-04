@@ -1,0 +1,160 @@
+arazzo: 1.0.1
+info:
+  title: Moniepoint Card Charge With OTP
+  summary: Initialize a transaction, capture a card, branch on the 3-D Secure / OTP step, and confirm.
+  description: >-
+    Server-to-server card collection. This workflow initializes a transaction,
+    charges the supplied card, and branches: when the card requires OTP
+    authorization it submits the OTP and then confirms the final status, and
+    when the charge is already authorized it confirms directly. Every step
+    spells out its request inline so the flow can be read and executed without
+    opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: collectionsApi
+  url: ../openapi/monnify-collections-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: card-charge-otp
+  summary: Initialize a transaction, charge a card, authorize OTP if required, and confirm.
+  description: >-
+    Create a pending transaction, capture the card, and branch on the charge
+    response: submit the OTP when authorization is pending, then confirm the
+    settled transaction status.
+  inputs:
+    type: object
+    required:
+    - amount
+    - customerName
+    - customerEmail
+    - paymentReference
+    - paymentDescription
+    - contractCode
+    - currencyCode
+    - card
+    - otp
+    properties:
+      amount:
+        type: number
+        description: Amount to charge the card.
+      customerName:
+        type: string
+        description: Name of the cardholder.
+      customerEmail:
+        type: string
+        description: Email of the cardholder.
+      paymentReference:
+        type: string
+        description: Unique merchant payment reference.
+      paymentDescription:
+        type: string
+        description: Description shown for the payment.
+      contractCode:
+        type: string
+        description: Monnify contract code the transaction is created under.
+      currencyCode:
+        type: string
+        description: ISO currency code for the transaction (e.g. NGN).
+      collectionChannel:
+        type: string
+        description: Collection channel for the card charge (e.g. API_NOTIFICATION).
+      card:
+        type: object
+        description: Card details (number, expiryMonth, expiryYear, pin, cvv).
+      otp:
+        type: string
+        description: OTP returned by the cardholder's bank for authorization.
+      tokenId:
+        type: string
+        description: Token identifier returned with the OTP challenge on the card charge.
+  steps:
+  - stepId: initializeTransaction
+    description: >-
+      Create a pending transaction to obtain a transactionReference for the card
+      charge.
+    operationId: initializeTransaction
+    requestBody:
+      contentType: application/json
+      payload:
+        amount: $inputs.amount
+        customerName: $inputs.customerName
+        customerEmail: $inputs.customerEmail
+        paymentReference: $inputs.paymentReference
+        paymentDescription: $inputs.paymentDescription
+        contractCode: $inputs.contractCode
+        currencyCode: $inputs.currencyCode
+        paymentMethods:
+        - CARD
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      transactionReference: $response.body#/responseBody/transactionReference
+  - stepId: chargeCard
+    description: >-
+      Capture the supplied card against the transaction. Returns a pending
+      authorization status when OTP is required.
+    operationId: chargeCard
+    requestBody:
+      contentType: application/json
+      payload:
+        transactionReference: $steps.initializeTransaction.outputs.transactionReference
+        collectionChannel: $inputs.collectionChannel
+        card: $inputs.card
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      paymentStatus: $response.body#/responseBody/paymentStatus
+    onSuccess:
+    - name: needsOtp
+      type: goto
+      stepId: authorizeOtp
+      criteria:
+      - context: $response.body
+        condition: $.responseBody.paymentStatus == 'PENDING'
+        type: jsonpath
+    - name: alreadyPaid
+      type: goto
+      stepId: confirmStatus
+      criteria:
+      - context: $response.body
+        condition: $.responseBody.paymentStatus == 'PAID'
+        type: jsonpath
+  - stepId: authorizeOtp
+    description: >-
+      Submit the OTP returned by the cardholder to complete the card charge.
+    operationId: authorizeOtp
+    requestBody:
+      contentType: application/json
+      payload:
+        transactionReference: $steps.initializeTransaction.outputs.transactionReference
+        collectionChannel: $inputs.collectionChannel
+        tokenId: $inputs.tokenId
+        token: $inputs.otp
+    successCriteria:
+    - condition: $statusCode == 200
+    - condition: $.requestSuccessful == true
+      context: $response.body
+      type: jsonpath
+    outputs:
+      paymentStatus: $response.body#/responseBody/paymentStatus
+  - stepId: confirmStatus
+    description: >-
+      Confirm the final transaction status by querying it by payment reference.
+    operationId: getTransactionStatus
+    parameters:
+    - name: transactionReference
+      in: query
+      value: $steps.initializeTransaction.outputs.transactionReference
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      paymentStatus: $response.body#/responseBody/paymentStatus
+  outputs:
+    transactionReference: $steps.initializeTransaction.outputs.transactionReference
+    paymentStatus: $steps.confirmStatus.outputs.paymentStatus
