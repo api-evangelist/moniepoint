@@ -1,0 +1,442 @@
+{
+  "info": {
+    "_postman_id": "9e8ff6cf-ff77-40ef-9ae9-8e8eedcc32d7",
+    "name": "Monnify Sub-Accounts API",
+    "description": "Create and manage settlement sub-accounts representing third parties that should receive a configured share of each collection (marketplaces, franchises, multi-tenant platforms). Sub-accounts are referenced from Collections (incomeSplitConfig), Reserved Accounts, and Direct Debit mandate-debit calls.\n\n\nContact Support:\n Name: Monnify Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:12:58.000Z",
+    "updatedAt": "2026-06-05T15:12:58.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9e8ff6cf-ff77-40ef-9ae9-8e8eedcc32d7"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "sub-accounts",
+              "item": [
+                {
+                  "name": "{subAccountCode}",
+                  "item": [
+                    {
+                      "name": "Monnify Delete Sub-Account",
+                      "id": "578bf10e-31d2-48c0-b56d-698961b745bf",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/sub-accounts/:subAccountCode",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "sub-accounts",
+                            ":subAccountCode"
+                          ],
+                          "variable": [
+                            {
+                              "id": "20680943-6130-463b-81f8-1a4fd10292d3",
+                              "key": "subAccountCode",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "a0b4bc1a-42b4-4d3b-bcd7-e0a5a888b6b8",
+                          "name": "Sub-account deleted.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/sub-accounts/:subAccountCode",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "sub-accounts",
+                                ":subAccountCode"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "subAccountCode"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {}\n}",
+                          "createdAt": "2026-06-05T15:12:58.000Z",
+                          "updatedAt": "2026-06-05T15:12:58.000Z",
+                          "uid": "35240-a0b4bc1a-42b4-4d3b-bcd7-e0a5a888b6b8"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:12:58.000Z",
+                      "updatedAt": "2026-06-05T15:12:58.000Z",
+                      "uid": "35240-578bf10e-31d2-48c0-b56d-698961b745bf"
+                    }
+                  ],
+                  "id": "ab0611e9-18d1-4c96-a87d-3ccc65408c91",
+                  "createdAt": "2026-06-05T15:12:58.000Z",
+                  "updatedAt": "2026-06-05T15:12:58.000Z",
+                  "uid": "35240-ab0611e9-18d1-4c96-a87d-3ccc65408c91"
+                },
+                {
+                  "name": "Monnify Create Sub-Accounts",
+                  "id": "71aa8077-d603-4fe6-8e98-1fabe20b1070",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "[\n  {\n    \"currencyCode\": \"<string>\",\n    \"bankCode\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"email\": \"<email>\",\n    \"subAccountCode\": \"<string>\",\n    \"defaultSplitPercentage\": \"<number>\",\n    \"feeBearer\": \"<boolean>\",\n    \"defaultBearer\": \"<boolean>\"\n  },\n  {\n    \"currencyCode\": \"<string>\",\n    \"bankCode\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"email\": \"<email>\",\n    \"subAccountCode\": \"<string>\",\n    \"defaultSplitPercentage\": \"<number>\",\n    \"feeBearer\": \"<boolean>\",\n    \"defaultBearer\": \"<boolean>\"\n  }\n]",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/sub-accounts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "sub-accounts"
+                      ]
+                    },
+                    "description": "Create one or more sub-accounts in a single call."
+                  },
+                  "response": [
+                    {
+                      "id": "211ab26e-1a2c-4f02-9c98-68d1bc5ecc6a",
+                      "name": "Sub-accounts created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "[\n  {\n    \"currencyCode\": \"<string>\",\n    \"bankCode\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"email\": \"<email>\",\n    \"subAccountCode\": \"<string>\",\n    \"defaultSplitPercentage\": \"<number>\",\n    \"feeBearer\": \"<boolean>\",\n    \"defaultBearer\": \"<boolean>\"\n  },\n  {\n    \"currencyCode\": \"<string>\",\n    \"bankCode\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"email\": \"<email>\",\n    \"subAccountCode\": \"<string>\",\n    \"defaultSplitPercentage\": \"<number>\",\n    \"feeBearer\": \"<boolean>\",\n    \"defaultBearer\": \"<boolean>\"\n  }\n]",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/sub-accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "sub-accounts"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": [\n    {\n      \"currencyCode\": \"<string>\",\n      \"bankCode\": \"<string>\",\n      \"accountNumber\": \"<string>\",\n      \"email\": \"<email>\",\n      \"subAccountCode\": \"<string>\",\n      \"defaultSplitPercentage\": \"<number>\",\n      \"feeBearer\": \"<boolean>\",\n      \"defaultBearer\": \"<boolean>\"\n    },\n    {\n      \"currencyCode\": \"<string>\",\n      \"bankCode\": \"<string>\",\n      \"accountNumber\": \"<string>\",\n      \"email\": \"<email>\",\n      \"subAccountCode\": \"<string>\",\n      \"defaultSplitPercentage\": \"<number>\",\n      \"feeBearer\": \"<boolean>\",\n      \"defaultBearer\": \"<boolean>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:12:58.000Z",
+                      "updatedAt": "2026-06-05T15:12:58.000Z",
+                      "uid": "35240-211ab26e-1a2c-4f02-9c98-68d1bc5ecc6a"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:12:58.000Z",
+                  "updatedAt": "2026-06-05T15:12:58.000Z",
+                  "uid": "35240-71aa8077-d603-4fe6-8e98-1fabe20b1070"
+                },
+                {
+                  "name": "Monnify Update Sub-Account",
+                  "id": "d95077bb-5e88-46af-985f-3c617da996ef",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"currencyCode\": \"<string>\",\n  \"bankCode\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"email\": \"<email>\",\n  \"subAccountCode\": \"<string>\",\n  \"defaultSplitPercentage\": \"<number>\",\n  \"feeBearer\": \"<boolean>\",\n  \"defaultBearer\": \"<boolean>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/sub-accounts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "sub-accounts"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "fc77c88d-d3bf-4c9d-8806-4e6c433c5979",
+                      "name": "Sub-account updated.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"currencyCode\": \"<string>\",\n  \"bankCode\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"email\": \"<email>\",\n  \"subAccountCode\": \"<string>\",\n  \"defaultSplitPercentage\": \"<number>\",\n  \"feeBearer\": \"<boolean>\",\n  \"defaultBearer\": \"<boolean>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/sub-accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "sub-accounts"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"currencyCode\": \"<string>\",\n    \"bankCode\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"email\": \"<email>\",\n    \"subAccountCode\": \"<string>\",\n    \"defaultSplitPercentage\": \"<number>\",\n    \"feeBearer\": \"<boolean>\",\n    \"defaultBearer\": \"<boolean>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:12:58.000Z",
+                      "updatedAt": "2026-06-05T15:12:58.000Z",
+                      "uid": "35240-fc77c88d-d3bf-4c9d-8806-4e6c433c5979"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:12:58.000Z",
+                  "updatedAt": "2026-06-05T15:12:58.000Z",
+                  "uid": "35240-d95077bb-5e88-46af-985f-3c617da996ef"
+                },
+                {
+                  "name": "Monnify List Sub-Accounts",
+                  "id": "d2a46421-6227-4862-bc88-441a664c8935",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/sub-accounts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "sub-accounts"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "c8b7d377-c4ba-4f4b-b475-ee19b217ed18",
+                      "name": "Sub-account list.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/sub-accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "sub-accounts"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": [\n    {\n      \"currencyCode\": \"<string>\",\n      \"bankCode\": \"<string>\",\n      \"accountNumber\": \"<string>\",\n      \"email\": \"<email>\",\n      \"subAccountCode\": \"<string>\",\n      \"defaultSplitPercentage\": \"<number>\",\n      \"feeBearer\": \"<boolean>\",\n      \"defaultBearer\": \"<boolean>\"\n    },\n    {\n      \"currencyCode\": \"<string>\",\n      \"bankCode\": \"<string>\",\n      \"accountNumber\": \"<string>\",\n      \"email\": \"<email>\",\n      \"subAccountCode\": \"<string>\",\n      \"defaultSplitPercentage\": \"<number>\",\n      \"feeBearer\": \"<boolean>\",\n      \"defaultBearer\": \"<boolean>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-06-05T15:12:58.000Z",
+                      "updatedAt": "2026-06-05T15:12:58.000Z",
+                      "uid": "35240-c8b7d377-c4ba-4f4b-b475-ee19b217ed18"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:12:58.000Z",
+                  "updatedAt": "2026-06-05T15:12:58.000Z",
+                  "uid": "35240-d2a46421-6227-4862-bc88-441a664c8935"
+                }
+              ],
+              "id": "cffeac54-eafb-4f21-8c13-92fff03f3892",
+              "createdAt": "2026-06-05T15:12:58.000Z",
+              "updatedAt": "2026-06-05T15:12:58.000Z",
+              "uid": "35240-cffeac54-eafb-4f21-8c13-92fff03f3892"
+            }
+          ],
+          "id": "18648bf0-7d6e-4667-9c36-76ced2411230",
+          "createdAt": "2026-06-05T15:12:58.000Z",
+          "updatedAt": "2026-06-05T15:12:58.000Z",
+          "uid": "35240-18648bf0-7d6e-4667-9c36-76ced2411230"
+        }
+      ],
+      "id": "2bfde70a-137a-4e12-88e2-3c204c798d03",
+      "createdAt": "2026-06-05T15:12:58.000Z",
+      "updatedAt": "2026-06-05T15:12:58.000Z",
+      "uid": "35240-2bfde70a-137a-4e12-88e2-3c204c798d03"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.monnify.com"
+    }
+  ]
+}

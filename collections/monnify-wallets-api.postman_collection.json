@@ -1,0 +1,441 @@
+{
+  "item": [
+    {
+      "id": "425b4f29-3ee6-4c5c-800b-6b930a340f77",
+      "name": "Wallets",
+      "description": {
+        "content": "Manage wallets and sub-wallets.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f35062e8-c219-4419-8adf-f6225e74e56e",
+          "name": "Monnify Create Wallet",
+          "request": {
+            "name": "Monnify Create Wallet",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "disbursements",
+                "wallet"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"walletReference\": \"<string>\",\n  \"walletName\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"bvnDetails\": {\n    \"bvn\": \"<string>\",\n    \"bvnDateOfBirth\": \"<date>\"\n  },\n  \"customerName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ba0b1960-d2f1-4096-9320-405acac31b88",
+              "name": "Wallet created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "disbursements",
+                    "wallet"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"walletReference\": \"<string>\",\n  \"walletName\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"bvnDetails\": {\n    \"bvn\": \"<string>\",\n    \"bvnDateOfBirth\": \"<date>\"\n  },\n  \"customerName\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": false,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"walletReference\": \"string\",\n    \"walletName\": \"string\",\n    \"accountNumber\": \"string\",\n    \"accountName\": \"string\",\n    \"bankCode\": \"string\",\n    \"bankName\": \"string\",\n    \"customerName\": \"string\",\n    \"customerEmail\": \"string\",\n    \"dateCreated\": \"2011-12-07T13:15:50.315Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4b5f738-1e89-4d47-8777-b1ef02a64ea1",
+          "name": "Monnify List Wallets",
+          "request": {
+            "name": "Monnify List Wallets",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "disbursements",
+                "wallet"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "customerEmail",
+                  "value": "<email>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0c01e7d9-510b-4e94-a952-ee0c63e9fe15",
+              "name": "Wallet list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "disbursements",
+                    "wallet"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "customerEmail",
+                      "value": "<email>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": false,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": [\n    {\n      \"walletReference\": \"string\",\n      \"walletName\": \"string\",\n      \"accountNumber\": \"string\",\n      \"accountName\": \"string\",\n      \"bankCode\": \"string\",\n      \"bankName\": \"string\",\n      \"customerName\": \"string\",\n      \"customerEmail\": \"string\",\n      \"dateCreated\": \"2012-01-04T12:36:30.462Z\"\n    },\n    {\n      \"walletReference\": \"string\",\n      \"walletName\": \"string\",\n      \"accountNumber\": \"string\",\n      \"accountName\": \"string\",\n      \"bankCode\": \"string\",\n      \"bankName\": \"string\",\n      \"customerName\": \"string\",\n      \"customerEmail\": \"string\",\n      \"dateCreated\": \"1982-03-06T17:24:19.859Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5bddb4ac-14bc-4a1c-a829-f07490c30612",
+          "name": "Monnify Get Wallet Balance",
+          "request": {
+            "name": "Monnify Get Wallet Balance",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "disbursements",
+                "wallet-balance"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "accountNumber",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d4423b68-f719-42fc-8c88-31f67e3be717",
+              "name": "Available and ledger balance.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "disbursements",
+                    "wallet-balance"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "accountNumber",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": true,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"availableBalance\": 5106.989142924558,\n    \"ledgerBalance\": 118.16076716180346\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e6966f5e-eca3-4817-bc5d-7756b3f3cf12",
+          "name": "Monnify List Wallet Transactions",
+          "request": {
+            "name": "Monnify List Wallet Transactions",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "disbursements",
+                "wallet",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "walletReference",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "pageNo",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "20"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3f0a54a-f030-4d02-be75-5aa77b1a9cc1",
+              "name": "Wallet transaction page.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "disbursements",
+                    "wallet",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "walletReference",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "pageNo",
+                      "value": "0"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": true,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"content\": [\n      {\n        \"transactionReference\": \"string\",\n        \"amount\": 3831.767914447365,\n        \"type\": \"CREDIT\",\n        \"narration\": \"string\",\n        \"balanceAfter\": 5566.9953016307845,\n        \"dateCreated\": \"2012-06-06T14:48:26.385Z\"\n      },\n      {\n        \"transactionReference\": \"string\",\n        \"amount\": 9388.45488781746,\n        \"type\": \"DEBIT\",\n        \"narration\": \"string\",\n        \"balanceAfter\": 3226.446741690229,\n        \"dateCreated\": \"1995-12-15T11:58:31.935Z\"\n      }\n    ],\n    \"totalElements\": 9348,\n    \"totalPages\": 5283\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.monnify.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9714eeb8-8ac6-4f2e-afab-9f3799d54008",
+    "name": "Monnify Wallets API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Create wallets and sub-wallets, query main and disbursement balances, list transactions, and pull statements. Used to fund disbursement operations and to model end-user wallets in business-management products.\n\n\nContact Support:\n Name: Monnify Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

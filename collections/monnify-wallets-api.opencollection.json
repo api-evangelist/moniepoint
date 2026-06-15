@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Monnify Wallets API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Wallets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify List Wallets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monnify.com/api/v1/disbursements/wallet",
+            "params": [
+              {
+                "name": "customerEmail",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Monnify List Wallets"
+        },
+        {
+          "info": {
+            "name": "Monnify Create Wallet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.monnify.com/api/v1/disbursements/wallet",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Monnify Create Wallet"
+        },
+        {
+          "info": {
+            "name": "Monnify Get Wallet Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monnify.com/api/v1/disbursements/wallet-balance",
+            "params": [
+              {
+                "name": "accountNumber",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Monnify Get Wallet Balance"
+        },
+        {
+          "info": {
+            "name": "Monnify List Wallet Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monnify.com/api/v1/disbursements/wallet/transactions",
+            "params": [
+              {
+                "name": "walletReference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Monnify List Wallet Transactions"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

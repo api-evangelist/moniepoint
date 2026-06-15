@@ -1,0 +1,249 @@
+{
+  "item": [
+    {
+      "id": "dcd18301-ff80-4ed5-9d66-ca9de71cf77c",
+      "name": "Push Payments",
+      "description": {
+        "content": "Initiate push payments to a registered POS terminal.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ac9f52d0-d80e-4d96-8902-abfe9ecc9fd2",
+          "name": "Moniepoint Push Payment Request",
+          "request": {
+            "name": "Moniepoint Push Payment Request",
+            "description": {
+              "content": "Push a payment request to a specific Moniepoint POS terminal. The terminal prompts the cashier to confirm and present the card or transfer instructions to the customer.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "push-payment",
+                "request"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"terminalSerialNumber\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"reference\": \"<string>\",\n  \"currency\": \"NGN\",\n  \"description\": \"<string>\",\n  \"callbackUrl\": \"<uri>\",\n  \"expiresIn\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "edf03d9d-5f94-4c84-a88f-8e3195952730",
+              "name": "Push accepted; terminal awaiting customer action.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "push-payment",
+                    "request"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"terminalSerialNumber\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"reference\": \"<string>\",\n  \"currency\": \"NGN\",\n  \"description\": \"<string>\",\n  \"callbackUrl\": \"<uri>\",\n  \"expiresIn\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": false,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"terminalSerialNumber\": \"string\",\n    \"reference\": \"string\",\n    \"amount\": 4741.450083703376,\n    \"currency\": \"string\",\n    \"status\": \"ACCEPTED\",\n    \"responseCode\": \"string\",\n    \"responseMessage\": \"string\",\n    \"paymentMethod\": \"CARD\",\n    \"dateCreated\": \"1973-11-05T21:25:14.460Z\",\n    \"completedAt\": \"1973-08-05T02:06:32.668Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e1f4f94-6535-4b4a-8a2b-4855f3203c93",
+          "name": "Moniepoint Push Payment Status",
+          "request": {
+            "name": "Moniepoint Push Payment Status",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "push-payment",
+                "status",
+                ":reference"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "reference",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e62d53b4-9caa-4821-a68e-48f35e8de748",
+              "name": "Payment status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "push-payment",
+                    "status",
+                    ":reference"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "reference",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": false,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"terminalSerialNumber\": \"string\",\n    \"reference\": \"string\",\n    \"amount\": 4741.450083703376,\n    \"currency\": \"string\",\n    \"status\": \"ACCEPTED\",\n    \"responseCode\": \"string\",\n    \"responseMessage\": \"string\",\n    \"paymentMethod\": \"CARD\",\n    \"dateCreated\": \"1973-11-05T21:25:14.460Z\",\n    \"completedAt\": \"1973-08-05T02:06:32.668Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pos.moniepoint.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7e8bad8b-9ac9-4af8-8c12-c5a3042fced2",
+    "name": "Moniepoint POS Push Payment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Push payment-request flow for Moniepoint POS terminals. ISV partners push an authenticated payment request to a registered terminal serial number; the merchant taps to accept and the terminal completes a card or bank-transfer collection routed through Moniepoint's acquiring rails. API client credentials (client id and client secret) are issued from the Moniepoint Business dashboard.\n\n\nContact Support:\n Name: Moniepoint POS Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

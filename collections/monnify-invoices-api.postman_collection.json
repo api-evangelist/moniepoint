@@ -1,0 +1,422 @@
+{
+  "item": [
+    {
+      "id": "e0a6fc6e-d5cf-4c73-bb34-e224b0f1050c",
+      "name": "Invoices",
+      "description": {
+        "content": "Create, list, and manage invoices.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a4c8678f-1dbf-4d6b-8191-03e98d32d810",
+          "name": "Monnify Create Invoice",
+          "request": {
+            "name": "Monnify Create Invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "invoice",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<number>\",\n  \"invoiceReference\": \"<string>\",\n  \"description\": \"<string>\",\n  \"currencyCode\": \"NGN\",\n  \"contractCode\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"customerName\": \"<string>\",\n  \"expiryDate\": \"<dateTime>\",\n  \"paymentMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"redirectUrl\": \"<uri>\",\n  \"incomeSplitConfig\": [\n    {\n      \"subAccountCode\": \"<string>\",\n      \"feePercentage\": \"<number>\",\n      \"splitPercentage\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    },\n    {\n      \"subAccountCode\": \"<string>\",\n      \"feePercentage\": \"<number>\",\n      \"splitPercentage\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7ed1db28-0179-420e-acc6-c0d8a6dab52f",
+              "name": "Invoice created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "invoice",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": \"<number>\",\n  \"invoiceReference\": \"<string>\",\n  \"description\": \"<string>\",\n  \"currencyCode\": \"NGN\",\n  \"contractCode\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"customerName\": \"<string>\",\n  \"expiryDate\": \"<dateTime>\",\n  \"paymentMethods\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"redirectUrl\": \"<uri>\",\n  \"incomeSplitConfig\": [\n    {\n      \"subAccountCode\": \"<string>\",\n      \"feePercentage\": \"<number>\",\n      \"splitPercentage\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    },\n    {\n      \"subAccountCode\": \"<string>\",\n      \"feePercentage\": \"<number>\",\n      \"splitPercentage\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": false,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"invoiceReference\": \"string\",\n    \"amount\": 351.50862587441156,\n    \"currencyCode\": \"string\",\n    \"customerEmail\": \"string\",\n    \"customerName\": \"string\",\n    \"checkoutUrl\": \"http://TpcsTIgJfnoOYtipOzhEPd.zmwY3W-y-ZQcOYLAlK2eANrAMBvuwEhKH7u+k58\",\n    \"accountNumber\": \"string\",\n    \"accountName\": \"string\",\n    \"bankCode\": \"string\",\n    \"bankName\": \"string\",\n    \"status\": \"PAID\",\n    \"expiryDate\": \"1962-03-30T11:55:07.765Z\",\n    \"dateCreated\": \"2016-12-08T15:54:36.100Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "daa8516d-2e61-4bc8-b1fc-dc77c0abd084",
+          "name": "Monnify Get Invoice Details",
+          "request": {
+            "name": "Monnify Get Invoice Details",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "invoice",
+                ":invoiceReference",
+                "details"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoiceReference",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e09b99d1-30ab-4913-8159-e90f425aaf11",
+              "name": "Invoice details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "invoice",
+                    ":invoiceReference",
+                    "details"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceReference",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": false,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"invoiceReference\": \"string\",\n    \"amount\": 351.50862587441156,\n    \"currencyCode\": \"string\",\n    \"customerEmail\": \"string\",\n    \"customerName\": \"string\",\n    \"checkoutUrl\": \"http://TpcsTIgJfnoOYtipOzhEPd.zmwY3W-y-ZQcOYLAlK2eANrAMBvuwEhKH7u+k58\",\n    \"accountNumber\": \"string\",\n    \"accountName\": \"string\",\n    \"bankCode\": \"string\",\n    \"bankName\": \"string\",\n    \"status\": \"PAID\",\n    \"expiryDate\": \"1962-03-30T11:55:07.765Z\",\n    \"dateCreated\": \"2016-12-08T15:54:36.100Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "53b4c900-b82a-41dc-a2bc-4e3af775d379",
+          "name": "Monnify List Invoices",
+          "request": {
+            "name": "Monnify List Invoices",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "invoice",
+                "all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "44886c5e-d92a-4e53-92ad-6352e38f8cb3",
+              "name": "Invoice list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "invoice",
+                    "all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": false,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": [\n    {\n      \"invoiceReference\": \"string\",\n      \"amount\": 9558.08675259714,\n      \"currencyCode\": \"string\",\n      \"customerEmail\": \"string\",\n      \"customerName\": \"string\",\n      \"checkoutUrl\": \"https://F.llzop\",\n      \"accountNumber\": \"string\",\n      \"accountName\": \"string\",\n      \"bankCode\": \"string\",\n      \"bankName\": \"string\",\n      \"status\": \"OVERPAID\",\n      \"expiryDate\": \"1985-12-04T02:04:11.697Z\",\n      \"dateCreated\": \"2007-09-07T19:26:29.842Z\"\n    },\n    {\n      \"invoiceReference\": \"string\",\n      \"amount\": 4454.048851707313,\n      \"currencyCode\": \"string\",\n      \"customerEmail\": \"string\",\n      \"customerName\": \"string\",\n      \"checkoutUrl\": \"http://nFsagslUaNiDcHDbCjrreClT.hjqMENH9bOhAp4HzS7lPO1wbbpt2YGUG0r2xLvEzScDJ\",\n      \"accountNumber\": \"string\",\n      \"accountName\": \"string\",\n      \"bankCode\": \"string\",\n      \"bankName\": \"string\",\n      \"status\": \"EXPIRED\",\n      \"expiryDate\": \"1956-12-07T23:53:54.883Z\",\n      \"dateCreated\": \"1975-11-25T03:50:51.759Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f1845d2f-a71a-493f-be72-da0c8e696eed",
+          "name": "Monnify Cancel Invoice",
+          "request": {
+            "name": "Monnify Cancel Invoice",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "invoice",
+                ":invoiceReference",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "invoiceReference",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3f62d7f-cb53-4b10-8934-f21530bb208e",
+              "name": "Invoice cancelled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "invoice",
+                    ":invoiceReference",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "invoiceReference",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": false,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"invoiceReference\": \"string\",\n    \"amount\": 351.50862587441156,\n    \"currencyCode\": \"string\",\n    \"customerEmail\": \"string\",\n    \"customerName\": \"string\",\n    \"checkoutUrl\": \"http://TpcsTIgJfnoOYtipOzhEPd.zmwY3W-y-ZQcOYLAlK2eANrAMBvuwEhKH7u+k58\",\n    \"accountNumber\": \"string\",\n    \"accountName\": \"string\",\n    \"bankCode\": \"string\",\n    \"bankName\": \"string\",\n    \"status\": \"PAID\",\n    \"expiryDate\": \"1962-03-30T11:55:07.765Z\",\n    \"dateCreated\": \"2016-12-08T15:54:36.100Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.monnify.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f94068ac-380b-420b-a341-c9dd194647c0",
+    "name": "Monnify Invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Create static and dynamic invoices that generate hosted payment pages and unique reserved accounts. Static invoices have a fixed amount and description; dynamic invoices let the customer pay any amount within a configured range.\n\n\nContact Support:\n Name: Monnify Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

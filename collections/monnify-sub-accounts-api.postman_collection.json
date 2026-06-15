@@ -1,0 +1,420 @@
+{
+  "item": [
+    {
+      "id": "5e217ac2-c815-456d-9c43-9f8c778925d3",
+      "name": "Sub-Accounts",
+      "description": {
+        "content": "Manage settlement sub-accounts.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f080950e-d8a6-425c-986a-fc47842138f0",
+          "name": "Monnify Create Sub-Accounts",
+          "request": {
+            "name": "Monnify Create Sub-Accounts",
+            "description": {
+              "content": "Create one or more sub-accounts in a single call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "sub-accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"currencyCode\": \"<string>\",\n    \"bankCode\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"email\": \"<email>\",\n    \"subAccountCode\": \"<string>\",\n    \"defaultSplitPercentage\": \"<number>\",\n    \"feeBearer\": \"<boolean>\",\n    \"defaultBearer\": \"<boolean>\"\n  },\n  {\n    \"currencyCode\": \"<string>\",\n    \"bankCode\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"email\": \"<email>\",\n    \"subAccountCode\": \"<string>\",\n    \"defaultSplitPercentage\": \"<number>\",\n    \"feeBearer\": \"<boolean>\",\n    \"defaultBearer\": \"<boolean>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d4c02fb1-1b17-40c3-b434-92c9b3ca36fb",
+              "name": "Sub-accounts created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sub-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"currencyCode\": \"NGN\",\n    \"bankCode\": \"string\",\n    \"accountNumber\": \"string\",\n    \"email\": \"jVk@vqZAZYbwZscrgcauCRQJoWy.vglc\",\n    \"subAccountCode\": \"string\",\n    \"defaultSplitPercentage\": 4874.9203600425235,\n    \"feeBearer\": true,\n    \"defaultBearer\": true\n  },\n  {\n    \"currencyCode\": \"NGN\",\n    \"bankCode\": \"string\",\n    \"accountNumber\": \"string\",\n    \"email\": \"mHzrRNuh@Hq.ctzq\",\n    \"subAccountCode\": \"string\",\n    \"defaultSplitPercentage\": 155.1929614530878,\n    \"feeBearer\": false,\n    \"defaultBearer\": true\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": false,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": [\n    {\n      \"currencyCode\": \"NGN\",\n      \"bankCode\": \"string\",\n      \"accountNumber\": \"string\",\n      \"email\": \"MXN3kiWV2W@b.ners\",\n      \"subAccountCode\": \"string\",\n      \"defaultSplitPercentage\": 5527.182000769113,\n      \"feeBearer\": false,\n      \"defaultBearer\": true\n    },\n    {\n      \"currencyCode\": \"NGN\",\n      \"bankCode\": \"string\",\n      \"accountNumber\": \"string\",\n      \"email\": \"4weqN@dfTKhZdBbcFPQi.swfy\",\n      \"subAccountCode\": \"string\",\n      \"defaultSplitPercentage\": 3346.678001454606,\n      \"feeBearer\": true,\n      \"defaultBearer\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "339cac46-6e73-450a-b8fb-ceeaf3fa6e9d",
+          "name": "Monnify Update Sub-Account",
+          "request": {
+            "name": "Monnify Update Sub-Account",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "sub-accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"currencyCode\": \"<string>\",\n  \"bankCode\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"email\": \"<email>\",\n  \"subAccountCode\": \"<string>\",\n  \"defaultSplitPercentage\": \"<number>\",\n  \"feeBearer\": \"<boolean>\",\n  \"defaultBearer\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "01d7a327-b585-4ea2-994c-b7269edd4914",
+              "name": "Sub-account updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sub-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"currencyCode\": \"NGN\",\n  \"bankCode\": \"<string>\",\n  \"accountNumber\": \"<string>\",\n  \"email\": \"<email>\",\n  \"subAccountCode\": \"<string>\",\n  \"defaultSplitPercentage\": \"<number>\",\n  \"feeBearer\": \"<boolean>\",\n  \"defaultBearer\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": false,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"currencyCode\": \"NGN\",\n    \"bankCode\": \"string\",\n    \"accountNumber\": \"string\",\n    \"email\": \"skx7fWy@foNwKJCCgQwGJlgiakektHWLtgA.wvg\",\n    \"subAccountCode\": \"string\",\n    \"defaultSplitPercentage\": 2070.915370552032,\n    \"feeBearer\": true,\n    \"defaultBearer\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97f663ef-cc7f-4187-86d7-9179eca657fd",
+          "name": "Monnify List Sub-Accounts",
+          "request": {
+            "name": "Monnify List Sub-Accounts",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "sub-accounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5ca998e0-5df4-45f3-b0a7-5b23396ec78d",
+              "name": "Sub-account list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sub-accounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": false,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": [\n    {\n      \"currencyCode\": \"NGN\",\n      \"bankCode\": \"string\",\n      \"accountNumber\": \"string\",\n      \"email\": \"MXN3kiWV2W@b.ners\",\n      \"subAccountCode\": \"string\",\n      \"defaultSplitPercentage\": 5527.182000769113,\n      \"feeBearer\": false,\n      \"defaultBearer\": true\n    },\n    {\n      \"currencyCode\": \"NGN\",\n      \"bankCode\": \"string\",\n      \"accountNumber\": \"string\",\n      \"email\": \"4weqN@dfTKhZdBbcFPQi.swfy\",\n      \"subAccountCode\": \"string\",\n      \"defaultSplitPercentage\": 3346.678001454606,\n      \"feeBearer\": true,\n      \"defaultBearer\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6351e5bd-ec87-4185-b396-82281bf2f93e",
+          "name": "Monnify Delete Sub-Account",
+          "request": {
+            "name": "Monnify Delete Sub-Account",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "sub-accounts",
+                ":subAccountCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subAccountCode",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d1ff0bec-cde0-486b-aa89-cf9769342f04",
+              "name": "Sub-account deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "sub-accounts",
+                    ":subAccountCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subAccountCode",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": false,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.monnify.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "364faed1-d559-4df1-9667-7fa9c1d452fb",
+    "name": "Monnify Sub-Accounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Create and manage settlement sub-accounts representing third parties that should receive a configured share of each collection (marketplaces, franchises, multi-tenant platforms). Sub-accounts are referenced from Collections (incomeSplitConfig), Reserved Accounts, and Direct Debit mandate-debit calls.\n\n\nContact Support:\n Name: Monnify Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,368 @@
+{
+  "info": {
+    "_postman_id": "1405fa25-658d-41db-9e77-1096b9cadee6",
+    "name": "Monnify Refunds API",
+    "description": "Initiate full or partial refunds against a successful collection, list refunds, and look up refund status. Refund events emit successful_refund and failed_refund webhooks for asynchronous reconciliation.\n\n\nContact Support:\n Name: Monnify Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:13:05.000Z",
+    "updatedAt": "2026-06-05T15:13:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1405fa25-658d-41db-9e77-1096b9cadee6"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "refunds",
+              "item": [
+                {
+                  "name": "initiate-refund",
+                  "item": [
+                    {
+                      "name": "Monnify Initiate Refund",
+                      "id": "1da7a3d6-d9cc-4efb-9e42-87751a480105",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"transactionReference\": \"<string>\",\n  \"refundReference\": \"<string>\",\n  \"refundAmount\": \"<number>\",\n  \"refundReason\": \"<string>\",\n  \"customerNote\": \"<string>\",\n  \"destinationAccountNumber\": \"<string>\",\n  \"destinationAccountBankCode\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/refunds/initiate-refund",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "refunds",
+                            "initiate-refund"
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "c204aa7c-9d39-4f86-98fe-7dff873ba2d0",
+                          "name": "Refund initiated.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"transactionReference\": \"<string>\",\n  \"refundReference\": \"<string>\",\n  \"refundAmount\": \"<number>\",\n  \"refundReason\": \"<string>\",\n  \"customerNote\": \"<string>\",\n  \"destinationAccountNumber\": \"<string>\",\n  \"destinationAccountBankCode\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/refunds/initiate-refund",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "refunds",
+                                "initiate-refund"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"refundReference\": \"<string>\",\n    \"transactionReference\": \"<string>\",\n    \"refundAmount\": \"<number>\",\n    \"refundReason\": \"<string>\",\n    \"refundStatus\": \"FAILED\",\n    \"dateCreated\": \"<dateTime>\",\n    \"completedOn\": \"<dateTime>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:13:05.000Z",
+                          "updatedAt": "2026-06-05T15:13:05.000Z",
+                          "uid": "35240-c204aa7c-9d39-4f86-98fe-7dff873ba2d0"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:13:05.000Z",
+                      "updatedAt": "2026-06-05T15:13:05.000Z",
+                      "uid": "35240-1da7a3d6-d9cc-4efb-9e42-87751a480105"
+                    }
+                  ],
+                  "id": "e6084abe-7fc3-4ab2-b121-9945c47e6edb",
+                  "createdAt": "2026-06-05T15:13:05.000Z",
+                  "updatedAt": "2026-06-05T15:13:05.000Z",
+                  "uid": "35240-e6084abe-7fc3-4ab2-b121-9945c47e6edb"
+                },
+                {
+                  "name": "{refundReference}",
+                  "item": [
+                    {
+                      "name": "Monnify Get Refund Status",
+                      "id": "8c0c3e33-bd9c-4c6e-8138-ca869bc0f0ff",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/refunds/:refundReference",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "refunds",
+                            ":refundReference"
+                          ],
+                          "variable": [
+                            {
+                              "id": "998396da-453f-4e99-b8b1-7dd8ef22e51b",
+                              "key": "refundReference",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "26a90077-45a7-4bdc-ac75-d5896257c2c2",
+                          "name": "Refund details.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/refunds/:refundReference",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "refunds",
+                                ":refundReference"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "refundReference"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"refundReference\": \"<string>\",\n    \"transactionReference\": \"<string>\",\n    \"refundAmount\": \"<number>\",\n    \"refundReason\": \"<string>\",\n    \"refundStatus\": \"FAILED\",\n    \"dateCreated\": \"<dateTime>\",\n    \"completedOn\": \"<dateTime>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:13:05.000Z",
+                          "updatedAt": "2026-06-05T15:13:05.000Z",
+                          "uid": "35240-26a90077-45a7-4bdc-ac75-d5896257c2c2"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:13:05.000Z",
+                      "updatedAt": "2026-06-05T15:13:05.000Z",
+                      "uid": "35240-8c0c3e33-bd9c-4c6e-8138-ca869bc0f0ff"
+                    }
+                  ],
+                  "id": "3bdbfdf1-bcd2-48af-b2d2-b1b55fb66a11",
+                  "createdAt": "2026-06-05T15:13:05.000Z",
+                  "updatedAt": "2026-06-05T15:13:05.000Z",
+                  "uid": "35240-3bdbfdf1-bcd2-48af-b2d2-b1b55fb66a11"
+                },
+                {
+                  "name": "Monnify List Refunds",
+                  "id": "119e4300-12e6-4664-95c5-58b2397f4609",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/refunds?pageNo=0&pageSize=10",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "refunds"
+                      ],
+                      "query": [
+                        {
+                          "key": "pageNo",
+                          "value": "0"
+                        },
+                        {
+                          "key": "pageSize",
+                          "value": "10"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "07b43bd1-3d4a-43bd-b38b-4cce27d0e92f",
+                      "name": "Refunds page.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/refunds?pageNo=0&pageSize=10",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "refunds"
+                          ],
+                          "query": [
+                            {
+                              "key": "pageNo",
+                              "value": "0"
+                            },
+                            {
+                              "key": "pageSize",
+                              "value": "10"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"content\": [\n      {\n        \"refundReference\": \"<string>\",\n        \"transactionReference\": \"<string>\",\n        \"refundAmount\": \"<number>\",\n        \"refundReason\": \"<string>\",\n        \"refundStatus\": \"FAILED\",\n        \"dateCreated\": \"<dateTime>\",\n        \"completedOn\": \"<dateTime>\"\n      },\n      {\n        \"refundReference\": \"<string>\",\n        \"transactionReference\": \"<string>\",\n        \"refundAmount\": \"<number>\",\n        \"refundReason\": \"<string>\",\n        \"refundStatus\": \"COMPLETED\",\n        \"dateCreated\": \"<dateTime>\",\n        \"completedOn\": \"<dateTime>\"\n      }\n    ],\n    \"totalElements\": \"<integer>\",\n    \"totalPages\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:13:05.000Z",
+                      "updatedAt": "2026-06-05T15:13:05.000Z",
+                      "uid": "35240-07b43bd1-3d4a-43bd-b38b-4cce27d0e92f"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:13:05.000Z",
+                  "updatedAt": "2026-06-05T15:13:05.000Z",
+                  "uid": "35240-119e4300-12e6-4664-95c5-58b2397f4609"
+                }
+              ],
+              "id": "82dcef6f-5e98-417c-a0e7-b2f3f7782b10",
+              "createdAt": "2026-06-05T15:13:05.000Z",
+              "updatedAt": "2026-06-05T15:13:05.000Z",
+              "uid": "35240-82dcef6f-5e98-417c-a0e7-b2f3f7782b10"
+            }
+          ],
+          "id": "fd03128c-4bce-4054-9de6-8b5b9a9a4dc2",
+          "createdAt": "2026-06-05T15:13:05.000Z",
+          "updatedAt": "2026-06-05T15:13:05.000Z",
+          "uid": "35240-fd03128c-4bce-4054-9de6-8b5b9a9a4dc2"
+        }
+      ],
+      "id": "abe0c3bf-5be7-4519-a5d5-1b47b857b586",
+      "createdAt": "2026-06-05T15:13:05.000Z",
+      "updatedAt": "2026-06-05T15:13:05.000Z",
+      "uid": "35240-abe0c3bf-5be7-4519-a5d5-1b47b857b586"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.monnify.com"
+    }
+  ]
+}

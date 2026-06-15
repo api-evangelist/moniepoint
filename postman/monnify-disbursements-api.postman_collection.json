@@ -1,0 +1,1323 @@
+{
+  "info": {
+    "_postman_id": "18c03171-f019-4119-a730-967cbe5e1d5f",
+    "name": "Monnify Disbursements API",
+    "description": "Initiate single and bulk NIP transfers to Nigerian bank accounts. As of April 2026 the disbursement flow requires Name Inquiry first then a Disbursement Request that carries the verified beneficiary account name. A sender-information object has been supported on initiation since October 2025. Two-factor authorization with OTP applies to single transfers.\n\n\nContact Support:\n Name: Monnify Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:12:57.000Z",
+    "updatedAt": "2026-06-05T15:12:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-18c03171-f019-4119-a730-967cbe5e1d5f"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v2",
+          "item": [
+            {
+              "name": "disbursements",
+              "item": [
+                {
+                  "name": "single",
+                  "item": [
+                    {
+                      "name": "validate-otp",
+                      "item": [
+                        {
+                          "name": "Monnify Authorize Single Transfer OTP",
+                          "id": "f52e300f-17b0-409a-a683-566cf83298da",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"reference\": \"<string>\",\n  \"authorizationCode\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/disbursements/single/validate-otp",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "disbursements",
+                                "single",
+                                "validate-otp"
+                              ]
+                            },
+                            "description": "Submit the OTP returned to the merchant to authorize a pending transfer."
+                          },
+                          "response": [
+                            {
+                              "id": "4a03ef77-8049-4f9b-a2b7-70ebbbd58e20",
+                              "name": "Transfer authorized.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"reference\": \"<string>\",\n  \"authorizationCode\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v2/disbursements/single/validate-otp",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v2",
+                                    "disbursements",
+                                    "single",
+                                    "validate-otp"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"reference\": \"<string>\",\n    \"amount\": \"<number>\",\n    \"destinationAccountName\": \"<string>\",\n    \"destinationAccountNumber\": \"<string>\",\n    \"destinationBankCode\": \"<string>\",\n    \"currency\": \"<string>\",\n    \"status\": \"SUCCESS\",\n    \"narration\": \"<string>\",\n    \"fee\": \"<number>\",\n    \"dateCreated\": \"<dateTime>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:12:57.000Z",
+                              "updatedAt": "2026-06-05T15:12:57.000Z",
+                              "uid": "35240-4a03ef77-8049-4f9b-a2b7-70ebbbd58e20"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:57.000Z",
+                          "updatedAt": "2026-06-05T15:12:57.000Z",
+                          "uid": "35240-f52e300f-17b0-409a-a683-566cf83298da"
+                        }
+                      ],
+                      "id": "f0e79419-6a2b-4a89-8fe7-adc993af489a",
+                      "createdAt": "2026-06-05T15:12:57.000Z",
+                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                      "uid": "35240-f0e79419-6a2b-4a89-8fe7-adc993af489a"
+                    },
+                    {
+                      "name": "resend-otp",
+                      "item": [
+                        {
+                          "name": "Monnify Resend Transfer OTP",
+                          "id": "d31a5ff1-d81a-43f5-9a1e-8f355d9f6eb0",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"reference\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/disbursements/single/resend-otp",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "disbursements",
+                                "single",
+                                "resend-otp"
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "66ae2c6e-87ab-459d-8ee5-d38c63435593",
+                              "name": "OTP resent.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"reference\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v2/disbursements/single/resend-otp",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v2",
+                                    "disbursements",
+                                    "single",
+                                    "resend-otp"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {}\n}",
+                              "createdAt": "2026-06-05T15:12:57.000Z",
+                              "updatedAt": "2026-06-05T15:12:57.000Z",
+                              "uid": "35240-66ae2c6e-87ab-459d-8ee5-d38c63435593"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:57.000Z",
+                          "updatedAt": "2026-06-05T15:12:57.000Z",
+                          "uid": "35240-d31a5ff1-d81a-43f5-9a1e-8f355d9f6eb0"
+                        }
+                      ],
+                      "id": "effbf9ea-44dc-436b-a546-3ebc28693ba1",
+                      "createdAt": "2026-06-05T15:12:57.000Z",
+                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                      "uid": "35240-effbf9ea-44dc-436b-a546-3ebc28693ba1"
+                    },
+                    {
+                      "name": "summary",
+                      "item": [
+                        {
+                          "name": "Monnify Get Single Transfer Status",
+                          "id": "ce279216-f03f-4833-a908-fe33ab265e94",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/disbursements/single/summary?reference=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "disbursements",
+                                "single",
+                                "summary"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "reference",
+                                  "value": "<string>"
+                                }
+                              ]
+                            },
+                            "description": "Look up the current status of a single transfer."
+                          },
+                          "response": [
+                            {
+                              "id": "7880f43d-f5ef-4b67-9bd7-7b1d402ef5dd",
+                              "name": "Transfer status.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v2/disbursements/single/summary?reference=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v2",
+                                    "disbursements",
+                                    "single",
+                                    "summary"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) ",
+                                      "key": "reference",
+                                      "value": "<string>"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"reference\": \"<string>\",\n    \"amount\": \"<number>\",\n    \"destinationAccountName\": \"<string>\",\n    \"destinationAccountNumber\": \"<string>\",\n    \"destinationBankCode\": \"<string>\",\n    \"currency\": \"<string>\",\n    \"status\": \"SUCCESS\",\n    \"narration\": \"<string>\",\n    \"fee\": \"<number>\",\n    \"dateCreated\": \"<dateTime>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:12:57.000Z",
+                              "updatedAt": "2026-06-05T15:12:57.000Z",
+                              "uid": "35240-7880f43d-f5ef-4b67-9bd7-7b1d402ef5dd"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:57.000Z",
+                          "updatedAt": "2026-06-05T15:12:57.000Z",
+                          "uid": "35240-ce279216-f03f-4833-a908-fe33ab265e94"
+                        }
+                      ],
+                      "id": "7b8c0bdd-bd5e-44ba-b179-a69d2687accd",
+                      "createdAt": "2026-06-05T15:12:57.000Z",
+                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                      "uid": "35240-7b8c0bdd-bd5e-44ba-b179-a69d2687accd"
+                    },
+                    {
+                      "name": "transactions",
+                      "item": [
+                        {
+                          "name": "Monnify List Single Transfers",
+                          "id": "17d4e35e-56cc-436e-8836-94c22e8fbdfb",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/disbursements/single/transactions?pageNo=0&pageSize=10",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "disbursements",
+                                "single",
+                                "transactions"
+                              ],
+                              "query": [
+                                {
+                                  "key": "pageNo",
+                                  "value": "0"
+                                },
+                                {
+                                  "key": "pageSize",
+                                  "value": "10"
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "6e578494-2b2f-4e57-ba89-e7415c15c976",
+                              "name": "Single transfers page.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v2/disbursements/single/transactions?pageNo=0&pageSize=10",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v2",
+                                    "disbursements",
+                                    "single",
+                                    "transactions"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "pageNo",
+                                      "value": "0"
+                                    },
+                                    {
+                                      "key": "pageSize",
+                                      "value": "10"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"content\": [\n      {\n        \"reference\": \"<string>\",\n        \"amount\": \"<number>\",\n        \"destinationAccountName\": \"<string>\",\n        \"destinationAccountNumber\": \"<string>\",\n        \"destinationBankCode\": \"<string>\",\n        \"currency\": \"<string>\",\n        \"status\": \"PENDING_AUTHORIZATION\",\n        \"narration\": \"<string>\",\n        \"fee\": \"<number>\",\n        \"dateCreated\": \"<dateTime>\"\n      },\n      {\n        \"reference\": \"<string>\",\n        \"amount\": \"<number>\",\n        \"destinationAccountName\": \"<string>\",\n        \"destinationAccountNumber\": \"<string>\",\n        \"destinationBankCode\": \"<string>\",\n        \"currency\": \"<string>\",\n        \"status\": \"REVERSED\",\n        \"narration\": \"<string>\",\n        \"fee\": \"<number>\",\n        \"dateCreated\": \"<dateTime>\"\n      }\n    ],\n    \"number\": \"<integer>\",\n    \"size\": \"<integer>\",\n    \"totalElements\": \"<integer>\",\n    \"totalPages\": \"<integer>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:12:57.000Z",
+                              "updatedAt": "2026-06-05T15:12:57.000Z",
+                              "uid": "35240-6e578494-2b2f-4e57-ba89-e7415c15c976"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:57.000Z",
+                          "updatedAt": "2026-06-05T15:12:57.000Z",
+                          "uid": "35240-17d4e35e-56cc-436e-8836-94c22e8fbdfb"
+                        }
+                      ],
+                      "id": "017f319d-50ed-45ad-a39c-5f992d45c7a5",
+                      "createdAt": "2026-06-05T15:12:57.000Z",
+                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                      "uid": "35240-017f319d-50ed-45ad-a39c-5f992d45c7a5"
+                    },
+                    {
+                      "name": "Monnify Initiate Single Transfer",
+                      "id": "d6e895f2-67e7-4e38-b1f9-4084827dd2e4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"amount\": \"<number>\",\n  \"reference\": \"<string>\",\n  \"narration\": \"<string>\",\n  \"destinationBankCode\": \"<string>\",\n  \"destinationAccountNumber\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"sourceAccountNumber\": \"<string>\",\n  \"destinationAccountName\": \"<string>\",\n  \"async\": \"<boolean>\",\n  \"senderInformation\": {\n    \"fullName\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"email\": \"<email>\",\n    \"senderRef\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/disbursements/single",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "disbursements",
+                            "single"
+                          ]
+                        },
+                        "description": "Initiate a single-bank-account payout. Requires beneficiary account name verified by Name Inquiry."
+                      },
+                      "response": [
+                        {
+                          "id": "ca7dfbbc-0c00-4e42-96d6-67cb4bc9abf4",
+                          "name": "Transfer initiated.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"amount\": \"<number>\",\n  \"reference\": \"<string>\",\n  \"narration\": \"<string>\",\n  \"destinationBankCode\": \"<string>\",\n  \"destinationAccountNumber\": \"<string>\",\n  \"currency\": \"<string>\",\n  \"sourceAccountNumber\": \"<string>\",\n  \"destinationAccountName\": \"<string>\",\n  \"async\": \"<boolean>\",\n  \"senderInformation\": {\n    \"fullName\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"email\": \"<email>\",\n    \"senderRef\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/disbursements/single",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "disbursements",
+                                "single"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"reference\": \"<string>\",\n    \"amount\": \"<number>\",\n    \"destinationAccountName\": \"<string>\",\n    \"destinationAccountNumber\": \"<string>\",\n    \"destinationBankCode\": \"<string>\",\n    \"currency\": \"<string>\",\n    \"status\": \"SUCCESS\",\n    \"narration\": \"<string>\",\n    \"fee\": \"<number>\",\n    \"dateCreated\": \"<dateTime>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:12:57.000Z",
+                          "updatedAt": "2026-06-05T15:12:57.000Z",
+                          "uid": "35240-ca7dfbbc-0c00-4e42-96d6-67cb4bc9abf4"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:12:57.000Z",
+                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                      "uid": "35240-d6e895f2-67e7-4e38-b1f9-4084827dd2e4"
+                    }
+                  ],
+                  "id": "2f35e55d-1896-42fc-ad89-d4738c34e48b",
+                  "createdAt": "2026-06-05T15:12:57.000Z",
+                  "updatedAt": "2026-06-05T15:12:57.000Z",
+                  "uid": "35240-2f35e55d-1896-42fc-ad89-d4738c34e48b"
+                },
+                {
+                  "name": "bulk",
+                  "item": [
+                    {
+                      "name": "summary",
+                      "item": [
+                        {
+                          "name": "Monnify Get Bulk Transfer Summary",
+                          "id": "6f08716a-cc75-414f-98fb-aa02414bd93c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/disbursements/bulk/summary?batchReference=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "disbursements",
+                                "bulk",
+                                "summary"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "batchReference",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "666bd3e8-a893-4977-952b-ce39e51a8a20",
+                              "name": "Bulk transfer summary.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v2/disbursements/bulk/summary?batchReference=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v2",
+                                    "disbursements",
+                                    "bulk",
+                                    "summary"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) ",
+                                      "key": "batchReference",
+                                      "value": "<string>"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"batchReference\": \"<string>\",\n    \"batchStatus\": \"<string>\",\n    \"totalAmount\": \"<number>\",\n    \"totalFee\": \"<number>\",\n    \"totalReceivedAmount\": \"<number>\",\n    \"totalCount\": \"<integer>\",\n    \"successfulCount\": \"<integer>\",\n    \"failedCount\": \"<integer>\",\n    \"pendingCount\": \"<integer>\",\n    \"dateCreated\": \"<dateTime>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:12:57.000Z",
+                              "updatedAt": "2026-06-05T15:12:57.000Z",
+                              "uid": "35240-666bd3e8-a893-4977-952b-ce39e51a8a20"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:57.000Z",
+                          "updatedAt": "2026-06-05T15:12:57.000Z",
+                          "uid": "35240-6f08716a-cc75-414f-98fb-aa02414bd93c"
+                        }
+                      ],
+                      "id": "a5f226d9-5d50-4a59-85e6-37cfecfb0915",
+                      "createdAt": "2026-06-05T15:12:57.000Z",
+                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                      "uid": "35240-a5f226d9-5d50-4a59-85e6-37cfecfb0915"
+                    },
+                    {
+                      "name": "{batchReference}",
+                      "item": [
+                        {
+                          "name": "transactions",
+                          "item": [
+                            {
+                              "name": "Monnify List Bulk Transfer Items",
+                              "id": "5dac8376-aef2-4131-a5b7-ad1db51f7c5b",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v2/disbursements/bulk/:batchReference/transactions?pageNo=0&pageSize=10",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v2",
+                                    "disbursements",
+                                    "bulk",
+                                    ":batchReference",
+                                    "transactions"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "pageNo",
+                                      "value": "0"
+                                    },
+                                    {
+                                      "key": "pageSize",
+                                      "value": "10"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "086dc81b-0e99-4258-9570-36b37925dc3d",
+                                      "key": "batchReference",
+                                      "value": "<string>",
+                                      "description": "(Required) "
+                                    }
+                                  ]
+                                }
+                              },
+                              "response": [
+                                {
+                                  "id": "76b0cf47-1ca5-4b59-a3bd-81a3c22fcf41",
+                                  "name": "Bulk transfer items page.",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v2/disbursements/bulk/:batchReference/transactions?pageNo=0&pageSize=10",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v2",
+                                        "disbursements",
+                                        "bulk",
+                                        ":batchReference",
+                                        "transactions"
+                                      ],
+                                      "query": [
+                                        {
+                                          "key": "pageNo",
+                                          "value": "0"
+                                        },
+                                        {
+                                          "key": "pageSize",
+                                          "value": "10"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "batchReference"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"content\": [\n      {\n        \"reference\": \"<string>\",\n        \"amount\": \"<number>\",\n        \"destinationAccountName\": \"<string>\",\n        \"destinationAccountNumber\": \"<string>\",\n        \"destinationBankCode\": \"<string>\",\n        \"currency\": \"<string>\",\n        \"status\": \"PENDING_AUTHORIZATION\",\n        \"narration\": \"<string>\",\n        \"fee\": \"<number>\",\n        \"dateCreated\": \"<dateTime>\"\n      },\n      {\n        \"reference\": \"<string>\",\n        \"amount\": \"<number>\",\n        \"destinationAccountName\": \"<string>\",\n        \"destinationAccountNumber\": \"<string>\",\n        \"destinationBankCode\": \"<string>\",\n        \"currency\": \"<string>\",\n        \"status\": \"REVERSED\",\n        \"narration\": \"<string>\",\n        \"fee\": \"<number>\",\n        \"dateCreated\": \"<dateTime>\"\n      }\n    ],\n    \"number\": \"<integer>\",\n    \"size\": \"<integer>\",\n    \"totalElements\": \"<integer>\",\n    \"totalPages\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-06-05T15:12:57.000Z",
+                                  "updatedAt": "2026-06-05T15:12:57.000Z",
+                                  "uid": "35240-76b0cf47-1ca5-4b59-a3bd-81a3c22fcf41"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:12:57.000Z",
+                              "updatedAt": "2026-06-05T15:12:57.000Z",
+                              "uid": "35240-5dac8376-aef2-4131-a5b7-ad1db51f7c5b"
+                            }
+                          ],
+                          "id": "1eba0972-2e80-406c-923d-47591b87d4c8",
+                          "createdAt": "2026-06-05T15:12:57.000Z",
+                          "updatedAt": "2026-06-05T15:12:57.000Z",
+                          "uid": "35240-1eba0972-2e80-406c-923d-47591b87d4c8"
+                        }
+                      ],
+                      "id": "c1b1b94e-2a13-483c-a780-6367668ee1d2",
+                      "createdAt": "2026-06-05T15:12:57.000Z",
+                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                      "uid": "35240-c1b1b94e-2a13-483c-a780-6367668ee1d2"
+                    },
+                    {
+                      "name": "Monnify Initiate Bulk Transfer",
+                      "id": "e6f9daab-56a5-447e-9c9f-f7d3123345ce",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"title\": \"<string>\",\n  \"batchReference\": \"<string>\",\n  \"narration\": \"<string>\",\n  \"sourceAccountNumber\": \"<string>\",\n  \"transactionList\": [\n    {\n      \"amount\": \"<number>\",\n      \"reference\": \"<string>\",\n      \"narration\": \"<string>\",\n      \"destinationBankCode\": \"<string>\",\n      \"destinationAccountNumber\": \"<string>\",\n      \"destinationAccountName\": \"<string>\",\n      \"currency\": \"<string>\"\n    },\n    {\n      \"amount\": \"<number>\",\n      \"reference\": \"<string>\",\n      \"narration\": \"<string>\",\n      \"destinationBankCode\": \"<string>\",\n      \"destinationAccountNumber\": \"<string>\",\n      \"destinationAccountName\": \"<string>\",\n      \"currency\": \"<string>\"\n    }\n  ],\n  \"onValidationFailure\": \"BREAK\",\n  \"notificationInterval\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/disbursements/bulk",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "disbursements",
+                            "bulk"
+                          ]
+                        },
+                        "description": "Initiate a batch of transfers in one call."
+                      },
+                      "response": [
+                        {
+                          "id": "4d3648c9-e30d-4000-83a8-a94ac4fcede2",
+                          "name": "Bulk transfer accepted.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"title\": \"<string>\",\n  \"batchReference\": \"<string>\",\n  \"narration\": \"<string>\",\n  \"sourceAccountNumber\": \"<string>\",\n  \"transactionList\": [\n    {\n      \"amount\": \"<number>\",\n      \"reference\": \"<string>\",\n      \"narration\": \"<string>\",\n      \"destinationBankCode\": \"<string>\",\n      \"destinationAccountNumber\": \"<string>\",\n      \"destinationAccountName\": \"<string>\",\n      \"currency\": \"<string>\"\n    },\n    {\n      \"amount\": \"<number>\",\n      \"reference\": \"<string>\",\n      \"narration\": \"<string>\",\n      \"destinationBankCode\": \"<string>\",\n      \"destinationAccountNumber\": \"<string>\",\n      \"destinationAccountName\": \"<string>\",\n      \"currency\": \"<string>\"\n    }\n  ],\n  \"onValidationFailure\": \"BREAK\",\n  \"notificationInterval\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/disbursements/bulk",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "disbursements",
+                                "bulk"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"batchReference\": \"<string>\",\n    \"batchStatus\": \"<string>\",\n    \"totalAmount\": \"<number>\",\n    \"totalFee\": \"<number>\",\n    \"totalReceivedAmount\": \"<number>\",\n    \"totalCount\": \"<integer>\",\n    \"successfulCount\": \"<integer>\",\n    \"failedCount\": \"<integer>\",\n    \"pendingCount\": \"<integer>\",\n    \"dateCreated\": \"<dateTime>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:12:57.000Z",
+                          "updatedAt": "2026-06-05T15:12:57.000Z",
+                          "uid": "35240-4d3648c9-e30d-4000-83a8-a94ac4fcede2"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:12:57.000Z",
+                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                      "uid": "35240-e6f9daab-56a5-447e-9c9f-f7d3123345ce"
+                    }
+                  ],
+                  "id": "a14140df-bf39-4a4d-9428-9bc3f19724c7",
+                  "createdAt": "2026-06-05T15:12:57.000Z",
+                  "updatedAt": "2026-06-05T15:12:57.000Z",
+                  "uid": "35240-a14140df-bf39-4a4d-9428-9bc3f19724c7"
+                },
+                {
+                  "name": "wallet-balance",
+                  "item": [
+                    {
+                      "name": "Monnify Get Disbursement Wallet Balance",
+                      "id": "87c0999c-bdf8-46ea-b9f3-e034b46987fb",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/disbursements/wallet-balance?accountNumber=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "disbursements",
+                            "wallet-balance"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "accountNumber",
+                              "value": "<string>"
+                            }
+                          ]
+                        }
+                      },
+                      "response": [
+                        {
+                          "id": "15ea1d4a-987a-4ba0-bdcd-d7748a6f063a",
+                          "name": "Wallet balance.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/disbursements/wallet-balance?accountNumber=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "disbursements",
+                                "wallet-balance"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "accountNumber",
+                                  "value": "<string>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"availableBalance\": \"<number>\",\n    \"ledgerBalance\": \"<number>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:12:57.000Z",
+                          "updatedAt": "2026-06-05T15:12:57.000Z",
+                          "uid": "35240-15ea1d4a-987a-4ba0-bdcd-d7748a6f063a"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:12:57.000Z",
+                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                      "uid": "35240-87c0999c-bdf8-46ea-b9f3-e034b46987fb"
+                    }
+                  ],
+                  "id": "81392187-ed1c-4cc4-8f21-35752f7a75f2",
+                  "createdAt": "2026-06-05T15:12:57.000Z",
+                  "updatedAt": "2026-06-05T15:12:57.000Z",
+                  "uid": "35240-81392187-ed1c-4cc4-8f21-35752f7a75f2"
+                }
+              ],
+              "id": "a3631b1e-8364-4195-af57-93346187fac7",
+              "createdAt": "2026-06-05T15:12:57.000Z",
+              "updatedAt": "2026-06-05T15:12:57.000Z",
+              "uid": "35240-a3631b1e-8364-4195-af57-93346187fac7"
+            }
+          ],
+          "id": "efc7ced2-4858-4f83-8d93-6230d70b415b",
+          "createdAt": "2026-06-05T15:12:57.000Z",
+          "updatedAt": "2026-06-05T15:12:57.000Z",
+          "uid": "35240-efc7ced2-4858-4f83-8d93-6230d70b415b"
+        },
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "sdk",
+              "item": [
+                {
+                  "name": "transactions",
+                  "item": [
+                    {
+                      "name": "banks",
+                      "item": [
+                        {
+                          "name": "Monnify List NIP Banks",
+                          "id": "5c4bb4a0-f061-424e-af67-933288357fa0",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/sdk/transactions/banks",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "sdk",
+                                "transactions",
+                                "banks"
+                              ]
+                            },
+                            "description": "Returns the list of supported Nigerian banks with bank codes."
+                          },
+                          "response": [
+                            {
+                              "id": "db028cd9-1b23-49b7-90cc-600bae6f2bd0",
+                              "name": "Bank list.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/sdk/transactions/banks",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "sdk",
+                                    "transactions",
+                                    "banks"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": [\n    {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"ussdTemplate\": \"<string>\",\n      \"nibssBankCode\": \"<string>\"\n    },\n    {\n      \"code\": \"<string>\",\n      \"name\": \"<string>\",\n      \"ussdTemplate\": \"<string>\",\n      \"nibssBankCode\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-06-05T15:12:57.000Z",
+                              "updatedAt": "2026-06-05T15:12:57.000Z",
+                              "uid": "35240-db028cd9-1b23-49b7-90cc-600bae6f2bd0"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:57.000Z",
+                          "updatedAt": "2026-06-05T15:12:57.000Z",
+                          "uid": "35240-5c4bb4a0-f061-424e-af67-933288357fa0"
+                        }
+                      ],
+                      "id": "9e7497be-10e9-4214-9cd5-867188967f98",
+                      "createdAt": "2026-06-05T15:12:57.000Z",
+                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                      "uid": "35240-9e7497be-10e9-4214-9cd5-867188967f98"
+                    }
+                  ],
+                  "id": "f7bd2798-060b-4894-808a-37701cb7204f",
+                  "createdAt": "2026-06-05T15:12:57.000Z",
+                  "updatedAt": "2026-06-05T15:12:57.000Z",
+                  "uid": "35240-f7bd2798-060b-4894-808a-37701cb7204f"
+                }
+              ],
+              "id": "a8af34aa-a68c-4194-bed9-71daa3373f5e",
+              "createdAt": "2026-06-05T15:12:57.000Z",
+              "updatedAt": "2026-06-05T15:12:57.000Z",
+              "uid": "35240-a8af34aa-a68c-4194-bed9-71daa3373f5e"
+            },
+            {
+              "name": "disbursements",
+              "item": [
+                {
+                  "name": "account",
+                  "item": [
+                    {
+                      "name": "validate",
+                      "item": [
+                        {
+                          "name": "Monnify Validate Bank Account (Name Inquiry)",
+                          "id": "5863878f-51bc-4633-b2fe-3f372ae89128",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/disbursements/account/validate?accountNumber=<string>&bankCode=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "disbursements",
+                                "account",
+                                "validate"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "accountNumber",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "bankCode",
+                                  "value": "<string>"
+                                }
+                              ]
+                            },
+                            "description": "Return the registered account name for a bank account number."
+                          },
+                          "response": [
+                            {
+                              "id": "df7aa752-0136-42a1-a318-5ec44aa7fb22",
+                              "name": "Account holder name.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/disbursements/account/validate?accountNumber=<string>&bankCode=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "disbursements",
+                                    "account",
+                                    "validate"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) ",
+                                      "key": "accountNumber",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "(Required) ",
+                                      "key": "bankCode",
+                                      "value": "<string>"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"accountNumber\": \"<string>\",\n    \"accountName\": \"<string>\",\n    \"bankCode\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:12:57.000Z",
+                              "updatedAt": "2026-06-05T15:12:57.000Z",
+                              "uid": "35240-df7aa752-0136-42a1-a318-5ec44aa7fb22"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:57.000Z",
+                          "updatedAt": "2026-06-05T15:12:57.000Z",
+                          "uid": "35240-5863878f-51bc-4633-b2fe-3f372ae89128"
+                        }
+                      ],
+                      "id": "720a4b01-d075-4286-9693-c12717e33bfe",
+                      "createdAt": "2026-06-05T15:12:57.000Z",
+                      "updatedAt": "2026-06-05T15:12:57.000Z",
+                      "uid": "35240-720a4b01-d075-4286-9693-c12717e33bfe"
+                    }
+                  ],
+                  "id": "889c9855-b17f-4c01-a3cd-3caf35ee9684",
+                  "createdAt": "2026-06-05T15:12:57.000Z",
+                  "updatedAt": "2026-06-05T15:12:57.000Z",
+                  "uid": "35240-889c9855-b17f-4c01-a3cd-3caf35ee9684"
+                }
+              ],
+              "id": "86a25054-5918-493b-b3ab-9d3e6a73efce",
+              "createdAt": "2026-06-05T15:12:57.000Z",
+              "updatedAt": "2026-06-05T15:12:57.000Z",
+              "uid": "35240-86a25054-5918-493b-b3ab-9d3e6a73efce"
+            }
+          ],
+          "id": "f5c69d09-6d64-4cc3-8653-2c2895ff03a6",
+          "createdAt": "2026-06-05T15:12:57.000Z",
+          "updatedAt": "2026-06-05T15:12:57.000Z",
+          "uid": "35240-f5c69d09-6d64-4cc3-8653-2c2895ff03a6"
+        }
+      ],
+      "id": "3049a9ca-707e-49e1-8fdd-7c8db292f49a",
+      "createdAt": "2026-06-05T15:12:57.000Z",
+      "updatedAt": "2026-06-05T15:12:57.000Z",
+      "uid": "35240-3049a9ca-707e-49e1-8fdd-7c8db292f49a"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.monnify.com"
+    }
+  ]
+}

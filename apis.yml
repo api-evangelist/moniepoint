@@ -1,495 +1,479 @@
 aid: moniepoint
 url: https://raw.githubusercontent.com/api-evangelist/moniepoint/refs/heads/main/apis.yml
 apis:
-- aid: moniepoint:monnify-authentication-api
-  name: Monnify Authentication API
-  tags:
-  - Authentication
-  - OAuth
-  - Tokens
-  humanURL: https://developers.monnify.com/docs/getting-started/authentication
-  properties:
-  - url: https://developers.monnify.com/docs/getting-started/authentication
-    type: Documentation
-  - url: openapi/monnify-authentication-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/authentication-login.yaml
-  description: Exchange Monnify API key and secret credentials (Basic auth) for a short-lived Bearer access
-    token via POST /api/v1/auth/login. The returned accessToken plus expiresIn drives every other Monnify
-    API call. Tokens expire after one hour and must be re-issued; client code typically caches and refreshes
-    on demand.
-- aid: moniepoint:monnify-collections-api
-  name: Monnify Collections API
-  tags:
-  - Collections
-  - Payments
-  - Cards
-  - Bank Transfer
-  - USSD
-  - QR
-  humanURL: https://developers.monnify.com/docs/collections
-  properties:
-  - url: https://developers.monnify.com/docs/collections
-    type: Documentation
-  - url: openapi/monnify-collections-api-openapi.yml
-    type: OpenAPI
-  - url: json-schema/monnify-transaction-schema.json
-    type: JSONSchema
-  - url: json-ld/moniepoint-context.jsonld
-    type: JSONLD
-  - type: NaftikoCapability
-    url: capabilities/collections-transactions.yaml
-  - type: NaftikoCapability
-    url: capabilities/collections-cards.yaml
-  description: Initialize one-time payment transactions, accept card payments with 3-D Secure / OTP
-    authorization, charge tokenized cards, complete bank-transfer payments, and look up transaction status.
-    Powers the Monnify Checkout, server-to-server card capture, and pay-with-transfer flows used by Nigerian
-    merchants. Endpoints under /api/v1/merchant/transactions/ and /api/v1/sdk/transactions/.
-- aid: moniepoint:monnify-reserved-accounts-api
-  name: Monnify Reserved Accounts API
-  tags:
-  - Reserved Accounts
-  - Virtual Accounts
-  - Bank Transfer
-  - KYC
-  - Limits
-  humanURL: https://developers.monnify.com/docs/collections/customer-reserved-account
-  properties:
-  - url: https://developers.monnify.com/docs/collections/customer-reserved-account
-    type: Documentation
-  - url: openapi/monnify-reserved-accounts-api-openapi.yml
-    type: OpenAPI
-  - url: json-schema/monnify-reserved-account-schema.json
-    type: JSONSchema
-  - type: NaftikoCapability
-    url: capabilities/reserved-accounts-accounts.yaml
-  - type: NaftikoCapability
-    url: capabilities/reserved-accounts-limits.yaml
-  description: Programmatically provision permanent NUBAN virtual accounts (dedicated and one-time invoice
-    variants) for customers and merchants. Supports income-split configuration to multiple sub-accounts,
-    KYC updates (BVN / NIN), allowed-source-account restriction, deallocation, transaction history, and
-    per-account limit profiles. V2 endpoints under /api/v2/bank-transfer/reserved-accounts/.
-- aid: moniepoint:monnify-disbursements-api
-  name: Monnify Disbursements API
-  tags:
-  - Disbursements
-  - Transfers
-  - Payouts
-  - NIP
-  - Bulk
-  humanURL: https://developers.monnify.com/docs/disbursements
-  properties:
-  - url: https://developers.monnify.com/docs/disbursements
-    type: Documentation
-  - url: https://developers.monnify.com/docs/disbursements/single-transfers
-    type: Documentation
-  - url: https://developers.monnify.com/docs/disbursements/bulk-transfers
-    type: Documentation
-  - url: openapi/monnify-disbursements-api-openapi.yml
-    type: OpenAPI
-  - url: json-schema/monnify-transfer-schema.json
-    type: JSONSchema
-  - type: NaftikoCapability
-    url: capabilities/disbursements-single.yaml
-  - type: NaftikoCapability
-    url: capabilities/disbursements-bulk.yaml
-  description: Initiate single and bulk NIP transfers to any Nigerian bank account, with two-factor OTP
-    authorization, wallet-balance lookup, transfer status, list/search, and resend-OTP. As of April 2026
-    the request flow follows Name Inquiry → Disbursement Request and requires a verified beneficiary
-    account name. Sender-information object supported since October 2025. Endpoints under
-    /api/v2/disbursements/single, /api/v2/disbursements/bulk, /api/v2/disbursements/wallet-balance.
-- aid: moniepoint:monnify-sub-accounts-api
-  name: Monnify Sub-Accounts API
-  tags:
-  - Sub-Accounts
-  - Settlement
-  - Split Payments
-  humanURL: https://developers.monnify.com/docs/sub-accounts
-  properties:
-  - url: https://developers.monnify.com/docs/sub-accounts
-    type: Documentation
-  - url: openapi/monnify-sub-accounts-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/sub-accounts-sub-accounts.yaml
-  description: Create and manage settlement sub-accounts representing third parties that should receive
-    a configured percentage of each transaction (marketplaces, multi-tenant platforms, franchise
-    networks). Settlement bank, split percentage, default flag, and per-call income-split configuration.
-    Endpoints under /api/v1/sub-accounts.
-- aid: moniepoint:monnify-direct-debit-api
-  name: Monnify Direct Debit API
-  tags:
-  - Direct Debit
-  - Mandates
-  - Recurring Payments
-  - NIBSS
-  humanURL: https://developers.monnify.com/docs/direct-debit
-  properties:
-  - url: https://developers.monnify.com/docs/direct-debit
-    type: Documentation
-  - url: openapi/monnify-direct-debit-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/direct-debit-mandates.yaml
-  - type: NaftikoCapability
-    url: capabilities/direct-debit-debit.yaml
-  description: Create, activate, and debit recurring NIBSS direct-debit mandates against a customer's
-    bank account. Smart routing uses TeamApt as the primary processor with NIBSS as fallback for
-    improved success rates. Supports incomeSplit on mandate-debit to settle into multiple
-    sub-accounts. Endpoints under /api/v1/direct-debit/mandate/ and /api/v1/direct-debit/mandate/debit.
-- aid: moniepoint:monnify-invoices-api
-  name: Monnify Invoices API
-  tags:
-  - Invoices
-  - Billing
-  - Static
-  - Dynamic
-  humanURL: https://developers.monnify.com/docs/invoices
-  properties:
-  - url: https://developers.monnify.com/docs/invoices
-    type: Documentation
-  - url: openapi/monnify-invoices-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/invoices-invoices.yaml
-  description: Create static and dynamic invoices that generate hosted payment pages and unique reserved
-    accounts. Supports invoice listing, status lookup, and cancellation. Backs Monnify's invoicing
-    dashboard and embedded invoicing in business-management apps. Endpoints under /api/v1/invoice.
-- aid: moniepoint:monnify-bills-payment-api
-  name: Monnify Bills Payment API
-  tags:
-  - Bills
-  - Airtime
-  - Data
-  - Electricity
-  - Cable TV
-  - Betting
-  humanURL: https://developers.monnify.com/docs/bills-payment
-  properties:
-  - url: https://developers.monnify.com/docs/bills-payment
-    type: Documentation
-  - url: openapi/monnify-bills-payment-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/bills-payment-bills.yaml
-  description: Unified Biller Service for purchasing airtime and data, paying electricity and cable-TV
-    bills, funding betting wallets, and paying education fees. List categories, billers, and biller
-    items; validate the customer; process the bill; check status. Endpoints under
-    /api/v1/bill-payment/.
-- aid: moniepoint:monnify-verification-api
-  name: Monnify Verification API
-  tags:
-  - Verification
-  - BVN
-  - NIN
-  - Bank Account
-  - KYC
-  humanURL: https://developers.monnify.com/docs/verification
-  properties:
-  - url: https://developers.monnify.com/docs/verification
-    type: Documentation
-  - url: openapi/monnify-verification-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/verification-verifications.yaml
-  description: Validate a Nigerian bank account number (Name Inquiry), match a Bank Verification
-    Number (BVN) against an account, and verify National Identification Numbers (NIN). Critical for
-    KYC, disbursement beneficiary checks, and fraud prevention. Endpoints under
-    /api/v1/disbursements/account/validate, /api/v1/vas/bvn-account-match, and /api/v1/vas/verify-nin.
-- aid: moniepoint:monnify-wallets-api
-  name: Monnify Wallets API
-  tags:
-  - Wallets
-  - Balance
-  - Statements
-  - Sub-Wallets
-  humanURL: https://developers.monnify.com/docs/wallets
-  properties:
-  - url: https://developers.monnify.com/docs/wallets
-    type: Documentation
-  - url: openapi/monnify-wallets-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/wallets-wallets.yaml
-  description: Create wallets and sub-wallets, query main and disbursement balances, list transactions,
-    and pull statements. Used to fund disbursement operations and to model end-user wallets for
-    business-management products. Endpoints under /api/v1/disbursements/wallet-balance and
-    /api/v1/disbursements/wallet.
-- aid: moniepoint:monnify-refunds-api
-  name: Monnify Refunds API
-  tags:
-  - Refunds
-  - Reversals
-  - Disputes
-  humanURL: https://developers.monnify.com/docs/refunds
-  properties:
-  - url: https://developers.monnify.com/docs/refunds
-    type: Documentation
-  - url: openapi/monnify-refunds-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/refunds-refunds.yaml
-  description: Initiate full or partial refunds against a successful collection, list refunds, and
-    look up refund status. Refund events emit successful_refund / failed_refund webhooks for
-    asynchronous reconciliation. Endpoints under /api/v1/refunds.
-- aid: moniepoint:monnify-settlements-api
-  name: Monnify Settlements API
-  tags:
-  - Settlement
-  - Payouts
-  - Reporting
-  humanURL: https://developers.monnify.com/docs/settlements
-  properties:
-  - url: https://developers.monnify.com/docs/settlements
-    type: Documentation
-  - url: openapi/monnify-settlements-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/settlements-settlements.yaml
-  description: Retrieve settlement information for collected funds — settlement batches per merchant
-    or sub-account, settlement transactions, and settlement bank details. Backs reconciliation of
-    daily settlement payouts into the merchant's external bank account. Endpoints under
-    /api/v1/transactions/find-by-settlement-reference and /api/v1/settlements.
-- aid: moniepoint:monnify-webhooks
-  name: Monnify Webhooks
-  tags:
-  - Webhooks
-  - Events
-  - HMAC
-  - SHA-512
-  humanURL: https://developers.monnify.com/docs/webhooks
-  properties:
-  - url: https://developers.monnify.com/docs/webhooks
-    type: Documentation
-  - url: json-schema/monnify-webhook-schema.json
-    type: JSONSchema
-  description: Asynchronous server-to-server notifications for nine event categories — successful
-    collection, successful / failed / reversed disbursement, successful / failed refund, settlement
-    completion, mandate status change, wallet activity, and low_balance_alert (added September 2025).
-    Every payload includes a monnify-signature header computed as HMAC-SHA-512 of the stringified
-    request body using the client secret. Standard envelope { eventType, eventData }.
-- aid: moniepoint:moniepoint-pos-api
-  name: Moniepoint POS Push Payment API
-  tags:
-  - POS
-  - Terminals
-  - Push Payments
-  - Acquiring
-  humanURL: https://docs.pos.moniepoint.com
-  properties:
-  - url: https://docs.pos.moniepoint.com
-    type: Documentation
-  - url: https://teamapt.atlassian.net/wiki/spaces/EI/pages/1039826999/Push+Payment+Request+API+Reference
-    type: Documentation
-  - url: https://teamapt.atlassian.net/wiki/spaces/EI/pages/1042120729/API+Client+Credentials
-    type: Documentation
-  - url: openapi/moniepoint-pos-api-openapi.yml
-    type: OpenAPI
-  - type: NaftikoCapability
-    url: capabilities/pos-push-payment.yaml
-  description: Push payment-request flow for Moniepoint POS terminals. ISV partners send an authenticated
-    push to a registered terminal serial number; the merchant taps to accept and the terminal completes
-    a card or transfer collection routed through Moniepoint's acquiring rails. Authentication uses an
-    API client ID / secret pair issued through the Moniepoint Business dashboard.
+  - aid: moniepoint:monnify-authentication-api
+    name: Monnify Authentication API
+    tags:
+      - Authentication
+      - OAuth
+      - Tokens
+    humanURL: https://developers.monnify.com/docs/getting-started/authentication
+    properties:
+      - url: https://developers.monnify.com/docs/getting-started/authentication
+        type: Documentation
+      - url: openapi/monnify-authentication-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Exchange Monnify API key and secret credentials (Basic auth) for a short-lived Bearer access token via POST
+      /api/v1/auth/login. The returned accessToken plus expiresIn drives every other Monnify API call. Tokens expire
+      after one hour and must be re-issued; client code typically caches and refreshes on demand.
+  - aid: moniepoint:monnify-collections-api
+    name: Monnify Collections API
+    tags:
+      - Collections
+      - Payments
+      - Cards
+      - Bank Transfer
+      - USSD
+      - QR
+    humanURL: https://developers.monnify.com/docs/collections
+    properties:
+      - url: https://developers.monnify.com/docs/collections
+        type: Documentation
+      - url: openapi/monnify-collections-api-openapi.yml
+        type: OpenAPI
+      - url: json-schema/monnify-transaction-schema.json
+        type: JSONSchema
+      - url: json-ld/moniepoint-context.jsonld
+        type: JSONLD
+    description: >-
+      Initialize one-time payment transactions, accept card payments with 3-D Secure / OTP authorization, charge
+      tokenized cards, complete bank-transfer payments, and look up transaction status. Powers the Monnify Checkout,
+      server-to-server card capture, and pay-with-transfer flows used by Nigerian merchants. Endpoints under
+      /api/v1/merchant/transactions/ and /api/v1/sdk/transactions/.
+  - aid: moniepoint:monnify-reserved-accounts-api
+    name: Monnify Reserved Accounts API
+    tags:
+      - Reserved Accounts
+      - Virtual Accounts
+      - Bank Transfer
+      - KYC
+      - Limits
+    humanURL: https://developers.monnify.com/docs/collections/customer-reserved-account
+    properties:
+      - url: https://developers.monnify.com/docs/collections/customer-reserved-account
+        type: Documentation
+      - url: openapi/monnify-reserved-accounts-api-openapi.yml
+        type: OpenAPI
+      - url: json-schema/monnify-reserved-account-schema.json
+        type: JSONSchema
+    description: >-
+      Programmatically provision permanent NUBAN virtual accounts (dedicated and one-time invoice variants) for
+      customers and merchants. Supports income-split configuration to multiple sub-accounts, KYC updates (BVN / NIN),
+      allowed-source-account restriction, deallocation, transaction history, and per-account limit profiles. V2
+      endpoints under /api/v2/bank-transfer/reserved-accounts/.
+  - aid: moniepoint:monnify-disbursements-api
+    name: Monnify Disbursements API
+    tags:
+      - Disbursements
+      - Transfers
+      - Payouts
+      - NIP
+      - Bulk
+    humanURL: https://developers.monnify.com/docs/disbursements
+    properties:
+      - url: https://developers.monnify.com/docs/disbursements
+        type: Documentation
+      - url: https://developers.monnify.com/docs/disbursements/single-transfers
+        type: Documentation
+      - url: https://developers.monnify.com/docs/disbursements/bulk-transfers
+        type: Documentation
+      - url: openapi/monnify-disbursements-api-openapi.yml
+        type: OpenAPI
+      - url: json-schema/monnify-transfer-schema.json
+        type: JSONSchema
+    description: >-
+      Initiate single and bulk NIP transfers to any Nigerian bank account, with two-factor OTP authorization,
+      wallet-balance lookup, transfer status, list/search, and resend-OTP. As of April 2026 the request flow follows
+      Name Inquiry → Disbursement Request and requires a verified beneficiary account name. Sender-information object
+      supported since October 2025. Endpoints under /api/v2/disbursements/single, /api/v2/disbursements/bulk,
+      /api/v2/disbursements/wallet-balance.
+  - aid: moniepoint:monnify-sub-accounts-api
+    name: Monnify Sub-Accounts API
+    tags:
+      - Sub-Accounts
+      - Settlement
+      - Split Payments
+    humanURL: https://developers.monnify.com/docs/sub-accounts
+    properties:
+      - url: https://developers.monnify.com/docs/sub-accounts
+        type: Documentation
+      - url: openapi/monnify-sub-accounts-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Create and manage settlement sub-accounts representing third parties that should receive a configured percentage
+      of each transaction (marketplaces, multi-tenant platforms, franchise networks). Settlement bank, split percentage,
+      default flag, and per-call income-split configuration. Endpoints under /api/v1/sub-accounts.
+  - aid: moniepoint:monnify-direct-debit-api
+    name: Monnify Direct Debit API
+    tags:
+      - Direct Debit
+      - Mandates
+      - Recurring Payments
+      - NIBSS
+    humanURL: https://developers.monnify.com/docs/direct-debit
+    properties:
+      - url: https://developers.monnify.com/docs/direct-debit
+        type: Documentation
+      - url: openapi/monnify-direct-debit-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Create, activate, and debit recurring NIBSS direct-debit mandates against a customer's bank account. Smart routing
+      uses TeamApt as the primary processor with NIBSS as fallback for improved success rates. Supports incomeSplit on
+      mandate-debit to settle into multiple sub-accounts. Endpoints under /api/v1/direct-debit/mandate/ and
+      /api/v1/direct-debit/mandate/debit.
+  - aid: moniepoint:monnify-invoices-api
+    name: Monnify Invoices API
+    tags:
+      - Invoices
+      - Billing
+      - Static
+      - Dynamic
+    humanURL: https://developers.monnify.com/docs/invoices
+    properties:
+      - url: https://developers.monnify.com/docs/invoices
+        type: Documentation
+      - url: openapi/monnify-invoices-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Create static and dynamic invoices that generate hosted payment pages and unique reserved accounts. Supports
+      invoice listing, status lookup, and cancellation. Backs Monnify's invoicing dashboard and embedded invoicing in
+      business-management apps. Endpoints under /api/v1/invoice.
+  - aid: moniepoint:monnify-bills-payment-api
+    name: Monnify Bills Payment API
+    tags:
+      - Bills
+      - Airtime
+      - Data
+      - Electricity
+      - Cable TV
+      - Betting
+    humanURL: https://developers.monnify.com/docs/bills-payment
+    properties:
+      - url: https://developers.monnify.com/docs/bills-payment
+        type: Documentation
+      - url: openapi/monnify-bills-payment-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Unified Biller Service for purchasing airtime and data, paying electricity and cable-TV bills, funding betting
+      wallets, and paying education fees. List categories, billers, and biller items; validate the customer; process the
+      bill; check status. Endpoints under /api/v1/bill-payment/.
+  - aid: moniepoint:monnify-verification-api
+    name: Monnify Verification API
+    tags:
+      - Verification
+      - BVN
+      - NIN
+      - Bank Account
+      - KYC
+    humanURL: https://developers.monnify.com/docs/verification
+    properties:
+      - url: https://developers.monnify.com/docs/verification
+        type: Documentation
+      - url: openapi/monnify-verification-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Validate a Nigerian bank account number (Name Inquiry), match a Bank Verification Number (BVN) against an account,
+      and verify National Identification Numbers (NIN). Critical for KYC, disbursement beneficiary checks, and fraud
+      prevention. Endpoints under /api/v1/disbursements/account/validate, /api/v1/vas/bvn-account-match, and
+      /api/v1/vas/verify-nin.
+  - aid: moniepoint:monnify-wallets-api
+    name: Monnify Wallets API
+    tags:
+      - Wallets
+      - Balance
+      - Statements
+      - Sub-Wallets
+    humanURL: https://developers.monnify.com/docs/wallets
+    properties:
+      - url: https://developers.monnify.com/docs/wallets
+        type: Documentation
+      - url: openapi/monnify-wallets-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Create wallets and sub-wallets, query main and disbursement balances, list transactions, and pull statements. Used
+      to fund disbursement operations and to model end-user wallets for business-management products. Endpoints under
+      /api/v1/disbursements/wallet-balance and /api/v1/disbursements/wallet.
+  - aid: moniepoint:monnify-refunds-api
+    name: Monnify Refunds API
+    tags:
+      - Refunds
+      - Reversals
+      - Disputes
+    humanURL: https://developers.monnify.com/docs/refunds
+    properties:
+      - url: https://developers.monnify.com/docs/refunds
+        type: Documentation
+      - url: openapi/monnify-refunds-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Initiate full or partial refunds against a successful collection, list refunds, and look up refund status. Refund
+      events emit successful_refund / failed_refund webhooks for asynchronous reconciliation. Endpoints under
+      /api/v1/refunds.
+  - aid: moniepoint:monnify-settlements-api
+    name: Monnify Settlements API
+    tags:
+      - Settlement
+      - Payouts
+      - Reporting
+    humanURL: https://developers.monnify.com/docs/settlements
+    properties:
+      - url: https://developers.monnify.com/docs/settlements
+        type: Documentation
+      - url: openapi/monnify-settlements-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Retrieve settlement information for collected funds — settlement batches per merchant or sub-account, settlement
+      transactions, and settlement bank details. Backs reconciliation of daily settlement payouts into the merchant's
+      external bank account. Endpoints under /api/v1/transactions/find-by-settlement-reference and /api/v1/settlements.
+  - aid: moniepoint:monnify-webhooks
+    name: Monnify Webhooks
+    tags:
+      - Webhooks
+      - Events
+      - HMAC
+      - SHA-512
+    humanURL: https://developers.monnify.com/docs/webhooks
+    properties:
+      - url: https://developers.monnify.com/docs/webhooks
+        type: Documentation
+      - url: json-schema/monnify-webhook-schema.json
+        type: JSONSchema
+    description: >-
+      Asynchronous server-to-server notifications for nine event categories — successful collection, successful / failed
+      / reversed disbursement, successful / failed refund, settlement completion, mandate status change, wallet
+      activity, and low_balance_alert (added September 2025). Every payload includes a monnify-signature header computed
+      as HMAC-SHA-512 of the stringified request body using the client secret. Standard envelope { eventType, eventData
+      }.
+  - aid: moniepoint:moniepoint-pos-api
+    name: Moniepoint POS Push Payment API
+    tags:
+      - POS
+      - Terminals
+      - Push Payments
+      - Acquiring
+    humanURL: https://docs.pos.moniepoint.com
+    properties:
+      - url: https://docs.pos.moniepoint.com
+        type: Documentation
+      - url: https://teamapt.atlassian.net/wiki/spaces/EI/pages/1039826999/Push+Payment+Request+API+Reference
+        type: Documentation
+      - url: https://teamapt.atlassian.net/wiki/spaces/EI/pages/1042120729/API+Client+Credentials
+        type: Documentation
+      - url: openapi/moniepoint-pos-api-openapi.yml
+        type: OpenAPI
+    description: >-
+      Push payment-request flow for Moniepoint POS terminals. ISV partners send an authenticated push to a registered
+      terminal serial number; the merchant taps to accept and the terminal completes a card or transfer collection
+      routed through Moniepoint's acquiring rails. Authentication uses an API client ID / secret pair issued through the
+      Moniepoint Business dashboard.
 name: Moniepoint
 tags:
-- Africa
-- Nigeria
-- Payments
-- Banking
-- Fintech
-- Acquiring
-- POS
-- Collections
-- Disbursements
-- Virtual Accounts
-- Direct Debit
-- Bills Payment
-- SMB
-- Working Capital
-- Unicorn
+  - Africa
+  - Nigeria
+  - Payments
+  - Banking
+  - Fintech
+  - Acquiring
+  - POS
+  - Collections
+  - Disbursements
+  - Virtual Accounts
+  - Direct Debit
+  - Bills Payment
+  - SMB
+  - Working Capital
+  - Unicorn
 kind: contract
 image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
-- type: ArazzoWorkflows
-  url: arazzo/
-  workflows:
-  - url: arazzo/moniepoint-bulk-disbursement-workflow.yml
-    name: Moniepoint Bulk Disbursement
-    summary: Initiate a batch of transfers, poll the batch summary to completion, then list per-item results.
-  - url: arazzo/moniepoint-card-charge-otp-workflow.yml
-    name: Moniepoint Card Charge With OTP
-    summary: Initialize a transaction, capture a card, branch on the 3-D Secure / OTP step, and confirm.
-  - url: arazzo/moniepoint-collect-bank-transfer-workflow.yml
-    name: Moniepoint Collect Via Bank Transfer
-    summary: Initialize a collection, generate a one-time NUBAN to pay it, then poll the transaction until paid.
-  - url: arazzo/moniepoint-kyc-reserve-account-workflow.yml
-    name: Moniepoint KYC Verified Virtual Account
-    summary: Match a customer BVN to their bank account, then reserve a KYC-bound virtual account and confirm it.
-  - url: arazzo/moniepoint-pay-bill-workflow.yml
-    name: Moniepoint Pay A Bill
-    summary: List billers for a category, validate the customer, process the bill, then poll the bill status.
-  - url: arazzo/moniepoint-pos-push-payment-workflow.yml
-    name: Moniepoint POS Push Payment
-    summary: Push a payment request to a Moniepoint POS terminal, then poll the terminal until the customer completes it.
-  - url: arazzo/moniepoint-recurring-mandate-debit-workflow.yml
-    name: Moniepoint Recurring Mandate Debit
-    summary: Create a direct-debit mandate, activate it, debit it, then read the mandate back.
-  - url: arazzo/moniepoint-refund-collected-payment-workflow.yml
-    name: Moniepoint Refund A Collected Payment
-    summary: Confirm a collection is paid, initiate a refund against it, then poll the refund to completion.
-  - url: arazzo/moniepoint-reserve-virtual-account-workflow.yml
-    name: Moniepoint Reserve Virtual Account
-    summary: Reserve a permanent NUBAN virtual account for a customer, confirm it, and read its inbound transactions.
-  - url: arazzo/moniepoint-single-transfer-otp-workflow.yml
-    name: Moniepoint Single Transfer With OTP
-    summary: Initiate a single transfer, branch on whether OTP authorization is required, authorize it, and confirm.
-  - url: arazzo/moniepoint-verify-and-disburse-workflow.yml
-    name: Moniepoint Verify And Disburse
-    summary: Name-inquiry a beneficiary bank account, then disburse to it and poll the transfer to a final state.
-  - url: arazzo/moniepoint-virtual-account-with-limit-workflow.yml
-    name: Moniepoint Virtual Account With Limit Profile
-    summary: Define a transaction limit profile, then reserve a virtual account bound to that profile.
-  - url: arazzo/moniepoint-wallet-balance-check-workflow.yml
-    name: Moniepoint Create Wallet And Check Balance
-    summary: Create a customer wallet, read its available and ledger balance, then list its transactions.
-- type: Portal
-  url: https://moniepoint.com
-- type: Portal
-  url: https://developers.monnify.com
-  name: Monnify Developer Portal
-- type: Documentation
-  url: https://developers.monnify.com/api
-  name: Monnify API Reference
-- type: Documentation
-  url: https://docs.pos.moniepoint.com
-  name: Moniepoint POS API Documentation
-- type: Documentation
-  url: https://teamapt.atlassian.net/wiki/spaces/MON/pages
-  name: Monnify Confluence Archive
-- type: Documentation
-  url: https://teamapt.atlassian.net/wiki/spaces/EI/pages
-  name: Moniepoint POS Developer Support (Confluence)
-- type: GettingStarted
-  url: https://developers.monnify.com/docs/getting-started
-- type: ChangeLog
-  url: https://developers.monnify.com/docs/change-logs
-- type: Blog
-  url: https://developers.monnify.com/blog
-  name: Monnify Developer Blog
-- type: Blog
-  url: https://engineering.moniepoint.com
-  name: Moniepoint Engineering Blog
-- type: Blog
-  url: https://moniepoint.com/blog
-- type: Press
-  url: https://moniepoint.com/press
-- type: Support
-  url: https://support.moniepoint.com
-- type: Training
-  url: https://learning.moniepoint.com
-- type: TrustCenter
-  url: https://trust.moniepoint.com
-- type: PrivacyPolicy
-  url: https://moniepoint.com/ng/privacy-policy
-- type: TermsOfService
-  url: https://moniepoint.com/ng/terms-of-service
-- type: SignUp
-  url: https://app.monnify.com/create-account
-  name: Monnify Sign Up
-- type: SignUp
-  url: https://app.moniepoint.com/signup
-  name: Moniepoint Business Sign Up
-- type: Sandbox
-  url: https://sandbox.monnify.com
-- type: GitHubOrganization
-  url: https://github.com/Moniepoint
-- type: LinkedIn
-  url: https://www.linkedin.com/company/moniepoint
-- type: Twitter
-  url: https://twitter.com/moniepointNG
-- type: Careers
-  url: https://moniepoint.com/careers
-- type: SDK
-  url: https://github.com/Moniepoint/dart-flow
-  name: dart-flow (Dart async stream library)
-- type: SDK
-  url: https://github.com/cla-bit/MonnifyEase
-  name: MonnifyEase (community Python wrapper)
-- type: SDK
-  url: https://github.com/abdsalam/laravel-monnify
-  name: Laravel Monnify (community)
-- type: Webhooks
-  url: https://developers.monnify.com/docs/webhooks
-- type: Errors
-  url: https://developers.monnify.com/docs/getting-started/errors
-- type: Authentication
-  url: https://developers.monnify.com/docs/getting-started/authentication
-- type: RateLimits
-  url: https://developers.monnify.com/docs/rate-limits
-- type: Versioning
-  url: https://developers.monnify.com/docs/getting-started/versioning
-- type: Plans
-  url: plans/moniepoint-plans-pricing.yml
-- type: RateLimits
-  url: rate-limits/moniepoint-rate-limits.yml
-- type: FinOps
-  url: finops/moniepoint-finops.yml
-- type: Vocabulary
-  url: vocabulary/moniepoint-vocabulary.yml
-- type: Rules
-  url: rules/moniepoint-rules.yml
-- type: Features
-  data:
-  - Africa's largest merchant acquirer — ~10M business and individual accounts, $17B monthly TPV, 26M daily payments processed
-  - POS terminal acquiring across Nigeria for in-person card and bank-transfer collections
-  - Monnify developer platform (formerly TeamApt) — embedded payments, banking, and disbursements for Nigerian businesses
-  - Collections API with Monnify Checkout, server-to-server card capture (3-D Secure / OTP), pay-with-transfer, and USSD
-  - Permanent NUBAN virtual accounts (Reserved Accounts) with V2 limit profiles, KYC, and income-split routing
-  - Single and bulk NIP transfers with mandatory name-inquiry pre-flight (April 2026) and sender-information support
-  - Sub-accounts for marketplaces, franchises, and multi-tenant settlement with per-transaction split percentages
-  - Direct-debit mandates with smart routing (TeamApt primary, NIBSS fallback) and incomeSplit on debit
-  - Static and dynamic invoices with hosted payment pages and per-invoice reserved accounts
-  - Unified Bills Payment service — airtime, data, electricity, cable TV, betting, education
-  - Verification services — bank account name inquiry, BVN-account match, NIN verification
-  - Wallet APIs for main and sub-wallet balances, statements, and transactions
-  - HMAC-SHA-512 signed webhooks across nine event categories including new low_balance_alert (Sept 2025)
-  - Sandbox environment at sandbox.monnify.com with separate API key / secret pair
-  - OAuth-style flow — Basic auth to /api/v1/auth/login returns short-lived Bearer accessToken
-  - Standard response envelope { requestSuccessful, responseMessage, responseCode, responseBody }
-  - Community SDKs and wrappers for PHP, Laravel, Python; official Dart utility library (dart-flow)
-  - Moniepoint POS Push Payment API for ISV-initiated payments to registered terminal serial numbers
-  - Working-capital credit, business bank accounts, expense cards, and bookkeeping tools alongside the payments rails
-  - Cross-border payments and Kenya expansion (2024-2026) extending the Nigerian core
-  sources:
-  - https://moniepoint.com
-  - https://developers.monnify.com
-  - https://developers.monnify.com/api
-  - https://developers.monnify.com/docs/change-logs
-  - https://developers.monnify.com/docs/webhooks
-  - https://docs.pos.moniepoint.com
-  - https://github.com/Moniepoint
-  - https://moniepoint.com/payments
-  updated: '2026-05-24'
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/moniepoint/overview
+  - type: ArazzoWorkflows
+    url: arazzo/
+    workflows:
+      - url: arazzo/moniepoint-bulk-disbursement-workflow.yml
+        name: Moniepoint Bulk Disbursement
+        summary: Initiate a batch of transfers, poll the batch summary to completion, then list per-item results.
+      - url: arazzo/moniepoint-card-charge-otp-workflow.yml
+        name: Moniepoint Card Charge With OTP
+        summary: Initialize a transaction, capture a card, branch on the 3-D Secure / OTP step, and confirm.
+      - url: arazzo/moniepoint-collect-bank-transfer-workflow.yml
+        name: Moniepoint Collect Via Bank Transfer
+        summary: Initialize a collection, generate a one-time NUBAN to pay it, then poll the transaction until paid.
+      - url: arazzo/moniepoint-kyc-reserve-account-workflow.yml
+        name: Moniepoint KYC Verified Virtual Account
+        summary: Match a customer BVN to their bank account, then reserve a KYC-bound virtual account and confirm it.
+      - url: arazzo/moniepoint-pay-bill-workflow.yml
+        name: Moniepoint Pay A Bill
+        summary: List billers for a category, validate the customer, process the bill, then poll the bill status.
+      - url: arazzo/moniepoint-pos-push-payment-workflow.yml
+        name: Moniepoint POS Push Payment
+        summary: Push a payment request to a Moniepoint POS terminal, then poll the terminal until the customer completes it.
+      - url: arazzo/moniepoint-recurring-mandate-debit-workflow.yml
+        name: Moniepoint Recurring Mandate Debit
+        summary: Create a direct-debit mandate, activate it, debit it, then read the mandate back.
+      - url: arazzo/moniepoint-refund-collected-payment-workflow.yml
+        name: Moniepoint Refund A Collected Payment
+        summary: Confirm a collection is paid, initiate a refund against it, then poll the refund to completion.
+      - url: arazzo/moniepoint-reserve-virtual-account-workflow.yml
+        name: Moniepoint Reserve Virtual Account
+        summary: Reserve a permanent NUBAN virtual account for a customer, confirm it, and read its inbound transactions.
+      - url: arazzo/moniepoint-single-transfer-otp-workflow.yml
+        name: Moniepoint Single Transfer With OTP
+        summary: Initiate a single transfer, branch on whether OTP authorization is required, authorize it, and confirm.
+      - url: arazzo/moniepoint-verify-and-disburse-workflow.yml
+        name: Moniepoint Verify And Disburse
+        summary: Name-inquiry a beneficiary bank account, then disburse to it and poll the transfer to a final state.
+      - url: arazzo/moniepoint-virtual-account-with-limit-workflow.yml
+        name: Moniepoint Virtual Account With Limit Profile
+        summary: Define a transaction limit profile, then reserve a virtual account bound to that profile.
+      - url: arazzo/moniepoint-wallet-balance-check-workflow.yml
+        name: Moniepoint Create Wallet And Check Balance
+        summary: Create a customer wallet, read its available and ledger balance, then list its transactions.
+  - type: Portal
+    url: https://moniepoint.com
+  - type: Portal
+    url: https://developers.monnify.com
+    name: Monnify Developer Portal
+  - type: Documentation
+    url: https://developers.monnify.com/api
+    name: Monnify API Reference
+  - type: Documentation
+    url: https://docs.pos.moniepoint.com
+    name: Moniepoint POS API Documentation
+  - type: Documentation
+    url: https://teamapt.atlassian.net/wiki/spaces/MON/pages
+    name: Monnify Confluence Archive
+  - type: Documentation
+    url: https://teamapt.atlassian.net/wiki/spaces/EI/pages
+    name: Moniepoint POS Developer Support (Confluence)
+  - type: GettingStarted
+    url: https://developers.monnify.com/docs/getting-started
+  - type: ChangeLog
+    url: https://developers.monnify.com/docs/change-logs
+  - type: Blog
+    url: https://developers.monnify.com/blog
+    name: Monnify Developer Blog
+  - type: Blog
+    url: https://engineering.moniepoint.com
+    name: Moniepoint Engineering Blog
+  - type: Blog
+    url: https://moniepoint.com/blog
+  - type: Press
+    url: https://moniepoint.com/press
+  - type: Support
+    url: https://support.moniepoint.com
+  - type: Training
+    url: https://learning.moniepoint.com
+  - type: TrustCenter
+    url: https://trust.moniepoint.com
+  - type: PrivacyPolicy
+    url: https://moniepoint.com/ng/privacy-policy
+  - type: TermsOfService
+    url: https://moniepoint.com/ng/terms-of-service
+  - type: SignUp
+    url: https://app.monnify.com/create-account
+    name: Monnify Sign Up
+  - type: SignUp
+    url: https://app.moniepoint.com/signup
+    name: Moniepoint Business Sign Up
+  - type: Sandbox
+    url: https://sandbox.monnify.com
+  - type: GitHubOrganization
+    url: https://github.com/Moniepoint
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/moniepoint
+  - type: Twitter
+    url: https://twitter.com/moniepointNG
+  - type: Careers
+    url: https://moniepoint.com/careers
+  - type: SDK
+    url: https://github.com/Moniepoint/dart-flow
+    name: dart-flow (Dart async stream library)
+  - type: SDK
+    url: https://github.com/cla-bit/MonnifyEase
+    name: MonnifyEase (community Python wrapper)
+  - type: SDK
+    url: https://github.com/abdsalam/laravel-monnify
+    name: Laravel Monnify (community)
+  - type: Webhooks
+    url: https://developers.monnify.com/docs/webhooks
+  - type: Errors
+    url: https://developers.monnify.com/docs/getting-started/errors
+  - type: Authentication
+    url: https://developers.monnify.com/docs/getting-started/authentication
+  - type: RateLimits
+    url: https://developers.monnify.com/docs/rate-limits
+  - type: Versioning
+    url: https://developers.monnify.com/docs/getting-started/versioning
+  - type: Plans
+    url: plans/moniepoint-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/moniepoint-rate-limits.yml
+  - type: FinOps
+    url: finops/moniepoint-finops.yml
+  - type: Vocabulary
+    url: vocabulary/moniepoint-vocabulary.yml
+  - type: Rules
+    url: rules/moniepoint-rules.yml
+  - type: Features
+    data:
+      - >-
+        Africa's largest merchant acquirer — ~10M business and individual accounts, $17B monthly TPV, 26M daily payments
+        processed
+      - POS terminal acquiring across Nigeria for in-person card and bank-transfer collections
+      - >-
+        Monnify developer platform (formerly TeamApt) — embedded payments, banking, and disbursements for Nigerian
+        businesses
+      - >-
+        Collections API with Monnify Checkout, server-to-server card capture (3-D Secure / OTP), pay-with-transfer, and
+        USSD
+      - Permanent NUBAN virtual accounts (Reserved Accounts) with V2 limit profiles, KYC, and income-split routing
+      - Single and bulk NIP transfers with mandatory name-inquiry pre-flight (April 2026) and sender-information support
+      - Sub-accounts for marketplaces, franchises, and multi-tenant settlement with per-transaction split percentages
+      - Direct-debit mandates with smart routing (TeamApt primary, NIBSS fallback) and incomeSplit on debit
+      - Static and dynamic invoices with hosted payment pages and per-invoice reserved accounts
+      - Unified Bills Payment service — airtime, data, electricity, cable TV, betting, education
+      - Verification services — bank account name inquiry, BVN-account match, NIN verification
+      - Wallet APIs for main and sub-wallet balances, statements, and transactions
+      - HMAC-SHA-512 signed webhooks across nine event categories including new low_balance_alert (Sept 2025)
+      - Sandbox environment at sandbox.monnify.com with separate API key / secret pair
+      - OAuth-style flow — Basic auth to /api/v1/auth/login returns short-lived Bearer accessToken
+      - Standard response envelope { requestSuccessful, responseMessage, responseCode, responseBody }
+      - Community SDKs and wrappers for PHP, Laravel, Python; official Dart utility library (dart-flow)
+      - Moniepoint POS Push Payment API for ISV-initiated payments to registered terminal serial numbers
+      - >-
+        Working-capital credit, business bank accounts, expense cards, and bookkeeping tools alongside the payments
+        rails
+      - Cross-border payments and Kenya expansion (2024-2026) extending the Nigerian core
+    sources:
+      - https://moniepoint.com
+      - https://developers.monnify.com
+      - https://developers.monnify.com/api
+      - https://developers.monnify.com/docs/change-logs
+      - https://developers.monnify.com/docs/webhooks
+      - https://docs.pos.moniepoint.com
+      - https://github.com/Moniepoint
+      - https://moniepoint.com/payments
+    updated: '2026-05-24'
 created: '2026-05-24T00:00:00.000Z'
 modified: '2026-05-24'
 position: Consuming
-description: Moniepoint is Africa's all-in-one financial platform for small and medium-sized businesses
-  and individuals — Nigeria's largest merchant acquirer, with about 10 million business and individual
-  accounts, $17B in monthly transaction volume, and 26M daily payments processed. Founded as TeamApt and
-  rebranded under the Moniepoint name, the company became Africa's most valuable fintech unicorn after
-  a 2024 raise led by Google, then expanded into Kenya and cross-border payments. The Monnify developer
-  platform exposes the rails to third parties through a comprehensive REST API for authentication,
-  collections (cards, bank transfer, USSD, reserved accounts), disbursements (single and bulk NIP),
-  sub-accounts and settlement, direct-debit mandates, invoices, bills payment, KYC verification,
-  wallets, refunds, and signed webhooks; the separate Moniepoint POS API enables push payments to
-  registered terminals. Underlying products also include business bank accounts, working-capital credit,
-  expense cards, and business-management tools.
+description: >-
+  Moniepoint is Africa's all-in-one financial platform for small and medium-sized businesses and individuals — Nigeria's
+  largest merchant acquirer, with about 10 million business and individual accounts, $17B in monthly transaction volume,
+  and 26M daily payments processed. Founded as TeamApt and rebranded under the Moniepoint name, the company became
+  Africa's most valuable fintech unicorn after a 2024 raise led by Google, then expanded into Kenya and cross-border
+  payments. The Monnify developer platform exposes the rails to third parties through a comprehensive REST API for
+  authentication, collections (cards, bank transfer, USSD, reserved accounts), disbursements (single and bulk NIP),
+  sub-accounts and settlement, direct-debit mandates, invoices, bills payment, KYC verification, wallets, refunds, and
+  signed webhooks; the separate Moniepoint POS API enables push payments to registered terminals. Underlying products
+  also include business bank accounts, working-capital credit, expense cards, and business-management tools.
 maintainers:
-- FN: Kin Lane
-  email: info@apievangelist.com
-  X: apievangelist
-  url: https://apievangelist.com
+  - FN: Kin Lane
+    email: info@apievangelist.com
+    X: apievangelist
+    url: https://apievangelist.com
 specificationVersion: '0.16'

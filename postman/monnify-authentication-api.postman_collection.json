@@ -1,0 +1,210 @@
+{
+  "info": {
+    "_postman_id": "f3d8e463-7548-4dbe-860e-f1100324dead",
+    "name": "Monnify Authentication API",
+    "description": "Exchange Monnify API key and secret credentials for a short-lived Bearer access token. Every other Monnify endpoint requires the access token returned by POST /api/v1/auth/login as Authorization: Bearer {accessToken}. Tokens expire after one hour and must be re-issued.\n\n\nContact Support:\n Name: Monnify Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:12:53.000Z",
+    "updatedAt": "2026-06-05T15:12:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f3d8e463-7548-4dbe-860e-f1100324dead"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "auth",
+              "item": [
+                {
+                  "name": "login",
+                  "item": [
+                    {
+                      "name": "Monnify Log In And Issue Access Token",
+                      "id": "5e9df3bb-942b-48b3-a58a-af468a0f44e5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "basic",
+                          "basic": [
+                            {
+                              "key": "username",
+                              "value": "{{basicAuthUsername}}",
+                              "type": "string"
+                            },
+                            {
+                              "key": "password",
+                              "value": "{{basicAuthPassword}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/auth/login",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "auth",
+                            "login"
+                          ]
+                        },
+                        "description": "Authenticate with Basic auth using your API key as the username and your secret key as the password. Returns an OAuth-style accessToken and expiresIn (seconds). Cache the token until expiry to avoid re-authenticating on every call.\n"
+                      },
+                      "response": [
+                        {
+                          "id": "ea9e0c6f-c080-4d57-adbb-a50ee5efd15c",
+                          "name": "Access token issued successfully.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/auth/login",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "auth",
+                                "login"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"accessToken\": \"<string>\",\n    \"expiresIn\": \"<integer>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:12:54.000Z",
+                          "updatedAt": "2026-06-05T15:12:54.000Z",
+                          "uid": "35240-ea9e0c6f-c080-4d57-adbb-a50ee5efd15c"
+                        },
+                        {
+                          "id": "5682f682-3915-4ace-92a2-29ac0befb612",
+                          "name": "Authentication failed.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/auth/login",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "auth",
+                                "login"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {}\n}",
+                          "createdAt": "2026-06-05T15:12:54.000Z",
+                          "updatedAt": "2026-06-05T15:12:54.000Z",
+                          "uid": "35240-5682f682-3915-4ace-92a2-29ac0befb612"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:12:54.000Z",
+                      "updatedAt": "2026-06-05T15:12:54.000Z",
+                      "uid": "35240-5e9df3bb-942b-48b3-a58a-af468a0f44e5"
+                    }
+                  ],
+                  "id": "3db6da27-568b-43d6-a3d3-5aeba76e9ebf",
+                  "createdAt": "2026-06-05T15:12:54.000Z",
+                  "updatedAt": "2026-06-05T15:12:54.000Z",
+                  "uid": "35240-3db6da27-568b-43d6-a3d3-5aeba76e9ebf"
+                }
+              ],
+              "id": "2d519deb-be70-444d-80c4-c126d3239bbb",
+              "createdAt": "2026-06-05T15:12:54.000Z",
+              "updatedAt": "2026-06-05T15:12:54.000Z",
+              "uid": "35240-2d519deb-be70-444d-80c4-c126d3239bbb"
+            }
+          ],
+          "id": "473f10c7-0f80-48cc-99fb-416ebdd0e48c",
+          "createdAt": "2026-06-05T15:12:54.000Z",
+          "updatedAt": "2026-06-05T15:12:54.000Z",
+          "uid": "35240-473f10c7-0f80-48cc-99fb-416ebdd0e48c"
+        }
+      ],
+      "id": "a2121e2c-a5c1-4bf6-9a7d-0dc2f3a2b61c",
+      "createdAt": "2026-06-05T15:12:54.000Z",
+      "updatedAt": "2026-06-05T15:12:54.000Z",
+      "uid": "35240-a2121e2c-a5c1-4bf6-9a7d-0dc2f3a2b61c"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.monnify.com"
+    }
+  ]
+}

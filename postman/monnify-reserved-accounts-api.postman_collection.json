@@ -1,0 +1,1146 @@
+{
+  "info": {
+    "_postman_id": "761b6b98-d4de-47cc-a723-892faeed1dfe",
+    "name": "Monnify Reserved Accounts API",
+    "description": "Provision permanent NUBAN virtual accounts (dedicated and invoice variants) for customers and merchants. V2 endpoints replace earlier /api/v1 routes for new integrations; transaction listing remains under /api/v1.\n\n\nContact Support:\n Name: Monnify Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:12:56.000Z",
+    "updatedAt": "2026-06-05T15:12:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-761b6b98-d4de-47cc-a723-892faeed1dfe"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v2",
+          "item": [
+            {
+              "name": "bank-transfer",
+              "item": [
+                {
+                  "name": "reserved-accounts",
+                  "item": [
+                    {
+                      "name": "{accountReference}",
+                      "item": [
+                        {
+                          "name": "Monnify Get Reserved Account Details (V2)",
+                          "id": "2d526623-d30f-4b93-9828-c81be6b9befa",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/bank-transfer/reserved-accounts/:accountReference",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "bank-transfer",
+                                "reserved-accounts",
+                                ":accountReference"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "6e30f8d5-f74f-4f53-a620-2aa174d6b309",
+                                  "key": "accountReference",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Fetch a single reserved account by accountReference."
+                          },
+                          "response": [
+                            {
+                              "id": "085cf18c-0bc5-40e8-b0aa-b0e5daf1c47b",
+                              "name": "Reserved account details.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v2/bank-transfer/reserved-accounts/:accountReference",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v2",
+                                    "bank-transfer",
+                                    "reserved-accounts",
+                                    ":accountReference"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "accountReference"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"accountReference\": \"<string>\",\n    \"accountName\": \"<string>\",\n    \"currencyCode\": \"<string>\",\n    \"customerEmail\": \"<string>\",\n    \"customerName\": \"<string>\",\n    \"bvn\": \"<string>\",\n    \"nin\": \"<string>\",\n    \"status\": \"DEALLOCATED\",\n    \"accounts\": [\n      {\n        \"bankCode\": \"<string>\",\n        \"bankName\": \"<string>\",\n        \"accountNumber\": \"<string>\",\n        \"accountName\": \"<string>\"\n      },\n      {\n        \"bankCode\": \"<string>\",\n        \"bankName\": \"<string>\",\n        \"accountNumber\": \"<string>\",\n        \"accountName\": \"<string>\"\n      }\n    ]\n  }\n}",
+                              "createdAt": "2026-06-05T15:12:56.000Z",
+                              "updatedAt": "2026-06-05T15:12:56.000Z",
+                              "uid": "35240-085cf18c-0bc5-40e8-b0aa-b0e5daf1c47b"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:56.000Z",
+                          "updatedAt": "2026-06-05T15:12:56.000Z",
+                          "uid": "35240-2d526623-d30f-4b93-9828-c81be6b9befa"
+                        },
+                        {
+                          "name": "Monnify Deallocate Reserved Account",
+                          "id": "620c8bf5-c208-48ac-95da-dcbfc8815d88",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/bank-transfer/reserved-accounts/:accountReference",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "bank-transfer",
+                                "reserved-accounts",
+                                ":accountReference"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "55a1c144-6ac5-407d-96b3-69232a434b3e",
+                                  "key": "accountReference",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Permanently deallocate a reserved account."
+                          },
+                          "response": [
+                            {
+                              "id": "ef90016c-08b5-4cf8-807a-1d1a76aff15c",
+                              "name": "Account deallocated.",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v2/bank-transfer/reserved-accounts/:accountReference",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v2",
+                                    "bank-transfer",
+                                    "reserved-accounts",
+                                    ":accountReference"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "accountReference"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"accountReference\": \"<string>\",\n    \"accountName\": \"<string>\",\n    \"currencyCode\": \"<string>\",\n    \"customerEmail\": \"<string>\",\n    \"customerName\": \"<string>\",\n    \"bvn\": \"<string>\",\n    \"nin\": \"<string>\",\n    \"status\": \"DEALLOCATED\",\n    \"accounts\": [\n      {\n        \"bankCode\": \"<string>\",\n        \"bankName\": \"<string>\",\n        \"accountNumber\": \"<string>\",\n        \"accountName\": \"<string>\"\n      },\n      {\n        \"bankCode\": \"<string>\",\n        \"bankName\": \"<string>\",\n        \"accountNumber\": \"<string>\",\n        \"accountName\": \"<string>\"\n      }\n    ]\n  }\n}",
+                              "createdAt": "2026-06-05T15:12:56.000Z",
+                              "updatedAt": "2026-06-05T15:12:56.000Z",
+                              "uid": "35240-ef90016c-08b5-4cf8-807a-1d1a76aff15c"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:56.000Z",
+                          "updatedAt": "2026-06-05T15:12:56.000Z",
+                          "uid": "35240-620c8bf5-c208-48ac-95da-dcbfc8815d88"
+                        }
+                      ],
+                      "id": "eaa467dd-d1b5-4ee0-ba17-c632bad4b93e",
+                      "createdAt": "2026-06-05T15:12:56.000Z",
+                      "updatedAt": "2026-06-05T15:12:56.000Z",
+                      "uid": "35240-eaa467dd-d1b5-4ee0-ba17-c632bad4b93e"
+                    },
+                    {
+                      "name": "Monnify Reserve A Customer Account (V2)",
+                      "id": "31695646-46f2-41d6-b9bc-2e583423d5d2",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"accountReference\": \"<string>\",\n  \"accountName\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"contractCode\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"customerName\": \"<string>\",\n  \"bvn\": \"<string>\",\n  \"nin\": \"<string>\",\n  \"getAllAvailableBanks\": \"<boolean>\",\n  \"preferredBanks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"restrictPaymentSource\": \"<boolean>\",\n  \"allowedPaymentSources\": {\n    \"bvns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"accountNumbers\": [\n      {\n        \"accountNumber\": \"<string>\",\n        \"bankCode\": \"<string>\"\n      },\n      {\n        \"accountNumber\": \"<string>\",\n        \"bankCode\": \"<string>\"\n      }\n    ],\n    \"accountNames\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"incomeSplitConfig\": [\n    {\n      \"subAccountCode\": \"<string>\",\n      \"feePercentage\": \"<number>\",\n      \"splitPercentage\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    },\n    {\n      \"subAccountCode\": \"<string>\",\n      \"feePercentage\": \"<number>\",\n      \"splitPercentage\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    }\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/bank-transfer/reserved-accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "bank-transfer",
+                            "reserved-accounts"
+                          ]
+                        },
+                        "description": "Create a permanent NUBAN virtual account for a customer."
+                      },
+                      "response": [
+                        {
+                          "id": "b71d658b-cdeb-467b-ab02-67d6c8ef739d",
+                          "name": "Reserved account created.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"accountReference\": \"<string>\",\n  \"accountName\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"contractCode\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"customerName\": \"<string>\",\n  \"bvn\": \"<string>\",\n  \"nin\": \"<string>\",\n  \"getAllAvailableBanks\": \"<boolean>\",\n  \"preferredBanks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"restrictPaymentSource\": \"<boolean>\",\n  \"allowedPaymentSources\": {\n    \"bvns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"accountNumbers\": [\n      {\n        \"accountNumber\": \"<string>\",\n        \"bankCode\": \"<string>\"\n      },\n      {\n        \"accountNumber\": \"<string>\",\n        \"bankCode\": \"<string>\"\n      }\n    ],\n    \"accountNames\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"incomeSplitConfig\": [\n    {\n      \"subAccountCode\": \"<string>\",\n      \"feePercentage\": \"<number>\",\n      \"splitPercentage\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    },\n    {\n      \"subAccountCode\": \"<string>\",\n      \"feePercentage\": \"<number>\",\n      \"splitPercentage\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/bank-transfer/reserved-accounts",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "bank-transfer",
+                                "reserved-accounts"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"accountReference\": \"<string>\",\n    \"accountName\": \"<string>\",\n    \"currencyCode\": \"<string>\",\n    \"customerEmail\": \"<string>\",\n    \"customerName\": \"<string>\",\n    \"bvn\": \"<string>\",\n    \"nin\": \"<string>\",\n    \"status\": \"DEALLOCATED\",\n    \"accounts\": [\n      {\n        \"bankCode\": \"<string>\",\n        \"bankName\": \"<string>\",\n        \"accountNumber\": \"<string>\",\n        \"accountName\": \"<string>\"\n      },\n      {\n        \"bankCode\": \"<string>\",\n        \"bankName\": \"<string>\",\n        \"accountNumber\": \"<string>\",\n        \"accountName\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-06-05T15:12:56.000Z",
+                          "updatedAt": "2026-06-05T15:12:56.000Z",
+                          "uid": "35240-b71d658b-cdeb-467b-ab02-67d6c8ef739d"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:12:56.000Z",
+                      "updatedAt": "2026-06-05T15:12:56.000Z",
+                      "uid": "35240-31695646-46f2-41d6-b9bc-2e583423d5d2"
+                    },
+                    {
+                      "name": "Monnify Update Reserved Account KYC",
+                      "id": "5b95d731-f884-47f3-af16-34f960b9c78a",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"accountReference\": \"<string>\",\n  \"bvn\": \"<string>\",\n  \"nin\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v2/bank-transfer/reserved-accounts",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v2",
+                            "bank-transfer",
+                            "reserved-accounts"
+                          ]
+                        },
+                        "description": "Update BVN, NIN, or customer details for a reserved account."
+                      },
+                      "response": [
+                        {
+                          "id": "8e70bda3-62b6-49b3-9b97-86224a6775b4",
+                          "name": "KYC updated.",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"accountReference\": \"<string>\",\n  \"bvn\": \"<string>\",\n  \"nin\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/bank-transfer/reserved-accounts",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "bank-transfer",
+                                "reserved-accounts"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"accountReference\": \"<string>\",\n    \"accountName\": \"<string>\",\n    \"currencyCode\": \"<string>\",\n    \"customerEmail\": \"<string>\",\n    \"customerName\": \"<string>\",\n    \"bvn\": \"<string>\",\n    \"nin\": \"<string>\",\n    \"status\": \"DEALLOCATED\",\n    \"accounts\": [\n      {\n        \"bankCode\": \"<string>\",\n        \"bankName\": \"<string>\",\n        \"accountNumber\": \"<string>\",\n        \"accountName\": \"<string>\"\n      },\n      {\n        \"bankCode\": \"<string>\",\n        \"bankName\": \"<string>\",\n        \"accountNumber\": \"<string>\",\n        \"accountName\": \"<string>\"\n      }\n    ]\n  }\n}",
+                          "createdAt": "2026-06-05T15:12:56.000Z",
+                          "updatedAt": "2026-06-05T15:12:56.000Z",
+                          "uid": "35240-8e70bda3-62b6-49b3-9b97-86224a6775b4"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:12:56.000Z",
+                      "updatedAt": "2026-06-05T15:12:56.000Z",
+                      "uid": "35240-5b95d731-f884-47f3-af16-34f960b9c78a"
+                    }
+                  ],
+                  "id": "e28369aa-1219-48e9-b11e-01821187ac23",
+                  "createdAt": "2026-06-05T15:12:56.000Z",
+                  "updatedAt": "2026-06-05T15:12:56.000Z",
+                  "uid": "35240-e28369aa-1219-48e9-b11e-01821187ac23"
+                }
+              ],
+              "id": "c5647a9e-e04c-4696-b267-645c7b57b8f6",
+              "createdAt": "2026-06-05T15:12:56.000Z",
+              "updatedAt": "2026-06-05T15:12:56.000Z",
+              "uid": "35240-c5647a9e-e04c-4696-b267-645c7b57b8f6"
+            }
+          ],
+          "id": "58736a79-c6f1-4d7e-82c8-8b662f8fd8cb",
+          "createdAt": "2026-06-05T15:12:56.000Z",
+          "updatedAt": "2026-06-05T15:12:56.000Z",
+          "uid": "35240-58736a79-c6f1-4d7e-82c8-8b662f8fd8cb"
+        },
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "bank-transfer",
+              "item": [
+                {
+                  "name": "reserved-accounts",
+                  "item": [
+                    {
+                      "name": "transactions",
+                      "item": [
+                        {
+                          "name": "Monnify List Reserved Account Transactions",
+                          "id": "fdc2c499-2b50-4903-87e1-6b4333aed1f5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/bank-transfer/reserved-accounts/transactions?accountReference=<string>&page=0&size=10",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "bank-transfer",
+                                "reserved-accounts",
+                                "transactions"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "accountReference",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "page",
+                                  "value": "0"
+                                },
+                                {
+                                  "key": "size",
+                                  "value": "10"
+                                }
+                              ]
+                            },
+                            "description": "Paginated list of inbound transactions to a reserved account."
+                          },
+                          "response": [
+                            {
+                              "id": "dd3f14ce-9627-4618-9209-3e323a9dd3ee",
+                              "name": "Transaction page.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/bank-transfer/reserved-accounts/transactions?accountReference=<string>&page=0&size=10",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "bank-transfer",
+                                    "reserved-accounts",
+                                    "transactions"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) ",
+                                      "key": "accountReference",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "key": "page",
+                                      "value": "0"
+                                    },
+                                    {
+                                      "key": "size",
+                                      "value": "10"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"totalElements\": \"<integer>\",\n    \"totalPages\": \"<integer>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:12:56.000Z",
+                              "updatedAt": "2026-06-05T15:12:56.000Z",
+                              "uid": "35240-dd3f14ce-9627-4618-9209-3e323a9dd3ee"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:56.000Z",
+                          "updatedAt": "2026-06-05T15:12:56.000Z",
+                          "uid": "35240-fdc2c499-2b50-4903-87e1-6b4333aed1f5"
+                        }
+                      ],
+                      "id": "bf7241f1-204c-4807-9a1d-8c2a420684a3",
+                      "createdAt": "2026-06-05T15:12:56.000Z",
+                      "updatedAt": "2026-06-05T15:12:56.000Z",
+                      "uid": "35240-bf7241f1-204c-4807-9a1d-8c2a420684a3"
+                    },
+                    {
+                      "name": "limit",
+                      "item": [
+                        {
+                          "name": "Monnify Reserve Account With Limit",
+                          "id": "f209058b-a384-4456-a8a9-0b956077fa07",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"accountReference\": \"<string>\",\n  \"accountName\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"contractCode\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"customerName\": \"<string>\",\n  \"bvn\": \"<string>\",\n  \"nin\": \"<string>\",\n  \"getAllAvailableBanks\": \"<boolean>\",\n  \"preferredBanks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"restrictPaymentSource\": \"<boolean>\",\n  \"allowedPaymentSources\": {\n    \"bvns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"accountNumbers\": [\n      {\n        \"accountNumber\": \"<string>\",\n        \"bankCode\": \"<string>\"\n      },\n      {\n        \"accountNumber\": \"<string>\",\n        \"bankCode\": \"<string>\"\n      }\n    ],\n    \"accountNames\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"incomeSplitConfig\": [\n    {\n      \"subAccountCode\": \"<string>\",\n      \"feePercentage\": \"<number>\",\n      \"splitPercentage\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    },\n    {\n      \"subAccountCode\": \"<string>\",\n      \"feePercentage\": \"<number>\",\n      \"splitPercentage\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    }\n  ],\n  \"limitProfileCode\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/bank-transfer/reserved-accounts/limit",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "bank-transfer",
+                                "reserved-accounts",
+                                "limit"
+                              ]
+                            },
+                            "description": "Create a reserved account with a pre-assigned limit profile."
+                          },
+                          "response": [
+                            {
+                              "id": "0654b774-ac79-49d8-a8ef-3817961646f7",
+                              "name": "Reserved account with limit created.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"accountReference\": \"<string>\",\n  \"accountName\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"contractCode\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"customerName\": \"<string>\",\n  \"bvn\": \"<string>\",\n  \"nin\": \"<string>\",\n  \"getAllAvailableBanks\": \"<boolean>\",\n  \"preferredBanks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"restrictPaymentSource\": \"<boolean>\",\n  \"allowedPaymentSources\": {\n    \"bvns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"accountNumbers\": [\n      {\n        \"accountNumber\": \"<string>\",\n        \"bankCode\": \"<string>\"\n      },\n      {\n        \"accountNumber\": \"<string>\",\n        \"bankCode\": \"<string>\"\n      }\n    ],\n    \"accountNames\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"incomeSplitConfig\": [\n    {\n      \"subAccountCode\": \"<string>\",\n      \"feePercentage\": \"<number>\",\n      \"splitPercentage\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    },\n    {\n      \"subAccountCode\": \"<string>\",\n      \"feePercentage\": \"<number>\",\n      \"splitPercentage\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    }\n  ],\n  \"limitProfileCode\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/bank-transfer/reserved-accounts/limit",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "bank-transfer",
+                                    "reserved-accounts",
+                                    "limit"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"accountReference\": \"<string>\",\n    \"accountName\": \"<string>\",\n    \"currencyCode\": \"<string>\",\n    \"customerEmail\": \"<string>\",\n    \"customerName\": \"<string>\",\n    \"bvn\": \"<string>\",\n    \"nin\": \"<string>\",\n    \"status\": \"DEALLOCATED\",\n    \"accounts\": [\n      {\n        \"bankCode\": \"<string>\",\n        \"bankName\": \"<string>\",\n        \"accountNumber\": \"<string>\",\n        \"accountName\": \"<string>\"\n      },\n      {\n        \"bankCode\": \"<string>\",\n        \"bankName\": \"<string>\",\n        \"accountNumber\": \"<string>\",\n        \"accountName\": \"<string>\"\n      }\n    ]\n  }\n}",
+                              "createdAt": "2026-06-05T15:12:56.000Z",
+                              "updatedAt": "2026-06-05T15:12:56.000Z",
+                              "uid": "35240-0654b774-ac79-49d8-a8ef-3817961646f7"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:56.000Z",
+                          "updatedAt": "2026-06-05T15:12:56.000Z",
+                          "uid": "35240-f209058b-a384-4456-a8a9-0b956077fa07"
+                        },
+                        {
+                          "name": "Monnify Update Reserved Account Limit",
+                          "id": "b0d8141c-b7e9-42dd-8cbc-b12a27f23966",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"accountReference\": \"<string>\",\n  \"limitProfileCode\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/bank-transfer/reserved-accounts/limit",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "bank-transfer",
+                                "reserved-accounts",
+                                "limit"
+                              ]
+                            },
+                            "description": "Assign or change the limit profile on an existing reserved account."
+                          },
+                          "response": [
+                            {
+                              "id": "f5c33bad-3db3-444b-a0ae-7af53d46c3f2",
+                              "name": "Reserved account limit updated.",
+                              "originalRequest": {
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"accountReference\": \"<string>\",\n  \"limitProfileCode\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/bank-transfer/reserved-accounts/limit",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "bank-transfer",
+                                    "reserved-accounts",
+                                    "limit"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"accountReference\": \"<string>\",\n    \"accountName\": \"<string>\",\n    \"currencyCode\": \"<string>\",\n    \"customerEmail\": \"<string>\",\n    \"customerName\": \"<string>\",\n    \"bvn\": \"<string>\",\n    \"nin\": \"<string>\",\n    \"status\": \"DEALLOCATED\",\n    \"accounts\": [\n      {\n        \"bankCode\": \"<string>\",\n        \"bankName\": \"<string>\",\n        \"accountNumber\": \"<string>\",\n        \"accountName\": \"<string>\"\n      },\n      {\n        \"bankCode\": \"<string>\",\n        \"bankName\": \"<string>\",\n        \"accountNumber\": \"<string>\",\n        \"accountName\": \"<string>\"\n      }\n    ]\n  }\n}",
+                              "createdAt": "2026-06-05T15:12:56.000Z",
+                              "updatedAt": "2026-06-05T15:12:56.000Z",
+                              "uid": "35240-f5c33bad-3db3-444b-a0ae-7af53d46c3f2"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:56.000Z",
+                          "updatedAt": "2026-06-05T15:12:56.000Z",
+                          "uid": "35240-b0d8141c-b7e9-42dd-8cbc-b12a27f23966"
+                        }
+                      ],
+                      "id": "e15171b7-c207-46d6-a309-8d61eea975fd",
+                      "createdAt": "2026-06-05T15:12:56.000Z",
+                      "updatedAt": "2026-06-05T15:12:56.000Z",
+                      "uid": "35240-e15171b7-c207-46d6-a309-8d61eea975fd"
+                    }
+                  ],
+                  "id": "c7eab829-3133-4c7e-844d-17e1aa091cff",
+                  "createdAt": "2026-06-05T15:12:56.000Z",
+                  "updatedAt": "2026-06-05T15:12:56.000Z",
+                  "uid": "35240-c7eab829-3133-4c7e-844d-17e1aa091cff"
+                }
+              ],
+              "id": "b8b6117e-1498-4126-8355-bf108bfe0fe7",
+              "createdAt": "2026-06-05T15:12:56.000Z",
+              "updatedAt": "2026-06-05T15:12:56.000Z",
+              "uid": "35240-b8b6117e-1498-4126-8355-bf108bfe0fe7"
+            },
+            {
+              "name": "limit-profiles",
+              "item": [
+                {
+                  "name": "Monnify Create Limit Profile",
+                  "id": "366561c4-6eb3-48de-a3d3-0147b7e2dd81",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"limitProfileCode\": \"<string>\",\n  \"limitProfileName\": \"<string>\",\n  \"singleTransactionValue\": \"<number>\",\n  \"dailyTransactionVolume\": \"<integer>\",\n  \"dailyTransactionValue\": \"<number>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/limit-profiles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "limit-profiles"
+                      ]
+                    },
+                    "description": "Define a per-transaction and daily cap profile to apply to reserved accounts."
+                  },
+                  "response": [
+                    {
+                      "id": "a613b2b5-4748-4bbf-806e-c28f82cda7f8",
+                      "name": "Limit profile created.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"limitProfileCode\": \"<string>\",\n  \"limitProfileName\": \"<string>\",\n  \"singleTransactionValue\": \"<number>\",\n  \"dailyTransactionVolume\": \"<integer>\",\n  \"dailyTransactionValue\": \"<number>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/limit-profiles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "limit-profiles"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"limitProfileCode\": \"<string>\",\n    \"limitProfileName\": \"<string>\",\n    \"singleTransactionValue\": \"<number>\",\n    \"dailyTransactionVolume\": \"<integer>\",\n    \"dailyTransactionValue\": \"<number>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:12:56.000Z",
+                      "updatedAt": "2026-06-05T15:12:56.000Z",
+                      "uid": "35240-a613b2b5-4748-4bbf-806e-c28f82cda7f8"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:12:56.000Z",
+                  "updatedAt": "2026-06-05T15:12:56.000Z",
+                  "uid": "35240-366561c4-6eb3-48de-a3d3-0147b7e2dd81"
+                },
+                {
+                  "name": "Monnify List Limit Profiles",
+                  "id": "a4e24396-896e-4c49-b56e-4e5d9b6ca571",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/limit-profiles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "limit-profiles"
+                      ]
+                    },
+                    "description": "Paginated list of limit profiles for the merchant."
+                  },
+                  "response": [
+                    {
+                      "id": "5cceee1c-cbc0-4535-ba2f-e79febef1949",
+                      "name": "Limit profiles page.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/limit-profiles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "limit-profiles"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"content\": [\n      {\n        \"limitProfileCode\": \"<string>\",\n        \"limitProfileName\": \"<string>\",\n        \"singleTransactionValue\": \"<number>\",\n        \"dailyTransactionVolume\": \"<integer>\",\n        \"dailyTransactionValue\": \"<number>\"\n      },\n      {\n        \"limitProfileCode\": \"<string>\",\n        \"limitProfileName\": \"<string>\",\n        \"singleTransactionValue\": \"<number>\",\n        \"dailyTransactionVolume\": \"<integer>\",\n        \"dailyTransactionValue\": \"<number>\"\n      }\n    ]\n  }\n}",
+                      "createdAt": "2026-06-05T15:12:56.000Z",
+                      "updatedAt": "2026-06-05T15:12:56.000Z",
+                      "uid": "35240-5cceee1c-cbc0-4535-ba2f-e79febef1949"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:12:56.000Z",
+                  "updatedAt": "2026-06-05T15:12:56.000Z",
+                  "uid": "35240-a4e24396-896e-4c49-b56e-4e5d9b6ca571"
+                },
+                {
+                  "name": "Monnify Update Limit Profile",
+                  "id": "9948d841-b034-4760-938a-eb5234f792d5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"limitProfileCode\": \"<string>\",\n  \"limitProfileName\": \"<string>\",\n  \"singleTransactionValue\": \"<number>\",\n  \"dailyTransactionVolume\": \"<integer>\",\n  \"dailyTransactionValue\": \"<number>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/limit-profiles",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "limit-profiles"
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "cbfc513b-3113-453c-a3b4-53348b28d480",
+                      "name": "Updated.",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"limitProfileCode\": \"<string>\",\n  \"limitProfileName\": \"<string>\",\n  \"singleTransactionValue\": \"<number>\",\n  \"dailyTransactionVolume\": \"<integer>\",\n  \"dailyTransactionValue\": \"<number>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/limit-profiles",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "limit-profiles"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"limitProfileCode\": \"<string>\",\n    \"limitProfileName\": \"<string>\",\n    \"singleTransactionValue\": \"<number>\",\n    \"dailyTransactionVolume\": \"<integer>\",\n    \"dailyTransactionValue\": \"<number>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:12:56.000Z",
+                      "updatedAt": "2026-06-05T15:12:56.000Z",
+                      "uid": "35240-cbfc513b-3113-453c-a3b4-53348b28d480"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:12:56.000Z",
+                  "updatedAt": "2026-06-05T15:12:56.000Z",
+                  "uid": "35240-9948d841-b034-4760-938a-eb5234f792d5"
+                }
+              ],
+              "id": "ec1a68ec-8588-4f6f-8a8b-cf343bd5efaa",
+              "createdAt": "2026-06-05T15:12:56.000Z",
+              "updatedAt": "2026-06-05T15:12:56.000Z",
+              "uid": "35240-ec1a68ec-8588-4f6f-8a8b-cf343bd5efaa"
+            }
+          ],
+          "id": "84b7e423-e0e4-4144-89fb-e7b1c3606beb",
+          "createdAt": "2026-06-05T15:12:56.000Z",
+          "updatedAt": "2026-06-05T15:12:56.000Z",
+          "uid": "35240-84b7e423-e0e4-4144-89fb-e7b1c3606beb"
+        }
+      ],
+      "id": "c244af88-9eaa-4d92-96dc-2e2a16a59562",
+      "createdAt": "2026-06-05T15:12:56.000Z",
+      "updatedAt": "2026-06-05T15:12:56.000Z",
+      "uid": "35240-c244af88-9eaa-4d92-96dc-2e2a16a59562"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.monnify.com"
+    }
+  ]
+}

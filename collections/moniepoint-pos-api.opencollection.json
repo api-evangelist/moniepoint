@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Moniepoint POS Push Payment API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Push Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Moniepoint Push Payment Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pos.moniepoint.com/api/v1/push-payment/request",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Push a payment request to a specific Moniepoint POS terminal. The terminal prompts the cashier to confirm and present the card or transfer instructions to the customer.\n"
+        },
+        {
+          "info": {
+            "name": "Moniepoint Push Payment Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v1/push-payment/status/:reference",
+            "params": [
+              {
+                "name": "reference",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Moniepoint Push Payment Status"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,247 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Monnify Disbursements API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Single Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify Initiate Single Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.monnify.com/api/v2/disbursements/single",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a single-bank-account payout. Requires beneficiary account name verified by Name Inquiry."
+        },
+        {
+          "info": {
+            "name": "Monnify Authorize Single Transfer OTP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.monnify.com/api/v2/disbursements/single/validate-otp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit the OTP returned to the merchant to authorize a pending transfer."
+        },
+        {
+          "info": {
+            "name": "Monnify Resend Transfer OTP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.monnify.com/api/v2/disbursements/single/resend-otp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Monnify Resend Transfer OTP"
+        },
+        {
+          "info": {
+            "name": "Monnify Get Single Transfer Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monnify.com/api/v2/disbursements/single/summary",
+            "params": [
+              {
+                "name": "reference",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Look up the current status of a single transfer."
+        },
+        {
+          "info": {
+            "name": "Monnify List Single Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monnify.com/api/v2/disbursements/single/transactions",
+            "params": [
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Monnify List Single Transfers"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Bulk Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify Initiate Bulk Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.monnify.com/api/v2/disbursements/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a batch of transfers in one call."
+        },
+        {
+          "info": {
+            "name": "Monnify Get Bulk Transfer Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monnify.com/api/v2/disbursements/bulk/summary",
+            "params": [
+              {
+                "name": "batchReference",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Monnify Get Bulk Transfer Summary"
+        },
+        {
+          "info": {
+            "name": "Monnify List Bulk Transfer Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monnify.com/api/v2/disbursements/bulk/:batchReference/transactions",
+            "params": [
+              {
+                "name": "batchReference",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Monnify List Bulk Transfer Items"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Wallet",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify Get Disbursement Wallet Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monnify.com/api/v2/disbursements/wallet-balance",
+            "params": [
+              {
+                "name": "accountNumber",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Monnify Get Disbursement Wallet Balance"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Banks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify List NIP Banks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monnify.com/api/v1/sdk/transactions/banks"
+          },
+          "docs": "Returns the list of supported Nigerian banks with bank codes."
+        },
+        {
+          "info": {
+            "name": "Monnify Validate Bank Account (Name Inquiry)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monnify.com/api/v1/disbursements/account/validate",
+            "params": [
+              {
+                "name": "accountNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bankCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Return the registered account name for a bank account number."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

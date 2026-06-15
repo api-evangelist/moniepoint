@@ -1,0 +1,160 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Monnify Collections API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify Initialize Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.monnify.com/api/v1/merchant/transactions/init-transaction",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a pending transaction and return a checkoutUrl plus paymentReference."
+        },
+        {
+          "info": {
+            "name": "Monnify Pay With Bank Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.monnify.com/api/v1/merchant/bank-transfer/init-payment",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate a one-time NUBAN to complete an initialized transaction by bank transfer."
+        },
+        {
+          "info": {
+            "name": "Monnify Charge Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.monnify.com/api/v1/merchant/cards/charge",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Server-to-server card capture; returns secure-3D / OTP next step when required."
+        },
+        {
+          "info": {
+            "name": "Monnify Authorize OTP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.monnify.com/api/v1/merchant/cards/otp/authorize",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit the OTP returned by the cardholder to complete a card charge."
+        },
+        {
+          "info": {
+            "name": "Monnify Charge Tokenized Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.monnify.com/api/v1/merchant/cards/charge-card-token",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Charge a stored card token previously returned on a successful card collection."
+        },
+        {
+          "info": {
+            "name": "Monnify Get Transaction Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monnify.com/api/v2/merchant/transactions/query",
+            "params": [
+              {
+                "name": "paymentReference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "transactionReference",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Query a transaction by paymentReference or transactionReference."
+        },
+        {
+          "info": {
+            "name": "Monnify Search Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monnify.com/api/v1/transactions/search",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "paymentStatus",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Paginated search across collection transactions by date range, status, and reference."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

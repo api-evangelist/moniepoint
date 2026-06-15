@@ -1,0 +1,95 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Monnify Verification API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Verification",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify Validate Bank Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monnify.com/api/v1/disbursements/account/validate",
+            "params": [
+              {
+                "name": "accountNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bankCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the registered account name for a bank account number and bank code."
+        },
+        {
+          "info": {
+            "name": "Monnify Match BVN To Bank Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.monnify.com/api/v1/vas/bvn-account-match",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Verify that a BVN belongs to the owner of a given bank account."
+        },
+        {
+          "info": {
+            "name": "Monnify Get BVN Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monnify.com/api/v1/vas/bvn-details/:bvn",
+            "params": [
+              {
+                "name": "bvn",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns demographic details associated with a BVN."
+        },
+        {
+          "info": {
+            "name": "Monnify Verify NIN",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.monnify.com/api/v1/vas/verify-nin",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate a National Identification Number (NIN) against demographic details."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

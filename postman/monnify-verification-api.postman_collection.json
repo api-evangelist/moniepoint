@@ -1,0 +1,533 @@
+{
+  "info": {
+    "_postman_id": "8dab196b-63fd-42f6-ae11-937d6c71552c",
+    "name": "Monnify Verification API",
+    "description": "Validate a Nigerian bank account number (Name Inquiry), match a Bank Verification Number (BVN) against an account, and verify National Identification Numbers (NIN). These checks underpin KYC, beneficiary verification on disbursement, and fraud prevention.\n\n\nContact Support:\n Name: Monnify Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:13:03.000Z",
+    "updatedAt": "2026-06-05T15:13:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-8dab196b-63fd-42f6-ae11-937d6c71552c"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "disbursements",
+              "item": [
+                {
+                  "name": "account",
+                  "item": [
+                    {
+                      "name": "validate",
+                      "item": [
+                        {
+                          "name": "Monnify Validate Bank Account",
+                          "id": "51699ba3-4a8a-4f4e-8a14-d7e211b3c6fe",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/disbursements/account/validate?accountNumber=<string>&bankCode=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "disbursements",
+                                "account",
+                                "validate"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "accountNumber",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "(Required) ",
+                                  "key": "bankCode",
+                                  "value": "<string>"
+                                }
+                              ]
+                            },
+                            "description": "Returns the registered account name for a bank account number and bank code."
+                          },
+                          "response": [
+                            {
+                              "id": "fa191f14-1a36-480d-9c18-fcb9b0b5e017",
+                              "name": "Account holder name.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/disbursements/account/validate?accountNumber=<string>&bankCode=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "disbursements",
+                                    "account",
+                                    "validate"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "(Required) ",
+                                      "key": "accountNumber",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "(Required) ",
+                                      "key": "bankCode",
+                                      "value": "<string>"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"accountNumber\": \"<string>\",\n    \"accountName\": \"<string>\",\n    \"bankCode\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:13:03.000Z",
+                              "updatedAt": "2026-06-05T15:13:03.000Z",
+                              "uid": "35240-fa191f14-1a36-480d-9c18-fcb9b0b5e017"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:13:03.000Z",
+                          "updatedAt": "2026-06-05T15:13:03.000Z",
+                          "uid": "35240-51699ba3-4a8a-4f4e-8a14-d7e211b3c6fe"
+                        }
+                      ],
+                      "id": "e0830048-aef5-4fac-abdf-2aa2b967157c",
+                      "createdAt": "2026-06-05T15:13:03.000Z",
+                      "updatedAt": "2026-06-05T15:13:03.000Z",
+                      "uid": "35240-e0830048-aef5-4fac-abdf-2aa2b967157c"
+                    }
+                  ],
+                  "id": "eaf64222-aa94-427e-9580-3572c1906fdb",
+                  "createdAt": "2026-06-05T15:13:03.000Z",
+                  "updatedAt": "2026-06-05T15:13:03.000Z",
+                  "uid": "35240-eaf64222-aa94-427e-9580-3572c1906fdb"
+                }
+              ],
+              "id": "25194de0-a846-4195-bf2c-fa27388f8b79",
+              "createdAt": "2026-06-05T15:13:03.000Z",
+              "updatedAt": "2026-06-05T15:13:03.000Z",
+              "uid": "35240-25194de0-a846-4195-bf2c-fa27388f8b79"
+            },
+            {
+              "name": "vas",
+              "item": [
+                {
+                  "name": "bvn-account-match",
+                  "item": [
+                    {
+                      "name": "Monnify Match BVN To Bank Account",
+                      "id": "5982c7c3-6fb5-444d-b11b-fe130d969216",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"bvn\": \"<string>\",\n  \"bankCode\": \"<string>\",\n  \"accountNumber\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/vas/bvn-account-match",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "vas",
+                            "bvn-account-match"
+                          ]
+                        },
+                        "description": "Verify that a BVN belongs to the owner of a given bank account."
+                      },
+                      "response": [
+                        {
+                          "id": "f428acaf-55dc-438e-93fa-a8148385a0b3",
+                          "name": "BVN match result.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"bvn\": \"<string>\",\n  \"bankCode\": \"<string>\",\n  \"accountNumber\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/vas/bvn-account-match",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "vas",
+                                "bvn-account-match"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"bvn\": \"<string>\",\n    \"accountNumber\": \"<string>\",\n    \"bankCode\": \"<string>\",\n    \"matchStatus\": \"PARTIAL_MATCH\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:13:03.000Z",
+                          "updatedAt": "2026-06-05T15:13:03.000Z",
+                          "uid": "35240-f428acaf-55dc-438e-93fa-a8148385a0b3"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:13:03.000Z",
+                      "updatedAt": "2026-06-05T15:13:03.000Z",
+                      "uid": "35240-5982c7c3-6fb5-444d-b11b-fe130d969216"
+                    }
+                  ],
+                  "id": "5a0500ba-bb70-4c42-95c7-3010223fab5f",
+                  "createdAt": "2026-06-05T15:13:03.000Z",
+                  "updatedAt": "2026-06-05T15:13:03.000Z",
+                  "uid": "35240-5a0500ba-bb70-4c42-95c7-3010223fab5f"
+                },
+                {
+                  "name": "bvn-details",
+                  "item": [
+                    {
+                      "name": "{bvn}",
+                      "item": [
+                        {
+                          "name": "Monnify Get BVN Details",
+                          "id": "517b0289-677e-4bb7-85ee-286e76339185",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/vas/bvn-details/:bvn",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "vas",
+                                "bvn-details",
+                                ":bvn"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "09109878-c531-41e9-a921-19a1a6acb3de",
+                                  "key": "bvn",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Returns demographic details associated with a BVN."
+                          },
+                          "response": [
+                            {
+                              "id": "1c651027-5225-4bde-9455-cab626cf4d72",
+                              "name": "BVN details.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/vas/bvn-details/:bvn",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "vas",
+                                    "bvn-details",
+                                    ":bvn"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "bvn"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"bvn\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"middleName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"dateOfBirth\": \"<date>\",\n    \"phoneNumber\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"registrationDate\": \"<date>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:13:03.000Z",
+                              "updatedAt": "2026-06-05T15:13:03.000Z",
+                              "uid": "35240-1c651027-5225-4bde-9455-cab626cf4d72"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:13:03.000Z",
+                          "updatedAt": "2026-06-05T15:13:03.000Z",
+                          "uid": "35240-517b0289-677e-4bb7-85ee-286e76339185"
+                        }
+                      ],
+                      "id": "de00f88f-f870-485b-81bc-32e9201269cf",
+                      "createdAt": "2026-06-05T15:13:03.000Z",
+                      "updatedAt": "2026-06-05T15:13:03.000Z",
+                      "uid": "35240-de00f88f-f870-485b-81bc-32e9201269cf"
+                    }
+                  ],
+                  "id": "76924ac8-6dc2-4e12-9331-0bb869ad601b",
+                  "createdAt": "2026-06-05T15:13:03.000Z",
+                  "updatedAt": "2026-06-05T15:13:03.000Z",
+                  "uid": "35240-76924ac8-6dc2-4e12-9331-0bb869ad601b"
+                },
+                {
+                  "name": "verify-nin",
+                  "item": [
+                    {
+                      "name": "Monnify Verify NIN",
+                      "id": "0d0fb06d-e1f8-4082-a193-8eccce0d35de",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"nin\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"phoneNumber\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/vas/verify-nin",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "vas",
+                            "verify-nin"
+                          ]
+                        },
+                        "description": "Validate a National Identification Number (NIN) against demographic details."
+                      },
+                      "response": [
+                        {
+                          "id": "837b8cb6-a547-4d47-a242-bb18288fc7c9",
+                          "name": "NIN verification result.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"nin\": \"<string>\",\n  \"dateOfBirth\": \"<date>\",\n  \"phoneNumber\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/vas/verify-nin",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "vas",
+                                "verify-nin"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"nin\": \"<string>\",\n    \"firstName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"dateOfBirth\": \"<date>\",\n    \"phoneNumber\": \"<string>\",\n    \"matched\": \"<boolean>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:13:03.000Z",
+                          "updatedAt": "2026-06-05T15:13:03.000Z",
+                          "uid": "35240-837b8cb6-a547-4d47-a242-bb18288fc7c9"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:13:03.000Z",
+                      "updatedAt": "2026-06-05T15:13:03.000Z",
+                      "uid": "35240-0d0fb06d-e1f8-4082-a193-8eccce0d35de"
+                    }
+                  ],
+                  "id": "4fab7e81-6b99-4820-b7e5-731953821574",
+                  "createdAt": "2026-06-05T15:13:03.000Z",
+                  "updatedAt": "2026-06-05T15:13:03.000Z",
+                  "uid": "35240-4fab7e81-6b99-4820-b7e5-731953821574"
+                }
+              ],
+              "id": "b1494214-f2e4-4990-a0dc-a2055f0ba9c8",
+              "createdAt": "2026-06-05T15:13:03.000Z",
+              "updatedAt": "2026-06-05T15:13:03.000Z",
+              "uid": "35240-b1494214-f2e4-4990-a0dc-a2055f0ba9c8"
+            }
+          ],
+          "id": "797d6253-d4ac-44aa-8c52-541cdf5965af",
+          "createdAt": "2026-06-05T15:13:03.000Z",
+          "updatedAt": "2026-06-05T15:13:03.000Z",
+          "uid": "35240-797d6253-d4ac-44aa-8c52-541cdf5965af"
+        }
+      ],
+      "id": "aeb936f1-fb62-4c5b-8602-20236a88f68b",
+      "createdAt": "2026-06-05T15:13:03.000Z",
+      "updatedAt": "2026-06-05T15:13:03.000Z",
+      "uid": "35240-aeb936f1-fb62-4c5b-8602-20236a88f68b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.monnify.com"
+    }
+  ]
+}

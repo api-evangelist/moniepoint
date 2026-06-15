@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Monnify Bills Payment API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bills Payment",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify List Bill Categories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monnify.com/api/v1/bill-payment/categories"
+          },
+          "docs": "Monnify List Bill Categories"
+        },
+        {
+          "info": {
+            "name": "Monnify List Billers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monnify.com/api/v1/bill-payment/billers",
+            "params": [
+              {
+                "name": "categoryCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Monnify List Billers"
+        },
+        {
+          "info": {
+            "name": "Monnify List Biller Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monnify.com/api/v1/bill-payment/biller-items",
+            "params": [
+              {
+                "name": "billerCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Monnify List Biller Items"
+        },
+        {
+          "info": {
+            "name": "Monnify Validate Bills Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.monnify.com/api/v1/bill-payment/customer-validate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Validate a customer identifier (smart-card number, meter number, account number) against a biller."
+        },
+        {
+          "info": {
+            "name": "Monnify Process Bill",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.monnify.com/api/v1/bill-payment/process-bill",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Monnify Process Bill"
+        },
+        {
+          "info": {
+            "name": "Monnify Get Bill Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.monnify.com/api/v1/bill-payment/status",
+            "params": [
+              {
+                "name": "reference",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Monnify Get Bill Status"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

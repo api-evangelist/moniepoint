@@ -1,0 +1,296 @@
+{
+  "info": {
+    "_postman_id": "068b6cf3-80a9-4a1e-b26d-9529226601a4",
+    "name": "Monnify Settlements API",
+    "description": "Retrieve settlement information for collected funds \u2014 settlement batches per merchant or sub-account and settlement transactions. Powers reconciliation of daily settlement payouts into the merchant's external bank account.\n\n\nContact Support:\n Name: Monnify Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:13:18.000Z",
+    "updatedAt": "2026-06-05T15:13:18.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-068b6cf3-80a9-4a1e-b26d-9529226601a4"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "transactions",
+              "item": [
+                {
+                  "name": "find-by-settlement-reference",
+                  "item": [
+                    {
+                      "name": "Monnify Find Transactions By Settlement Reference",
+                      "id": "5233b375-491a-4713-8883-79d33d89eabe",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/transactions/find-by-settlement-reference?reference=<string>&page=0&size=10",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "transactions",
+                            "find-by-settlement-reference"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) ",
+                              "key": "reference",
+                              "value": "<string>"
+                            },
+                            {
+                              "key": "page",
+                              "value": "0"
+                            },
+                            {
+                              "key": "size",
+                              "value": "10"
+                            }
+                          ]
+                        },
+                        "description": "List the transactions included in a single settlement payout."
+                      },
+                      "response": [
+                        {
+                          "id": "6be55c60-6fbd-46fc-93e6-a22de1045b8a",
+                          "name": "Settlement transactions page.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/transactions/find-by-settlement-reference?reference=<string>&page=0&size=10",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "transactions",
+                                "find-by-settlement-reference"
+                              ],
+                              "query": [
+                                {
+                                  "description": "(Required) ",
+                                  "key": "reference",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "page",
+                                  "value": "0"
+                                },
+                                {
+                                  "key": "size",
+                                  "value": "10"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"content\": [\n      {\n        \"transactionReference\": \"<string>\",\n        \"amount\": \"<number>\",\n        \"fee\": \"<number>\",\n        \"netAmount\": \"<number>\",\n        \"paidOn\": \"<dateTime>\"\n      },\n      {\n        \"transactionReference\": \"<string>\",\n        \"amount\": \"<number>\",\n        \"fee\": \"<number>\",\n        \"netAmount\": \"<number>\",\n        \"paidOn\": \"<dateTime>\"\n      }\n    ],\n    \"totalElements\": \"<integer>\",\n    \"totalPages\": \"<integer>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:13:19.000Z",
+                          "updatedAt": "2026-06-05T15:13:19.000Z",
+                          "uid": "35240-6be55c60-6fbd-46fc-93e6-a22de1045b8a"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:13:19.000Z",
+                      "updatedAt": "2026-06-05T15:13:19.000Z",
+                      "uid": "35240-5233b375-491a-4713-8883-79d33d89eabe"
+                    }
+                  ],
+                  "id": "167fcf0b-c8f7-4e98-ac09-e8bc8887fb4d",
+                  "createdAt": "2026-06-05T15:13:19.000Z",
+                  "updatedAt": "2026-06-05T15:13:19.000Z",
+                  "uid": "35240-167fcf0b-c8f7-4e98-ac09-e8bc8887fb4d"
+                }
+              ],
+              "id": "ea13e9c5-1e58-463c-bcbd-ee748b0f6d6a",
+              "createdAt": "2026-06-05T15:13:19.000Z",
+              "updatedAt": "2026-06-05T15:13:19.000Z",
+              "uid": "35240-ea13e9c5-1e58-463c-bcbd-ee748b0f6d6a"
+            },
+            {
+              "name": "settlements",
+              "item": [
+                {
+                  "name": "Monnify List Settlements",
+                  "id": "bc2f3631-63e0-478c-a99c-479efba55359",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/v1/settlements?page=0&size=10&from=<date>&to=<date>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "v1",
+                        "settlements"
+                      ],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "0"
+                        },
+                        {
+                          "key": "size",
+                          "value": "10"
+                        },
+                        {
+                          "key": "from",
+                          "value": "<date>"
+                        },
+                        {
+                          "key": "to",
+                          "value": "<date>"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "id": "3d0b49d4-0ea4-4121-b761-f041c580cb5f",
+                      "name": "Settlements page.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/settlements?page=0&size=10&from=<date>&to=<date>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "settlements"
+                          ],
+                          "query": [
+                            {
+                              "key": "page",
+                              "value": "0"
+                            },
+                            {
+                              "key": "size",
+                              "value": "10"
+                            },
+                            {
+                              "key": "from",
+                              "value": "<date>"
+                            },
+                            {
+                              "key": "to",
+                              "value": "<date>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"content\": [\n      {\n        \"settlementReference\": \"<string>\",\n        \"amount\": \"<number>\",\n        \"fee\": \"<number>\",\n        \"netAmount\": \"<number>\",\n        \"bankCode\": \"<string>\",\n        \"accountNumber\": \"<string>\",\n        \"accountName\": \"<string>\",\n        \"settlementStatus\": \"PENDING\",\n        \"settledOn\": \"<dateTime>\"\n      },\n      {\n        \"settlementReference\": \"<string>\",\n        \"amount\": \"<number>\",\n        \"fee\": \"<number>\",\n        \"netAmount\": \"<number>\",\n        \"bankCode\": \"<string>\",\n        \"accountNumber\": \"<string>\",\n        \"accountName\": \"<string>\",\n        \"settlementStatus\": \"FAILED\",\n        \"settledOn\": \"<dateTime>\"\n      }\n    ],\n    \"totalElements\": \"<integer>\",\n    \"totalPages\": \"<integer>\"\n  }\n}",
+                      "createdAt": "2026-06-05T15:13:19.000Z",
+                      "updatedAt": "2026-06-05T15:13:19.000Z",
+                      "uid": "35240-3d0b49d4-0ea4-4121-b761-f041c580cb5f"
+                    }
+                  ],
+                  "createdAt": "2026-06-05T15:13:19.000Z",
+                  "updatedAt": "2026-06-05T15:13:19.000Z",
+                  "uid": "35240-bc2f3631-63e0-478c-a99c-479efba55359"
+                }
+              ],
+              "id": "6c29dad7-866a-4fa9-ab84-6b54f78c5249",
+              "createdAt": "2026-06-05T15:13:19.000Z",
+              "updatedAt": "2026-06-05T15:13:19.000Z",
+              "uid": "35240-6c29dad7-866a-4fa9-ab84-6b54f78c5249"
+            }
+          ],
+          "id": "b894c3a7-de1a-4050-a8a9-d96e418374d1",
+          "createdAt": "2026-06-05T15:13:19.000Z",
+          "updatedAt": "2026-06-05T15:13:19.000Z",
+          "uid": "35240-b894c3a7-de1a-4050-a8a9-d96e418374d1"
+        }
+      ],
+      "id": "24abd60e-6e23-42d0-be13-1f2f8884a031",
+      "createdAt": "2026-06-05T15:13:19.000Z",
+      "updatedAt": "2026-06-05T15:13:19.000Z",
+      "uid": "35240-24abd60e-6e23-42d0-be13-1f2f8884a031"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.monnify.com"
+    }
+  ]
+}

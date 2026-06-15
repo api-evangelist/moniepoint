@@ -1,0 +1,289 @@
+{
+  "info": {
+    "_postman_id": "62c56c6f-ba5e-47a5-be20-cc8fc1148bd4",
+    "name": "Moniepoint POS Push Payment API",
+    "description": "Push payment-request flow for Moniepoint POS terminals. ISV partners push an authenticated payment request to a registered terminal serial number; the merchant taps to accept and the terminal completes a card or bank-transfer collection routed through Moniepoint's acquiring rails. API client credentials (client id and client secret) are issued from the Moniepoint Business dashboard.\n\n\nContact Support:\n Name: Moniepoint POS Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:13:19.000Z",
+    "updatedAt": "2026-06-05T15:13:19.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-62c56c6f-ba5e-47a5-be20-cc8fc1148bd4"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "push-payment",
+              "item": [
+                {
+                  "name": "request",
+                  "item": [
+                    {
+                      "name": "Moniepoint Push Payment Request",
+                      "id": "128febbe-0304-430b-8d68-3e19b44053b5",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"terminalSerialNumber\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"reference\": \"<string>\",\n  \"currency\": \"NGN\",\n  \"description\": \"<string>\",\n  \"callbackUrl\": \"<uri>\",\n  \"expiresIn\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/push-payment/request",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "push-payment",
+                            "request"
+                          ]
+                        },
+                        "description": "Push a payment request to a specific Moniepoint POS terminal. The terminal prompts the cashier to confirm and present the card or transfer instructions to the customer.\n"
+                      },
+                      "response": [
+                        {
+                          "id": "fb01af1d-752c-49f9-b64a-71a0fb6ae936",
+                          "name": "Push accepted; terminal awaiting customer action.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"terminalSerialNumber\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"reference\": \"<string>\",\n  \"currency\": \"NGN\",\n  \"description\": \"<string>\",\n  \"callbackUrl\": \"<uri>\",\n  \"expiresIn\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/push-payment/request",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "push-payment",
+                                "request"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"terminalSerialNumber\": \"<string>\",\n    \"reference\": \"<string>\",\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"status\": \"EXPIRED\",\n    \"responseCode\": \"<string>\",\n    \"responseMessage\": \"<string>\",\n    \"paymentMethod\": \"TRANSFER\",\n    \"dateCreated\": \"<dateTime>\",\n    \"completedAt\": \"<dateTime>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:13:20.000Z",
+                          "updatedAt": "2026-06-05T15:13:20.000Z",
+                          "uid": "35240-fb01af1d-752c-49f9-b64a-71a0fb6ae936"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:13:20.000Z",
+                      "updatedAt": "2026-06-05T15:13:20.000Z",
+                      "uid": "35240-128febbe-0304-430b-8d68-3e19b44053b5"
+                    }
+                  ],
+                  "id": "bee8ba8e-18fc-4e30-9e83-c1cac39ef882",
+                  "createdAt": "2026-06-05T15:13:20.000Z",
+                  "updatedAt": "2026-06-05T15:13:20.000Z",
+                  "uid": "35240-bee8ba8e-18fc-4e30-9e83-c1cac39ef882"
+                },
+                {
+                  "name": "status",
+                  "item": [
+                    {
+                      "name": "{reference}",
+                      "item": [
+                        {
+                          "name": "Moniepoint Push Payment Status",
+                          "id": "242d5bbd-0b09-45b6-9a49-c40a1933702a",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/push-payment/status/:reference",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "push-payment",
+                                "status",
+                                ":reference"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "ccfd8ec3-e117-4662-b0ac-80f022921223",
+                                  "key": "reference",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            }
+                          },
+                          "response": [
+                            {
+                              "id": "11e68f72-754f-447a-a9b4-d15af234e51b",
+                              "name": "Payment status.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: basic",
+                                    "key": "Authorization",
+                                    "value": "Basic <credentials>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/push-payment/status/:reference",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "push-payment",
+                                    "status",
+                                    ":reference"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "reference"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"terminalSerialNumber\": \"<string>\",\n    \"reference\": \"<string>\",\n    \"amount\": \"<number>\",\n    \"currency\": \"<string>\",\n    \"status\": \"EXPIRED\",\n    \"responseCode\": \"<string>\",\n    \"responseMessage\": \"<string>\",\n    \"paymentMethod\": \"TRANSFER\",\n    \"dateCreated\": \"<dateTime>\",\n    \"completedAt\": \"<dateTime>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:13:20.000Z",
+                              "updatedAt": "2026-06-05T15:13:20.000Z",
+                              "uid": "35240-11e68f72-754f-447a-a9b4-d15af234e51b"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:13:20.000Z",
+                          "updatedAt": "2026-06-05T15:13:20.000Z",
+                          "uid": "35240-242d5bbd-0b09-45b6-9a49-c40a1933702a"
+                        }
+                      ],
+                      "id": "939c9cb8-6869-4c1a-bd17-0e6d98be7d75",
+                      "createdAt": "2026-06-05T15:13:20.000Z",
+                      "updatedAt": "2026-06-05T15:13:20.000Z",
+                      "uid": "35240-939c9cb8-6869-4c1a-bd17-0e6d98be7d75"
+                    }
+                  ],
+                  "id": "0d26f5bd-5546-4329-a6e6-22509ba24eb9",
+                  "createdAt": "2026-06-05T15:13:20.000Z",
+                  "updatedAt": "2026-06-05T15:13:20.000Z",
+                  "uid": "35240-0d26f5bd-5546-4329-a6e6-22509ba24eb9"
+                }
+              ],
+              "id": "2f69dad1-fed4-4c8a-ae1f-2a8d287bf3b7",
+              "createdAt": "2026-06-05T15:13:20.000Z",
+              "updatedAt": "2026-06-05T15:13:20.000Z",
+              "uid": "35240-2f69dad1-fed4-4c8a-ae1f-2a8d287bf3b7"
+            }
+          ],
+          "id": "ee486cd1-9157-47df-b6d7-c9b48e71936a",
+          "createdAt": "2026-06-05T15:13:20.000Z",
+          "updatedAt": "2026-06-05T15:13:20.000Z",
+          "uid": "35240-ee486cd1-9157-47df-b6d7-c9b48e71936a"
+        }
+      ],
+      "id": "d47d5819-6771-40ab-b355-8c85295c7dde",
+      "createdAt": "2026-06-05T15:13:20.000Z",
+      "updatedAt": "2026-06-05T15:13:20.000Z",
+      "uid": "35240-d47d5819-6771-40ab-b355-8c85295c7dde"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://pos.moniepoint.com"
+    }
+  ]
+}

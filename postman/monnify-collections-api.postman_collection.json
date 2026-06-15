@@ -1,0 +1,963 @@
+{
+  "info": {
+    "_postman_id": "c57efd13-e79a-4088-be3e-ffba1e01fe54",
+    "name": "Monnify Collections API",
+    "description": "Accept money from customers in Nigeria via Monnify Checkout, server-to- server card capture with 3-D Secure / OTP, charge stored card tokens, complete bank-transfer payments, and look up transaction status.\n\n\nContact Support:\n Name: Monnify Developer Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:12:54.000Z",
+    "updatedAt": "2026-06-05T15:12:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c57efd13-e79a-4088-be3e-ffba1e01fe54"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "v1",
+          "item": [
+            {
+              "name": "merchant",
+              "item": [
+                {
+                  "name": "transactions",
+                  "item": [
+                    {
+                      "name": "init-transaction",
+                      "item": [
+                        {
+                          "name": "Monnify Initialize Transaction",
+                          "id": "75230544-86d7-415d-889d-ad2c0a62395b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"amount\": \"<number>\",\n  \"customerName\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"paymentReference\": \"<string>\",\n  \"paymentDescription\": \"<string>\",\n  \"contractCode\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"redirectUrl\": \"<uri>\",\n  \"paymentMethods\": [\n    \"CARD\",\n    \"ACCOUNT_TRANSFER\"\n  ],\n  \"incomeSplitConfig\": [\n    {\n      \"subAccountCode\": \"<string>\",\n      \"feePercentage\": \"<number>\",\n      \"splitAmount\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    },\n    {\n      \"subAccountCode\": \"<string>\",\n      \"feePercentage\": \"<number>\",\n      \"splitAmount\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    }\n  ],\n  \"metaData\": {\n    \"Excepteur_70e\": \"<string>\",\n    \"dolor_1\": \"<string>\",\n    \"Duis31e\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/merchant/transactions/init-transaction",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "merchant",
+                                "transactions",
+                                "init-transaction"
+                              ]
+                            },
+                            "description": "Create a pending transaction and return a checkoutUrl plus paymentReference."
+                          },
+                          "response": [
+                            {
+                              "id": "c2400b3d-cedf-499d-9182-dc3214eb7146",
+                              "name": "Transaction initialized.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"amount\": \"<number>\",\n  \"customerName\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"paymentReference\": \"<string>\",\n  \"paymentDescription\": \"<string>\",\n  \"contractCode\": \"<string>\",\n  \"currencyCode\": \"<string>\",\n  \"redirectUrl\": \"<uri>\",\n  \"paymentMethods\": [\n    \"CARD\",\n    \"ACCOUNT_TRANSFER\"\n  ],\n  \"incomeSplitConfig\": [\n    {\n      \"subAccountCode\": \"<string>\",\n      \"feePercentage\": \"<number>\",\n      \"splitAmount\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    },\n    {\n      \"subAccountCode\": \"<string>\",\n      \"feePercentage\": \"<number>\",\n      \"splitAmount\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    }\n  ],\n  \"metaData\": {\n    \"Excepteur_70e\": \"<string>\",\n    \"dolor_1\": \"<string>\",\n    \"Duis31e\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/merchant/transactions/init-transaction",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "merchant",
+                                    "transactions",
+                                    "init-transaction"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"transactionReference\": \"<string>\",\n    \"paymentReference\": \"<string>\",\n    \"merchantName\": \"<string>\",\n    \"apiKey\": \"<string>\",\n    \"redirectUrl\": \"<string>\",\n    \"enabledPaymentMethod\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"checkoutUrl\": \"<uri>\",\n    \"amount\": \"<number>\",\n    \"currencyCode\": \"<string>\",\n    \"paymentStatus\": \"OVERPAID\",\n    \"paidOn\": \"<dateTime>\",\n    \"paymentMethod\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:12:55.000Z",
+                              "updatedAt": "2026-06-05T15:12:55.000Z",
+                              "uid": "35240-c2400b3d-cedf-499d-9182-dc3214eb7146"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:55.000Z",
+                          "updatedAt": "2026-06-05T15:12:55.000Z",
+                          "uid": "35240-75230544-86d7-415d-889d-ad2c0a62395b"
+                        }
+                      ],
+                      "id": "504d933b-dfc7-4872-9a0f-320ce98cae2e",
+                      "createdAt": "2026-06-05T15:12:55.000Z",
+                      "updatedAt": "2026-06-05T15:12:55.000Z",
+                      "uid": "35240-504d933b-dfc7-4872-9a0f-320ce98cae2e"
+                    }
+                  ],
+                  "id": "b713894a-32ec-4d2e-a5e2-091f805dfa74",
+                  "createdAt": "2026-06-05T15:12:55.000Z",
+                  "updatedAt": "2026-06-05T15:12:55.000Z",
+                  "uid": "35240-b713894a-32ec-4d2e-a5e2-091f805dfa74"
+                },
+                {
+                  "name": "bank-transfer",
+                  "item": [
+                    {
+                      "name": "init-payment",
+                      "item": [
+                        {
+                          "name": "Monnify Pay With Bank Transfer",
+                          "id": "cef48e28-62ab-4ea2-b9db-f023677d1247",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"transactionReference\": \"<string>\",\n  \"bankCode\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/merchant/bank-transfer/init-payment",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "merchant",
+                                "bank-transfer",
+                                "init-payment"
+                              ]
+                            },
+                            "description": "Generate a one-time NUBAN to complete an initialized transaction by bank transfer."
+                          },
+                          "response": [
+                            {
+                              "id": "200ec938-0f9d-43f5-924c-d52cda09371e",
+                              "name": "Bank-transfer instructions returned.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"transactionReference\": \"<string>\",\n  \"bankCode\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/merchant/bank-transfer/init-payment",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "merchant",
+                                    "bank-transfer",
+                                    "init-payment"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"transactionReference\": \"<string>\",\n    \"paymentReference\": \"<string>\",\n    \"merchantName\": \"<string>\",\n    \"apiKey\": \"<string>\",\n    \"redirectUrl\": \"<string>\",\n    \"enabledPaymentMethod\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"checkoutUrl\": \"<uri>\",\n    \"amount\": \"<number>\",\n    \"currencyCode\": \"<string>\",\n    \"paymentStatus\": \"OVERPAID\",\n    \"paidOn\": \"<dateTime>\",\n    \"paymentMethod\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:12:55.000Z",
+                              "updatedAt": "2026-06-05T15:12:55.000Z",
+                              "uid": "35240-200ec938-0f9d-43f5-924c-d52cda09371e"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:55.000Z",
+                          "updatedAt": "2026-06-05T15:12:55.000Z",
+                          "uid": "35240-cef48e28-62ab-4ea2-b9db-f023677d1247"
+                        }
+                      ],
+                      "id": "cf69b070-8aad-4ebd-a408-74213cf4e651",
+                      "createdAt": "2026-06-05T15:12:55.000Z",
+                      "updatedAt": "2026-06-05T15:12:55.000Z",
+                      "uid": "35240-cf69b070-8aad-4ebd-a408-74213cf4e651"
+                    }
+                  ],
+                  "id": "78e010b1-0a35-485d-8efe-dabf646cb7c9",
+                  "createdAt": "2026-06-05T15:12:55.000Z",
+                  "updatedAt": "2026-06-05T15:12:55.000Z",
+                  "uid": "35240-78e010b1-0a35-485d-8efe-dabf646cb7c9"
+                },
+                {
+                  "name": "cards",
+                  "item": [
+                    {
+                      "name": "charge",
+                      "item": [
+                        {
+                          "name": "Monnify Charge Card",
+                          "id": "c1fbec73-3a2d-407c-9c1c-069a56089324",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"transactionReference\": \"<string>\",\n  \"collectionChannel\": \"<string>\",\n  \"card\": {\n    \"number\": \"<string>\",\n    \"expiryMonth\": \"<string>\",\n    \"expiryYear\": \"<string>\",\n    \"pin\": \"<string>\",\n    \"cvv\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/merchant/cards/charge",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "merchant",
+                                "cards",
+                                "charge"
+                              ]
+                            },
+                            "description": "Server-to-server card capture; returns secure-3D / OTP next step when required."
+                          },
+                          "response": [
+                            {
+                              "id": "82ecbf62-93f4-4a2c-be80-2d70eb33cea0",
+                              "name": "Card charge processed or pending authorization.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"transactionReference\": \"<string>\",\n  \"collectionChannel\": \"<string>\",\n  \"card\": {\n    \"number\": \"<string>\",\n    \"expiryMonth\": \"<string>\",\n    \"expiryYear\": \"<string>\",\n    \"pin\": \"<string>\",\n    \"cvv\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/merchant/cards/charge",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "merchant",
+                                    "cards",
+                                    "charge"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"transactionReference\": \"<string>\",\n    \"paymentReference\": \"<string>\",\n    \"merchantName\": \"<string>\",\n    \"apiKey\": \"<string>\",\n    \"redirectUrl\": \"<string>\",\n    \"enabledPaymentMethod\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"checkoutUrl\": \"<uri>\",\n    \"amount\": \"<number>\",\n    \"currencyCode\": \"<string>\",\n    \"paymentStatus\": \"OVERPAID\",\n    \"paidOn\": \"<dateTime>\",\n    \"paymentMethod\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:12:55.000Z",
+                              "updatedAt": "2026-06-05T15:12:55.000Z",
+                              "uid": "35240-82ecbf62-93f4-4a2c-be80-2d70eb33cea0"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:55.000Z",
+                          "updatedAt": "2026-06-05T15:12:55.000Z",
+                          "uid": "35240-c1fbec73-3a2d-407c-9c1c-069a56089324"
+                        }
+                      ],
+                      "id": "47a82fcc-43a8-4474-bc0b-2fb29cdfd4c8",
+                      "createdAt": "2026-06-05T15:12:55.000Z",
+                      "updatedAt": "2026-06-05T15:12:55.000Z",
+                      "uid": "35240-47a82fcc-43a8-4474-bc0b-2fb29cdfd4c8"
+                    },
+                    {
+                      "name": "otp",
+                      "item": [
+                        {
+                          "name": "authorize",
+                          "item": [
+                            {
+                              "name": "Monnify Authorize OTP",
+                              "id": "7a64c415-3133-4cbb-9a3b-b52d185be6d2",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"transactionReference\": \"<string>\",\n  \"collectionChannel\": \"<string>\",\n  \"tokenId\": \"<string>\",\n  \"token\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/merchant/cards/otp/authorize",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "merchant",
+                                    "cards",
+                                    "otp",
+                                    "authorize"
+                                  ]
+                                },
+                                "description": "Submit the OTP returned by the cardholder to complete a card charge."
+                              },
+                              "response": [
+                                {
+                                  "id": "aae03ec8-7228-4812-8369-a0d941c94668",
+                                  "name": "Card charge authorized.",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"transactionReference\": \"<string>\",\n  \"collectionChannel\": \"<string>\",\n  \"tokenId\": \"<string>\",\n  \"token\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/merchant/cards/otp/authorize",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "merchant",
+                                        "cards",
+                                        "otp",
+                                        "authorize"
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"transactionReference\": \"<string>\",\n    \"paymentReference\": \"<string>\",\n    \"merchantName\": \"<string>\",\n    \"apiKey\": \"<string>\",\n    \"redirectUrl\": \"<string>\",\n    \"enabledPaymentMethod\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"checkoutUrl\": \"<uri>\",\n    \"amount\": \"<number>\",\n    \"currencyCode\": \"<string>\",\n    \"paymentStatus\": \"OVERPAID\",\n    \"paidOn\": \"<dateTime>\",\n    \"paymentMethod\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-06-05T15:12:55.000Z",
+                                  "updatedAt": "2026-06-05T15:12:55.000Z",
+                                  "uid": "35240-aae03ec8-7228-4812-8369-a0d941c94668"
+                                }
+                              ],
+                              "createdAt": "2026-06-05T15:12:55.000Z",
+                              "updatedAt": "2026-06-05T15:12:55.000Z",
+                              "uid": "35240-7a64c415-3133-4cbb-9a3b-b52d185be6d2"
+                            }
+                          ],
+                          "id": "4da33e5d-baf4-4432-8bea-b92205782735",
+                          "createdAt": "2026-06-05T15:12:55.000Z",
+                          "updatedAt": "2026-06-05T15:12:55.000Z",
+                          "uid": "35240-4da33e5d-baf4-4432-8bea-b92205782735"
+                        }
+                      ],
+                      "id": "c80f2753-7cfb-4e4a-81aa-777edcade83f",
+                      "createdAt": "2026-06-05T15:12:55.000Z",
+                      "updatedAt": "2026-06-05T15:12:55.000Z",
+                      "uid": "35240-c80f2753-7cfb-4e4a-81aa-777edcade83f"
+                    },
+                    {
+                      "name": "charge-card-token",
+                      "item": [
+                        {
+                          "name": "Monnify Charge Tokenized Card",
+                          "id": "f25b1dd7-9383-47d6-8965-867be5d6f555",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"cardToken\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"customerName\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"paymentReference\": \"<string>\",\n  \"contractCode\": \"<string>\",\n  \"currencyCode\": \"NGN\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/merchant/cards/charge-card-token",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "merchant",
+                                "cards",
+                                "charge-card-token"
+                              ]
+                            },
+                            "description": "Charge a stored card token previously returned on a successful card collection."
+                          },
+                          "response": [
+                            {
+                              "id": "358d78b9-9401-4f76-9e55-2b0b35503fee",
+                              "name": "Tokenized card charged.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"cardToken\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"customerName\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"paymentReference\": \"<string>\",\n  \"contractCode\": \"<string>\",\n  \"currencyCode\": \"NGN\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/merchant/cards/charge-card-token",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "merchant",
+                                    "cards",
+                                    "charge-card-token"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"transactionReference\": \"<string>\",\n    \"paymentReference\": \"<string>\",\n    \"merchantName\": \"<string>\",\n    \"apiKey\": \"<string>\",\n    \"redirectUrl\": \"<string>\",\n    \"enabledPaymentMethod\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"checkoutUrl\": \"<uri>\",\n    \"amount\": \"<number>\",\n    \"currencyCode\": \"<string>\",\n    \"paymentStatus\": \"OVERPAID\",\n    \"paidOn\": \"<dateTime>\",\n    \"paymentMethod\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:12:55.000Z",
+                              "updatedAt": "2026-06-05T15:12:55.000Z",
+                              "uid": "35240-358d78b9-9401-4f76-9e55-2b0b35503fee"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:55.000Z",
+                          "updatedAt": "2026-06-05T15:12:55.000Z",
+                          "uid": "35240-f25b1dd7-9383-47d6-8965-867be5d6f555"
+                        }
+                      ],
+                      "id": "dd287cc9-cc49-4063-baa6-72233067fbb9",
+                      "createdAt": "2026-06-05T15:12:55.000Z",
+                      "updatedAt": "2026-06-05T15:12:55.000Z",
+                      "uid": "35240-dd287cc9-cc49-4063-baa6-72233067fbb9"
+                    }
+                  ],
+                  "id": "498c12cd-5765-47e5-9220-21537bb903d8",
+                  "createdAt": "2026-06-05T15:12:55.000Z",
+                  "updatedAt": "2026-06-05T15:12:55.000Z",
+                  "uid": "35240-498c12cd-5765-47e5-9220-21537bb903d8"
+                }
+              ],
+              "id": "96d92d3c-4926-43b6-86bb-63614e55fa0b",
+              "createdAt": "2026-06-05T15:12:55.000Z",
+              "updatedAt": "2026-06-05T15:12:55.000Z",
+              "uid": "35240-96d92d3c-4926-43b6-86bb-63614e55fa0b"
+            },
+            {
+              "name": "transactions",
+              "item": [
+                {
+                  "name": "search",
+                  "item": [
+                    {
+                      "name": "Monnify Search Transactions",
+                      "id": "7f348450-4fb7-4492-ac95-ac8e5914f615",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/transactions/search?page=0&size=20&from=<date>&to=<date>&paymentStatus=EXPIRED",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "transactions",
+                            "search"
+                          ],
+                          "query": [
+                            {
+                              "key": "page",
+                              "value": "0"
+                            },
+                            {
+                              "key": "size",
+                              "value": "20"
+                            },
+                            {
+                              "key": "from",
+                              "value": "<date>"
+                            },
+                            {
+                              "key": "to",
+                              "value": "<date>"
+                            },
+                            {
+                              "key": "paymentStatus",
+                              "value": "EXPIRED"
+                            }
+                          ]
+                        },
+                        "description": "Paginated search across collection transactions by date range, status, and reference."
+                      },
+                      "response": [
+                        {
+                          "id": "5ca87df6-2646-415f-8db4-3547a4dfb835",
+                          "name": "Paginated transaction page.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/transactions/search?page=0&size=20&from=<date>&to=<date>&paymentStatus=EXPIRED",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "transactions",
+                                "search"
+                              ],
+                              "query": [
+                                {
+                                  "key": "page",
+                                  "value": "0"
+                                },
+                                {
+                                  "key": "size",
+                                  "value": "20"
+                                },
+                                {
+                                  "key": "from",
+                                  "value": "<date>"
+                                },
+                                {
+                                  "key": "to",
+                                  "value": "<date>"
+                                },
+                                {
+                                  "key": "paymentStatus",
+                                  "value": "EXPIRED"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"content\": [\n      {\n        \"transactionReference\": \"<string>\",\n        \"paymentReference\": \"<string>\",\n        \"merchantName\": \"<string>\",\n        \"apiKey\": \"<string>\",\n        \"redirectUrl\": \"<string>\",\n        \"enabledPaymentMethod\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"checkoutUrl\": \"<uri>\",\n        \"amount\": \"<number>\",\n        \"currencyCode\": \"<string>\",\n        \"paymentStatus\": \"PAID\",\n        \"paidOn\": \"<dateTime>\",\n        \"paymentMethod\": \"<string>\"\n      },\n      {\n        \"transactionReference\": \"<string>\",\n        \"paymentReference\": \"<string>\",\n        \"merchantName\": \"<string>\",\n        \"apiKey\": \"<string>\",\n        \"redirectUrl\": \"<string>\",\n        \"enabledPaymentMethod\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"checkoutUrl\": \"<uri>\",\n        \"amount\": \"<number>\",\n        \"currencyCode\": \"<string>\",\n        \"paymentStatus\": \"EXPIRED\",\n        \"paidOn\": \"<dateTime>\",\n        \"paymentMethod\": \"<string>\"\n      }\n    ],\n    \"number\": \"<integer>\",\n    \"size\": \"<integer>\",\n    \"totalElements\": \"<integer>\",\n    \"totalPages\": \"<integer>\"\n  }\n}",
+                          "createdAt": "2026-06-05T15:12:55.000Z",
+                          "updatedAt": "2026-06-05T15:12:55.000Z",
+                          "uid": "35240-5ca87df6-2646-415f-8db4-3547a4dfb835"
+                        }
+                      ],
+                      "createdAt": "2026-06-05T15:12:55.000Z",
+                      "updatedAt": "2026-06-05T15:12:55.000Z",
+                      "uid": "35240-7f348450-4fb7-4492-ac95-ac8e5914f615"
+                    }
+                  ],
+                  "id": "7b9d1c72-d508-41b8-a49d-5e4732ac651c",
+                  "createdAt": "2026-06-05T15:12:55.000Z",
+                  "updatedAt": "2026-06-05T15:12:55.000Z",
+                  "uid": "35240-7b9d1c72-d508-41b8-a49d-5e4732ac651c"
+                }
+              ],
+              "id": "90d8c033-6570-4c4a-b111-6086464bbe87",
+              "createdAt": "2026-06-05T15:12:55.000Z",
+              "updatedAt": "2026-06-05T15:12:55.000Z",
+              "uid": "35240-90d8c033-6570-4c4a-b111-6086464bbe87"
+            }
+          ],
+          "id": "495335ff-14cb-4667-a53e-18f9d7fe41b8",
+          "createdAt": "2026-06-05T15:12:55.000Z",
+          "updatedAt": "2026-06-05T15:12:55.000Z",
+          "uid": "35240-495335ff-14cb-4667-a53e-18f9d7fe41b8"
+        },
+        {
+          "name": "v2",
+          "item": [
+            {
+              "name": "merchant",
+              "item": [
+                {
+                  "name": "transactions",
+                  "item": [
+                    {
+                      "name": "query",
+                      "item": [
+                        {
+                          "name": "Monnify Get Transaction Status",
+                          "id": "5073cbc5-314a-45d7-a2af-0dac6908ffe3",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v2/merchant/transactions/query?paymentReference=<string>&transactionReference=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v2",
+                                "merchant",
+                                "transactions",
+                                "query"
+                              ],
+                              "query": [
+                                {
+                                  "key": "paymentReference",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "key": "transactionReference",
+                                  "value": "<string>"
+                                }
+                              ]
+                            },
+                            "description": "Query a transaction by paymentReference or transactionReference."
+                          },
+                          "response": [
+                            {
+                              "id": "dfa7c4d7-b070-4b4b-a4d1-dd8bdacde73e",
+                              "name": "Transaction details.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v2/merchant/transactions/query?paymentReference=<string>&transactionReference=<string>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v2",
+                                    "merchant",
+                                    "transactions",
+                                    "query"
+                                  ],
+                                  "query": [
+                                    {
+                                      "key": "paymentReference",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "key": "transactionReference",
+                                      "value": "<string>"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"requestSuccessful\": \"<boolean>\",\n  \"responseMessage\": \"<string>\",\n  \"responseCode\": \"<string>\",\n  \"responseBody\": {\n    \"transactionReference\": \"<string>\",\n    \"paymentReference\": \"<string>\",\n    \"merchantName\": \"<string>\",\n    \"apiKey\": \"<string>\",\n    \"redirectUrl\": \"<string>\",\n    \"enabledPaymentMethod\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"checkoutUrl\": \"<uri>\",\n    \"amount\": \"<number>\",\n    \"currencyCode\": \"<string>\",\n    \"paymentStatus\": \"OVERPAID\",\n    \"paidOn\": \"<dateTime>\",\n    \"paymentMethod\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-06-05T15:12:55.000Z",
+                              "updatedAt": "2026-06-05T15:12:55.000Z",
+                              "uid": "35240-dfa7c4d7-b070-4b4b-a4d1-dd8bdacde73e"
+                            }
+                          ],
+                          "createdAt": "2026-06-05T15:12:55.000Z",
+                          "updatedAt": "2026-06-05T15:12:55.000Z",
+                          "uid": "35240-5073cbc5-314a-45d7-a2af-0dac6908ffe3"
+                        }
+                      ],
+                      "id": "d0648fac-e3a9-4322-8b1d-72a53c7f1110",
+                      "createdAt": "2026-06-05T15:12:55.000Z",
+                      "updatedAt": "2026-06-05T15:12:55.000Z",
+                      "uid": "35240-d0648fac-e3a9-4322-8b1d-72a53c7f1110"
+                    }
+                  ],
+                  "id": "2a718f73-bdcc-43a3-8477-5f602fcef0f5",
+                  "createdAt": "2026-06-05T15:12:55.000Z",
+                  "updatedAt": "2026-06-05T15:12:55.000Z",
+                  "uid": "35240-2a718f73-bdcc-43a3-8477-5f602fcef0f5"
+                }
+              ],
+              "id": "2efcabfb-fa38-4331-a1c1-01a6fc2af26d",
+              "createdAt": "2026-06-05T15:12:55.000Z",
+              "updatedAt": "2026-06-05T15:12:55.000Z",
+              "uid": "35240-2efcabfb-fa38-4331-a1c1-01a6fc2af26d"
+            }
+          ],
+          "id": "175aa8ae-4674-4853-bf5d-e02749d6fac7",
+          "createdAt": "2026-06-05T15:12:55.000Z",
+          "updatedAt": "2026-06-05T15:12:55.000Z",
+          "uid": "35240-175aa8ae-4674-4853-bf5d-e02749d6fac7"
+        }
+      ],
+      "id": "0e9a78ad-fa37-48ca-b25b-da0c47731ee7",
+      "createdAt": "2026-06-05T15:12:55.000Z",
+      "updatedAt": "2026-06-05T15:12:55.000Z",
+      "uid": "35240-0e9a78ad-fa37-48ca-b25b-da0c47731ee7"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.monnify.com"
+    }
+  ]
+}
