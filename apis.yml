@@ -290,48 +290,45 @@ access: 3rd-Party
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/moniepoint/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/moniepoint-bulk-disbursement-workflow.yml
-        name: Moniepoint Bulk Disbursement
-        summary: Initiate a batch of transfers, poll the batch summary to completion, then list per-item results.
-      - url: arazzo/moniepoint-card-charge-otp-workflow.yml
-        name: Moniepoint Card Charge With OTP
-        summary: Initialize a transaction, capture a card, branch on the 3-D Secure / OTP step, and confirm.
-      - url: arazzo/moniepoint-collect-bank-transfer-workflow.yml
-        name: Moniepoint Collect Via Bank Transfer
-        summary: Initialize a collection, generate a one-time NUBAN to pay it, then poll the transaction until paid.
-      - url: arazzo/moniepoint-kyc-reserve-account-workflow.yml
-        name: Moniepoint KYC Verified Virtual Account
-        summary: Match a customer BVN to their bank account, then reserve a KYC-bound virtual account and confirm it.
-      - url: arazzo/moniepoint-pay-bill-workflow.yml
-        name: Moniepoint Pay A Bill
-        summary: List billers for a category, validate the customer, process the bill, then poll the bill status.
-      - url: arazzo/moniepoint-pos-push-payment-workflow.yml
-        name: Moniepoint POS Push Payment
-        summary: Push a payment request to a Moniepoint POS terminal, then poll the terminal until the customer completes it.
-      - url: arazzo/moniepoint-recurring-mandate-debit-workflow.yml
-        name: Moniepoint Recurring Mandate Debit
-        summary: Create a direct-debit mandate, activate it, debit it, then read the mandate back.
-      - url: arazzo/moniepoint-refund-collected-payment-workflow.yml
-        name: Moniepoint Refund A Collected Payment
-        summary: Confirm a collection is paid, initiate a refund against it, then poll the refund to completion.
-      - url: arazzo/moniepoint-reserve-virtual-account-workflow.yml
-        name: Moniepoint Reserve Virtual Account
-        summary: Reserve a permanent NUBAN virtual account for a customer, confirm it, and read its inbound transactions.
-      - url: arazzo/moniepoint-single-transfer-otp-workflow.yml
-        name: Moniepoint Single Transfer With OTP
-        summary: Initiate a single transfer, branch on whether OTP authorization is required, authorize it, and confirm.
-      - url: arazzo/moniepoint-verify-and-disburse-workflow.yml
-        name: Moniepoint Verify And Disburse
-        summary: Name-inquiry a beneficiary bank account, then disburse to it and poll the transfer to a final state.
-      - url: arazzo/moniepoint-virtual-account-with-limit-workflow.yml
-        name: Moniepoint Virtual Account With Limit Profile
-        summary: Define a transaction limit profile, then reserve a virtual account bound to that profile.
-      - url: arazzo/moniepoint-wallet-balance-check-workflow.yml
-        name: Moniepoint Create Wallet And Check Balance
-        summary: Create a customer wallet, read its available and ledger balance, then list its transactions.
+  - type: Arazzo
+    url: arazzo/moniepoint-bulk-disbursement-workflow.yml
+    name: Moniepoint Bulk Disbursement
+  - type: Arazzo
+    url: arazzo/moniepoint-card-charge-otp-workflow.yml
+    name: Moniepoint Card Charge With OTP
+  - type: Arazzo
+    url: arazzo/moniepoint-collect-bank-transfer-workflow.yml
+    name: Moniepoint Collect Via Bank Transfer
+  - type: Arazzo
+    url: arazzo/moniepoint-kyc-reserve-account-workflow.yml
+    name: Moniepoint KYC Verified Virtual Account
+  - type: Arazzo
+    url: arazzo/moniepoint-pay-bill-workflow.yml
+    name: Moniepoint Pay A Bill
+  - type: Arazzo
+    url: arazzo/moniepoint-pos-push-payment-workflow.yml
+    name: Moniepoint POS Push Payment
+  - type: Arazzo
+    url: arazzo/moniepoint-recurring-mandate-debit-workflow.yml
+    name: Moniepoint Recurring Mandate Debit
+  - type: Arazzo
+    url: arazzo/moniepoint-refund-collected-payment-workflow.yml
+    name: Moniepoint Refund A Collected Payment
+  - type: Arazzo
+    url: arazzo/moniepoint-reserve-virtual-account-workflow.yml
+    name: Moniepoint Reserve Virtual Account
+  - type: Arazzo
+    url: arazzo/moniepoint-single-transfer-otp-workflow.yml
+    name: Moniepoint Single Transfer With OTP
+  - type: Arazzo
+    url: arazzo/moniepoint-verify-and-disburse-workflow.yml
+    name: Moniepoint Verify And Disburse
+  - type: Arazzo
+    url: arazzo/moniepoint-virtual-account-with-limit-workflow.yml
+    name: Moniepoint Virtual Account With Limit Profile
+  - type: Arazzo
+    url: arazzo/moniepoint-wallet-balance-check-workflow.yml
+    name: Moniepoint Create Wallet And Check Balance
   - type: Portal
     url: https://moniepoint.com
   - type: Portal
@@ -373,10 +370,10 @@ common:
     url: https://moniepoint.com/ng/privacy-policy
   - type: TermsOfService
     url: https://moniepoint.com/ng/terms-of-service
-  - type: SignUp
+  - type: Signup
     url: https://app.monnify.com/create-account
     name: Monnify Sign Up
-  - type: SignUp
+  - type: Signup
     url: https://app.moniepoint.com/signup
     name: Moniepoint Business Sign Up
   - type: Sandbox
@@ -389,18 +386,18 @@ common:
     url: https://twitter.com/moniepointNG
   - type: Careers
     url: https://moniepoint.com/careers
-  - type: SDK
+  - type: SDKs
     url: https://github.com/Moniepoint/dart-flow
     name: dart-flow (Dart async stream library)
-  - type: SDK
+  - type: SDKs
     url: https://github.com/cla-bit/MonnifyEase
     name: MonnifyEase (community Python wrapper)
-  - type: SDK
+  - type: SDKs
     url: https://github.com/abdsalam/laravel-monnify
     name: Laravel Monnify (community)
   - type: Webhooks
     url: https://developers.monnify.com/docs/webhooks
-  - type: Errors
+  - type: ErrorCodes
     url: https://developers.monnify.com/docs/getting-started/errors
   - type: Authentication
     url: https://developers.monnify.com/docs/getting-started/authentication
