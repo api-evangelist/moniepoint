@@ -288,6 +288,12 @@ kind: contract
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 access: 3rd-Party
 common:
+  - type: TrustCenter
+    url: security/moniepoint-trust-center.yml
+  - type: DomainSecurity
+    url: security/moniepoint-domain-security.yml
+  - type: Authentication
+    url: authentication/moniepoint-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/moniepoint/overview
   - type: Arazzo
