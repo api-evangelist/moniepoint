@@ -24,7 +24,10 @@
     },
     {
       "source": "https://developers.monnify.com/docs/change-logs",
-      "error": "TimeoutError"
+      "feed_url": "https://developers.monnify.com/docs/change-logs",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     },
     {
       "source": "https://engineering.moniepoint.com",
@@ -34,6 +37,6 @@
       "method": "discovered"
     }
   ],
-  "post_count": 4,
-  "fetched": "2026-06-27T12:03:07Z"
+  "post_count": 20,
+  "fetched": "2026-07-11T11:50:51Z"
 }
