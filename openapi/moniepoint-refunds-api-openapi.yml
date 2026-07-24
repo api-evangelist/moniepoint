@@ -1,0 +1,160 @@
+openapi: 3.1.0
+info:
+  title: Moniepoint POS Push Payment Authentication Refunds API
+  description: 'Push payment-request flow for Moniepoint POS terminals. ISV partners push an authenticated payment request to a registered terminal serial number; the merchant taps to accept and the terminal completes a card or bank-transfer collection routed through Moniepoint''s acquiring rails. API client credentials (client id and client secret) are issued from the Moniepoint Business dashboard.
+
+    '
+  version: '1.0'
+  contact:
+    name: Moniepoint POS Developer Support
+    url: https://teamapt.atlassian.net/wiki/spaces/EI
+servers:
+- url: https://pos.moniepoint.com
+  description: Production
+security:
+- BasicAuth: []
+tags:
+- name: Refunds
+  description: Initiate and query refunds.
+paths:
+  /api/v1/refunds/initiate-refund:
+    post:
+      summary: Monnify Initiate Refund
+      operationId: initiateRefund
+      tags:
+      - Refunds
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - transactionReference
+              - refundReference
+              - refundAmount
+              - refundReason
+              properties:
+                transactionReference:
+                  type: string
+                refundReference:
+                  type: string
+                refundAmount:
+                  type: number
+                refundReason:
+                  type: string
+                customerNote:
+                  type: string
+                destinationAccountNumber:
+                  type: string
+                destinationAccountBankCode:
+                  type: string
+      responses:
+        '200':
+          description: Refund initiated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefundEnvelope'
+  /api/v1/refunds:
+    get:
+      summary: Monnify List Refunds
+      operationId: listRefunds
+      tags:
+      - Refunds
+      parameters:
+      - name: pageNo
+        in: query
+        schema:
+          type: integer
+          default: 0
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          default: 10
+      responses:
+        '200':
+          description: Refunds page.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestSuccessful:
+                    type: boolean
+                  responseMessage:
+                    type: string
+                  responseCode:
+                    type: string
+                  responseBody:
+                    type: object
+                    properties:
+                      content:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Refund'
+                      totalElements:
+                        type: integer
+                      totalPages:
+                        type: integer
+  /api/v1/refunds/{refundReference}:
+    get:
+      summary: Monnify Get Refund Status
+      operationId: getRefundStatus
+      tags:
+      - Refunds
+      parameters:
+      - name: refundReference
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Refund details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefundEnvelope'
+components:
+  schemas:
+    RefundEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/Refund'
+    Refund:
+      type: object
+      properties:
+        refundReference:
+          type: string
+        transactionReference:
+          type: string
+        refundAmount:
+          type: number
+        refundReason:
+          type: string
+        refundStatus:
+          type: string
+          enum:
+          - PENDING
+          - COMPLETED
+          - FAILED
+        dateCreated:
+          type: string
+          format: date-time
+        completedOn:
+          type: string
+          format: date-time
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: Basic auth using API client id and client secret from the Moniepoint Business dashboard.

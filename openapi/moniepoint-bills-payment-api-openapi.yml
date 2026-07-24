@@ -1,0 +1,295 @@
+openapi: 3.1.0
+info:
+  title: Moniepoint POS Push Payment Authentication Bills Payment API
+  description: 'Push payment-request flow for Moniepoint POS terminals. ISV partners push an authenticated payment request to a registered terminal serial number; the merchant taps to accept and the terminal completes a card or bank-transfer collection routed through Moniepoint''s acquiring rails. API client credentials (client id and client secret) are issued from the Moniepoint Business dashboard.
+
+    '
+  version: '1.0'
+  contact:
+    name: Moniepoint POS Developer Support
+    url: https://teamapt.atlassian.net/wiki/spaces/EI
+servers:
+- url: https://pos.moniepoint.com
+  description: Production
+security:
+- BasicAuth: []
+tags:
+- name: Bills Payment
+  description: Bill categories, billers, validation, processing, and status.
+paths:
+  /api/v1/bill-payment/categories:
+    get:
+      summary: Monnify List Bill Categories
+      operationId: listBillCategories
+      tags:
+      - Bills Payment
+      responses:
+        '200':
+          description: Categories list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestSuccessful:
+                    type: boolean
+                  responseMessage:
+                    type: string
+                  responseCode:
+                    type: string
+                  responseBody:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BillCategory'
+  /api/v1/bill-payment/billers:
+    get:
+      summary: Monnify List Billers
+      operationId: listBillers
+      tags:
+      - Bills Payment
+      parameters:
+      - name: categoryCode
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Biller list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestSuccessful:
+                    type: boolean
+                  responseMessage:
+                    type: string
+                  responseCode:
+                    type: string
+                  responseBody:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Biller'
+  /api/v1/bill-payment/biller-items:
+    get:
+      summary: Monnify List Biller Items
+      operationId: listBillerItems
+      tags:
+      - Bills Payment
+      parameters:
+      - name: billerCode
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Biller items list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestSuccessful:
+                    type: boolean
+                  responseMessage:
+                    type: string
+                  responseCode:
+                    type: string
+                  responseBody:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/BillerItem'
+  /api/v1/bill-payment/customer-validate:
+    post:
+      summary: Monnify Validate Bills Customer
+      description: Validate a customer identifier (smart-card number, meter number, account number) against a biller.
+      operationId: validateBillsCustomer
+      tags:
+      - Bills Payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - billerCode
+              - billerItemCode
+              - customerId
+              properties:
+                billerCode:
+                  type: string
+                billerItemCode:
+                  type: string
+                customerId:
+                  type: string
+      responses:
+        '200':
+          description: Customer validated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestSuccessful:
+                    type: boolean
+                  responseMessage:
+                    type: string
+                  responseCode:
+                    type: string
+                  responseBody:
+                    type: object
+                    properties:
+                      customerId:
+                        type: string
+                      customerName:
+                        type: string
+                      customerAddress:
+                        type: string
+                      billerCode:
+                        type: string
+                      billerItemCode:
+                        type: string
+  /api/v1/bill-payment/process-bill:
+    post:
+      summary: Monnify Process Bill
+      operationId: processBill
+      tags:
+      - Bills Payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - billerCode
+              - billerItemCode
+              - customerId
+              - amount
+              - reference
+              properties:
+                billerCode:
+                  type: string
+                billerItemCode:
+                  type: string
+                customerId:
+                  type: string
+                customerEmail:
+                  type: string
+                  format: email
+                amount:
+                  type: number
+                reference:
+                  type: string
+                narration:
+                  type: string
+      responses:
+        '200':
+          description: Bill processed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillEnvelope'
+  /api/v1/bill-payment/status:
+    get:
+      summary: Monnify Get Bill Status
+      operationId: getBillStatus
+      tags:
+      - Bills Payment
+      parameters:
+      - name: reference
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Bill status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillEnvelope'
+components:
+  schemas:
+    Biller:
+      type: object
+      properties:
+        billerCode:
+          type: string
+        billerName:
+          type: string
+        categoryCode:
+          type: string
+    BillerItem:
+      type: object
+      properties:
+        billerItemCode:
+          type: string
+        billerItemName:
+          type: string
+        amount:
+          type: number
+        billerCode:
+          type: string
+        amountType:
+          type: string
+          enum:
+          - FIXED
+          - RANGE
+          - FREE
+    Bill:
+      type: object
+      properties:
+        reference:
+          type: string
+        billerCode:
+          type: string
+        billerItemCode:
+          type: string
+        customerId:
+          type: string
+        amount:
+          type: number
+        narration:
+          type: string
+        token:
+          type: string
+          description: Electricity token
+          where applicable.: null
+        status:
+          type: string
+          enum:
+          - PENDING
+          - SUCCESS
+          - FAILED
+        dateProcessed:
+          type: string
+          format: date-time
+    BillEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/Bill'
+    BillCategory:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: Basic auth using API client id and client secret from the Moniepoint Business dashboard.

@@ -1,0 +1,229 @@
+openapi: 3.1.0
+info:
+  title: Moniepoint POS Push Payment Authentication Bulk Transfers API
+  description: 'Push payment-request flow for Moniepoint POS terminals. ISV partners push an authenticated payment request to a registered terminal serial number; the merchant taps to accept and the terminal completes a card or bank-transfer collection routed through Moniepoint''s acquiring rails. API client credentials (client id and client secret) are issued from the Moniepoint Business dashboard.
+
+    '
+  version: '1.0'
+  contact:
+    name: Moniepoint POS Developer Support
+    url: https://teamapt.atlassian.net/wiki/spaces/EI
+servers:
+- url: https://pos.moniepoint.com
+  description: Production
+security:
+- BasicAuth: []
+tags:
+- name: Bulk Transfers
+  description: Initiate and query bulk transfer batches.
+paths:
+  /api/v2/disbursements/bulk:
+    post:
+      summary: Monnify Initiate Bulk Transfer
+      description: Initiate a batch of transfers in one call.
+      operationId: initiateBulkTransfer
+      tags:
+      - Bulk Transfers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkTransferRequest'
+      responses:
+        '200':
+          description: Bulk transfer accepted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkTransferEnvelope'
+  /api/v2/disbursements/bulk/summary:
+    get:
+      summary: Monnify Get Bulk Transfer Summary
+      operationId: getBulkTransferSummary
+      tags:
+      - Bulk Transfers
+      parameters:
+      - name: batchReference
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Bulk transfer summary.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkTransferEnvelope'
+  /api/v2/disbursements/bulk/{batchReference}/transactions:
+    get:
+      summary: Monnify List Bulk Transfer Items
+      operationId: listBulkTransferItems
+      tags:
+      - Bulk Transfers
+      parameters:
+      - name: batchReference
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: pageNo
+        in: query
+        schema:
+          type: integer
+          default: 0
+      - name: pageSize
+        in: query
+        schema:
+          type: integer
+          default: 10
+      responses:
+        '200':
+          description: Bulk transfer items page.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransferPageEnvelope'
+components:
+  schemas:
+    Transfer:
+      type: object
+      properties:
+        reference:
+          type: string
+        amount:
+          type: number
+        destinationAccountName:
+          type: string
+        destinationAccountNumber:
+          type: string
+        destinationBankCode:
+          type: string
+        currency:
+          type: string
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILED
+          - REVERSED
+          - PENDING
+          - OTP_EMAIL_DISPATCH
+          - PENDING_AUTHORIZATION
+        narration:
+          type: string
+        fee:
+          type: number
+        dateCreated:
+          type: string
+          format: date-time
+    BulkTransferRequest:
+      type: object
+      required:
+      - title
+      - batchReference
+      - narration
+      - sourceAccountNumber
+      - transactionList
+      properties:
+        title:
+          type: string
+        batchReference:
+          type: string
+        narration:
+          type: string
+        sourceAccountNumber:
+          type: string
+        onValidationFailure:
+          type: string
+          enum:
+          - BREAK
+          - CONTINUE
+        notificationInterval:
+          type: integer
+          description: Webhook batch notification interval as a percentage (10, 20, 50, 100).
+        transactionList:
+          type: array
+          items:
+            type: object
+            properties:
+              amount:
+                type: number
+              reference:
+                type: string
+              narration:
+                type: string
+              destinationBankCode:
+                type: string
+              destinationAccountNumber:
+                type: string
+              destinationAccountName:
+                type: string
+              currency:
+                type: string
+                example: NGN
+    BulkTransferEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/BulkTransferSummary'
+    TransferPageEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          type: object
+          properties:
+            content:
+              type: array
+              items:
+                $ref: '#/components/schemas/Transfer'
+            number:
+              type: integer
+            size:
+              type: integer
+            totalElements:
+              type: integer
+            totalPages:
+              type: integer
+    BulkTransferSummary:
+      type: object
+      properties:
+        batchReference:
+          type: string
+        batchStatus:
+          type: string
+        totalAmount:
+          type: number
+        totalFee:
+          type: number
+        totalReceivedAmount:
+          type: number
+        totalCount:
+          type: integer
+        successfulCount:
+          type: integer
+        failedCount:
+          type: integer
+        pendingCount:
+          type: integer
+        dateCreated:
+          type: string
+          format: date-time
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: Basic auth using API client id and client secret from the Moniepoint Business dashboard.
