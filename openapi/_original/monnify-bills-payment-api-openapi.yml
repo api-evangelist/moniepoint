@@ -1,0 +1,216 @@
+openapi: 3.1.0
+info:
+  title: Monnify Bills Payment API
+  description: >
+    Unified Biller Service to purchase airtime and data, pay electricity
+    and cable-TV bills, fund betting wallets, and pay education fees. The
+    typical flow is List Categories → List Billers → List Biller Items →
+    Validate Customer → Process Bill → Check Status.
+  version: '1.0'
+  contact:
+    name: Monnify Developer Support
+    url: https://developers.monnify.com
+servers:
+  - url: https://api.monnify.com
+    description: Production
+  - url: https://sandbox.monnify.com
+    description: Sandbox
+security:
+  - BearerAuth: []
+tags:
+  - name: Bills Payment
+    description: Bill categories, billers, validation, processing, and status.
+paths:
+  /api/v1/bill-payment/categories:
+    get:
+      summary: Monnify List Bill Categories
+      operationId: listBillCategories
+      tags: [Bills Payment]
+      responses:
+        '200':
+          description: Categories list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestSuccessful: { type: boolean }
+                  responseMessage: { type: string }
+                  responseCode: { type: string }
+                  responseBody:
+                    type: array
+                    items: { $ref: '#/components/schemas/BillCategory' }
+  /api/v1/bill-payment/billers:
+    get:
+      summary: Monnify List Billers
+      operationId: listBillers
+      tags: [Bills Payment]
+      parameters:
+        - name: categoryCode
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Biller list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestSuccessful: { type: boolean }
+                  responseMessage: { type: string }
+                  responseCode: { type: string }
+                  responseBody:
+                    type: array
+                    items: { $ref: '#/components/schemas/Biller' }
+  /api/v1/bill-payment/biller-items:
+    get:
+      summary: Monnify List Biller Items
+      operationId: listBillerItems
+      tags: [Bills Payment]
+      parameters:
+        - name: billerCode
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Biller items list.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestSuccessful: { type: boolean }
+                  responseMessage: { type: string }
+                  responseCode: { type: string }
+                  responseBody:
+                    type: array
+                    items: { $ref: '#/components/schemas/BillerItem' }
+  /api/v1/bill-payment/customer-validate:
+    post:
+      summary: Monnify Validate Bills Customer
+      description: Validate a customer identifier (smart-card number, meter number, account number) against a biller.
+      operationId: validateBillsCustomer
+      tags: [Bills Payment]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [billerCode, billerItemCode, customerId]
+              properties:
+                billerCode: { type: string }
+                billerItemCode: { type: string }
+                customerId: { type: string }
+      responses:
+        '200':
+          description: Customer validated.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestSuccessful: { type: boolean }
+                  responseMessage: { type: string }
+                  responseCode: { type: string }
+                  responseBody:
+                    type: object
+                    properties:
+                      customerId: { type: string }
+                      customerName: { type: string }
+                      customerAddress: { type: string }
+                      billerCode: { type: string }
+                      billerItemCode: { type: string }
+  /api/v1/bill-payment/process-bill:
+    post:
+      summary: Monnify Process Bill
+      operationId: processBill
+      tags: [Bills Payment]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [billerCode, billerItemCode, customerId, amount, reference]
+              properties:
+                billerCode: { type: string }
+                billerItemCode: { type: string }
+                customerId: { type: string }
+                customerEmail: { type: string, format: email }
+                amount: { type: number }
+                reference: { type: string }
+                narration: { type: string }
+      responses:
+        '200':
+          description: Bill processed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillEnvelope'
+  /api/v1/bill-payment/status:
+    get:
+      summary: Monnify Get Bill Status
+      operationId: getBillStatus
+      tags: [Bills Payment]
+      parameters:
+        - name: reference
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Bill status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BillEnvelope'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    BillCategory:
+      type: object
+      properties:
+        code: { type: string }
+        name: { type: string }
+        description: { type: string }
+    Biller:
+      type: object
+      properties:
+        billerCode: { type: string }
+        billerName: { type: string }
+        categoryCode: { type: string }
+    BillerItem:
+      type: object
+      properties:
+        billerItemCode: { type: string }
+        billerItemName: { type: string }
+        amount: { type: number }
+        billerCode: { type: string }
+        amountType: { type: string, enum: [FIXED, RANGE, FREE] }
+    Bill:
+      type: object
+      properties:
+        reference: { type: string }
+        billerCode: { type: string }
+        billerItemCode: { type: string }
+        customerId: { type: string }
+        amount: { type: number }
+        narration: { type: string }
+        token: { type: string, description: Electricity token, where applicable. }
+        status: { type: string, enum: [PENDING, SUCCESS, FAILED] }
+        dateProcessed: { type: string, format: date-time }
+    BillEnvelope:
+      type: object
+      properties:
+        requestSuccessful: { type: boolean }
+        responseMessage: { type: string }
+        responseCode: { type: string }
+        responseBody: { $ref: '#/components/schemas/Bill' }
