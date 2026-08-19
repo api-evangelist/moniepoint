@@ -1,0 +1,452 @@
+{
+  "item": [
+    {
+      "id": "9492d875-c756-4f56-96d3-0acdc468790c",
+      "name": "Mandates",
+      "description": {
+        "content": "Create and manage direct-debit mandates.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "43e5ef80-14c3-4868-9444-fd5f07b9d7fc",
+          "name": "Monnify Create Direct Debit Mandate",
+          "request": {
+            "name": "Monnify Create Direct Debit Mandate",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "direct-debit",
+                "mandate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mandateDescription\": \"<string>\",\n  \"mandateAmount\": \"<number>\",\n  \"customerName\": \"<string>\",\n  \"customerAccountNumber\": \"<string>\",\n  \"customerBankCode\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"customerEmail\": \"<email>\",\n  \"customerPhoneNumber\": \"<string>\",\n  \"frequency\": \"<string>\",\n  \"amountType\": \"<string>\",\n  \"debitReference\": \"<string>\",\n  \"contractCode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e9cfd31b-218f-4670-b389-400d75f76492",
+              "name": "Mandate created (pending activation).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "direct-debit",
+                    "mandate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mandateDescription\": \"<string>\",\n  \"mandateAmount\": \"<number>\",\n  \"customerName\": \"<string>\",\n  \"customerAccountNumber\": \"<string>\",\n  \"customerBankCode\": \"<string>\",\n  \"startDate\": \"<date>\",\n  \"endDate\": \"<date>\",\n  \"customerEmail\": \"<email>\",\n  \"customerPhoneNumber\": \"<string>\",\n  \"frequency\": \"<string>\",\n  \"amountType\": \"<string>\",\n  \"debitReference\": \"<string>\",\n  \"contractCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": true,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"mandateCode\": \"string\",\n    \"mandateDescription\": \"string\",\n    \"mandateAmount\": 5449.549939175247,\n    \"customerName\": \"string\",\n    \"customerAccountNumber\": \"string\",\n    \"customerBankCode\": \"string\",\n    \"status\": \"ACTIVATED\",\n    \"frequency\": \"string\",\n    \"amountType\": \"string\",\n    \"startDate\": \"2007-11-20\",\n    \"endDate\": \"1996-09-17\",\n    \"dateCreated\": \"1974-08-30T12:05:18.731Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d14cae5-d661-4fa6-bc7b-8744f401be2d",
+          "name": "Monnify Get Direct Debit Mandate",
+          "request": {
+            "name": "Monnify Get Direct Debit Mandate",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "direct-debit",
+                "mandate",
+                ":mandateCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mandateCode",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "01f82034-63f2-45e9-8d1e-096f9e53183d",
+              "name": "Mandate details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "direct-debit",
+                    "mandate",
+                    ":mandateCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mandateCode",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": true,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"mandateCode\": \"string\",\n    \"mandateDescription\": \"string\",\n    \"mandateAmount\": 5449.549939175247,\n    \"customerName\": \"string\",\n    \"customerAccountNumber\": \"string\",\n    \"customerBankCode\": \"string\",\n    \"status\": \"ACTIVATED\",\n    \"frequency\": \"string\",\n    \"amountType\": \"string\",\n    \"startDate\": \"2007-11-20\",\n    \"endDate\": \"1996-09-17\",\n    \"dateCreated\": \"1974-08-30T12:05:18.731Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "de7e0255-800a-42f2-b951-7e702d0c01dc",
+          "name": "Monnify Cancel Direct Debit Mandate",
+          "request": {
+            "name": "Monnify Cancel Direct Debit Mandate",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "direct-debit",
+                "mandate",
+                ":mandateCode"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "mandateCode",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b54bbd2-daa1-4e5e-8ae7-e7ef75a128b2",
+              "name": "Mandate cancelled.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "direct-debit",
+                    "mandate",
+                    ":mandateCode"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "mandateCode",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": true,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"mandateCode\": \"string\",\n    \"mandateDescription\": \"string\",\n    \"mandateAmount\": 5449.549939175247,\n    \"customerName\": \"string\",\n    \"customerAccountNumber\": \"string\",\n    \"customerBankCode\": \"string\",\n    \"status\": \"ACTIVATED\",\n    \"frequency\": \"string\",\n    \"amountType\": \"string\",\n    \"startDate\": \"2007-11-20\",\n    \"endDate\": \"1996-09-17\",\n    \"dateCreated\": \"1974-08-30T12:05:18.731Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "023d6ee7-bb02-480a-b238-129bf1d354b1",
+          "name": "Monnify Activate Direct Debit Mandate",
+          "request": {
+            "name": "Monnify Activate Direct Debit Mandate",
+            "description": {
+              "content": "Submit the activation code to move a mandate from PENDING to ACTIVATED.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "direct-debit",
+                "mandate",
+                "activation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mandateCode\": \"<string>\",\n  \"activationCode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4e2faf79-8f78-459e-af7e-8decf8663110",
+              "name": "Mandate activated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "direct-debit",
+                    "mandate",
+                    "activation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mandateCode\": \"<string>\",\n  \"activationCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": true,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"mandateCode\": \"string\",\n    \"mandateDescription\": \"string\",\n    \"mandateAmount\": 5449.549939175247,\n    \"customerName\": \"string\",\n    \"customerAccountNumber\": \"string\",\n    \"customerBankCode\": \"string\",\n    \"status\": \"ACTIVATED\",\n    \"frequency\": \"string\",\n    \"amountType\": \"string\",\n    \"startDate\": \"2007-11-20\",\n    \"endDate\": \"1996-09-17\",\n    \"dateCreated\": \"1974-08-30T12:05:18.731Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pos.moniepoint.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "49a827a2-c1f4-4b94-b5c1-855c45482a49",
+    "name": "Moniepoint POS Push Payment Authentication Mandates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Push payment-request flow for Moniepoint POS terminals. ISV partners push an authenticated payment request to a registered terminal serial number; the merchant taps to accept and the terminal completes a card or bank-transfer collection routed through Moniepoint's acquiring rails. API client credentials (client id and client secret) are issued from the Moniepoint Business dashboard.\n\n\nContact Support:\n Name: Moniepoint POS Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

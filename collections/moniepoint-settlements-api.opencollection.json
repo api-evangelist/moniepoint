@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Moniepoint POS Push Payment Authentication Settlements API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Settlements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify Find Transactions By Settlement Reference",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v1/transactions/find-by-settlement-reference",
+            "params": [
+              {
+                "name": "reference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List the transactions included in a single settlement payout."
+        },
+        {
+          "info": {
+            "name": "Monnify List Settlements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v1/settlements",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "from",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Monnify List Settlements"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,81 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Moniepoint POS Push Payment Authentication Refunds API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Refunds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify Initiate Refund",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pos.moniepoint.com/api/v1/refunds/initiate-refund",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Monnify Initiate Refund"
+        },
+        {
+          "info": {
+            "name": "Monnify List Refunds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v1/refunds",
+            "params": [
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Monnify List Refunds"
+        },
+        {
+          "info": {
+            "name": "Monnify Get Refund Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v1/refunds/:refundReference",
+            "params": [
+              {
+                "name": "refundReference",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Monnify Get Refund Status"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

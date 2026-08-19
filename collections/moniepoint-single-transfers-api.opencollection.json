@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Moniepoint POS Push Payment Authentication Single Transfers API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Single Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify Initiate Single Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pos.moniepoint.com/api/v2/disbursements/single",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a single-bank-account payout. Requires beneficiary account name verified by Name Inquiry."
+        },
+        {
+          "info": {
+            "name": "Monnify Authorize Single Transfer OTP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pos.moniepoint.com/api/v2/disbursements/single/validate-otp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit the OTP returned to the merchant to authorize a pending transfer."
+        },
+        {
+          "info": {
+            "name": "Monnify Resend Transfer OTP",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pos.moniepoint.com/api/v2/disbursements/single/resend-otp",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Monnify Resend Transfer OTP"
+        },
+        {
+          "info": {
+            "name": "Monnify Get Single Transfer Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v2/disbursements/single/summary",
+            "params": [
+              {
+                "name": "reference",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Look up the current status of a single transfer."
+        },
+        {
+          "info": {
+            "name": "Monnify List Single Transfers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v2/disbursements/single/transactions",
+            "params": [
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Monnify List Single Transfers"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

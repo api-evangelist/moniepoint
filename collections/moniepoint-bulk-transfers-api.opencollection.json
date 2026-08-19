@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Moniepoint POS Push Payment Authentication Bulk Transfers API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bulk Transfers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify Initiate Bulk Transfer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pos.moniepoint.com/api/v2/disbursements/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Initiate a batch of transfers in one call."
+        },
+        {
+          "info": {
+            "name": "Monnify Get Bulk Transfer Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v2/disbursements/bulk/summary",
+            "params": [
+              {
+                "name": "batchReference",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Monnify Get Bulk Transfer Summary"
+        },
+        {
+          "info": {
+            "name": "Monnify List Bulk Transfer Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v2/disbursements/bulk/:batchReference/transactions",
+            "params": [
+              {
+                "name": "batchReference",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "pageNo",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Monnify List Bulk Transfer Items"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

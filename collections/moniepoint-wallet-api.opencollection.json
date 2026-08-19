@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Moniepoint POS Push Payment Authentication Wallet API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Wallet",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify Get Disbursement Wallet Balance",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v2/disbursements/wallet-balance",
+            "params": [
+              {
+                "name": "accountNumber",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Monnify Get Disbursement Wallet Balance"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

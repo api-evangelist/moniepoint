@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Moniepoint POS Push Payment Authentication Reserved Accounts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Reserved Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify Reserve A Customer Account (V2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pos.moniepoint.com/api/v2/bank-transfer/reserved-accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a permanent NUBAN virtual account for a customer."
+        },
+        {
+          "info": {
+            "name": "Monnify Update Reserved Account KYC",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://pos.moniepoint.com/api/v2/bank-transfer/reserved-accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update BVN, NIN, or customer details for a reserved account."
+        },
+        {
+          "info": {
+            "name": "Monnify Get Reserved Account Details (V2)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v2/bank-transfer/reserved-accounts/:accountReference",
+            "params": [
+              {
+                "name": "accountReference",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetch a single reserved account by accountReference."
+        },
+        {
+          "info": {
+            "name": "Monnify Deallocate Reserved Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://pos.moniepoint.com/api/v2/bank-transfer/reserved-accounts/:accountReference",
+            "params": [
+              {
+                "name": "accountReference",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Permanently deallocate a reserved account."
+        },
+        {
+          "info": {
+            "name": "Monnify List Reserved Account Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v1/bank-transfer/reserved-accounts/transactions",
+            "params": [
+              {
+                "name": "accountReference",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "size",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Paginated list of inbound transactions to a reserved account."
+        },
+        {
+          "info": {
+            "name": "Monnify Reserve Account With Limit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pos.moniepoint.com/api/v1/bank-transfer/reserved-accounts/limit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a reserved account with a pre-assigned limit profile."
+        },
+        {
+          "info": {
+            "name": "Monnify Update Reserved Account Limit",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://pos.moniepoint.com/api/v1/bank-transfer/reserved-accounts/limit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Assign or change the limit profile on an existing reserved account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

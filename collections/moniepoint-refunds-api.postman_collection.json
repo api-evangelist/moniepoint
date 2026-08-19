@@ -1,0 +1,343 @@
+{
+  "item": [
+    {
+      "id": "ada80999-4914-4e13-b39d-68fd7b062d3d",
+      "name": "Refunds",
+      "description": {
+        "content": "Initiate and query refunds.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8804b5bc-025c-4e4d-ace4-4af11583e035",
+          "name": "Monnify Initiate Refund",
+          "request": {
+            "name": "Monnify Initiate Refund",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "refunds",
+                "initiate-refund"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transactionReference\": \"<string>\",\n  \"refundReference\": \"<string>\",\n  \"refundAmount\": \"<number>\",\n  \"refundReason\": \"<string>\",\n  \"customerNote\": \"<string>\",\n  \"destinationAccountNumber\": \"<string>\",\n  \"destinationAccountBankCode\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ae8dff54-35a5-48b8-bf74-7b30fc5681e4",
+              "name": "Refund initiated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "refunds",
+                    "initiate-refund"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionReference\": \"<string>\",\n  \"refundReference\": \"<string>\",\n  \"refundAmount\": \"<number>\",\n  \"refundReason\": \"<string>\",\n  \"customerNote\": \"<string>\",\n  \"destinationAccountNumber\": \"<string>\",\n  \"destinationAccountBankCode\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": true,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"refundReference\": \"string\",\n    \"transactionReference\": \"string\",\n    \"refundAmount\": 2888.357025908402,\n    \"refundReason\": \"string\",\n    \"refundStatus\": \"PENDING\",\n    \"dateCreated\": \"1959-03-30T16:46:53.537Z\",\n    \"completedOn\": \"1981-07-28T16:02:34.009Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b84ff073-8db6-4482-8fce-aef8ff5e8508",
+          "name": "Monnify List Refunds",
+          "request": {
+            "name": "Monnify List Refunds",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "refunds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageNo",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "da4b8206-c26a-4848-bc26-d95f3e81b9d4",
+              "name": "Refunds page.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "refunds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNo",
+                      "value": "0"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": true,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"content\": [\n      {\n        \"refundReference\": \"string\",\n        \"transactionReference\": \"string\",\n        \"refundAmount\": 9017.559734247781,\n        \"refundReason\": \"string\",\n        \"refundStatus\": \"PENDING\",\n        \"dateCreated\": \"1960-07-25T09:52:05.892Z\",\n        \"completedOn\": \"2000-07-06T14:17:57.112Z\"\n      },\n      {\n        \"refundReference\": \"string\",\n        \"transactionReference\": \"string\",\n        \"refundAmount\": 5217.349413762406,\n        \"refundReason\": \"string\",\n        \"refundStatus\": \"COMPLETED\",\n        \"dateCreated\": \"1998-11-20T23:20:25.852Z\",\n        \"completedOn\": \"2020-06-05T02:51:55.314Z\"\n      }\n    ],\n    \"totalElements\": 5954,\n    \"totalPages\": 1959\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b8d3d93-01c4-439c-bd5d-29eb265ef5a5",
+          "name": "Monnify Get Refund Status",
+          "request": {
+            "name": "Monnify Get Refund Status",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "refunds",
+                ":refundReference"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "refundReference",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8b01df4c-e4e9-4b62-9931-c75d649f4f0a",
+              "name": "Refund details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "refunds",
+                    ":refundReference"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "refundReference",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": true,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"refundReference\": \"string\",\n    \"transactionReference\": \"string\",\n    \"refundAmount\": 2888.357025908402,\n    \"refundReason\": \"string\",\n    \"refundStatus\": \"PENDING\",\n    \"dateCreated\": \"1959-03-30T16:46:53.537Z\",\n    \"completedOn\": \"1981-07-28T16:02:34.009Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pos.moniepoint.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "8a44758b-b46b-499e-a348-fcced3f5cca8",
+    "name": "Moniepoint POS Push Payment Authentication Refunds API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Push payment-request flow for Moniepoint POS terminals. ISV partners push an authenticated payment request to a registered terminal serial number; the merchant taps to accept and the terminal completes a card or bank-transfer collection routed through Moniepoint's acquiring rails. API client credentials (client id and client secret) are issued from the Moniepoint Business dashboard.\n\n\nContact Support:\n Name: Moniepoint POS Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Moniepoint POS Push Payment Authentication Debits API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Debits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify Debit Direct Debit Mandate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pos.moniepoint.com/api/v1/direct-debit/mandate/debit",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Debit a configured amount against an active mandate. Supports incomeSplit (April 2026)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

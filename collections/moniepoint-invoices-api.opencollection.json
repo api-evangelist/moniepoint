@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Moniepoint POS Push Payment Authentication Invoices API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify Create Invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pos.moniepoint.com/api/v1/invoice/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Monnify Create Invoice"
+        },
+        {
+          "info": {
+            "name": "Monnify Get Invoice Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v1/invoice/:invoiceReference/details",
+            "params": [
+              {
+                "name": "invoiceReference",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Monnify Get Invoice Details"
+        },
+        {
+          "info": {
+            "name": "Monnify List Invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v1/invoice/all"
+          },
+          "docs": "Monnify List Invoices"
+        },
+        {
+          "info": {
+            "name": "Monnify Cancel Invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://pos.moniepoint.com/api/v1/invoice/:invoiceReference/cancel",
+            "params": [
+              {
+                "name": "invoiceReference",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Monnify Cancel Invoice"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,366 @@
+{
+  "item": [
+    {
+      "id": "023e7466-20c6-46b7-abc4-5a4e139b1d50",
+      "name": "Bulk Transfers",
+      "description": {
+        "content": "Initiate and query bulk transfer batches.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8f815463-32a2-4000-a99c-dcf6c8684856",
+          "name": "Monnify Initiate Bulk Transfer",
+          "request": {
+            "name": "Monnify Initiate Bulk Transfer",
+            "description": {
+              "content": "Initiate a batch of transfers in one call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "disbursements",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"batchReference\": \"<string>\",\n  \"narration\": \"<string>\",\n  \"sourceAccountNumber\": \"<string>\",\n  \"transactionList\": [\n    {\n      \"amount\": \"<number>\",\n      \"reference\": \"<string>\",\n      \"narration\": \"<string>\",\n      \"destinationBankCode\": \"<string>\",\n      \"destinationAccountNumber\": \"<string>\",\n      \"destinationAccountName\": \"<string>\",\n      \"currency\": \"<string>\"\n    },\n    {\n      \"amount\": \"<number>\",\n      \"reference\": \"<string>\",\n      \"narration\": \"<string>\",\n      \"destinationBankCode\": \"<string>\",\n      \"destinationAccountNumber\": \"<string>\",\n      \"destinationAccountName\": \"<string>\",\n      \"currency\": \"<string>\"\n    }\n  ],\n  \"onValidationFailure\": \"<string>\",\n  \"notificationInterval\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "80ce4ed2-a9bb-42d6-a40a-cc37ce3211f4",
+              "name": "Bulk transfer accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "disbursements",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"batchReference\": \"<string>\",\n  \"narration\": \"<string>\",\n  \"sourceAccountNumber\": \"<string>\",\n  \"transactionList\": [\n    {\n      \"amount\": \"<number>\",\n      \"reference\": \"<string>\",\n      \"narration\": \"<string>\",\n      \"destinationBankCode\": \"<string>\",\n      \"destinationAccountNumber\": \"<string>\",\n      \"destinationAccountName\": \"<string>\",\n      \"currency\": \"NGN\"\n    },\n    {\n      \"amount\": \"<number>\",\n      \"reference\": \"<string>\",\n      \"narration\": \"<string>\",\n      \"destinationBankCode\": \"<string>\",\n      \"destinationAccountNumber\": \"<string>\",\n      \"destinationAccountName\": \"<string>\",\n      \"currency\": \"NGN\"\n    }\n  ],\n  \"onValidationFailure\": \"<string>\",\n  \"notificationInterval\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": true,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"batchReference\": \"string\",\n    \"batchStatus\": \"string\",\n    \"totalAmount\": 7820.480060933168,\n    \"totalFee\": 8172.842201005001,\n    \"totalReceivedAmount\": 4239.061146857086,\n    \"totalCount\": 4225,\n    \"successfulCount\": 1206,\n    \"failedCount\": 8817,\n    \"pendingCount\": 9221,\n    \"dateCreated\": \"2019-09-29T04:42:55.256Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd18caaf-d6c8-4313-9dd6-e872960b704f",
+          "name": "Monnify Get Bulk Transfer Summary",
+          "request": {
+            "name": "Monnify Get Bulk Transfer Summary",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "disbursements",
+                "bulk",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "batchReference",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7bbc08e5-024e-41d8-8f60-57339b8302f1",
+              "name": "Bulk transfer summary.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "disbursements",
+                    "bulk",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "batchReference",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": true,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"batchReference\": \"string\",\n    \"batchStatus\": \"string\",\n    \"totalAmount\": 7820.480060933168,\n    \"totalFee\": 8172.842201005001,\n    \"totalReceivedAmount\": 4239.061146857086,\n    \"totalCount\": 4225,\n    \"successfulCount\": 1206,\n    \"failedCount\": 8817,\n    \"pendingCount\": 9221,\n    \"dateCreated\": \"2019-09-29T04:42:55.256Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "281980f2-5549-460e-8c3a-d3dae12b9191",
+          "name": "Monnify List Bulk Transfer Items",
+          "request": {
+            "name": "Monnify List Bulk Transfer Items",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v2",
+                "disbursements",
+                "bulk",
+                ":batchReference",
+                "transactions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "pageNo",
+                  "value": "0"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "batchReference",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "98b0f20c-72be-4ee3-b3a9-eda93b2e45f5",
+              "name": "Bulk transfer items page.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2",
+                    "disbursements",
+                    "bulk",
+                    ":batchReference",
+                    "transactions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNo",
+                      "value": "0"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "batchReference",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": true,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"content\": [\n      {\n        \"reference\": \"string\",\n        \"amount\": 6003.974000693925,\n        \"destinationAccountName\": \"string\",\n        \"destinationAccountNumber\": \"string\",\n        \"destinationBankCode\": \"string\",\n        \"currency\": \"string\",\n        \"status\": \"FAILED\",\n        \"narration\": \"string\",\n        \"fee\": 8778.239655940366,\n        \"dateCreated\": \"1995-06-06T20:59:57.459Z\"\n      },\n      {\n        \"reference\": \"string\",\n        \"amount\": 8012.787370552229,\n        \"destinationAccountName\": \"string\",\n        \"destinationAccountNumber\": \"string\",\n        \"destinationBankCode\": \"string\",\n        \"currency\": \"string\",\n        \"status\": \"REVERSED\",\n        \"narration\": \"string\",\n        \"fee\": 9972.85589506419,\n        \"dateCreated\": \"2019-12-21T12:36:50.448Z\"\n      }\n    ],\n    \"number\": 8507,\n    \"size\": 2992,\n    \"totalElements\": 6720,\n    \"totalPages\": 2209\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pos.moniepoint.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c8a2f5ad-d4d9-4055-ba3c-a10204f2182e",
+    "name": "Moniepoint POS Push Payment Authentication Bulk Transfers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Push payment-request flow for Moniepoint POS terminals. ISV partners push an authenticated payment request to a registered terminal serial number; the merchant taps to accept and the terminal completes a card or bank-transfer collection routed through Moniepoint's acquiring rails. API client credentials (client id and client secret) are issued from the Moniepoint Business dashboard.\n\n\nContact Support:\n Name: Moniepoint POS Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

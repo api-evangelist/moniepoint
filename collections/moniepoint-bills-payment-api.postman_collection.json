@@ -1,0 +1,612 @@
+{
+  "item": [
+    {
+      "id": "f2524286-d41f-4382-858d-77ea2fcbdf18",
+      "name": "Bills Payment",
+      "description": {
+        "content": "Bill categories, billers, validation, processing, and status.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9957ab36-9ea9-4912-92fd-078ba251fa64",
+          "name": "Monnify List Bill Categories",
+          "request": {
+            "name": "Monnify List Bill Categories",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "bill-payment",
+                "categories"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f5817cdd-d177-4b3d-b0cf-1ff50a862af7",
+              "name": "Categories list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bill-payment",
+                    "categories"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": false,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": [\n    {\n      \"code\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc62bee6-129d-4d46-8a16-16c08a76a59d",
+          "name": "Monnify List Billers",
+          "request": {
+            "name": "Monnify List Billers",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "bill-payment",
+                "billers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "categoryCode",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "42e6370a-4f3a-4389-91ae-fc15deffdaa6",
+              "name": "Biller list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bill-payment",
+                    "billers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "categoryCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": true,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": [\n    {\n      \"billerCode\": \"string\",\n      \"billerName\": \"string\",\n      \"categoryCode\": \"string\"\n    },\n    {\n      \"billerCode\": \"string\",\n      \"billerName\": \"string\",\n      \"categoryCode\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "21d5423c-4776-41c8-b004-a6b545e967e7",
+          "name": "Monnify List Biller Items",
+          "request": {
+            "name": "Monnify List Biller Items",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "bill-payment",
+                "biller-items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "billerCode",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d45b2a82-b05a-4437-b0f7-ad0fd849080d",
+              "name": "Biller items list.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bill-payment",
+                    "biller-items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "billerCode",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": false,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": [\n    {\n      \"billerItemCode\": \"string\",\n      \"billerItemName\": \"string\",\n      \"amount\": 8942.005795969897,\n      \"billerCode\": \"string\",\n      \"amountType\": \"FIXED\"\n    },\n    {\n      \"billerItemCode\": \"string\",\n      \"billerItemName\": \"string\",\n      \"amount\": 6254.880632653239,\n      \"billerCode\": \"string\",\n      \"amountType\": \"RANGE\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a47f217-8bb6-4e4a-928c-53dbb460a698",
+          "name": "Monnify Validate Bills Customer",
+          "request": {
+            "name": "Monnify Validate Bills Customer",
+            "description": {
+              "content": "Validate a customer identifier (smart-card number, meter number, account number) against a biller.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "bill-payment",
+                "customer-validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billerCode\": \"<string>\",\n  \"billerItemCode\": \"<string>\",\n  \"customerId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "49164d98-1af7-4993-bd20-3c29df3f8ce6",
+              "name": "Customer validated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bill-payment",
+                    "customer-validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billerCode\": \"<string>\",\n  \"billerItemCode\": \"<string>\",\n  \"customerId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": false,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"customerId\": \"string\",\n    \"customerName\": \"string\",\n    \"customerAddress\": \"string\",\n    \"billerCode\": \"string\",\n    \"billerItemCode\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e6431463-b1ec-44e4-b0f1-916fc57a747c",
+          "name": "Monnify Process Bill",
+          "request": {
+            "name": "Monnify Process Bill",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "bill-payment",
+                "process-bill"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"billerCode\": \"<string>\",\n  \"billerItemCode\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"reference\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"narration\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "280638c6-43d2-4662-8479-de08c40ace4b",
+              "name": "Bill processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bill-payment",
+                    "process-bill"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"billerCode\": \"<string>\",\n  \"billerItemCode\": \"<string>\",\n  \"customerId\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"reference\": \"<string>\",\n  \"customerEmail\": \"<email>\",\n  \"narration\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": true,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"reference\": \"string\",\n    \"billerCode\": \"string\",\n    \"billerItemCode\": \"string\",\n    \"customerId\": \"string\",\n    \"amount\": 4818.893546437967,\n    \"narration\": \"string\",\n    \"token\": \"string\",\n    \"status\": \"FAILED\",\n    \"dateProcessed\": \"1956-07-20T08:04:25.748Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f828ad1c-fb2b-4777-b12a-14096fe0151d",
+          "name": "Monnify Get Bill Status",
+          "request": {
+            "name": "Monnify Get Bill Status",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "bill-payment",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "reference",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7f368362-84a7-4cdd-ab27-776584b3856e",
+              "name": "Bill status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "bill-payment",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "reference",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": true,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"reference\": \"string\",\n    \"billerCode\": \"string\",\n    \"billerItemCode\": \"string\",\n    \"customerId\": \"string\",\n    \"amount\": 4818.893546437967,\n    \"narration\": \"string\",\n    \"token\": \"string\",\n    \"status\": \"FAILED\",\n    \"dateProcessed\": \"1956-07-20T08:04:25.748Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pos.moniepoint.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "41a4869f-3fda-45f6-9a15-a5fce7f9a793",
+    "name": "Moniepoint POS Push Payment Authentication Bills Payment API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Push payment-request flow for Moniepoint POS terminals. ISV partners push an authenticated payment request to a registered terminal serial number; the merchant taps to accept and the terminal completes a card or bank-transfer collection routed through Moniepoint's acquiring rails. API client credentials (client id and client secret) are issued from the Moniepoint Business dashboard.\n\n\nContact Support:\n Name: Moniepoint POS Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

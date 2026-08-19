@@ -1,0 +1,84 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Moniepoint POS Push Payment Authentication Sub-Accounts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sub-Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify List Sub-Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v1/sub-accounts"
+          },
+          "docs": "Monnify List Sub-Accounts"
+        },
+        {
+          "info": {
+            "name": "Monnify Create Sub-Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pos.moniepoint.com/api/v1/sub-accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create one or more sub-accounts in a single call."
+        },
+        {
+          "info": {
+            "name": "Monnify Update Sub-Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://pos.moniepoint.com/api/v1/sub-accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Monnify Update Sub-Account"
+        },
+        {
+          "info": {
+            "name": "Monnify Delete Sub-Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://pos.moniepoint.com/api/v1/sub-accounts/:subAccountCode",
+            "params": [
+              {
+                "name": "subAccountCode",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Monnify Delete Sub-Account"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

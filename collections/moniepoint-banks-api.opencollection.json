@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Moniepoint POS Push Payment Authentication Banks API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Banks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify List NIP Banks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v1/sdk/transactions/banks"
+          },
+          "docs": "Returns the list of supported Nigerian banks with bank codes."
+        },
+        {
+          "info": {
+            "name": "Monnify Validate Bank Account (Name Inquiry)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v1/disbursements/account/validate",
+            "params": [
+              {
+                "name": "accountNumber",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bankCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Return the registered account name for a bank account number."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

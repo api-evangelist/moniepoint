@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Moniepoint POS Push Payment Authentication Limit Profiles API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Limit Profiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify List Limit Profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v1/limit-profiles"
+          },
+          "docs": "Paginated list of limit profiles for the merchant."
+        },
+        {
+          "info": {
+            "name": "Monnify Create Limit Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pos.moniepoint.com/api/v1/limit-profiles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Define a per-transaction and daily cap profile to apply to reserved accounts."
+        },
+        {
+          "info": {
+            "name": "Monnify Update Limit Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://pos.moniepoint.com/api/v1/limit-profiles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Monnify Update Limit Profile"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

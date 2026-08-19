@@ -1,0 +1,152 @@
+{
+  "item": [
+    {
+      "id": "9bbf39b0-395b-41ff-a858-0d10befcf59e",
+      "name": "Debits",
+      "description": {
+        "content": "Initiate debits against an active mandate.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9a56d56a-c3bc-4ac9-a552-7ae66face401",
+          "name": "Monnify Debit Direct Debit Mandate",
+          "request": {
+            "name": "Monnify Debit Direct Debit Mandate",
+            "description": {
+              "content": "Debit a configured amount against an active mandate. Supports incomeSplit (April 2026).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "direct-debit",
+                "mandate",
+                "debit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mandateCode\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"debitReference\": \"<string>\",\n  \"narration\": \"<string>\",\n  \"incomeSplit\": [\n    {\n      \"subAccountCode\": \"<string>\",\n      \"splitPercentage\": \"<number>\",\n      \"splitAmount\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    },\n    {\n      \"subAccountCode\": \"<string>\",\n      \"splitPercentage\": \"<number>\",\n      \"splitAmount\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ce6ad959-cc49-477a-8b36-45990060be3e",
+              "name": "Debit accepted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "direct-debit",
+                    "mandate",
+                    "debit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"mandateCode\": \"<string>\",\n  \"amount\": \"<number>\",\n  \"debitReference\": \"<string>\",\n  \"narration\": \"<string>\",\n  \"incomeSplit\": [\n    {\n      \"subAccountCode\": \"<string>\",\n      \"splitPercentage\": \"<number>\",\n      \"splitAmount\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    },\n    {\n      \"subAccountCode\": \"<string>\",\n      \"splitPercentage\": \"<number>\",\n      \"splitAmount\": \"<number>\",\n      \"feeBearer\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": true,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"mandateCode\": \"string\",\n    \"debitReference\": \"string\",\n    \"amount\": 3328.6874249507227,\n    \"transactionReference\": \"string\",\n    \"status\": \"FAILED\",\n    \"dateCreated\": \"1970-01-05T18:44:35.904Z\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pos.moniepoint.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a0c615ca-9cf0-41f2-9b01-f9e1b1e56ed8",
+    "name": "Moniepoint POS Push Payment Authentication Debits API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Push payment-request flow for Moniepoint POS terminals. ISV partners push an authenticated payment request to a registered terminal serial number; the merchant taps to accept and the terminal completes a card or bank-transfer collection routed through Moniepoint's acquiring rails. API client credentials (client id and client secret) are issued from the Moniepoint Business dashboard.\n\n\nContact Support:\n Name: Moniepoint POS Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

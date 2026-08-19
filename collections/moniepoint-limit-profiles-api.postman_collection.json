@@ -1,0 +1,330 @@
+{
+  "item": [
+    {
+      "id": "610b2b89-5b8f-4119-9405-2c20c34a1a55",
+      "name": "Limit Profiles",
+      "description": {
+        "content": "Per-account transaction limit profiles.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c6f4d6dc-a408-4bb1-beff-a20de8748310",
+          "name": "Monnify Create Limit Profile",
+          "request": {
+            "name": "Monnify Create Limit Profile",
+            "description": {
+              "content": "Define a per-transaction and daily cap profile to apply to reserved accounts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "limit-profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limitProfileCode\": \"<string>\",\n  \"limitProfileName\": \"<string>\",\n  \"singleTransactionValue\": \"<number>\",\n  \"dailyTransactionVolume\": \"<integer>\",\n  \"dailyTransactionValue\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e99ad9d6-a59d-47e5-823b-54fecc12dc84",
+              "name": "Limit profile created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "limit-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"limitProfileCode\": \"<string>\",\n  \"limitProfileName\": \"<string>\",\n  \"singleTransactionValue\": \"<number>\",\n  \"dailyTransactionVolume\": \"<integer>\",\n  \"dailyTransactionValue\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": true,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"limitProfileCode\": \"string\",\n    \"limitProfileName\": \"string\",\n    \"singleTransactionValue\": 7025.128754652549,\n    \"dailyTransactionVolume\": 7757,\n    \"dailyTransactionValue\": 9688.622365231098\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2594eafb-4d29-4f8f-9627-73fc685eea2b",
+          "name": "Monnify List Limit Profiles",
+          "request": {
+            "name": "Monnify List Limit Profiles",
+            "description": {
+              "content": "Paginated list of limit profiles for the merchant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "limit-profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c1f14b2b-e12c-46ad-a440-93134d8e1ee6",
+              "name": "Limit profiles page.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "limit-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": false,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"content\": [\n      {\n        \"limitProfileCode\": \"string\",\n        \"limitProfileName\": \"string\",\n        \"singleTransactionValue\": 4715.135979675309,\n        \"dailyTransactionVolume\": 9283,\n        \"dailyTransactionValue\": 5540.4525891661815\n      },\n      {\n        \"limitProfileCode\": \"string\",\n        \"limitProfileName\": \"string\",\n        \"singleTransactionValue\": 8575.807023528047,\n        \"dailyTransactionVolume\": 3244,\n        \"dailyTransactionValue\": 8587.993889013831\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6cd68ccc-bb34-4e33-ba3e-3310a9c78915",
+          "name": "Monnify Update Limit Profile",
+          "request": {
+            "name": "Monnify Update Limit Profile",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "limit-profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"limitProfileCode\": \"<string>\",\n  \"limitProfileName\": \"<string>\",\n  \"singleTransactionValue\": \"<number>\",\n  \"dailyTransactionVolume\": \"<integer>\",\n  \"dailyTransactionValue\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ad01d014-82af-47ae-8518-da5f4e54d98d",
+              "name": "Updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "limit-profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"limitProfileCode\": \"<string>\",\n  \"limitProfileName\": \"<string>\",\n  \"singleTransactionValue\": \"<number>\",\n  \"dailyTransactionVolume\": \"<integer>\",\n  \"dailyTransactionValue\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"requestSuccessful\": true,\n  \"responseMessage\": \"string\",\n  \"responseCode\": \"string\",\n  \"responseBody\": {\n    \"limitProfileCode\": \"string\",\n    \"limitProfileName\": \"string\",\n    \"singleTransactionValue\": 7025.128754652549,\n    \"dailyTransactionVolume\": 7757,\n    \"dailyTransactionValue\": 9688.622365231098\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://pos.moniepoint.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dd5c89e0-0c8a-49d7-8951-df9e5634f45b",
+    "name": "Moniepoint POS Push Payment Authentication Limit Profiles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Push payment-request flow for Moniepoint POS terminals. ISV partners push an authenticated payment request to a registered terminal serial number; the merchant taps to accept and the terminal completes a card or bank-transfer collection routed through Moniepoint's acquiring rails. API client credentials (client id and client secret) are issued from the Moniepoint Business dashboard.\n\n\nContact Support:\n Name: Moniepoint POS Developer Support",
+      "type": "text/plain"
+    }
+  }
+}

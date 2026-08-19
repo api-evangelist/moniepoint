@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Moniepoint POS Push Payment Authentication Mandates API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Mandates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Monnify Create Direct Debit Mandate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pos.moniepoint.com/api/v1/direct-debit/mandate",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Monnify Create Direct Debit Mandate"
+        },
+        {
+          "info": {
+            "name": "Monnify Get Direct Debit Mandate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://pos.moniepoint.com/api/v1/direct-debit/mandate/:mandateCode",
+            "params": [
+              {
+                "name": "mandateCode",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Monnify Get Direct Debit Mandate"
+        },
+        {
+          "info": {
+            "name": "Monnify Cancel Direct Debit Mandate",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://pos.moniepoint.com/api/v1/direct-debit/mandate/:mandateCode",
+            "params": [
+              {
+                "name": "mandateCode",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Monnify Cancel Direct Debit Mandate"
+        },
+        {
+          "info": {
+            "name": "Monnify Activate Direct Debit Mandate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://pos.moniepoint.com/api/v1/direct-debit/mandate/activation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Submit the activation code to move a mandate from PENDING to ACTIVATED."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
