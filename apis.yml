@@ -4,6 +4,11 @@ apis:
 - aid: moniepoint:monnify-webhooks
   name: Monnify Webhooks
   tags:
+  - Webhook
+  - Event
+  - HMAC
+  - SHA-512
+  tags_raw:
   - Webhooks
   - Events
   - HMAC
@@ -597,6 +602,8 @@ apis:
   description: Settlement batches and transactions reporting.
   humanURL: https://developers.monnify.com/docs/getting-started/authentication
   tags:
+  - Settlement
+  tags_raw:
   - Settlements
   properties:
   - type: OpenAPI
@@ -701,6 +708,8 @@ apis:
   description: Manage settlement sub-accounts.
   humanURL: https://developers.monnify.com/docs/getting-started/authentication
   tags:
+  - Subaccounts
+  tags_raw:
   - Sub-Accounts
   properties:
   - type: OpenAPI
@@ -753,6 +762,8 @@ apis:
   description: Initialize, charge, query, and list collection transactions.
   humanURL: https://developers.monnify.com/docs/getting-started/authentication
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
@@ -857,6 +868,8 @@ apis:
   description: Disbursement wallet balance and metadata.
   humanURL: https://developers.monnify.com/docs/getting-started/authentication
   tags:
+  - Wallets
+  tags_raw:
   - Wallet
   properties:
   - type: OpenAPI
@@ -958,6 +971,22 @@ apis:
     url: https://teamapt.atlassian.net/wiki/spaces/EI/pages/1042120729/API+Client+Credentials
 name: Moniepoint
 tags:
+  - Africa
+  - Nigeria
+  - Payments
+  - Banking
+  - Fintech
+  - Acquiring
+  - Point-of-Sale
+  - Collection
+  - Disbursements
+  - Virtual Accounts
+  - Direct Debit
+  - Bills Payment
+  - SMB
+  - Working Capital
+  - Unicorn
+tags_raw:
   - Africa
   - Nigeria
   - Payments
