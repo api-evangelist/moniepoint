@@ -14,8 +14,8 @@ info:
     can be read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: posApi
-  url: ../openapi/moniepoint-pos-api-openapi.yml
+- name: pushPaymentsApi
+  url: ../openapi/moniepoint-push-payments-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: pos-push-payment

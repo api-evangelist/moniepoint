@@ -11,8 +11,11 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
+- name: walletApi
+  url: ../openapi/moniepoint-wallet-api-openapi.yml
+  type: openapi
 - name: walletsApi
-  url: ../openapi/monnify-wallets-api-openapi.yml
+  url: ../openapi/moniepoint-wallets-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: wallet-balance-check

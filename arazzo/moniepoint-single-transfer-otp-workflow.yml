@@ -12,8 +12,11 @@ info:
     without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: disbursementsApi
-  url: ../openapi/monnify-disbursements-api-openapi.yml
+- name: banksApi
+  url: ../openapi/moniepoint-banks-api-openapi.yml
+  type: openapi
+- name: singleTransfersApi
+  url: ../openapi/moniepoint-single-transfers-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: single-transfer-otp

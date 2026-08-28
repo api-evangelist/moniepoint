@@ -10,8 +10,11 @@ info:
     can be read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
+- name: limitProfilesApi
+  url: ../openapi/moniepoint-limit-profiles-api-openapi.yml
+  type: openapi
 - name: reservedAccountsApi
-  url: ../openapi/monnify-reserved-accounts-api-openapi.yml
+  url: ../openapi/moniepoint-reserved-accounts-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: virtual-account-with-limit

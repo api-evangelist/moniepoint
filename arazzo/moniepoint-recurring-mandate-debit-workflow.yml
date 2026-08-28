@@ -11,8 +11,11 @@ info:
     be read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: directDebitApi
-  url: ../openapi/monnify-direct-debit-api-openapi.yml
+- name: debitsApi
+  url: ../openapi/moniepoint-debits-api-openapi.yml
+  type: openapi
+- name: mandatesApi
+  url: ../openapi/moniepoint-mandates-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: recurring-mandate-debit

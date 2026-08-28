@@ -13,7 +13,7 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: billsPaymentApi
-  url: ../openapi/monnify-bills-payment-api-openapi.yml
+  url: ../openapi/moniepoint-bills-payment-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: pay-bill

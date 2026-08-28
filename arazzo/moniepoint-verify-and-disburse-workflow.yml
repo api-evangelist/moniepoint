@@ -12,11 +12,11 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: verificationApi
-  url: ../openapi/monnify-verification-api-openapi.yml
+- name: singleTransfersApi
+  url: ../openapi/moniepoint-single-transfers-api-openapi.yml
   type: openapi
-- name: disbursementsApi
-  url: ../openapi/monnify-disbursements-api-openapi.yml
+- name: verificationApi
+  url: ../openapi/moniepoint-verification-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: verify-and-disburse

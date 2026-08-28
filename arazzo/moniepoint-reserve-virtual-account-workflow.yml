@@ -12,7 +12,7 @@ info:
   version: 1.0.0
 sourceDescriptions:
 - name: reservedAccountsApi
-  url: ../openapi/monnify-reserved-accounts-api-openapi.yml
+  url: ../openapi/moniepoint-reserved-accounts-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: reserve-virtual-account
