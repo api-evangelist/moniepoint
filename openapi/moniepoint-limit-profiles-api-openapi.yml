@@ -1,18 +1,20 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Moniepoint POS Push Payment Authentication Limit Profiles API
-  description: 'Push payment-request flow for Moniepoint POS terminals. ISV partners push an authenticated payment request to a registered terminal serial number; the merchant taps to accept and the terminal completes a card or bank-transfer collection routed through Moniepoint''s acquiring rails. API client credentials (client id and client secret) are issued from the Moniepoint Business dashboard.
+  title: Monnify Reserved Accounts Limit Profiles API
+  description: 'Provision permanent NUBAN virtual accounts (dedicated and invoice variants) for customers and merchants. V2 endpoints replace earlier /api/v1 routes for new integrations; transaction listing remains under /api/v1.
 
     '
-  version: '1.0'
+  version: '2.0'
   contact:
-    name: Moniepoint POS Developer Support
-    url: https://teamapt.atlassian.net/wiki/spaces/EI
+    name: Monnify Developer Support
+    url: https://developers.monnify.com
 servers:
-- url: https://pos.moniepoint.com
+- url: https://api.monnify.com
   description: Production
+- url: https://sandbox.monnify.com
+  description: Sandbox
 security:
-- BasicAuth: []
+- BearerAuth: []
 tags:
 - name: Limit Profiles
   description: Per-account transaction limit profiles.
@@ -116,7 +118,7 @@ components:
         dailyTransactionValue:
           type: number
   securitySchemes:
-    BasicAuth:
+    BearerAuth:
       type: http
-      scheme: basic
-      description: Basic auth using API client id and client secret from the Moniepoint Business dashboard.
+      scheme: bearer
+      bearerFormat: JWT

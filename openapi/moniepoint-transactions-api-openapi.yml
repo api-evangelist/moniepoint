@@ -1,18 +1,20 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Moniepoint POS Push Payment Authentication Transactions API
-  description: 'Push payment-request flow for Moniepoint POS terminals. ISV partners push an authenticated payment request to a registered terminal serial number; the merchant taps to accept and the terminal completes a card or bank-transfer collection routed through Moniepoint''s acquiring rails. API client credentials (client id and client secret) are issued from the Moniepoint Business dashboard.
+  title: Monnify Collections Transactions API
+  description: 'Accept money from customers in Nigeria via Monnify Checkout, server-to- server card capture with 3-D Secure / OTP, charge stored card tokens, complete bank-transfer payments, and look up transaction status.
 
     '
   version: '1.0'
   contact:
-    name: Moniepoint POS Developer Support
-    url: https://teamapt.atlassian.net/wiki/spaces/EI
+    name: Monnify Developer Support
+    url: https://developers.monnify.com
 servers:
-- url: https://pos.moniepoint.com
+- url: https://api.monnify.com
   description: Production
+- url: https://sandbox.monnify.com
+  description: Sandbox
 security:
-- BasicAuth: []
+- BearerAuth: []
 tags:
 - name: Transactions
   description: Initialize, charge, query, and list collection transactions.
@@ -212,6 +214,23 @@ components:
               type: integer
             totalPages:
               type: integer
+    AuthorizeOtpRequest:
+      type: object
+      required:
+      - transactionReference
+      - collectionChannel
+      - tokenId
+      - token
+      properties:
+        transactionReference:
+          type: string
+        collectionChannel:
+          type: string
+        tokenId:
+          type: string
+        token:
+          type: string
+          description: OTP returned by the cardholder's bank.
     Transaction:
       type: object
       properties:
@@ -250,23 +269,94 @@ components:
           format: date-time
         paymentMethod:
           type: string
-    AuthorizeOtpRequest:
+    TransactionEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/Transaction'
+    ChargeCardTokenRequest:
+      type: object
+      required:
+      - cardToken
+      - amount
+      - customerName
+      - customerEmail
+      - paymentReference
+      - contractCode
+      properties:
+        cardToken:
+          type: string
+        amount:
+          type: number
+        customerName:
+          type: string
+        customerEmail:
+          type: string
+          format: email
+        paymentReference:
+          type: string
+        contractCode:
+          type: string
+        currencyCode:
+          type: string
+          default: NGN
+    PayWithTransferRequest:
+      type: object
+      required:
+      - transactionReference
+      properties:
+        transactionReference:
+          type: string
+        bankCode:
+          type: string
+    IncomeSplit:
+      type: object
+      properties:
+        subAccountCode:
+          type: string
+        feePercentage:
+          type: number
+        splitAmount:
+          type: number
+        feeBearer:
+          type: boolean
+    ChargeCardRequest:
       type: object
       required:
       - transactionReference
       - collectionChannel
-      - tokenId
-      - token
+      - card
       properties:
         transactionReference:
           type: string
         collectionChannel:
           type: string
-        tokenId:
-          type: string
-        token:
-          type: string
-          description: OTP returned by the cardholder's bank.
+          example: API_NOTIFICATION
+        card:
+          type: object
+          required:
+          - number
+          - expiryMonth
+          - expiryYear
+          - pin
+          - cvv
+          properties:
+            number:
+              type: string
+            expiryMonth:
+              type: string
+            expiryYear:
+              type: string
+            pin:
+              type: string
+            cvv:
+              type: string
     InitializeTransactionRequest:
       type: object
       required:
@@ -316,96 +406,8 @@ components:
           type: object
           additionalProperties:
             type: string
-    IncomeSplit:
-      type: object
-      properties:
-        subAccountCode:
-          type: string
-        feePercentage:
-          type: number
-        splitAmount:
-          type: number
-        feeBearer:
-          type: boolean
-    TransactionEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/Transaction'
-    ChargeCardTokenRequest:
-      type: object
-      required:
-      - cardToken
-      - amount
-      - customerName
-      - customerEmail
-      - paymentReference
-      - contractCode
-      properties:
-        cardToken:
-          type: string
-        amount:
-          type: number
-        customerName:
-          type: string
-        customerEmail:
-          type: string
-          format: email
-        paymentReference:
-          type: string
-        contractCode:
-          type: string
-        currencyCode:
-          type: string
-          default: NGN
-    PayWithTransferRequest:
-      type: object
-      required:
-      - transactionReference
-      properties:
-        transactionReference:
-          type: string
-        bankCode:
-          type: string
-    ChargeCardRequest:
-      type: object
-      required:
-      - transactionReference
-      - collectionChannel
-      - card
-      properties:
-        transactionReference:
-          type: string
-        collectionChannel:
-          type: string
-          example: API_NOTIFICATION
-        card:
-          type: object
-          required:
-          - number
-          - expiryMonth
-          - expiryYear
-          - pin
-          - cvv
-          properties:
-            number:
-              type: string
-            expiryMonth:
-              type: string
-            expiryYear:
-              type: string
-            pin:
-              type: string
-            cvv:
-              type: string
   securitySchemes:
-    BasicAuth:
+    BearerAuth:
       type: http
-      scheme: basic
-      description: Basic auth using API client id and client secret from the Moniepoint Business dashboard.
+      scheme: bearer
+      bearerFormat: JWT

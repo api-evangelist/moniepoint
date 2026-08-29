@@ -1,18 +1,20 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Moniepoint POS Push Payment Authentication Debits API
-  description: 'Push payment-request flow for Moniepoint POS terminals. ISV partners push an authenticated payment request to a registered terminal serial number; the merchant taps to accept and the terminal completes a card or bank-transfer collection routed through Moniepoint''s acquiring rails. API client credentials (client id and client secret) are issued from the Moniepoint Business dashboard.
+  title: Monnify Direct Debit Debits API
+  description: 'Create, activate, and debit recurring NIBSS direct-debit mandates against a customer''s bank account. Smart routing introduced in September 2025 uses TeamApt as the primary processor with NIBSS as fallback. As of April 2026 the debit endpoint accepts an incomeSplit object to settle a debited amount across multiple sub-accounts.
 
     '
   version: '1.0'
   contact:
-    name: Moniepoint POS Developer Support
-    url: https://teamapt.atlassian.net/wiki/spaces/EI
+    name: Monnify Developer Support
+    url: https://developers.monnify.com
 servers:
-- url: https://pos.moniepoint.com
+- url: https://api.monnify.com
   description: Production
+- url: https://sandbox.monnify.com
+  description: Sandbox
 security:
-- BasicAuth: []
+- BearerAuth: []
 tags:
 - name: Debits
   description: Initiate debits against an active mandate.
@@ -39,35 +41,6 @@ paths:
                 $ref: '#/components/schemas/DebitEnvelope'
 components:
   schemas:
-    DebitEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          type: object
-          properties:
-            mandateCode:
-              type: string
-            debitReference:
-              type: string
-            amount:
-              type: number
-            transactionReference:
-              type: string
-            status:
-              type: string
-              enum:
-              - SUCCESS
-              - FAILED
-              - PENDING
-            dateCreated:
-              type: string
-              format: date-time
     DebitMandateRequest:
       type: object
       required:
@@ -98,8 +71,37 @@ components:
                 type: number
               feeBearer:
                 type: boolean
+    DebitEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          type: object
+          properties:
+            mandateCode:
+              type: string
+            debitReference:
+              type: string
+            amount:
+              type: number
+            transactionReference:
+              type: string
+            status:
+              type: string
+              enum:
+              - SUCCESS
+              - FAILED
+              - PENDING
+            dateCreated:
+              type: string
+              format: date-time
   securitySchemes:
-    BasicAuth:
+    BearerAuth:
       type: http
-      scheme: basic
-      description: Basic auth using API client id and client secret from the Moniepoint Business dashboard.
+      scheme: bearer
+      bearerFormat: JWT

@@ -1,18 +1,20 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Moniepoint POS Push Payment Authentication Sub-Accounts API
-  description: 'Push payment-request flow for Moniepoint POS terminals. ISV partners push an authenticated payment request to a registered terminal serial number; the merchant taps to accept and the terminal completes a card or bank-transfer collection routed through Moniepoint''s acquiring rails. API client credentials (client id and client secret) are issued from the Moniepoint Business dashboard.
+  title: Monnify Sub Accounts API
+  description: 'Create and manage settlement sub-accounts representing third parties that should receive a configured share of each collection (marketplaces, franchises, multi-tenant platforms). Sub-accounts are referenced from Collections (incomeSplitConfig), Reserved Accounts, and Direct Debit mandate-debit calls.
 
     '
   version: '1.0'
   contact:
-    name: Moniepoint POS Developer Support
-    url: https://teamapt.atlassian.net/wiki/spaces/EI
+    name: Monnify Developer Support
+    url: https://developers.monnify.com
 servers:
-- url: https://pos.moniepoint.com
+- url: https://api.monnify.com
   description: Production
+- url: https://sandbox.monnify.com
+  description: Sandbox
 security:
-- BasicAuth: []
+- BearerAuth: []
 tags:
 - name: Sub-Accounts
   description: Manage settlement sub-accounts.
@@ -152,7 +154,7 @@ components:
           items:
             $ref: '#/components/schemas/SubAccount'
   securitySchemes:
-    BasicAuth:
+    BearerAuth:
       type: http
-      scheme: basic
-      description: Basic auth using API client id and client secret from the Moniepoint Business dashboard.
+      scheme: bearer
+      bearerFormat: JWT
