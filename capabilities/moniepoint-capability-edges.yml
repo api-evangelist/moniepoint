@@ -1,0 +1,133 @@
+slug: moniepoint
+provider: Moniepoint
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 11
+edges:
+- tag: Transactions
+  spec_file: moniepoint-transactions-api-openapi.yml
+  capability_id: BC-1340
+  capability_id_l1: BC-1340
+  capability_name: Payments & Card Management
+  confidence: 0.85
+  evidence: '''Accept money from customers in Nigeria via Monnify Checkout, server-to-server card capture
+    with 3-D Secure / OTP, charge stored card tokens, complete bank-transfer payments'' — Monnify Charge
+    Card, Charge Tokenized Card, Get Transaction Status'
+  reason: 'Clearly payment collection/acquiring: card charging with 3DS/OTP, tokenised card charging,
+    bank-transfer payment and transaction status. Spans card processing and payment initiation, so no
+    single L2 is asserted.'
+- tag: Mandates
+  spec_file: moniepoint-mandates-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.78
+  evidence: '''Create, activate, and debit recurring NIBSS direct-debit mandates against a customer''s
+    bank account'' — Monnify Create/Activate/Cancel Direct Debit Mandate'
+  reason: Direct-debit mandate creation, activation and cancellation is capture and authorisation of payment
+    instructions on a bank rail, squarely Payment Initiation Management within Payments & Card Management.
+- tag: Verification
+  spec_file: moniepoint-verification-api-openapi.yml
+  capability_id: BC-1300.20
+  capability_id_l1: BC-1300
+  capability_name: KYC & Customer Due Diligence Management
+  confidence: 0.78
+  evidence: '''match a Bank Verification Number (BVN) against an account, and verify National Identification
+    Numbers (NIN). These checks underpin KYC, beneficiary verification on disbursement, and fraud prevention'''
+  reason: Identity verification operations (BVN, NIN, account name inquiry) are the technical substrate
+    of KYC/CDD for banking customers; the description explicitly names KYC. Some overlap with beneficiary
+    verification for payments keeps confidence below 0.8.
+- tag: Bills Payment
+  spec_file: moniepoint-bills-payment-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.75
+  evidence: '''Unified Biller Service to purchase airtime and data, pay electricity and cable-TV bills''
+    with ''POST /api/v1/bill-payment/process-bill  processBill'''
+  reason: Operations capture, validate and submit bill payment instructions to billers — payment initiation
+    and processing on behalf of customers.
+- tag: Settlements
+  spec_file: moniepoint-settlements-api-openapi.yml
+  capability_id: BC-1340.30
+  capability_id_l1: BC-1340
+  capability_name: Clearing & Settlement Management
+  confidence: 0.75
+  evidence: '''settlement batches per merchant or sub-account and settlement transactions. Powers reconciliation
+    of daily settlement payouts into the merchant''s external bank account'''
+  reason: Retrieval of settlement batches and settlement transactions for collected funds is settlement
+    management within Payments & Card Management.
+- tag: Single Transfers
+  spec_file: moniepoint-single-transfers-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.75
+  evidence: '''Initiate single and bulk NIP transfers to Nigerian bank accounts ... Two-factor authorization
+    with OTP applies to single transfers'' — Monnify Initiate Single Transfer, Authorize Single Transfer
+    OTP'
+  reason: Instruction capture, beneficiary validation and OTP authorisation of outbound bank transfers
+    is Payment Initiation Management; real-time rail (NIP) is an alternative L2 reading, hence 0.75.
+- tag: Refunds
+  spec_file: moniepoint-refunds-api-openapi.yml
+  capability_id: BC-1340
+  capability_id_l1: BC-1340
+  capability_name: Payments & Card Management
+  confidence: 0.72
+  evidence: '''Initiate full or partial refunds against a successful collection, list refunds, and look
+    up refund status'''
+  reason: Refund initiation and status against collections is payment/card transaction handling within
+    Payments & Card Management; the evidence does not clearly select between card transaction processing
+    and general payment processing, so no L2 is asserted.
+- tag: Banks
+  spec_file: moniepoint-banks-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.7
+  evidence: GET /api/v1/disbursements/account/validate — 'Monnify Validate Bank Account (Name Inquiry)';
+    'the disbursement flow requires Name Inquiry first then a Disbursement Request that carries the verified
+    beneficiary account name'
+  reason: Bank list and beneficiary name-inquiry validation are pre-transfer validation steps in payment
+    instruction capture and validation, part of payment initiation.
+- tag: Bulk Transfers
+  spec_file: moniepoint-bulk-transfers-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.7
+  evidence: POST /api/v2/disbursements/bulk — 'Monnify Initiate Bulk Transfer'; 'Initiate single and bulk
+    NIP transfers to Nigerian bank accounts'
+  reason: Bulk disbursement initiation and tracking is payment instruction capture/authorisation; NIP
+    being an instant rail makes BC-1340.50 an alternative reading, hence moderate confidence on the L2.
+- tag: Debits
+  spec_file: moniepoint-debits-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.7
+  evidence: POST /api/v1/direct-debit/mandate/debit  debitMandate — 'Create, activate, and debit recurring
+    NIBSS direct-debit mandates against a customer's bank account'
+  reason: Debiting a direct-debit mandate initiates a collection payment instruction against a payer account,
+    i.e. payment initiation within payments management.
+- tag: Push Payments
+  spec_file: moniepoint-push-payments-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.7
+  evidence: '''ISV partners push an authenticated payment request to a registered terminal serial number;
+    the merchant taps to accept and the terminal completes a card or bank-transfer collection routed through
+    Moniepoint''s acquiring rails'''
+  reason: The operations push a payment request to a POS terminal and query its status — capture and authorisation
+    of a payment instruction. L2 payment initiation is the best fit, though card acquiring processing
+    is an adjacent reading, hence moderate confidence.
