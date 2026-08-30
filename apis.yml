@@ -708,7 +708,7 @@ apis:
   description: Manage settlement sub-accounts.
   humanURL: https://developers.monnify.com/docs/getting-started/authentication
   tags:
-  - Subaccounts
+  - Sub-Accounts
   tags_raw:
   - Sub-Accounts
   properties:
@@ -977,7 +977,7 @@ tags:
   - Banking
   - Fintech
   - Acquiring
-  - Point-of-Sale
+  - POS
   - Collection
   - Disbursements
   - Virtual Accounts
