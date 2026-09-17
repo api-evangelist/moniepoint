@@ -703,60 +703,6 @@ apis:
       https://teamapt.atlassian.net/wiki/spaces/EI/pages/1039826999/Push+Payment+Request+API+Reference
   - type: Documentation
     url: https://teamapt.atlassian.net/wiki/spaces/EI/pages/1042120729/API+Client+Credentials
-- aid: moniepoint:moniepoint-sub-accounts-api
-  name: Moniepoint Sub-Accounts API
-  description: Manage settlement sub-accounts.
-  humanURL: https://developers.monnify.com/docs/getting-started/authentication
-  tags:
-  - Subaccounts
-  tags_raw:
-  - Sub-Accounts
-  properties:
-  - type: OpenAPI
-    url: openapi/moniepoint-sub-accounts-api-openapi.yml
-  - type: Documentation
-    url: https://developers.monnify.com/docs/getting-started/authentication
-  - type: Documentation
-    url: https://developers.monnify.com/docs/collections
-  - type: JSONSchema
-    url: json-schema/monnify-transaction-schema.json
-  - type: JSONLD
-    url: json-ld/moniepoint-context.jsonld
-  - type: Documentation
-    url: https://developers.monnify.com/docs/collections/customer-reserved-account
-  - type: JSONSchema
-    url: json-schema/monnify-reserved-account-schema.json
-  - type: Documentation
-    url: https://developers.monnify.com/docs/disbursements
-  - type: Documentation
-    url: https://developers.monnify.com/docs/disbursements/single-transfers
-  - type: Documentation
-    url: https://developers.monnify.com/docs/disbursements/bulk-transfers
-  - type: JSONSchema
-    url: json-schema/monnify-transfer-schema.json
-  - type: Documentation
-    url: https://developers.monnify.com/docs/sub-accounts
-  - type: Documentation
-    url: https://developers.monnify.com/docs/direct-debit
-  - type: Documentation
-    url: https://developers.monnify.com/docs/invoices
-  - type: Documentation
-    url: https://developers.monnify.com/docs/bills-payment
-  - type: Documentation
-    url: https://developers.monnify.com/docs/verification
-  - type: Documentation
-    url: https://developers.monnify.com/docs/wallets
-  - type: Documentation
-    url: https://developers.monnify.com/docs/refunds
-  - type: Documentation
-    url: https://developers.monnify.com/docs/settlements
-  - type: Documentation
-    url: https://docs.pos.moniepoint.com
-  - type: Documentation
-    url: >-
-      https://teamapt.atlassian.net/wiki/spaces/EI/pages/1039826999/Push+Payment+Request+API+Reference
-  - type: Documentation
-    url: https://teamapt.atlassian.net/wiki/spaces/EI/pages/1042120729/API+Client+Credentials
 - aid: moniepoint:moniepoint-transactions-api
   name: Moniepoint Transactions API
   description: Initialize, charge, query, and list collection transactions.
@@ -926,6 +872,58 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/moniepoint-wallets-api-openapi.yml
+  - type: Documentation
+    url: https://developers.monnify.com/docs/getting-started/authentication
+  - type: Documentation
+    url: https://developers.monnify.com/docs/collections
+  - type: JSONSchema
+    url: json-schema/monnify-transaction-schema.json
+  - type: JSONLD
+    url: json-ld/moniepoint-context.jsonld
+  - type: Documentation
+    url: https://developers.monnify.com/docs/collections/customer-reserved-account
+  - type: JSONSchema
+    url: json-schema/monnify-reserved-account-schema.json
+  - type: Documentation
+    url: https://developers.monnify.com/docs/disbursements
+  - type: Documentation
+    url: https://developers.monnify.com/docs/disbursements/single-transfers
+  - type: Documentation
+    url: https://developers.monnify.com/docs/disbursements/bulk-transfers
+  - type: JSONSchema
+    url: json-schema/monnify-transfer-schema.json
+  - type: Documentation
+    url: https://developers.monnify.com/docs/sub-accounts
+  - type: Documentation
+    url: https://developers.monnify.com/docs/direct-debit
+  - type: Documentation
+    url: https://developers.monnify.com/docs/invoices
+  - type: Documentation
+    url: https://developers.monnify.com/docs/bills-payment
+  - type: Documentation
+    url: https://developers.monnify.com/docs/verification
+  - type: Documentation
+    url: https://developers.monnify.com/docs/wallets
+  - type: Documentation
+    url: https://developers.monnify.com/docs/refunds
+  - type: Documentation
+    url: https://developers.monnify.com/docs/settlements
+  - type: Documentation
+    url: https://docs.pos.moniepoint.com
+  - type: Documentation
+    url: >-
+      https://teamapt.atlassian.net/wiki/spaces/EI/pages/1039826999/Push+Payment+Request+API+Reference
+  - type: Documentation
+    url: https://teamapt.atlassian.net/wiki/spaces/EI/pages/1042120729/API+Client+Credentials
+- aid: moniepoint:moniepoint-subaccounts-api
+  name: Moniepoint Subaccounts API
+  description: Manage settlement sub-accounts.
+  humanURL: https://developers.monnify.com/docs/webhooks
+  tags:
+  - Subaccounts
+  properties:
+  - type: OpenAPI
+    url: openapi/moniepoint-subaccounts-api-openapi.yml
   - type: Documentation
     url: https://developers.monnify.com/docs/getting-started/authentication
   - type: Documentation
