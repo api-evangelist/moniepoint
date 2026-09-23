@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Monnify Reserved Accounts API
-  description: 'Provision permanent NUBAN virtual accounts (dedicated and invoice variants) for customers and merchants. V2 endpoints replace earlier /api/v1 routes for new integrations; transaction listing remains under /api/v1.
-
-    '
+  description: Provision permanent NUBAN virtual accounts (dedicated and invoice variants) for customers and merchants. V2 endpoints replace earlier /api/v1 routes for new integrations; transaction listing remains under /api/v1.
   version: '2.0'
   contact:
     name: Monnify Developer Support
@@ -199,6 +197,53 @@ paths:
                 $ref: '#/components/schemas/ReservedAccountEnvelope'
 components:
   schemas:
+    ReservedAccount:
+      type: object
+      properties:
+        accountReference:
+          type: string
+        accountName:
+          type: string
+        currencyCode:
+          type: string
+        customerEmail:
+          type: string
+        customerName:
+          type: string
+        bvn:
+          type: string
+        nin:
+          type: string
+        status:
+          type: string
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - DEALLOCATED
+        accounts:
+          type: array
+          items:
+            type: object
+            properties:
+              bankCode:
+                type: string
+              bankName:
+                type: string
+              accountNumber:
+                type: string
+              accountName:
+                type: string
+    ReservedAccountEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/ReservedAccount'
     ReserveAccountRequest:
       type: object
       required:
@@ -270,17 +315,6 @@ components:
                 type: number
               feeBearer:
                 type: boolean
-    ReservedAccountEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/ReservedAccount'
     UpdateKycRequest:
       type: object
       properties:
@@ -290,42 +324,6 @@ components:
           type: string
         nin:
           type: string
-    ReservedAccount:
-      type: object
-      properties:
-        accountReference:
-          type: string
-        accountName:
-          type: string
-        currencyCode:
-          type: string
-        customerEmail:
-          type: string
-        customerName:
-          type: string
-        bvn:
-          type: string
-        nin:
-          type: string
-        status:
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
-          - DEALLOCATED
-        accounts:
-          type: array
-          items:
-            type: object
-            properties:
-              bankCode:
-                type: string
-              bankName:
-                type: string
-              accountNumber:
-                type: string
-              accountName:
-                type: string
   securitySchemes:
     BearerAuth:
       type: http

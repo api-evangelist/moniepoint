@@ -35,7 +35,9 @@
     "moniepoint-verification-api-openapi.yml",
     "moniepoint-wallets-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
   "notes": [
@@ -52,7 +54,9 @@
     "monnify-settlements-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "monnify-sub-accounts-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "monnify-verification-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "monnify-wallets-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+    "monnify-wallets-api-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "superseded outputs removed: moniepoint-subaccounts-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 19 total)"
   ],
   "skipped": [
     "moniepoint-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -68,7 +72,7 @@
     "moniepoint-reserved-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "moniepoint-settlements-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "moniepoint-single-transfers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "moniepoint-sub-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "moniepoint-subaccounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "moniepoint-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "moniepoint-verification-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "moniepoint-wallet-api-openapi.yml: previously refined output, superseded by openapi/_original/",

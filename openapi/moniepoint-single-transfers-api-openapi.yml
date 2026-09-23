@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Monnify Disbursements Single Transfers API
-  description: 'Initiate single and bulk NIP transfers to Nigerian bank accounts. As of April 2026 the disbursement flow requires Name Inquiry first then a Disbursement Request that carries the verified beneficiary account name. A sender-information object has been supported on initiation since October 2025. Two-factor authorization with OTP applies to single transfers.
-
-    '
+  description: Initiate single and bulk NIP transfers to Nigerian bank accounts. As of April 2026 the disbursement flow requires Name Inquiry first then a Disbursement Request that carries the verified beneficiary account name. A sender-information object has been supported on initiation since October 2025. Two-factor authorization with OTP applies to single transfers.
   version: '2.0'
   contact:
     name: Monnify Developer Support
@@ -138,6 +136,29 @@ paths:
                 $ref: '#/components/schemas/TransferPageEnvelope'
 components:
   schemas:
+    SenderInformation:
+      type: object
+      description: Optional sender details (added October 2025).
+      properties:
+        fullName:
+          type: string
+        phoneNumber:
+          type: string
+        email:
+          type: string
+          format: email
+        senderRef:
+          type: string
+    AuthorizeTransferRequest:
+      type: object
+      required:
+      - reference
+      - authorizationCode
+      properties:
+        reference:
+          type: string
+        authorizationCode:
+          type: string
     TransferPageEnvelope:
       type: object
       properties:
@@ -198,6 +219,17 @@ components:
           type: boolean
         senderInformation:
           $ref: '#/components/schemas/SenderInformation'
+    TransferEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/Transfer'
     Transfer:
       type: object
       properties:
@@ -229,40 +261,6 @@ components:
         dateCreated:
           type: string
           format: date-time
-    SenderInformation:
-      type: object
-      description: Optional sender details (added October 2025).
-      properties:
-        fullName:
-          type: string
-        phoneNumber:
-          type: string
-        email:
-          type: string
-          format: email
-        senderRef:
-          type: string
-    AuthorizeTransferRequest:
-      type: object
-      required:
-      - reference
-      - authorizationCode
-      properties:
-        reference:
-          type: string
-        authorizationCode:
-          type: string
-    TransferEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/Transfer'
   securitySchemes:
     BearerAuth:
       type: http

@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Monnify Direct Debit Mandates API
-  description: 'Create, activate, and debit recurring NIBSS direct-debit mandates against a customer''s bank account. Smart routing introduced in September 2025 uses TeamApt as the primary processor with NIBSS as fallback. As of April 2026 the debit endpoint accepts an incomeSplit object to settle a debited amount across multiple sub-accounts.
-
-    '
+  description: Create, activate, and debit recurring NIBSS direct-debit mandates against a customer's bank account. Smart routing introduced in September 2025 uses TeamApt as the primary processor with NIBSS as fallback. As of April 2026 the debit endpoint accepts an incomeSplit object to settle a debited amount across multiple sub-accounts.
   version: '1.0'
   contact:
     name: Monnify Developer Support
@@ -105,53 +103,6 @@ paths:
                 $ref: '#/components/schemas/MandateEnvelope'
 components:
   schemas:
-    Mandate:
-      type: object
-      properties:
-        mandateCode:
-          type: string
-        mandateDescription:
-          type: string
-        mandateAmount:
-          type: number
-        customerName:
-          type: string
-        customerAccountNumber:
-          type: string
-        customerBankCode:
-          type: string
-        status:
-          type: string
-          enum:
-          - PENDING
-          - FAILED
-          - CANCELLED
-          - ACTIVATED
-          - EXPIRED
-        frequency:
-          type: string
-        amountType:
-          type: string
-        startDate:
-          type: string
-          format: date
-        endDate:
-          type: string
-          format: date
-        dateCreated:
-          type: string
-          format: date-time
-    MandateEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/Mandate'
     CreateMandateRequest:
       type: object
       required:
@@ -202,6 +153,53 @@ components:
           type: string
         contractCode:
           type: string
+    Mandate:
+      type: object
+      properties:
+        mandateCode:
+          type: string
+        mandateDescription:
+          type: string
+        mandateAmount:
+          type: number
+        customerName:
+          type: string
+        customerAccountNumber:
+          type: string
+        customerBankCode:
+          type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - FAILED
+          - CANCELLED
+          - ACTIVATED
+          - EXPIRED
+        frequency:
+          type: string
+        amountType:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        dateCreated:
+          type: string
+          format: date-time
+    MandateEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/Mandate'
   securitySchemes:
     BearerAuth:
       type: http

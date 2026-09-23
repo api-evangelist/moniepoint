@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Monnify Settlements API
-  description: 'Retrieve settlement information for collected funds — settlement batches per merchant or sub-account and settlement transactions. Powers reconciliation of daily settlement payouts into the merchant''s external bank account.
-
-    '
+  description: Retrieve settlement information for collected funds — settlement batches per merchant or sub-account and settlement transactions. Powers reconciliation of daily settlement payouts into the merchant's external bank account.
   version: '1.0'
   contact:
     name: Monnify Developer Support
@@ -121,6 +119,20 @@ paths:
                         type: integer
 components:
   schemas:
+    SettlementTransaction:
+      type: object
+      properties:
+        transactionReference:
+          type: string
+        amount:
+          type: number
+        fee:
+          type: number
+        netAmount:
+          type: number
+        paidOn:
+          type: string
+          format: date-time
     Settlement:
       type: object
       properties:
@@ -145,20 +157,6 @@ components:
           - COMPLETED
           - FAILED
         settledOn:
-          type: string
-          format: date-time
-    SettlementTransaction:
-      type: object
-      properties:
-        transactionReference:
-          type: string
-        amount:
-          type: number
-        fee:
-          type: number
-        netAmount:
-          type: number
-        paidOn:
           type: string
           format: date-time
   securitySchemes:

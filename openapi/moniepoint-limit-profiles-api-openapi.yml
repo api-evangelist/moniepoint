@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Monnify Reserved Accounts Limit Profiles API
-  description: 'Provision permanent NUBAN virtual accounts (dedicated and invoice variants) for customers and merchants. V2 endpoints replace earlier /api/v1 routes for new integrations; transaction listing remains under /api/v1.
-
-    '
+  description: Provision permanent NUBAN virtual accounts (dedicated and invoice variants) for customers and merchants. V2 endpoints replace earlier /api/v1 routes for new integrations; transaction listing remains under /api/v1.
   version: '2.0'
   contact:
     name: Monnify Developer Support

@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Monnify Invoices API
-  description: 'Create static and dynamic invoices that generate hosted payment pages and unique reserved accounts. Static invoices have a fixed amount and description; dynamic invoices let the customer pay any amount within a configured range.
-
-    '
+  description: Create static and dynamic invoices that generate hosted payment pages and unique reserved accounts. Static invoices have a fixed amount and description; dynamic invoices let the customer pay any amount within a configured range.
   version: '1.0'
   contact:
     name: Monnify Developer Support

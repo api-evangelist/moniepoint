@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Monnify Direct Debit Debits API
-  description: 'Create, activate, and debit recurring NIBSS direct-debit mandates against a customer''s bank account. Smart routing introduced in September 2025 uses TeamApt as the primary processor with NIBSS as fallback. As of April 2026 the debit endpoint accepts an incomeSplit object to settle a debited amount across multiple sub-accounts.
-
-    '
+  description: Create, activate, and debit recurring NIBSS direct-debit mandates against a customer's bank account. Smart routing introduced in September 2025 uses TeamApt as the primary processor with NIBSS as fallback. As of April 2026 the debit endpoint accepts an incomeSplit object to settle a debited amount across multiple sub-accounts.
   version: '1.0'
   contact:
     name: Monnify Developer Support
@@ -41,6 +39,35 @@ paths:
                 $ref: '#/components/schemas/DebitEnvelope'
 components:
   schemas:
+    DebitEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          type: object
+          properties:
+            mandateCode:
+              type: string
+            debitReference:
+              type: string
+            amount:
+              type: number
+            transactionReference:
+              type: string
+            status:
+              type: string
+              enum:
+              - SUCCESS
+              - FAILED
+              - PENDING
+            dateCreated:
+              type: string
+              format: date-time
     DebitMandateRequest:
       type: object
       required:
@@ -71,35 +98,6 @@ components:
                 type: number
               feeBearer:
                 type: boolean
-    DebitEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          type: object
-          properties:
-            mandateCode:
-              type: string
-            debitReference:
-              type: string
-            amount:
-              type: number
-            transactionReference:
-              type: string
-            status:
-              type: string
-              enum:
-              - SUCCESS
-              - FAILED
-              - PENDING
-            dateCreated:
-              type: string
-              format: date-time
   securitySchemes:
     BearerAuth:
       type: http

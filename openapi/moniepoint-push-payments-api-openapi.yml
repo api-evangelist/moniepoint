@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Moniepoint POS Push Payment Push Payments API
-  description: 'Push payment-request flow for Moniepoint POS terminals. ISV partners push an authenticated payment request to a registered terminal serial number; the merchant taps to accept and the terminal completes a card or bank-transfer collection routed through Moniepoint''s acquiring rails. API client credentials (client id and client secret) are issued from the Moniepoint Business dashboard.
-
-    '
+  description: Push payment-request flow for Moniepoint POS terminals. ISV partners push an authenticated payment request to a registered terminal serial number; the merchant taps to accept and the terminal completes a card or bank-transfer collection routed through Moniepoint's acquiring rails. API client credentials (client id and client secret) are issued from the Moniepoint Business dashboard.
   version: '1.0'
   contact:
     name: Moniepoint POS Developer Support
@@ -20,9 +18,7 @@ paths:
   /api/v1/push-payment/request:
     post:
       summary: Moniepoint Push Payment Request
-      description: 'Push a payment request to a specific Moniepoint POS terminal. The terminal prompts the cashier to confirm and present the card or transfer instructions to the customer.
-
-        '
+      description: Push a payment request to a specific Moniepoint POS terminal. The terminal prompts the cashier to confirm and present the card or transfer instructions to the customer.
       operationId: pushPaymentRequest
       tags:
       - Push Payments
@@ -60,32 +56,6 @@ paths:
                 $ref: '#/components/schemas/PushPaymentEnvelope'
 components:
   schemas:
-    PushPaymentRequest:
-      type: object
-      required:
-      - terminalSerialNumber
-      - amount
-      - reference
-      - currency
-      properties:
-        terminalSerialNumber:
-          type: string
-        amount:
-          type: number
-        reference:
-          type: string
-          description: Unique ISV reference.
-        currency:
-          type: string
-          default: NGN
-        description:
-          type: string
-        callbackUrl:
-          type: string
-          format: uri
-        expiresIn:
-          type: integer
-          description: Seconds before the terminal cancels the request.
     PushPayment:
       type: object
       properties:
@@ -132,6 +102,32 @@ components:
           type: string
         responseBody:
           $ref: '#/components/schemas/PushPayment'
+    PushPaymentRequest:
+      type: object
+      required:
+      - terminalSerialNumber
+      - amount
+      - reference
+      - currency
+      properties:
+        terminalSerialNumber:
+          type: string
+        amount:
+          type: number
+        reference:
+          type: string
+          description: Unique ISV reference.
+        currency:
+          type: string
+          default: NGN
+        description:
+          type: string
+        callbackUrl:
+          type: string
+          format: uri
+        expiresIn:
+          type: integer
+          description: Seconds before the terminal cancels the request.
   securitySchemes:
     BasicAuth:
       type: http

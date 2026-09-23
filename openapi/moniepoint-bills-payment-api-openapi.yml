@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Monnify Bills Payment API
-  description: 'Unified Biller Service to purchase airtime and data, pay electricity and cable-TV bills, fund betting wallets, and pay education fees. The typical flow is List Categories → List Billers → List Biller Items → Validate Customer → Process Bill → Check Status.
-
-    '
+  description: Unified Biller Service to purchase airtime and data, pay electricity and cable-TV bills, fund betting wallets, and pay education fees. The typical flow is List Categories → List Billers → List Biller Items → Validate Customer → Process Bill → Check Status.
   version: '1.0'
   contact:
     name: Monnify Developer Support
@@ -216,17 +214,6 @@ paths:
                 $ref: '#/components/schemas/BillEnvelope'
 components:
   schemas:
-    BillEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/Bill'
     BillerItem:
       type: object
       properties:
@@ -244,6 +231,17 @@ components:
           - FIXED
           - RANGE
           - FREE
+    BillEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/Bill'
     BillCategory:
       type: object
       properties:
@@ -252,15 +250,6 @@ components:
         name:
           type: string
         description:
-          type: string
-    Biller:
-      type: object
-      properties:
-        billerCode:
-          type: string
-        billerName:
-          type: string
-        categoryCode:
           type: string
     Bill:
       type: object
@@ -290,6 +279,15 @@ components:
         dateProcessed:
           type: string
           format: date-time
+    Biller:
+      type: object
+      properties:
+        billerCode:
+          type: string
+        billerName:
+          type: string
+        categoryCode:
+          type: string
   securitySchemes:
     BearerAuth:
       type: http

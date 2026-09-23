@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Monnify Wallets API
-  description: 'Create wallets and sub-wallets, query main and disbursement balances, list transactions, and pull statements. Used to fund disbursement operations and to model end-user wallets in business-management products.
-
-    '
+  description: Create wallets and sub-wallets, query main and disbursement balances, list transactions, and pull statements. Used to fund disbursement operations and to model end-user wallets in business-management products.
   version: '1.0'
   contact:
     name: Monnify Developer Support
@@ -172,6 +170,17 @@ paths:
                         type: integer
 components:
   schemas:
+    WalletEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/Wallet'
     WalletTransaction:
       type: object
       properties:
@@ -191,17 +200,6 @@ components:
         dateCreated:
           type: string
           format: date-time
-    WalletEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/Wallet'
     Wallet:
       type: object
       properties:

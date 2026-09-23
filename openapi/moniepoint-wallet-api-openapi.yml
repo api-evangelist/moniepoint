@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Monnify Disbursements Wallet API
-  description: 'Initiate single and bulk NIP transfers to Nigerian bank accounts. As of April 2026 the disbursement flow requires Name Inquiry first then a Disbursement Request that carries the verified beneficiary account name. A sender-information object has been supported on initiation since October 2025. Two-factor authorization with OTP applies to single transfers.
-
-    '
+  description: Initiate single and bulk NIP transfers to Nigerian bank accounts. As of April 2026 the disbursement flow requires Name Inquiry first then a Disbursement Request that carries the verified beneficiary account name. A sender-information object has been supported on initiation since October 2025. Two-factor authorization with OTP applies to single transfers.
   version: '2.0'
   contact:
     name: Monnify Developer Support

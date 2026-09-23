@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Monnify Sub Accounts API
-  description: 'Create and manage settlement sub-accounts representing third parties that should receive a configured share of each collection (marketplaces, franchises, multi-tenant platforms). Sub-accounts are referenced from Collections (incomeSplitConfig), Reserved Accounts, and Direct Debit mandate-debit calls.
-
-    '
+  description: Create and manage settlement sub-accounts representing third parties that should receive a configured share of each collection (marketplaces, franchises, multi-tenant platforms). Sub-accounts are referenced from Collections (incomeSplitConfig), Reserved Accounts, and Direct Debit mandate-debit calls.
   version: '1.0'
   contact:
     name: Monnify Developer Support
@@ -16,7 +14,7 @@ servers:
 security:
 - BearerAuth: []
 tags:
-- name: Sub-Accounts
+- name: Subaccounts
   description: Manage settlement sub-accounts.
 paths:
   /api/v1/sub-accounts:
@@ -25,7 +23,7 @@ paths:
       description: Create one or more sub-accounts in a single call.
       operationId: createSubAccounts
       tags:
-      - Sub-Accounts
+      - Subaccounts
       requestBody:
         required: true
         content:
@@ -45,7 +43,7 @@ paths:
       summary: Monnify Update Sub-Account
       operationId: updateSubAccount
       tags:
-      - Sub-Accounts
+      - Subaccounts
       requestBody:
         required: true
         content:
@@ -63,7 +61,7 @@ paths:
       summary: Monnify List Sub-Accounts
       operationId: listSubAccounts
       tags:
-      - Sub-Accounts
+      - Subaccounts
       responses:
         '200':
           description: Sub-account list.
@@ -76,7 +74,7 @@ paths:
       summary: Monnify Delete Sub-Account
       operationId: deleteSubAccount
       tags:
-      - Sub-Accounts
+      - Subaccounts
       parameters:
       - name: subAccountCode
         in: path
@@ -101,6 +99,30 @@ paths:
                     type: object
 components:
   schemas:
+    SubAccountEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/SubAccount'
+    SubAccountListEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubAccount'
     SubAccount:
       type: object
       required:
@@ -129,30 +151,6 @@ components:
           description: When true the sub-account absorbs Monnify's fee.
         defaultBearer:
           type: boolean
-    SubAccountEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/SubAccount'
-    SubAccountListEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubAccount'
   securitySchemes:
     BearerAuth:
       type: http

@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Monnify Collections Transactions API
-  description: 'Accept money from customers in Nigeria via Monnify Checkout, server-to- server card capture with 3-D Secure / OTP, charge stored card tokens, complete bank-transfer payments, and look up transaction status.
-
-    '
+  description: Accept money from customers in Nigeria via Monnify Checkout, server-to- server card capture with 3-D Secure / OTP, charge stored card tokens, complete bank-transfer payments, and look up transaction status.
   version: '1.0'
   contact:
     name: Monnify Developer Support
@@ -190,7 +188,33 @@ paths:
                 $ref: '#/components/schemas/TransactionPageEnvelope'
 components:
   schemas:
-    TransactionPageEnvelope:
+    ChargeCardTokenRequest:
+      type: object
+      required:
+      - cardToken
+      - amount
+      - customerName
+      - customerEmail
+      - paymentReference
+      - contractCode
+      properties:
+        cardToken:
+          type: string
+        amount:
+          type: number
+        customerName:
+          type: string
+        customerEmail:
+          type: string
+          format: email
+        paymentReference:
+          type: string
+        contractCode:
+          type: string
+        currencyCode:
+          type: string
+          default: NGN
+    TransactionEnvelope:
       type: object
       properties:
         requestSuccessful:
@@ -200,37 +224,7 @@ components:
         responseCode:
           type: string
         responseBody:
-          type: object
-          properties:
-            content:
-              type: array
-              items:
-                $ref: '#/components/schemas/Transaction'
-            number:
-              type: integer
-            size:
-              type: integer
-            totalElements:
-              type: integer
-            totalPages:
-              type: integer
-    AuthorizeOtpRequest:
-      type: object
-      required:
-      - transactionReference
-      - collectionChannel
-      - tokenId
-      - token
-      properties:
-        transactionReference:
-          type: string
-        collectionChannel:
-          type: string
-        tokenId:
-          type: string
-        token:
-          type: string
-          description: OTP returned by the cardholder's bank.
+          $ref: '#/components/schemas/Transaction'
     Transaction:
       type: object
       properties:
@@ -269,7 +263,7 @@ components:
           format: date-time
         paymentMethod:
           type: string
-    TransactionEnvelope:
+    TransactionPageEnvelope:
       type: object
       properties:
         requestSuccessful:
@@ -279,42 +273,20 @@ components:
         responseCode:
           type: string
         responseBody:
-          $ref: '#/components/schemas/Transaction'
-    ChargeCardTokenRequest:
-      type: object
-      required:
-      - cardToken
-      - amount
-      - customerName
-      - customerEmail
-      - paymentReference
-      - contractCode
-      properties:
-        cardToken:
-          type: string
-        amount:
-          type: number
-        customerName:
-          type: string
-        customerEmail:
-          type: string
-          format: email
-        paymentReference:
-          type: string
-        contractCode:
-          type: string
-        currencyCode:
-          type: string
-          default: NGN
-    PayWithTransferRequest:
-      type: object
-      required:
-      - transactionReference
-      properties:
-        transactionReference:
-          type: string
-        bankCode:
-          type: string
+          type: object
+          properties:
+            content:
+              type: array
+              items:
+                $ref: '#/components/schemas/Transaction'
+            number:
+              type: integer
+            size:
+              type: integer
+            totalElements:
+              type: integer
+            totalPages:
+              type: integer
     IncomeSplit:
       type: object
       properties:
@@ -357,6 +329,32 @@ components:
               type: string
             cvv:
               type: string
+    AuthorizeOtpRequest:
+      type: object
+      required:
+      - transactionReference
+      - collectionChannel
+      - tokenId
+      - token
+      properties:
+        transactionReference:
+          type: string
+        collectionChannel:
+          type: string
+        tokenId:
+          type: string
+        token:
+          type: string
+          description: OTP returned by the cardholder's bank.
+    PayWithTransferRequest:
+      type: object
+      required:
+      - transactionReference
+      properties:
+        transactionReference:
+          type: string
+        bankCode:
+          type: string
     InitializeTransactionRequest:
       type: object
       required:

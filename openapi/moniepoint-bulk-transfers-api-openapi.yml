@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Monnify Disbursements Bulk Transfers API
-  description: 'Initiate single and bulk NIP transfers to Nigerian bank accounts. As of April 2026 the disbursement flow requires Name Inquiry first then a Disbursement Request that carries the verified beneficiary account name. A sender-information object has been supported on initiation since October 2025. Two-factor authorization with OTP applies to single transfers.
-
-    '
+  description: Initiate single and bulk NIP transfers to Nigerian bank accounts. As of April 2026 the disbursement flow requires Name Inquiry first then a Disbursement Request that carries the verified beneficiary account name. A sender-information object has been supported on initiation since October 2025. Two-factor authorization with OTP applies to single transfers.
   version: '2.0'
   contact:
     name: Monnify Developer Support
@@ -113,6 +111,30 @@ components:
               type: integer
             totalPages:
               type: integer
+    BulkTransferSummary:
+      type: object
+      properties:
+        batchReference:
+          type: string
+        batchStatus:
+          type: string
+        totalAmount:
+          type: number
+        totalFee:
+          type: number
+        totalReceivedAmount:
+          type: number
+        totalCount:
+          type: integer
+        successfulCount:
+          type: integer
+        failedCount:
+          type: integer
+        pendingCount:
+          type: integer
+        dateCreated:
+          type: string
+          format: date-time
     Transfer:
       type: object
       properties:
@@ -141,30 +163,6 @@ components:
           type: string
         fee:
           type: number
-        dateCreated:
-          type: string
-          format: date-time
-    BulkTransferSummary:
-      type: object
-      properties:
-        batchReference:
-          type: string
-        batchStatus:
-          type: string
-        totalAmount:
-          type: number
-        totalFee:
-          type: number
-        totalReceivedAmount:
-          type: number
-        totalCount:
-          type: integer
-        successfulCount:
-          type: integer
-        failedCount:
-          type: integer
-        pendingCount:
-          type: integer
         dateCreated:
           type: string
           format: date-time

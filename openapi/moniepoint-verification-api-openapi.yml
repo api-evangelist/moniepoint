@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Monnify Verification API
-  description: 'Validate a Nigerian bank account number (Name Inquiry), match a Bank Verification Number (BVN) against an account, and verify National Identification Numbers (NIN). These checks underpin KYC, beneficiary verification on disbursement, and fraud prevention.
-
-    '
+  description: Validate a Nigerian bank account number (Name Inquiry), match a Bank Verification Number (BVN) against an account, and verify National Identification Numbers (NIN). These checks underpin KYC, beneficiary verification on disbursement, and fraud prevention.
   version: '1.0'
   contact:
     name: Monnify Developer Support
@@ -127,31 +125,6 @@ paths:
                 $ref: '#/components/schemas/NinEnvelope'
 components:
   schemas:
-    NinEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          type: object
-          properties:
-            nin:
-              type: string
-            firstName:
-              type: string
-            lastName:
-              type: string
-            dateOfBirth:
-              type: string
-              format: date
-            phoneNumber:
-              type: string
-            matched:
-              type: boolean
     BvnDetailsEnvelope:
       type: object
       properties:
@@ -182,24 +155,6 @@ components:
             registrationDate:
               type: string
               format: date
-    AccountValidationEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          type: object
-          properties:
-            accountNumber:
-              type: string
-            accountName:
-              type: string
-            bankCode:
-              type: string
     BvnMatchEnvelope:
       type: object
       properties:
@@ -224,6 +179,49 @@ components:
               - MATCHED
               - PARTIAL_MATCH
               - NO_MATCH
+    NinEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          type: object
+          properties:
+            nin:
+              type: string
+            firstName:
+              type: string
+            lastName:
+              type: string
+            dateOfBirth:
+              type: string
+              format: date
+            phoneNumber:
+              type: string
+            matched:
+              type: boolean
+    AccountValidationEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          type: object
+          properties:
+            accountNumber:
+              type: string
+            accountName:
+              type: string
+            bankCode:
+              type: string
   securitySchemes:
     BearerAuth:
       type: http
