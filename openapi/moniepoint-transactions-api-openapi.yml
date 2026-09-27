@@ -214,147 +214,6 @@ components:
         currencyCode:
           type: string
           default: NGN
-    TransactionEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/Transaction'
-    Transaction:
-      type: object
-      properties:
-        transactionReference:
-          type: string
-        paymentReference:
-          type: string
-        merchantName:
-          type: string
-        apiKey:
-          type: string
-        redirectUrl:
-          type: string
-        enabledPaymentMethod:
-          type: array
-          items:
-            type: string
-        checkoutUrl:
-          type: string
-          format: uri
-        amount:
-          type: number
-        currencyCode:
-          type: string
-        paymentStatus:
-          type: string
-          enum:
-          - PAID
-          - OVERPAID
-          - PARTIALLY_PAID
-          - PENDING
-          - FAILED
-          - EXPIRED
-        paidOn:
-          type: string
-          format: date-time
-        paymentMethod:
-          type: string
-    TransactionPageEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          type: object
-          properties:
-            content:
-              type: array
-              items:
-                $ref: '#/components/schemas/Transaction'
-            number:
-              type: integer
-            size:
-              type: integer
-            totalElements:
-              type: integer
-            totalPages:
-              type: integer
-    IncomeSplit:
-      type: object
-      properties:
-        subAccountCode:
-          type: string
-        feePercentage:
-          type: number
-        splitAmount:
-          type: number
-        feeBearer:
-          type: boolean
-    ChargeCardRequest:
-      type: object
-      required:
-      - transactionReference
-      - collectionChannel
-      - card
-      properties:
-        transactionReference:
-          type: string
-        collectionChannel:
-          type: string
-          example: API_NOTIFICATION
-        card:
-          type: object
-          required:
-          - number
-          - expiryMonth
-          - expiryYear
-          - pin
-          - cvv
-          properties:
-            number:
-              type: string
-            expiryMonth:
-              type: string
-            expiryYear:
-              type: string
-            pin:
-              type: string
-            cvv:
-              type: string
-    AuthorizeOtpRequest:
-      type: object
-      required:
-      - transactionReference
-      - collectionChannel
-      - tokenId
-      - token
-      properties:
-        transactionReference:
-          type: string
-        collectionChannel:
-          type: string
-        tokenId:
-          type: string
-        token:
-          type: string
-          description: OTP returned by the cardholder's bank.
-    PayWithTransferRequest:
-      type: object
-      required:
-      - transactionReference
-      properties:
-        transactionReference:
-          type: string
-        bankCode:
-          type: string
     InitializeTransactionRequest:
       type: object
       required:
@@ -404,6 +263,147 @@ components:
           type: object
           additionalProperties:
             type: string
+    TransactionPageEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          type: object
+          properties:
+            content:
+              type: array
+              items:
+                $ref: '#/components/schemas/Transaction'
+            number:
+              type: integer
+            size:
+              type: integer
+            totalElements:
+              type: integer
+            totalPages:
+              type: integer
+    PayWithTransferRequest:
+      type: object
+      required:
+      - transactionReference
+      properties:
+        transactionReference:
+          type: string
+        bankCode:
+          type: string
+    IncomeSplit:
+      type: object
+      properties:
+        subAccountCode:
+          type: string
+        feePercentage:
+          type: number
+        splitAmount:
+          type: number
+        feeBearer:
+          type: boolean
+    ChargeCardRequest:
+      type: object
+      required:
+      - transactionReference
+      - collectionChannel
+      - card
+      properties:
+        transactionReference:
+          type: string
+        collectionChannel:
+          type: string
+          example: API_NOTIFICATION
+        card:
+          type: object
+          required:
+          - number
+          - expiryMonth
+          - expiryYear
+          - pin
+          - cvv
+          properties:
+            number:
+              type: string
+            expiryMonth:
+              type: string
+            expiryYear:
+              type: string
+            pin:
+              type: string
+            cvv:
+              type: string
+    TransactionEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/Transaction'
+    Transaction:
+      type: object
+      properties:
+        transactionReference:
+          type: string
+        paymentReference:
+          type: string
+        merchantName:
+          type: string
+        apiKey:
+          type: string
+        redirectUrl:
+          type: string
+        enabledPaymentMethod:
+          type: array
+          items:
+            type: string
+        checkoutUrl:
+          type: string
+          format: uri
+        amount:
+          type: number
+        currencyCode:
+          type: string
+        paymentStatus:
+          type: string
+          enum:
+          - PAID
+          - OVERPAID
+          - PARTIALLY_PAID
+          - PENDING
+          - FAILED
+          - EXPIRED
+        paidOn:
+          type: string
+          format: date-time
+        paymentMethod:
+          type: string
+    AuthorizeOtpRequest:
+      type: object
+      required:
+      - transactionReference
+      - collectionChannel
+      - tokenId
+      - token
+      properties:
+        transactionReference:
+          type: string
+        collectionChannel:
+          type: string
+        tokenId:
+          type: string
+        token:
+          type: string
+          description: OTP returned by the cardholder's bank.
   securitySchemes:
     BearerAuth:
       type: http

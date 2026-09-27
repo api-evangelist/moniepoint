@@ -119,20 +119,6 @@ paths:
                         type: integer
 components:
   schemas:
-    SettlementTransaction:
-      type: object
-      properties:
-        transactionReference:
-          type: string
-        amount:
-          type: number
-        fee:
-          type: number
-        netAmount:
-          type: number
-        paidOn:
-          type: string
-          format: date-time
     Settlement:
       type: object
       properties:
@@ -157,6 +143,20 @@ components:
           - COMPLETED
           - FAILED
         settledOn:
+          type: string
+          format: date-time
+    SettlementTransaction:
+      type: object
+      properties:
+        transactionReference:
+          type: string
+        amount:
+          type: number
+        fee:
+          type: number
+        netAmount:
+          type: number
+        paidOn:
           type: string
           format: date-time
   securitySchemes:

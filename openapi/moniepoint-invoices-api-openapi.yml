@@ -111,6 +111,45 @@ components:
           type: string
         responseBody:
           $ref: '#/components/schemas/Invoice'
+    Invoice:
+      type: object
+      properties:
+        invoiceReference:
+          type: string
+        amount:
+          type: number
+        currencyCode:
+          type: string
+        customerEmail:
+          type: string
+        customerName:
+          type: string
+        checkoutUrl:
+          type: string
+          format: uri
+        accountNumber:
+          type: string
+        accountName:
+          type: string
+        bankCode:
+          type: string
+        bankName:
+          type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - PAID
+          - OVERPAID
+          - PARTIALLY_PAID
+          - EXPIRED
+          - CANCELLED
+        expiryDate:
+          type: string
+          format: date-time
+        dateCreated:
+          type: string
+          format: date-time
     CreateInvoiceRequest:
       type: object
       required:
@@ -165,45 +204,6 @@ components:
                 type: number
               feeBearer:
                 type: boolean
-    Invoice:
-      type: object
-      properties:
-        invoiceReference:
-          type: string
-        amount:
-          type: number
-        currencyCode:
-          type: string
-        customerEmail:
-          type: string
-        customerName:
-          type: string
-        checkoutUrl:
-          type: string
-          format: uri
-        accountNumber:
-          type: string
-        accountName:
-          type: string
-        bankCode:
-          type: string
-        bankName:
-          type: string
-        status:
-          type: string
-          enum:
-          - PENDING
-          - PAID
-          - OVERPAID
-          - PARTIALLY_PAID
-          - EXPIRED
-          - CANCELLED
-        expiryDate:
-          type: string
-          format: date-time
-        dateCreated:
-          type: string
-          format: date-time
   securitySchemes:
     BearerAuth:
       type: http

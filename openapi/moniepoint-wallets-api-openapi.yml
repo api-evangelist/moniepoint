@@ -170,6 +170,28 @@ paths:
                         type: integer
 components:
   schemas:
+    Wallet:
+      type: object
+      properties:
+        walletReference:
+          type: string
+        walletName:
+          type: string
+        accountNumber:
+          type: string
+        accountName:
+          type: string
+        bankCode:
+          type: string
+        bankName:
+          type: string
+        customerName:
+          type: string
+        customerEmail:
+          type: string
+        dateCreated:
+          type: string
+          format: date-time
     WalletEnvelope:
       type: object
       properties:
@@ -197,28 +219,6 @@ components:
           type: string
         balanceAfter:
           type: number
-        dateCreated:
-          type: string
-          format: date-time
-    Wallet:
-      type: object
-      properties:
-        walletReference:
-          type: string
-        walletName:
-          type: string
-        accountNumber:
-          type: string
-        accountName:
-          type: string
-        bankCode:
-          type: string
-        bankName:
-          type: string
-        customerName:
-          type: string
-        customerEmail:
-          type: string
         dateCreated:
           type: string
           format: date-time

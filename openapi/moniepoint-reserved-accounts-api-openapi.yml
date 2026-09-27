@@ -197,6 +197,15 @@ paths:
                 $ref: '#/components/schemas/ReservedAccountEnvelope'
 components:
   schemas:
+    UpdateKycRequest:
+      type: object
+      properties:
+        accountReference:
+          type: string
+        bvn:
+          type: string
+        nin:
+          type: string
     ReservedAccount:
       type: object
       properties:
@@ -315,15 +324,6 @@ components:
                 type: number
               feeBearer:
                 type: boolean
-    UpdateKycRequest:
-      type: object
-      properties:
-        accountReference:
-          type: string
-        bvn:
-          type: string
-        nin:
-          type: string
   securitySchemes:
     BearerAuth:
       type: http

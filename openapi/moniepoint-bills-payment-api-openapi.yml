@@ -214,43 +214,6 @@ paths:
                 $ref: '#/components/schemas/BillEnvelope'
 components:
   schemas:
-    BillerItem:
-      type: object
-      properties:
-        billerItemCode:
-          type: string
-        billerItemName:
-          type: string
-        amount:
-          type: number
-        billerCode:
-          type: string
-        amountType:
-          type: string
-          enum:
-          - FIXED
-          - RANGE
-          - FREE
-    BillEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/Bill'
-    BillCategory:
-      type: object
-      properties:
-        code:
-          type: string
-        name:
-          type: string
-        description:
-          type: string
     Bill:
       type: object
       properties:
@@ -279,6 +242,32 @@ components:
         dateProcessed:
           type: string
           format: date-time
+    BillerItem:
+      type: object
+      properties:
+        billerItemCode:
+          type: string
+        billerItemName:
+          type: string
+        amount:
+          type: number
+        billerCode:
+          type: string
+        amountType:
+          type: string
+          enum:
+          - FIXED
+          - RANGE
+          - FREE
+    BillCategory:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
     Biller:
       type: object
       properties:
@@ -288,6 +277,17 @@ components:
           type: string
         categoryCode:
           type: string
+    BillEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/Bill'
   securitySchemes:
     BearerAuth:
       type: http

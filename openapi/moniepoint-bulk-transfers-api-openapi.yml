@@ -111,30 +111,6 @@ components:
               type: integer
             totalPages:
               type: integer
-    BulkTransferSummary:
-      type: object
-      properties:
-        batchReference:
-          type: string
-        batchStatus:
-          type: string
-        totalAmount:
-          type: number
-        totalFee:
-          type: number
-        totalReceivedAmount:
-          type: number
-        totalCount:
-          type: integer
-        successfulCount:
-          type: integer
-        failedCount:
-          type: integer
-        pendingCount:
-          type: integer
-        dateCreated:
-          type: string
-          format: date-time
     Transfer:
       type: object
       properties:
@@ -222,6 +198,30 @@ components:
           type: string
         responseBody:
           $ref: '#/components/schemas/BulkTransferSummary'
+    BulkTransferSummary:
+      type: object
+      properties:
+        batchReference:
+          type: string
+        batchStatus:
+          type: string
+        totalAmount:
+          type: number
+        totalFee:
+          type: number
+        totalReceivedAmount:
+          type: number
+        totalCount:
+          type: integer
+        successfulCount:
+          type: integer
+        failedCount:
+          type: integer
+        pendingCount:
+          type: integer
+        dateCreated:
+          type: string
+          format: date-time
   securitySchemes:
     BearerAuth:
       type: http

@@ -56,41 +56,6 @@ paths:
                 $ref: '#/components/schemas/PushPaymentEnvelope'
 components:
   schemas:
-    PushPayment:
-      type: object
-      properties:
-        terminalSerialNumber:
-          type: string
-        reference:
-          type: string
-        amount:
-          type: number
-        currency:
-          type: string
-        status:
-          type: string
-          enum:
-          - PENDING
-          - ACCEPTED
-          - COMPLETED
-          - DECLINED
-          - EXPIRED
-          - FAILED
-        responseCode:
-          type: string
-        responseMessage:
-          type: string
-        paymentMethod:
-          type: string
-          enum:
-          - CARD
-          - TRANSFER
-        dateCreated:
-          type: string
-          format: date-time
-        completedAt:
-          type: string
-          format: date-time
     PushPaymentEnvelope:
       type: object
       properties:
@@ -128,6 +93,41 @@ components:
         expiresIn:
           type: integer
           description: Seconds before the terminal cancels the request.
+    PushPayment:
+      type: object
+      properties:
+        terminalSerialNumber:
+          type: string
+        reference:
+          type: string
+        amount:
+          type: number
+        currency:
+          type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - ACCEPTED
+          - COMPLETED
+          - DECLINED
+          - EXPIRED
+          - FAILED
+        responseCode:
+          type: string
+        responseMessage:
+          type: string
+        paymentMethod:
+          type: string
+          enum:
+          - CARD
+          - TRANSFER
+        dateCreated:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
   securitySchemes:
     BasicAuth:
       type: http

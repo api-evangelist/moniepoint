@@ -125,7 +125,7 @@ paths:
                 $ref: '#/components/schemas/NinEnvelope'
 components:
   schemas:
-    BvnDetailsEnvelope:
+    AccountValidationEnvelope:
       type: object
       properties:
         requestSuccessful:
@@ -137,24 +137,12 @@ components:
         responseBody:
           type: object
           properties:
-            bvn:
+            accountNumber:
               type: string
-            firstName:
+            accountName:
               type: string
-            middleName:
+            bankCode:
               type: string
-            lastName:
-              type: string
-            dateOfBirth:
-              type: string
-              format: date
-            phoneNumber:
-              type: string
-            gender:
-              type: string
-            registrationDate:
-              type: string
-              format: date
     BvnMatchEnvelope:
       type: object
       properties:
@@ -204,7 +192,7 @@ components:
               type: string
             matched:
               type: boolean
-    AccountValidationEnvelope:
+    BvnDetailsEnvelope:
       type: object
       properties:
         requestSuccessful:
@@ -216,12 +204,24 @@ components:
         responseBody:
           type: object
           properties:
-            accountNumber:
+            bvn:
               type: string
-            accountName:
+            firstName:
               type: string
-            bankCode:
+            middleName:
               type: string
+            lastName:
+              type: string
+            dateOfBirth:
+              type: string
+              format: date
+            phoneNumber:
+              type: string
+            gender:
+              type: string
+            registrationDate:
+              type: string
+              format: date
   securitySchemes:
     BearerAuth:
       type: http
