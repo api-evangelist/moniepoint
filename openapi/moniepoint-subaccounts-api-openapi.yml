@@ -99,6 +99,30 @@ paths:
                     type: object
 components:
   schemas:
+    SubAccountListEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubAccount'
+    SubAccountEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/SubAccount'
     SubAccount:
       type: object
       required:
@@ -127,30 +151,6 @@ components:
           description: When true the sub-account absorbs Monnify's fee.
         defaultBearer:
           type: boolean
-    SubAccountListEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubAccount'
-    SubAccountEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/SubAccount'
   securitySchemes:
     BearerAuth:
       type: http

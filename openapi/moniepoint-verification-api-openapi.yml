@@ -143,30 +143,6 @@ components:
               type: string
             bankCode:
               type: string
-    BvnMatchEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          type: object
-          properties:
-            bvn:
-              type: string
-            accountNumber:
-              type: string
-            bankCode:
-              type: string
-            matchStatus:
-              type: string
-              enum:
-              - MATCHED
-              - PARTIAL_MATCH
-              - NO_MATCH
     NinEnvelope:
       type: object
       properties:
@@ -192,6 +168,30 @@ components:
               type: string
             matched:
               type: boolean
+    BvnMatchEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          type: object
+          properties:
+            bvn:
+              type: string
+            accountNumber:
+              type: string
+            bankCode:
+              type: string
+            matchStatus:
+              type: string
+              enum:
+              - MATCHED
+              - PARTIAL_MATCH
+              - NO_MATCH
     BvnDetailsEnvelope:
       type: object
       properties:

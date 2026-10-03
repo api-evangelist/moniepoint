@@ -119,6 +119,17 @@ paths:
                 $ref: '#/components/schemas/RefundEnvelope'
 components:
   schemas:
+    RefundEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/Refund'
     Refund:
       type: object
       properties:
@@ -142,17 +153,6 @@ components:
         completedOn:
           type: string
           format: date-time
-    RefundEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/Refund'
   securitySchemes:
     BearerAuth:
       type: http

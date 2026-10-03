@@ -87,7 +87,7 @@ paths:
                 $ref: '#/components/schemas/TransferPageEnvelope'
 components:
   schemas:
-    TransferPageEnvelope:
+    BulkTransferEnvelope:
       type: object
       properties:
         requestSuccessful:
@@ -97,48 +97,28 @@ components:
         responseCode:
           type: string
         responseBody:
-          type: object
-          properties:
-            content:
-              type: array
-              items:
-                $ref: '#/components/schemas/Transfer'
-            number:
-              type: integer
-            size:
-              type: integer
-            totalElements:
-              type: integer
-            totalPages:
-              type: integer
-    Transfer:
+          $ref: '#/components/schemas/BulkTransferSummary'
+    BulkTransferSummary:
       type: object
       properties:
-        reference:
+        batchReference:
           type: string
-        amount:
+        batchStatus:
+          type: string
+        totalAmount:
           type: number
-        destinationAccountName:
-          type: string
-        destinationAccountNumber:
-          type: string
-        destinationBankCode:
-          type: string
-        currency:
-          type: string
-        status:
-          type: string
-          enum:
-          - SUCCESS
-          - FAILED
-          - REVERSED
-          - PENDING
-          - OTP_EMAIL_DISPATCH
-          - PENDING_AUTHORIZATION
-        narration:
-          type: string
-        fee:
+        totalFee:
           type: number
+        totalReceivedAmount:
+          type: number
+        totalCount:
+          type: integer
+        successfulCount:
+          type: integer
+        failedCount:
+          type: integer
+        pendingCount:
+          type: integer
         dateCreated:
           type: string
           format: date-time
@@ -187,7 +167,38 @@ components:
               currency:
                 type: string
                 example: NGN
-    BulkTransferEnvelope:
+    Transfer:
+      type: object
+      properties:
+        reference:
+          type: string
+        amount:
+          type: number
+        destinationAccountName:
+          type: string
+        destinationAccountNumber:
+          type: string
+        destinationBankCode:
+          type: string
+        currency:
+          type: string
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILED
+          - REVERSED
+          - PENDING
+          - OTP_EMAIL_DISPATCH
+          - PENDING_AUTHORIZATION
+        narration:
+          type: string
+        fee:
+          type: number
+        dateCreated:
+          type: string
+          format: date-time
+    TransferPageEnvelope:
       type: object
       properties:
         requestSuccessful:
@@ -197,31 +208,20 @@ components:
         responseCode:
           type: string
         responseBody:
-          $ref: '#/components/schemas/BulkTransferSummary'
-    BulkTransferSummary:
-      type: object
-      properties:
-        batchReference:
-          type: string
-        batchStatus:
-          type: string
-        totalAmount:
-          type: number
-        totalFee:
-          type: number
-        totalReceivedAmount:
-          type: number
-        totalCount:
-          type: integer
-        successfulCount:
-          type: integer
-        failedCount:
-          type: integer
-        pendingCount:
-          type: integer
-        dateCreated:
-          type: string
-          format: date-time
+          type: object
+          properties:
+            content:
+              type: array
+              items:
+                $ref: '#/components/schemas/Transfer'
+            number:
+              type: integer
+            size:
+              type: integer
+            totalElements:
+              type: integer
+            totalPages:
+              type: integer
   securitySchemes:
     BearerAuth:
       type: http

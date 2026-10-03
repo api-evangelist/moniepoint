@@ -192,17 +192,6 @@ components:
         dateCreated:
           type: string
           format: date-time
-    WalletEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/Wallet'
     WalletTransaction:
       type: object
       properties:
@@ -222,6 +211,17 @@ components:
         dateCreated:
           type: string
           format: date-time
+    WalletEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/Wallet'
   securitySchemes:
     BearerAuth:
       type: http

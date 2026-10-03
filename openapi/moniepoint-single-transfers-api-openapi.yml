@@ -136,6 +136,30 @@ paths:
                 $ref: '#/components/schemas/TransferPageEnvelope'
 components:
   schemas:
+    TransferEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/Transfer'
+    SenderInformation:
+      type: object
+      description: Optional sender details (added October 2025).
+      properties:
+        fullName:
+          type: string
+        phoneNumber:
+          type: string
+        email:
+          type: string
+          format: email
+        senderRef:
+          type: string
     Transfer:
       type: object
       properties:
@@ -191,40 +215,6 @@ components:
               type: integer
             totalPages:
               type: integer
-    TransferEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/Transfer'
-    AuthorizeTransferRequest:
-      type: object
-      required:
-      - reference
-      - authorizationCode
-      properties:
-        reference:
-          type: string
-        authorizationCode:
-          type: string
-    SenderInformation:
-      type: object
-      description: Optional sender details (added October 2025).
-      properties:
-        fullName:
-          type: string
-        phoneNumber:
-          type: string
-        email:
-          type: string
-          format: email
-        senderRef:
-          type: string
     SingleTransferRequest:
       type: object
       required:
@@ -261,6 +251,16 @@ components:
           type: boolean
         senderInformation:
           $ref: '#/components/schemas/SenderInformation'
+    AuthorizeTransferRequest:
+      type: object
+      required:
+      - reference
+      - authorizationCode
+      properties:
+        reference:
+          type: string
+        authorizationCode:
+          type: string
   securitySchemes:
     BearerAuth:
       type: http

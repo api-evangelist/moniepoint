@@ -197,6 +197,17 @@ paths:
                 $ref: '#/components/schemas/ReservedAccountEnvelope'
 components:
   schemas:
+    ReservedAccountEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/ReservedAccount'
     UpdateKycRequest:
       type: object
       properties:
@@ -242,17 +253,6 @@ components:
                 type: string
               accountName:
                 type: string
-    ReservedAccountEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/ReservedAccount'
     ReserveAccountRequest:
       type: object
       required:

@@ -56,17 +56,6 @@ paths:
                 $ref: '#/components/schemas/PushPaymentEnvelope'
 components:
   schemas:
-    PushPaymentEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/PushPayment'
     PushPaymentRequest:
       type: object
       required:
@@ -93,6 +82,17 @@ components:
         expiresIn:
           type: integer
           description: Seconds before the terminal cancels the request.
+    PushPaymentEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/PushPayment'
     PushPayment:
       type: object
       properties:

@@ -188,81 +188,6 @@ paths:
                 $ref: '#/components/schemas/TransactionPageEnvelope'
 components:
   schemas:
-    ChargeCardTokenRequest:
-      type: object
-      required:
-      - cardToken
-      - amount
-      - customerName
-      - customerEmail
-      - paymentReference
-      - contractCode
-      properties:
-        cardToken:
-          type: string
-        amount:
-          type: number
-        customerName:
-          type: string
-        customerEmail:
-          type: string
-          format: email
-        paymentReference:
-          type: string
-        contractCode:
-          type: string
-        currencyCode:
-          type: string
-          default: NGN
-    InitializeTransactionRequest:
-      type: object
-      required:
-      - amount
-      - customerName
-      - customerEmail
-      - paymentReference
-      - paymentDescription
-      - contractCode
-      - currencyCode
-      properties:
-        amount:
-          type: number
-          example: 1500
-        customerName:
-          type: string
-          example: Jane Customer
-        customerEmail:
-          type: string
-          format: email
-        paymentReference:
-          type: string
-        paymentDescription:
-          type: string
-        contractCode:
-          type: string
-        currencyCode:
-          type: string
-          example: NGN
-        redirectUrl:
-          type: string
-          format: uri
-        paymentMethods:
-          type: array
-          items:
-            type: string
-            enum:
-            - CARD
-            - ACCOUNT_TRANSFER
-            - USSD
-            - PHONE_NUMBER
-        incomeSplitConfig:
-          type: array
-          items:
-            $ref: '#/components/schemas/IncomeSplit'
-        metaData:
-          type: object
-          additionalProperties:
-            type: string
     TransactionPageEnvelope:
       type: object
       properties:
@@ -287,26 +212,6 @@ components:
               type: integer
             totalPages:
               type: integer
-    PayWithTransferRequest:
-      type: object
-      required:
-      - transactionReference
-      properties:
-        transactionReference:
-          type: string
-        bankCode:
-          type: string
-    IncomeSplit:
-      type: object
-      properties:
-        subAccountCode:
-          type: string
-        feePercentage:
-          type: number
-        splitAmount:
-          type: number
-        feeBearer:
-          type: boolean
     ChargeCardRequest:
       type: object
       required:
@@ -338,6 +243,32 @@ components:
               type: string
             cvv:
               type: string
+    ChargeCardTokenRequest:
+      type: object
+      required:
+      - cardToken
+      - amount
+      - customerName
+      - customerEmail
+      - paymentReference
+      - contractCode
+      properties:
+        cardToken:
+          type: string
+        amount:
+          type: number
+        customerName:
+          type: string
+        customerEmail:
+          type: string
+          format: email
+        paymentReference:
+          type: string
+        contractCode:
+          type: string
+        currencyCode:
+          type: string
+          default: NGN
     TransactionEnvelope:
       type: object
       properties:
@@ -404,6 +335,75 @@ components:
         token:
           type: string
           description: OTP returned by the cardholder's bank.
+    IncomeSplit:
+      type: object
+      properties:
+        subAccountCode:
+          type: string
+        feePercentage:
+          type: number
+        splitAmount:
+          type: number
+        feeBearer:
+          type: boolean
+    InitializeTransactionRequest:
+      type: object
+      required:
+      - amount
+      - customerName
+      - customerEmail
+      - paymentReference
+      - paymentDescription
+      - contractCode
+      - currencyCode
+      properties:
+        amount:
+          type: number
+          example: 1500
+        customerName:
+          type: string
+          example: Jane Customer
+        customerEmail:
+          type: string
+          format: email
+        paymentReference:
+          type: string
+        paymentDescription:
+          type: string
+        contractCode:
+          type: string
+        currencyCode:
+          type: string
+          example: NGN
+        redirectUrl:
+          type: string
+          format: uri
+        paymentMethods:
+          type: array
+          items:
+            type: string
+            enum:
+            - CARD
+            - ACCOUNT_TRANSFER
+            - USSD
+            - PHONE_NUMBER
+        incomeSplitConfig:
+          type: array
+          items:
+            $ref: '#/components/schemas/IncomeSplit'
+        metaData:
+          type: object
+          additionalProperties:
+            type: string
+    PayWithTransferRequest:
+      type: object
+      required:
+      - transactionReference
+      properties:
+        transactionReference:
+          type: string
+        bankCode:
+          type: string
   securitySchemes:
     BearerAuth:
       type: http

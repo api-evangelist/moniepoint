@@ -214,6 +214,26 @@ paths:
                 $ref: '#/components/schemas/BillEnvelope'
 components:
   schemas:
+    Biller:
+      type: object
+      properties:
+        billerCode:
+          type: string
+        billerName:
+          type: string
+        categoryCode:
+          type: string
+    BillEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/Bill'
     Bill:
       type: object
       properties:
@@ -268,26 +288,6 @@ components:
           type: string
         description:
           type: string
-    Biller:
-      type: object
-      properties:
-        billerCode:
-          type: string
-        billerName:
-          type: string
-        categoryCode:
-          type: string
-    BillEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/Bill'
   securitySchemes:
     BearerAuth:
       type: http
