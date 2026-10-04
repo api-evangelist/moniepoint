@@ -52,6 +52,17 @@ components:
         expiresIn:
           type: integer
           description: Token lifetime in seconds (typically 3600).
+    LoginResponse:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/LoginResponseBody'
     Error:
       type: object
       properties:
@@ -64,17 +75,6 @@ components:
           type: string
         responseBody:
           type: object
-    LoginResponse:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/LoginResponseBody'
   responses:
     ErrorResponse:
       description: Authentication failed.

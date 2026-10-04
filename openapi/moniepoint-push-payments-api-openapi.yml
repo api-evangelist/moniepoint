@@ -82,17 +82,6 @@ components:
         expiresIn:
           type: integer
           description: Seconds before the terminal cancels the request.
-    PushPaymentEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/PushPayment'
     PushPayment:
       type: object
       properties:
@@ -128,6 +117,17 @@ components:
         completedAt:
           type: string
           format: date-time
+    PushPaymentEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/PushPayment'
   securitySchemes:
     BasicAuth:
       type: http

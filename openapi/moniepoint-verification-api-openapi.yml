@@ -125,24 +125,6 @@ paths:
                 $ref: '#/components/schemas/NinEnvelope'
 components:
   schemas:
-    AccountValidationEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          type: object
-          properties:
-            accountNumber:
-              type: string
-            accountName:
-              type: string
-            bankCode:
-              type: string
     NinEnvelope:
       type: object
       properties:
@@ -192,6 +174,24 @@ components:
               - MATCHED
               - PARTIAL_MATCH
               - NO_MATCH
+    AccountValidationEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          type: object
+          properties:
+            accountNumber:
+              type: string
+            accountName:
+              type: string
+            bankCode:
+              type: string
     BvnDetailsEnvelope:
       type: object
       properties:

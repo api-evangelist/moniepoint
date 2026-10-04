@@ -114,6 +114,42 @@ components:
           type: string
         responseBody:
           $ref: '#/components/schemas/Mandate'
+    Mandate:
+      type: object
+      properties:
+        mandateCode:
+          type: string
+        mandateDescription:
+          type: string
+        mandateAmount:
+          type: number
+        customerName:
+          type: string
+        customerAccountNumber:
+          type: string
+        customerBankCode:
+          type: string
+        status:
+          type: string
+          enum:
+          - PENDING
+          - FAILED
+          - CANCELLED
+          - ACTIVATED
+          - EXPIRED
+        frequency:
+          type: string
+        amountType:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        dateCreated:
+          type: string
+          format: date-time
     CreateMandateRequest:
       type: object
       required:
@@ -164,42 +200,6 @@ components:
           type: string
         contractCode:
           type: string
-    Mandate:
-      type: object
-      properties:
-        mandateCode:
-          type: string
-        mandateDescription:
-          type: string
-        mandateAmount:
-          type: number
-        customerName:
-          type: string
-        customerAccountNumber:
-          type: string
-        customerBankCode:
-          type: string
-        status:
-          type: string
-          enum:
-          - PENDING
-          - FAILED
-          - CANCELLED
-          - ACTIVATED
-          - EXPIRED
-        frequency:
-          type: string
-        amountType:
-          type: string
-        startDate:
-          type: string
-          format: date
-        endDate:
-          type: string
-          format: date
-        dateCreated:
-          type: string
-          format: date-time
   securitySchemes:
     BearerAuth:
       type: http

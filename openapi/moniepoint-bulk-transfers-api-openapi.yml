@@ -87,17 +87,6 @@ paths:
                 $ref: '#/components/schemas/TransferPageEnvelope'
 components:
   schemas:
-    BulkTransferEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/BulkTransferSummary'
     BulkTransferSummary:
       type: object
       properties:
@@ -122,6 +111,30 @@ components:
         dateCreated:
           type: string
           format: date-time
+    TransferPageEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          type: object
+          properties:
+            content:
+              type: array
+              items:
+                $ref: '#/components/schemas/Transfer'
+            number:
+              type: integer
+            size:
+              type: integer
+            totalElements:
+              type: integer
+            totalPages:
+              type: integer
     BulkTransferRequest:
       type: object
       required:
@@ -167,6 +180,17 @@ components:
               currency:
                 type: string
                 example: NGN
+    BulkTransferEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/BulkTransferSummary'
     Transfer:
       type: object
       properties:
@@ -198,30 +222,6 @@ components:
         dateCreated:
           type: string
           format: date-time
-    TransferPageEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          type: object
-          properties:
-            content:
-              type: array
-              items:
-                $ref: '#/components/schemas/Transfer'
-            number:
-              type: integer
-            size:
-              type: integer
-            totalElements:
-              type: integer
-            totalPages:
-              type: integer
   securitySchemes:
     BearerAuth:
       type: http

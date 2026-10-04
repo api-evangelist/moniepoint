@@ -170,6 +170,25 @@ paths:
                         type: integer
 components:
   schemas:
+    WalletTransaction:
+      type: object
+      properties:
+        transactionReference:
+          type: string
+        amount:
+          type: number
+        type:
+          type: string
+          enum:
+          - CREDIT
+          - DEBIT
+        narration:
+          type: string
+        balanceAfter:
+          type: number
+        dateCreated:
+          type: string
+          format: date-time
     Wallet:
       type: object
       properties:
@@ -189,25 +208,6 @@ components:
           type: string
         customerEmail:
           type: string
-        dateCreated:
-          type: string
-          format: date-time
-    WalletTransaction:
-      type: object
-      properties:
-        transactionReference:
-          type: string
-        amount:
-          type: number
-        type:
-          type: string
-          enum:
-          - CREDIT
-          - DEBIT
-        narration:
-          type: string
-        balanceAfter:
-          type: number
         dateCreated:
           type: string
           format: date-time
