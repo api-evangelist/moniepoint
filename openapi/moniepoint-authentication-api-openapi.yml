@@ -42,6 +42,23 @@ paths:
         4XX:
           $ref: '#/components/responses/ErrorResponse'
 components:
+  examples:
+    LoginResponseExample:
+      summary: Successful login
+      value:
+        requestSuccessful: true
+        responseMessage: success
+        responseCode: '0'
+        responseBody:
+          accessToken: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJNS19QUk9EXzAxIn0.x
+          expiresIn: 3600
+  responses:
+    ErrorResponse:
+      description: Authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
     LoginResponseBody:
       type: object
@@ -75,23 +92,6 @@ components:
           type: string
         responseBody:
           type: object
-  responses:
-    ErrorResponse:
-      description: Authentication failed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-  examples:
-    LoginResponseExample:
-      summary: Successful login
-      value:
-        requestSuccessful: true
-        responseMessage: success
-        responseCode: '0'
-        responseBody:
-          accessToken: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJNS19QUk9EXzAxIn0.x
-          expiresIn: 3600
   securitySchemes:
     BasicAuth:
       type: http

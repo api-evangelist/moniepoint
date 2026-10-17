@@ -225,34 +225,6 @@ components:
           type: string
         responseBody:
           $ref: '#/components/schemas/Bill'
-    Bill:
-      type: object
-      properties:
-        reference:
-          type: string
-        billerCode:
-          type: string
-        billerItemCode:
-          type: string
-        customerId:
-          type: string
-        amount:
-          type: number
-        narration:
-          type: string
-        token:
-          type: string
-          description: Electricity token
-          where applicable.: null
-        status:
-          type: string
-          enum:
-          - PENDING
-          - SUCCESS
-          - FAILED
-        dateProcessed:
-          type: string
-          format: date-time
     BillerItem:
       type: object
       properties:
@@ -288,6 +260,34 @@ components:
           type: string
         categoryCode:
           type: string
+    Bill:
+      type: object
+      properties:
+        reference:
+          type: string
+        billerCode:
+          type: string
+        billerItemCode:
+          type: string
+        customerId:
+          type: string
+        amount:
+          type: number
+        narration:
+          type: string
+        token:
+          type: string
+          description: Electricity token
+          where applicable.: null
+        status:
+          type: string
+          enum:
+          - PENDING
+          - SUCCESS
+          - FAILED
+        dateProcessed:
+          type: string
+          format: date-time
   securitySchemes:
     BearerAuth:
       type: http

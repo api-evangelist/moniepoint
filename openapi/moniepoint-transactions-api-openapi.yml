@@ -188,80 +188,6 @@ paths:
                 $ref: '#/components/schemas/TransactionPageEnvelope'
 components:
   schemas:
-    PayWithTransferRequest:
-      type: object
-      required:
-      - transactionReference
-      properties:
-        transactionReference:
-          type: string
-        bankCode:
-          type: string
-    TransactionEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/Transaction'
-    IncomeSplit:
-      type: object
-      properties:
-        subAccountCode:
-          type: string
-        feePercentage:
-          type: number
-        splitAmount:
-          type: number
-        feeBearer:
-          type: boolean
-    ChargeCardTokenRequest:
-      type: object
-      required:
-      - cardToken
-      - amount
-      - customerName
-      - customerEmail
-      - paymentReference
-      - contractCode
-      properties:
-        cardToken:
-          type: string
-        amount:
-          type: number
-        customerName:
-          type: string
-        customerEmail:
-          type: string
-          format: email
-        paymentReference:
-          type: string
-        contractCode:
-          type: string
-        currencyCode:
-          type: string
-          default: NGN
-    AuthorizeOtpRequest:
-      type: object
-      required:
-      - transactionReference
-      - collectionChannel
-      - tokenId
-      - token
-      properties:
-        transactionReference:
-          type: string
-        collectionChannel:
-          type: string
-        tokenId:
-          type: string
-        token:
-          type: string
-          description: OTP returned by the cardholder's bank.
     Transaction:
       type: object
       properties:
@@ -300,6 +226,60 @@ components:
           format: date-time
         paymentMethod:
           type: string
+    AuthorizeOtpRequest:
+      type: object
+      required:
+      - transactionReference
+      - collectionChannel
+      - tokenId
+      - token
+      properties:
+        transactionReference:
+          type: string
+        collectionChannel:
+          type: string
+        tokenId:
+          type: string
+        token:
+          type: string
+          description: OTP returned by the cardholder's bank.
+    IncomeSplit:
+      type: object
+      properties:
+        subAccountCode:
+          type: string
+        feePercentage:
+          type: number
+        splitAmount:
+          type: number
+        feeBearer:
+          type: boolean
+    ChargeCardTokenRequest:
+      type: object
+      required:
+      - cardToken
+      - amount
+      - customerName
+      - customerEmail
+      - paymentReference
+      - contractCode
+      properties:
+        cardToken:
+          type: string
+        amount:
+          type: number
+        customerName:
+          type: string
+        customerEmail:
+          type: string
+          format: email
+        paymentReference:
+          type: string
+        contractCode:
+          type: string
+        currencyCode:
+          type: string
+          default: NGN
     TransactionPageEnvelope:
       type: object
       properties:
@@ -324,6 +304,37 @@ components:
               type: integer
             totalPages:
               type: integer
+    ChargeCardRequest:
+      type: object
+      required:
+      - transactionReference
+      - collectionChannel
+      - card
+      properties:
+        transactionReference:
+          type: string
+        collectionChannel:
+          type: string
+          example: API_NOTIFICATION
+        card:
+          type: object
+          required:
+          - number
+          - expiryMonth
+          - expiryYear
+          - pin
+          - cvv
+          properties:
+            number:
+              type: string
+            expiryMonth:
+              type: string
+            expiryYear:
+              type: string
+            pin:
+              type: string
+            cvv:
+              type: string
     InitializeTransactionRequest:
       type: object
       required:
@@ -373,37 +384,26 @@ components:
           type: object
           additionalProperties:
             type: string
-    ChargeCardRequest:
+    TransactionEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/Transaction'
+    PayWithTransferRequest:
       type: object
       required:
       - transactionReference
-      - collectionChannel
-      - card
       properties:
         transactionReference:
           type: string
-        collectionChannel:
+        bankCode:
           type: string
-          example: API_NOTIFICATION
-        card:
-          type: object
-          required:
-          - number
-          - expiryMonth
-          - expiryYear
-          - pin
-          - cvv
-          properties:
-            number:
-              type: string
-            expiryMonth:
-              type: string
-            expiryYear:
-              type: string
-            pin:
-              type: string
-            cvv:
-              type: string
   securitySchemes:
     BearerAuth:
       type: http

@@ -56,6 +56,17 @@ paths:
                 $ref: '#/components/schemas/PushPaymentEnvelope'
 components:
   schemas:
+    PushPaymentEnvelope:
+      type: object
+      properties:
+        requestSuccessful:
+          type: boolean
+        responseMessage:
+          type: string
+        responseCode:
+          type: string
+        responseBody:
+          $ref: '#/components/schemas/PushPayment'
     PushPaymentRequest:
       type: object
       required:
@@ -117,17 +128,6 @@ components:
         completedAt:
           type: string
           format: date-time
-    PushPaymentEnvelope:
-      type: object
-      properties:
-        requestSuccessful:
-          type: boolean
-        responseMessage:
-          type: string
-        responseCode:
-          type: string
-        responseBody:
-          $ref: '#/components/schemas/PushPayment'
   securitySchemes:
     BasicAuth:
       type: http
