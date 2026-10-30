@@ -1,4 +1,4 @@
-# Moniepoint (moniepoint)
+# Moniepoint
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,397 +66,185 @@
 
 Moniepoint is Africa's all-in-one financial platform for small and medium-sized businesses and individuals — Nigeria's largest merchant acquirer, with about 10 million business and individual accounts, $17B in monthly transaction volume, and 26M daily payments processed. Founded as TeamApt and rebranded under the Moniepoint name, the company became Africa's most valuable fintech unicorn after a 2024 raise led by Google, then expanded into Kenya and cross-border payments. The Monnify developer platform exposes the rails to third parties through a comprehensive REST API for authentication, collections (cards, bank transfer, USSD, reserved accounts), disbursements (single and bulk NIP), sub-accounts and settlement, direct-debit mandates, invoices, bills payment, KYC verification, wallets, refunds, and signed webhooks; the separate Moniepoint POS API enables push payments to registered terminals. Underlying products also include business bank accounts, working-capital credit, expense cards, and business-management tools.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/moniepoint/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/moniepoint/refs/heads/main/apis.yml)
+**Areas:** Africa · Nigeria · Payments · Banking · Fintech · Acquiring · Point-of-Sale · Collection · Disbursements · Virtual Accounts · Direct Debit · Bills Payment
 
-## Scope
+## Moniepoint on APIs.io
 
-- **Position:** Consuming
-- **Access:** 3rd-Party
+Everything profiled for Moniepoint is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/moniepoint/](https://apis.io/providers/moniepoint/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (19)
 
-- Africa
-- Nigeria
-- Payments
-- Banking
-- Fintech
-- Acquiring
-- POS
-- Collections
-- Disbursements
-- Virtual Accounts
-- Direct Debit
-- Bills Payment
-- SMB
-- Working Capital
-- Unicorn
+- [Monnify Webhooks](https://apis.io/apis/moniepoint/monnify-webhooks/) — Asynchronous server-to-server notifications for nine event categories — successful collection, successful / failed / reversed disbursement, successful /…
+- [Moniepoint Authentication API](https://apis.io/apis/moniepoint/moniepoint-authentication-api/) — Obtain a Bearer access token for the Monnify API.
+- [Moniepoint Banks API](https://apis.io/apis/moniepoint/moniepoint-banks-api/) — NIP bank directory and account validation.
+- [Moniepoint Bills Payment API](https://apis.io/apis/moniepoint/moniepoint-bills-payment-api/) — Bill categories, billers, validation, processing, and status.
+- [Moniepoint Bulk Transfers API](https://apis.io/apis/moniepoint/moniepoint-bulk-transfers-api/) — Initiate and query bulk transfer batches.
+- [Moniepoint Debits API](https://apis.io/apis/moniepoint/moniepoint-debits-api/) — Initiate debits against an active mandate.
+- [Moniepoint Invoices API](https://apis.io/apis/moniepoint/moniepoint-invoices-api/) — Create, list, and manage invoices.
+- [Moniepoint Limit Profiles API](https://apis.io/apis/moniepoint/moniepoint-limit-profiles-api/) — Per-account transaction limit profiles.
+- [Moniepoint Mandates API](https://apis.io/apis/moniepoint/moniepoint-mandates-api/) — Create and manage direct-debit mandates.
+- [Moniepoint Push Payments API](https://apis.io/apis/moniepoint/moniepoint-push-payments-api/) — Initiate push payments to a registered POS terminal.
+- [Moniepoint Refunds API](https://apis.io/apis/moniepoint/moniepoint-refunds-api/) — Initiate and query refunds.
+- [Moniepoint Reserved Accounts API](https://apis.io/apis/moniepoint/moniepoint-reserved-accounts-api/) — Manage dedicated and invoice reserved NUBAN accounts.
+- [Moniepoint Settlements API](https://apis.io/apis/moniepoint/moniepoint-settlements-api/) — Settlement batches and transactions reporting.
+- [Moniepoint Single Transfers API](https://apis.io/apis/moniepoint/moniepoint-single-transfers-api/) — Initiate, authorize, and query single transfers.
+- [Moniepoint Transactions API](https://apis.io/apis/moniepoint/moniepoint-transactions-api/) — Initialize, charge, query, and list collection transactions.
+- [Moniepoint Verification API](https://apis.io/apis/moniepoint/moniepoint-verification-api/) — Identity, BVN, NIN, and account verification.
+- [Moniepoint Wallet API](https://apis.io/apis/moniepoint/moniepoint-wallet-api/) — Disbursement wallet balance and metadata.
+- [Moniepoint Wallets API](https://apis.io/apis/moniepoint/moniepoint-wallets-api/) — Manage wallets and sub-wallets.
+- [Moniepoint Subaccounts API](https://apis.io/apis/moniepoint/moniepoint-subaccounts-api/) — Manage settlement sub-accounts.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-24T00:00:00.000Z
-- **Modified:** 2026-05-24
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Arazzo workflows (13)
 
-### Monnify Authentication API
+Multi-step workflows that chain operations into a business task.
 
-Exchange Monnify API key and secret credentials (Basic auth) for a short-lived Bearer access token via POST /api/v1/auth/login. The returned accessToken plus expiresIn drives every other Monnify API call. Tokens expire after one hour and must be re-issued; client code typically caches and refreshes on demand.
+- [Moniepoint Bulk Disbursement](https://apis.io/arazzos/moniepoint/moniepoint-bulk-disbursement-workflow/)
+- [Moniepoint Card Charge With OTP](https://apis.io/arazzos/moniepoint/moniepoint-card-charge-otp-workflow/)
+- [Moniepoint Collect Via Bank Transfer](https://apis.io/arazzos/moniepoint/moniepoint-collect-bank-transfer-workflow/)
+- [Moniepoint KYC Verified Virtual Account](https://apis.io/arazzos/moniepoint/moniepoint-kyc-reserve-account-workflow/)
+- [Moniepoint Pay A Bill](https://apis.io/arazzos/moniepoint/moniepoint-pay-bill-workflow/)
+- [Moniepoint POS Push Payment](https://apis.io/arazzos/moniepoint/moniepoint-pos-push-payment-workflow/)
+- [Moniepoint Recurring Mandate Debit](https://apis.io/arazzos/moniepoint/moniepoint-recurring-mandate-debit-workflow/)
+- [Moniepoint Refund A Collected Payment](https://apis.io/arazzos/moniepoint/moniepoint-refund-collected-payment-workflow/)
+- [Moniepoint Reserve Virtual Account](https://apis.io/arazzos/moniepoint/moniepoint-reserve-virtual-account-workflow/)
+- [Moniepoint Single Transfer With OTP](https://apis.io/arazzos/moniepoint/moniepoint-single-transfer-otp-workflow/)
+- [Moniepoint Verify And Disburse](https://apis.io/arazzos/moniepoint/moniepoint-verify-and-disburse-workflow/)
+- [Moniepoint Virtual Account With Limit Profile](https://apis.io/arazzos/moniepoint/moniepoint-virtual-account-with-limit-workflow/)
+- [Moniepoint Create Wallet And Check Balance](https://apis.io/arazzos/moniepoint/moniepoint-wallet-balance-check-workflow/)
 
-- **Human URL:** [https://developers.monnify.com/docs/getting-started/authentication](https://developers.monnify.com/docs/getting-started/authentication)
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Authentication
-- OAuth
-- Tokens
+- [Moniepoint Agentic Access](https://apis.io/agentic-access/moniepoint/moniepoint-agentic-access/)
 
-#### Properties
+#### JSON Schema (4)
 
-- [Documentation](https://developers.monnify.com/docs/getting-started/authentication)
-- [OpenAPI](openapi/monnify-authentication-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/monnify-authentication-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-authentication-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+The data models the API reads and writes.
 
-### Monnify Collections API
+- [Monnify Reserved Account](https://apis.io/schemas/moniepoint/monnify-reserved-account/)
+- [Monnify Transaction](https://apis.io/schemas/moniepoint/monnify-transaction/)
+- [Monnify Transfer](https://apis.io/schemas/moniepoint/monnify-transfer/)
+- [Monnify Webhook Notification](https://apis.io/schemas/moniepoint/monnify-webhook/)
 
-Initialize one-time payment transactions, accept card payments with 3-D Secure / OTP authorization, charge tokenized cards, complete bank-transfer payments, and look up transaction status. Powers the Monnify Checkout, server-to-server card capture, and pay-with-transfer flows used by Nigerian merchants. Endpoints under /api/v1/merchant/transactions/ and /api/v1/sdk/transactions/.
+#### JSON-LD (1)
 
-- **Human URL:** [https://developers.monnify.com/docs/collections](https://developers.monnify.com/docs/collections)
+Linked-data contexts for the provider's vocabulary.
 
-#### Tags
+- [Moniepoint Context](https://apis.io/jsonld/moniepoint/moniepoint-context/)
 
-- Collections
-- Payments
-- Cards
-- Bank Transfer
-- USSD
-- QR
+#### Vocabulary (1)
 
-#### Properties
+The provider's domain terms, defined.
 
-- [Documentation](https://developers.monnify.com/docs/collections)
-- [OpenAPI](openapi/monnify-collections-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/monnify-collections-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-collections-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/monnify-transaction-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/moniepoint-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+- [Moniepoint Vocabulary](https://apis.io/vocabularies/moniepoint/moniepoint-vocabulary/)
 
-### Monnify Reserved Accounts API
+#### Examples (5)
 
-Programmatically provision permanent NUBAN virtual accounts (dedicated and one-time invoice variants) for customers and merchants. Supports income-split configuration to multiple sub-accounts, KYC updates (BVN / NIN), allowed-source-account restriction, deallocation, transaction history, and per-account limit profiles. V2 endpoints under /api/v2/bank-transfer/reserved-accounts/.
+Example requests and responses.
 
-- **Human URL:** [https://developers.monnify.com/docs/collections/customer-reserved-account](https://developers.monnify.com/docs/collections/customer-reserved-account)
+- [Moniepoint Push Payment Example](https://apis.io/examples/moniepoint/moniepoint-push-payment-example/)
+- [Monnify Initialize Transaction Example](https://apis.io/examples/moniepoint/monnify-initialize-transaction-example/)
+- [Monnify Reserve Account Example](https://apis.io/examples/moniepoint/monnify-reserve-account-example/)
+- [Monnify Single Transfer Example](https://apis.io/examples/moniepoint/monnify-single-transfer-example/)
+- [Monnify Webhook Successful Collection Example](https://apis.io/examples/moniepoint/monnify-webhook-successful-collection-example/)
 
-#### Tags
+#### Collections (44)
 
-- Reserved Accounts
-- Virtual Accounts
-- Bank Transfer
-- KYC
-- Limits
+Postman and Open Collection request collections.
 
-#### Properties
+- [Moniepoint POS Push Payment Authentication API](https://apis.io/collections/moniepoint/open-moniepoint-authentication-api/)
+- [Moniepoint POS Push Payment Authentication Banks API](https://apis.io/collections/moniepoint/open-moniepoint-banks-api/)
+- [Moniepoint POS Push Payment Authentication Bills Payment API](https://apis.io/collections/moniepoint/open-moniepoint-bills-payment-api/)
+- [Moniepoint POS Push Payment Authentication Bulk Transfers API](https://apis.io/collections/moniepoint/open-moniepoint-bulk-transfers-api/)
+- [Moniepoint POS Push Payment Authentication Debits API](https://apis.io/collections/moniepoint/open-moniepoint-debits-api/)
+- [Moniepoint POS Push Payment Authentication Invoices API](https://apis.io/collections/moniepoint/open-moniepoint-invoices-api/)
+- [Moniepoint POS Push Payment Authentication Limit Profiles API](https://apis.io/collections/moniepoint/open-moniepoint-limit-profiles-api/)
+- [Moniepoint POS Push Payment Authentication Mandates API](https://apis.io/collections/moniepoint/open-moniepoint-mandates-api/)
+- [Moniepoint POS Push Payment API](https://apis.io/collections/moniepoint/open-moniepoint-pos-api/)
+- [Moniepoint POS Push Payment Authentication Push Payments API](https://apis.io/collections/moniepoint/open-moniepoint-push-payments-api/)
+- [Moniepoint POS Push Payment Authentication Refunds API](https://apis.io/collections/moniepoint/open-moniepoint-refunds-api/)
+- [Moniepoint POS Push Payment Authentication Reserved Accounts API](https://apis.io/collections/moniepoint/open-moniepoint-reserved-accounts-api/)
+- [Moniepoint POS Push Payment Authentication Settlements API](https://apis.io/collections/moniepoint/open-moniepoint-settlements-api/)
+- [Moniepoint POS Push Payment Authentication Single Transfers API](https://apis.io/collections/moniepoint/open-moniepoint-single-transfers-api/)
+- [Moniepoint POS Push Payment Authentication Sub-Accounts API](https://apis.io/collections/moniepoint/open-moniepoint-sub-accounts-api/)
+- [Moniepoint POS Push Payment Authentication Transactions API](https://apis.io/collections/moniepoint/open-moniepoint-transactions-api/)
+- [Moniepoint POS Push Payment Authentication Verification API](https://apis.io/collections/moniepoint/open-moniepoint-verification-api/)
+- [Moniepoint POS Push Payment Authentication Wallet API](https://apis.io/collections/moniepoint/open-moniepoint-wallet-api/)
+- [Moniepoint POS Push Payment Authentication Wallets API](https://apis.io/collections/moniepoint/open-moniepoint-wallets-api/)
+- [Monnify Authentication API](https://apis.io/collections/moniepoint/open-monnify-authentication-api/)
+- [Monnify Bills Payment API](https://apis.io/collections/moniepoint/open-monnify-bills-payment-api/)
+- [Monnify Collections API](https://apis.io/collections/moniepoint/open-monnify-collections-api/)
+- [Monnify Direct Debit API](https://apis.io/collections/moniepoint/open-monnify-direct-debit-api/)
+- [Monnify Disbursements API](https://apis.io/collections/moniepoint/open-monnify-disbursements-api/)
+- [Monnify Invoices API](https://apis.io/collections/moniepoint/open-monnify-invoices-api/)
+- …and 19 more published on APIs.io
 
-- [Documentation](https://developers.monnify.com/docs/collections/customer-reserved-account)
-- [OpenAPI](openapi/monnify-reserved-accounts-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/monnify-reserved-accounts-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-reserved-accounts-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/monnify-reserved-account-schema.json) — [JSON Schema](https://json-schema.org/specification)
+#### Governance rules (2)
 
-### Monnify Disbursements API
+Spectral rulesets for the provider's contracts.
 
-Initiate single and bulk NIP transfers to any Nigerian bank account, with two-factor OTP authorization, wallet-balance lookup, transfer status, list/search, and resend-OTP. As of April 2026 the request flow follows Name Inquiry → Disbursement Request and requires a verified beneficiary account name. Sender-information object supported since October 2025. Endpoints under /api/v2/disbursements/single, /api/v2/disbursements/bulk, /api/v2/disbursements/wallet-balance.
+- [Moniepoint — jsonschema rules](https://apis.io/rules/moniepoint/moniepoint-jsonschema-spectral-rules/)
+- [Moniepoint API Rules](https://apis.io/rules/moniepoint/moniepoint-rules/)
 
-- **Human URL:** [https://developers.monnify.com/docs/disbursements](https://developers.monnify.com/docs/disbursements)
+#### Security (3)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Disbursements
-- Transfers
-- Payouts
-- NIP
-- Bulk
+- [Moniepoint Authentication](https://apis.io/security/moniepoint/moniepoint-authentication/)
+- [Moniepoint Domain Security](https://apis.io/security/moniepoint/moniepoint-domain-security/)
+- [Moniepoint Trust Center](https://apis.io/security/moniepoint/moniepoint-trust-center/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://developers.monnify.com/docs/disbursements)
-- [Documentation](https://developers.monnify.com/docs/disbursements/single-transfers)
-- [Documentation](https://developers.monnify.com/docs/disbursements/bulk-transfers)
-- [OpenAPI](openapi/monnify-disbursements-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/monnify-disbursements-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-disbursements-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [JSON Schema](json-schema/monnify-transfer-schema.json) — [JSON Schema](https://json-schema.org/specification)
+Published plans, tiers and prices.
 
-### Monnify Sub-Accounts API
+- [Moniepoint Plans Pricing](https://apis.io/plans/moniepoint/moniepoint-plans-pricing/)
 
-Create and manage settlement sub-accounts representing third parties that should receive a configured percentage of each transaction (marketplaces, multi-tenant platforms, franchise networks). Settlement bank, split percentage, default flag, and per-call income-split configuration. Endpoints under /api/v1/sub-accounts.
+#### Rate limits (1)
 
-- **Human URL:** [https://developers.monnify.com/docs/sub-accounts](https://developers.monnify.com/docs/sub-accounts)
+Published request limits.
 
-#### Tags
+- [Moniepoint Rate Limits](https://apis.io/rate-limits/moniepoint/moniepoint-rate-limits/)
 
-- Sub-Accounts
-- Settlement
-- Split Payments
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [Documentation](https://developers.monnify.com/docs/sub-accounts)
-- [OpenAPI](openapi/monnify-sub-accounts-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/monnify-sub-accounts-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-sub-accounts-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Moniepoint Finops](https://apis.io/finops/moniepoint/moniepoint-finops/)
 
-### Monnify Direct Debit API
+## Where to find this API
 
-Create, activate, and debit recurring NIBSS direct-debit mandates against a customer's bank account. Smart routing uses TeamApt as the primary processor with NIBSS as fallback for improved success rates. Supports incomeSplit on mandate-debit to settle into multiple sub-accounts. Endpoints under /api/v1/direct-debit/mandate/ and /api/v1/direct-debit/mandate/debit.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://developers.monnify.com/docs/direct-debit](https://developers.monnify.com/docs/direct-debit)
-
-#### Tags
-
-- Direct Debit
-- Mandates
-- Recurring Payments
-- NIBSS
-
-#### Properties
-
-- [Documentation](https://developers.monnify.com/docs/direct-debit)
-- [OpenAPI](openapi/monnify-direct-debit-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/monnify-direct-debit-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-direct-debit-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Monnify Invoices API
-
-Create static and dynamic invoices that generate hosted payment pages and unique reserved accounts. Supports invoice listing, status lookup, and cancellation. Backs Monnify's invoicing dashboard and embedded invoicing in business-management apps. Endpoints under /api/v1/invoice.
-
-- **Human URL:** [https://developers.monnify.com/docs/invoices](https://developers.monnify.com/docs/invoices)
-
-#### Tags
-
-- Invoices
-- Billing
-- Static
-- Dynamic
-
-#### Properties
-
-- [Documentation](https://developers.monnify.com/docs/invoices)
-- [OpenAPI](openapi/monnify-invoices-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/monnify-invoices-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-invoices-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Monnify Bills Payment API
-
-Unified Biller Service for purchasing airtime and data, paying electricity and cable-TV bills, funding betting wallets, and paying education fees. List categories, billers, and biller items; validate the customer; process the bill; check status. Endpoints under /api/v1/bill-payment/.
-
-- **Human URL:** [https://developers.monnify.com/docs/bills-payment](https://developers.monnify.com/docs/bills-payment)
-
-#### Tags
-
-- Bills
-- Airtime
-- Data
-- Electricity
-- Cable TV
-- Betting
-
-#### Properties
-
-- [Documentation](https://developers.monnify.com/docs/bills-payment)
-- [OpenAPI](openapi/monnify-bills-payment-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/monnify-bills-payment-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-bills-payment-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Monnify Verification API
-
-Validate a Nigerian bank account number (Name Inquiry), match a Bank Verification Number (BVN) against an account, and verify National Identification Numbers (NIN). Critical for KYC, disbursement beneficiary checks, and fraud prevention. Endpoints under /api/v1/disbursements/account/validate, /api/v1/vas/bvn-account-match, and /api/v1/vas/verify-nin.
-
-- **Human URL:** [https://developers.monnify.com/docs/verification](https://developers.monnify.com/docs/verification)
-
-#### Tags
-
-- Verification
-- BVN
-- NIN
-- Bank Account
-- KYC
-
-#### Properties
-
-- [Documentation](https://developers.monnify.com/docs/verification)
-- [OpenAPI](openapi/monnify-verification-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/monnify-verification-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-verification-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Monnify Wallets API
-
-Create wallets and sub-wallets, query main and disbursement balances, list transactions, and pull statements. Used to fund disbursement operations and to model end-user wallets for business-management products. Endpoints under /api/v1/disbursements/wallet-balance and /api/v1/disbursements/wallet.
-
-- **Human URL:** [https://developers.monnify.com/docs/wallets](https://developers.monnify.com/docs/wallets)
-
-#### Tags
-
-- Wallets
-- Balance
-- Statements
-- Sub-Wallets
-
-#### Properties
-
-- [Documentation](https://developers.monnify.com/docs/wallets)
-- [OpenAPI](openapi/monnify-wallets-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/monnify-wallets-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-wallets-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Monnify Refunds API
-
-Initiate full or partial refunds against a successful collection, list refunds, and look up refund status. Refund events emit successful_refund / failed_refund webhooks for asynchronous reconciliation. Endpoints under /api/v1/refunds.
-
-- **Human URL:** [https://developers.monnify.com/docs/refunds](https://developers.monnify.com/docs/refunds)
-
-#### Tags
-
-- Refunds
-- Reversals
-- Disputes
-
-#### Properties
-
-- [Documentation](https://developers.monnify.com/docs/refunds)
-- [OpenAPI](openapi/monnify-refunds-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/monnify-refunds-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-refunds-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Monnify Settlements API
-
-Retrieve settlement information for collected funds — settlement batches per merchant or sub-account, settlement transactions, and settlement bank details. Backs reconciliation of daily settlement payouts into the merchant's external bank account. Endpoints under /api/v1/transactions/find-by-settlement-reference and /api/v1/settlements.
-
-- **Human URL:** [https://developers.monnify.com/docs/settlements](https://developers.monnify.com/docs/settlements)
-
-#### Tags
-
-- Settlement
-- Payouts
-- Reporting
-
-#### Properties
-
-- [Documentation](https://developers.monnify.com/docs/settlements)
-- [OpenAPI](openapi/monnify-settlements-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/monnify-settlements-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-settlements-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Monnify Webhooks
-
-Asynchronous server-to-server notifications for nine event categories — successful collection, successful / failed / reversed disbursement, successful / failed refund, settlement completion, mandate status change, wallet activity, and low_balance_alert (added September 2025). Every payload includes a monnify-signature header computed as HMAC-SHA-512 of the stringified request body using the client secret. Standard envelope { eventType, eventData }.
-
-- **Human URL:** [https://developers.monnify.com/docs/webhooks](https://developers.monnify.com/docs/webhooks)
-
-#### Tags
-
-- Webhooks
-- Events
-- HMAC
-- SHA-512
-
-#### Properties
-
-- [Documentation](https://developers.monnify.com/docs/webhooks)
-- [JSON Schema](json-schema/monnify-webhook-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [Postman Collection](collections/moniepoint-pos-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/moniepoint-pos-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/monnify-authentication-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-authentication-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/monnify-bills-payment-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-bills-payment-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/monnify-collections-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-collections-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/monnify-direct-debit-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-direct-debit-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/monnify-disbursements-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-disbursements-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/monnify-invoices-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-invoices-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/monnify-refunds-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-refunds-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/monnify-reserved-accounts-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-reserved-accounts-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/monnify-settlements-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-settlements-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/monnify-sub-accounts-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-sub-accounts-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/monnify-verification-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-verification-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [Postman Collection](collections/monnify-wallets-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/monnify-wallets-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Moniepoint POS Push Payment API
-
-Push payment-request flow for Moniepoint POS terminals. ISV partners send an authenticated push to a registered terminal serial number; the merchant taps to accept and the terminal completes a card or transfer collection routed through Moniepoint's acquiring rails. Authentication uses an API client ID / secret pair issued through the Moniepoint Business dashboard.
-
-- **Human URL:** [https://docs.pos.moniepoint.com](https://docs.pos.moniepoint.com)
-
-#### Tags
-
-- POS
-- Terminals
-- Push Payments
-- Acquiring
-
-#### Properties
-
-- [Documentation](https://docs.pos.moniepoint.com)
-- [Documentation](https://teamapt.atlassian.net/wiki/spaces/EI/pages/1039826999/Push+Payment+Request+API+Reference)
-- [Documentation](https://teamapt.atlassian.net/wiki/spaces/EI/pages/1042120729/API+Client+Credentials)
-- [OpenAPI](openapi/moniepoint-pos-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/moniepoint-pos-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/moniepoint-pos-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [Portal](https://moniepoint.com)
-- [Portal](https://developers.monnify.com)
 - [Documentation](https://developers.monnify.com/api)
-- [Documentation](https://docs.pos.moniepoint.com)
-- [Documentation](https://teamapt.atlassian.net/wiki/spaces/MON/pages)
-- [Documentation](https://teamapt.atlassian.net/wiki/spaces/EI/pages)
-- [Getting Started](https://developers.monnify.com/docs/getting-started)
+- [Getting started](https://developers.monnify.com/docs/getting-started)
+- [Support](https://support.moniepoint.com)
 - [Changelog](https://developers.monnify.com/docs/change-logs)
 - [Blog](https://developers.monnify.com/blog)
-- [Blog](https://engineering.moniepoint.com)
-- [Blog](https://moniepoint.com/blog)
-- [Press](https://moniepoint.com/press)
-- [Support](https://support.moniepoint.com)
-- [Training](https://learning.moniepoint.com)
-- [Trust Center](https://trust.moniepoint.com)
-- [Privacy Policy](https://moniepoint.com/ng/privacy-policy)
-- [Terms of Service](https://moniepoint.com/ng/terms-of-service)
-- [Sign Up](https://app.monnify.com/create-account)
-- [Sign Up](https://app.moniepoint.com/signup)
-- [Sandbox](https://sandbox.monnify.com)
-- [GitHub Organization](https://github.com/Moniepoint)
-- [LinkedIn](https://www.linkedin.com/company/moniepoint)
-- [Twitter](https://twitter.com/moniepointNG)
-- [Careers](https://moniepoint.com/careers)
-- [SDK](https://github.com/Moniepoint/dart-flow)
-- [SDK](https://github.com/cla-bit/MonnifyEase)
-- [SDK](https://github.com/abdsalam/laravel-monnify)
-- [Webhooks](https://developers.monnify.com/docs/webhooks)
-- [Errors](https://developers.monnify.com/docs/getting-started/errors)
-- [Authentication](https://developers.monnify.com/docs/getting-started/authentication)
-- [Rate Limits](https://developers.monnify.com/docs/rate-limits)
-- [Versioning](https://developers.monnify.com/docs/getting-started/versioning)
-- [Plans](plans/moniepoint-plans-pricing.yml)
-- [Rate Limits](rate-limits/moniepoint-rate-limits.yml)
-- [Fin Ops](finops/moniepoint-finops.yml)
-- [Vocabulary](vocabulary/moniepoint-vocabulary.yml)
-- [Rules](rules/moniepoint-rules.yml)
-- [Features](undefined)
+- [Trust centre](https://trust.moniepoint.com)
+- [Terms of service](https://moniepoint.com/ng/terms-of-service)
+- [Privacy policy](https://moniepoint.com/ng/privacy-policy)
+- [GitHub](https://github.com/Moniepoint)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** info@apievangelist.com
-**URL:** https://apievangelist.com
+**Unrated** — no public website could be reached for this company, so there was almost nothing to measure and nothing a reader could check.
+
+This is not a score of zero. No rating is published for this company. If that is wrong because something public exists that we missed, say so on this repository or email [info@apievangelist.com](mailto:info@apievangelist.com) and it will be re-run — free, and no justification needed.
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Moniepoint: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/moniepoint/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
